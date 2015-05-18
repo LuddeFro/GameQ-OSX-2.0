@@ -23,8 +23,11 @@ class PacketReader {
         
         
         println("start loop")
+        dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
+            PacketParser.start_loop()
+        })
         //NSThread.detachNewThreadSelector(Selector("start_loop"), toTarget: PacketParser.self, withObject: nil)
-        PacketParser.start_loop()
+        //PacketParser.start_loop()
         println("loop started")
     }
     

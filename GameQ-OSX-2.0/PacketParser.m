@@ -91,12 +91,10 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     const struct sniff_ip *ip;              /* The IP header */
     const struct sniff_tcp *tcp;            /* The TCP header */
     const struct sniff_udp *udp;
-    u_char *payload;                    /* Packet payload */
     
     int size_ip;
     int size_tcp;
     int size_udp;
-    int size_payload;
     
     printf("\nPacket number %d:\n", count);
     count++;
@@ -120,28 +118,30 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     switch(ip->ip_p) {
         case IPPROTO_TCP:
             printf("   Protocol: TCP\n");
+            tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
+            size_tcp = TH_OFF(tcp)*4;
+            if (size_tcp < 20) {
+                printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
+                return;
+            }
+            printf("Header length: %u bytes\n", size_tcp);
+            printf("   Src port: %d\n", ntohs(tcp->th_sport));
+            printf("   Dst port: %d\n", ntohs(tcp->th_dport));
             break;
         case IPPROTO_UDP:
             printf("   Protocol: UDP\n");
             udp = (struct sniff_udp*)(packet + SIZE_ETHERNET + size_ip);
             size_udp = ntohs(udp->uh_ulen);
-            
             if (size_udp < 8) {
                 printf("   * Invalid UDP header length: %u bytes\n", size_udp);
             }
-            
             printf("Header length: %u bytes\n", size_udp);
             printf("ip_len: %d", ntohs(ip->ip_len));
             printf("   Src port: %d\n", ntohs(udp->uh_sport));
             printf("   Dst port: %d\n", ntohs(udp->uh_dport));
-            
-            
-            
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
             
-            
-            //--
             return;
         case IPPROTO_ICMP:
             printf("   Protocol: ICMP\n");
@@ -153,28 +153,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
             printf("   Protocol: unknown\n");
             return;
     }
-    
-    /*
-     *  OK, this packet is TCP.
-     */
-    
-    /* define/compute tcp header offset */
-    tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
-    size_tcp = TH_OFF(tcp)*4;
-    if (size_tcp < 20) {
-        printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
-        return;
-    }
-    
-    printf("Header length: %u bytes\n", size_tcp);
-    
-    
-    
-    
-    
-    printf("   Src port: %d\n", ntohs(tcp->th_sport));
-    printf("   Dst port: %d\n", ntohs(tcp->th_dport));
-    
+   
     
     
     return;
@@ -187,10 +166,9 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
 {
     struct bpf_program fp;
     bpf_u_int32 net;
-    bpf_u_int32 mask;
     char errbuf[PCAP_ERRBUF_SIZE];
     u_char user;
-    char filter[] = "";
+    char filter[] = "udp";
     pcap_t *handle = pcap_create("en0", errbuf);
     pcap_set_buffer_size(handle, 1);
     pcap_activate(handle);
