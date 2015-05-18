@@ -170,9 +170,11 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     u_char user;
     char filter[] = "udp";
     pcap_t *handle = pcap_create("en0", errbuf);
-    pcap_set_buffer_size(handle, 1);
-    pcap_activate(handle);
+    pcap_set_buffer_size(handle, 65);
+    pcap_set_snaplen(handle, 65);
+    
 
+    pcap_activate(handle);
     
     
     
