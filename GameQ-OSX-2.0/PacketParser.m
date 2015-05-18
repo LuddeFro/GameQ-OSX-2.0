@@ -100,11 +100,13 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     count++;
     
     /* define ethernet header */
-    //	ethernet = (struct sniff_ethernet*)(packet);
+    //ethernet = (struct sniff_ethernet*)(packet);
     
     /* define/compute ip header offset */
     ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
     size_ip = IP_HL(ip)*4;
+    printf("    header length: %u bytes\n", size_ip);
+    printf("ip->ip_p  %d\n", ip->ip_p);
     if (size_ip < 20) {
         printf("   * Invalid IP header length: %u bytes\n", size_ip);
         return;
@@ -127,7 +129,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
             printf("Header length: %u bytes\n", size_tcp);
             printf("   Src port: %d\n", ntohs(tcp->th_sport));
             printf("   Dst port: %d\n", ntohs(tcp->th_dport));
-            break;
+            return;
         case IPPROTO_UDP:
             printf("   Protocol: UDP\n");
             udp = (struct sniff_udp*)(packet + SIZE_ETHERNET + size_ip);
