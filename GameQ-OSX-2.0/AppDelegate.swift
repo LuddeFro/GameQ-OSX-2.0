@@ -7,6 +7,9 @@
 //
 
 import Cocoa
+import AudioToolbox
+import CoreAudio
+
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -16,6 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        PacketReader.start()
+        
+        
+        
+        
+        
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
