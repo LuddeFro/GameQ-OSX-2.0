@@ -10,8 +10,8 @@ import Foundation
 
 class PacketHandler: NSObject {
     
-    class func handle(srcPort:Int, dstPort:Int, wlen:Int) {
-        println("s: \(srcPort) d: \(dstPort) w: \(wlen)")
+    class func handle(srcPort:Int, dstPort:Int, iplen:Int, hlen:Int) {
+        println("s: \(srcPort) d: \(dstPort) ip: \(iplen) h: \(hlen)")
     }
     
 }

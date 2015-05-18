@@ -143,7 +143,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
             printf("   Dst port: %d\n", ntohs(udp->uh_dport));
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
-            [PacketHandler handle:sport dstPort:dport wlen:ntohs(ip->ip_len)];
+            [PacketHandler handle:sport dstPort:dport iplen:ntohs(ip->ip_len) hlen:size_udp];
             return;
         case IPPROTO_ICMP:
             printf("   Protocol: ICMP\n");
