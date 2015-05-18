@@ -11,6 +11,10 @@ import Foundation
 class PacketReader {
     
     
+    struct Static {
+        static let filter = "udp"
+    }
+    
     
     /**
     description:
@@ -31,7 +35,9 @@ class PacketReader {
         
     }
     
-    
+    private class func open_pcap_socket(device:String) -> pcap_t {
+        println("39")
+    }
     
     
     
