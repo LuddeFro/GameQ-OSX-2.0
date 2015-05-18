@@ -16,5 +16,5 @@
 @property pcap_t* handle;
 
 static void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *packet);
-+ (void) start_loop:(pcap_t*)handle numPacks:(int)snapNum user:(u_char *)userChar;
++ (void) start_loop;
 @end

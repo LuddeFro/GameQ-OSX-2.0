@@ -129,10 +129,14 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
             if (size_udp < 8) {
                 printf("   * Invalid UDP header length: %u bytes\n", size_udp);
             }
+            
             printf("Header length: %u bytes\n", size_udp);
             printf("ip_len: %d", ntohs(ip->ip_len));
             printf("   Src port: %d\n", ntohs(udp->uh_sport));
             printf("   Dst port: %d\n", ntohs(udp->uh_dport));
+            
+            
+            
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
             
@@ -179,10 +183,35 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     
 }
 
-+ (void) start_loop:(pcap_t*)handle numPacks:(int)snapNum user:(u_char *)userChar
++ (void) start_loop
 {
+    struct bpf_program fp;
+    bpf_u_int32 net;
+    bpf_u_int32 mask;
+    char errbuf[PCAP_ERRBUF_SIZE];
+    u_char user;
+    char filter[] = "";
+    pcap_t *handle = pcap_create("en0", errbuf);
+    pcap_set_buffer_size(handle, 1);
+    pcap_activate(handle);
+
+    
+    
+    
+    /* Compile a filter */
+    if (pcap_compile(handle, &fp, filter, 0, net) == -1){
+        printf("Coudldn't compile filter");
+        return;
+    }
+    /* Apply a filter */
+    if (pcap_setfilter(handle, &fp) == -1){
+        printf("Coudldn't apply filter");
+        return;
+    }
+    
+    
     NSLog(@"calling pcap_loop");
-    pcap_loop(handle, snapNum, parse_packet, userChar);
+    pcap_loop(handle, -1, parse_packet, &user);
     NSLog(@"called pcap_loop");
 
 }
