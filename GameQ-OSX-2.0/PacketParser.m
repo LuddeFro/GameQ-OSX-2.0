@@ -76,6 +76,13 @@ struct sniff_udp {
     
 };
 
+/* Ethernet header */
+struct sniff_ethernet {
+    u_char  ether_dhost[ETHER_ADDR_LEN];    /* destination host address */
+    u_char  ether_shost[ETHER_ADDR_LEN];    /* source host address */
+    u_short ether_type;                     /* IP? ARP? RARP? etc */
+};
+
 #define SIZE_UDP        8               /* length of UDP header */
 // total udp header length: 8 bytes (=64 bits)
 
@@ -87,7 +94,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     static int count = 1;                   /* packet counter */
     
     /* declare pointers to packet headers */
-    //  const struct sniff_ethernet *ethernet;  /* The ethernet header [1] */
+    const struct sniff_ethernet *ethernet;  /* The ethernet header [1] */
     const struct sniff_ip *ip;              /* The IP header */
     const struct sniff_tcp *tcp;            /* The TCP header */
     const struct sniff_udp *udp;
@@ -100,7 +107,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     count++;
     
     /* define ethernet header */
-    //ethernet = (struct sniff_ethernet*)(packet);
+    ethernet = (struct sniff_ethernet*)(packet);
     
     /* define/compute ip header offset */
     ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
@@ -143,7 +150,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
             printf("   Dst port: %d\n", ntohs(udp->uh_dport));
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
-            [PacketHandler handle:sport dstPort:dport iplen:ntohs(ip->ip_len) hlen:size_udp];
+            [PacketReader handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET) hlen:size_udp];
             return;
         case IPPROTO_ICMP:
             printf("   Protocol: ICMP\n");

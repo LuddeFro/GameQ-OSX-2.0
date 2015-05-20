@@ -16,7 +16,6 @@
 		832BCE901B09F08500FE15E2 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE8F1B09F08500FE15E2 /* PacketReader.swift */; };
 		832BCE941B09F13B00FE15E2 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE931B09F13B00FE15E2 /* Packet.swift */; };
 		832BCE9D1B0A113D00FE15E2 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE9C1B0A113D00FE15E2 /* PacketParser.m */; };
-		832BCEA01B0A2A8200FE15E2 /* PacketHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE9F1B0A2A8200FE15E2 /* PacketHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +44,6 @@
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		832BCE9C1B0A113D00FE15E2 /* PacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketParser.m; sourceTree = "<group>"; };
 		832BCE9E1B0A115C00FE15E2 /* PacketParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacketParser.h; sourceTree = "<group>"; };
-		832BCE9F1B0A2A8200FE15E2 /* PacketHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +90,6 @@
 				832BCE8F1B09F08500FE15E2 /* PacketReader.swift */,
 				832BCE9E1B0A115C00FE15E2 /* PacketParser.h */,
 				832BCE9C1B0A113D00FE15E2 /* PacketParser.m */,
-				832BCE9F1B0A2A8200FE15E2 /* PacketHandler.swift */,
 				832BCE951B09F14200FE15E2 /* DataStructures */,
 				832BCE741B09E4AC00FE15E2 /* Images.xcassets */,
 				832BCE761B09E4AC00FE15E2 /* MainMenu.xib */,
@@ -238,7 +235,6 @@
 			files = (
 				832BCE901B09F08500FE15E2 /* PacketReader.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
-				832BCEA01B0A2A8200FE15E2 /* PacketHandler.swift in Sources */,
 				832BCE701B09E4AC00FE15E2 /* AppDelegate.swift in Sources */,
 				832BCE9D1B0A113D00FE15E2 /* PacketParser.m in Sources */,
 				832BCE941B09F13B00FE15E2 /* Packet.swift in Sources */,

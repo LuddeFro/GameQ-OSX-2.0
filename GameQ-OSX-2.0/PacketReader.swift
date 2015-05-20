@@ -8,9 +8,25 @@
 
 import Foundation
 
-class PacketReader {
+class PacketReader:NSObject {
     
     
+    
+    var packetQueue:[Packet] = [Packet]()
+    var queuePointer:Int = 0
+    var queueMaxSize:Int = 400
+    
+    class func addPacketToQueue(packet:Packet) {
+        
+    }
+    
+    
+    
+    
+    class func handle(srcPort:Int, dstPort:Int, iplen:Int, hlen:Int) {
+        println("s: \(srcPort) d: \(dstPort) ip: \(iplen) h: \(hlen)")
+        var aPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
+    }
     
     
     /**
@@ -19,9 +35,6 @@ class PacketReader {
     output:
     */
     class func start() {
-        
-        
-        
         println("start loop")
         dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
             PacketParser.start_loop()

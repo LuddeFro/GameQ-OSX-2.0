@@ -8,18 +8,16 @@
 
 import Foundation
 
-class Packet:NSObject {
-    
+struct Packet {
     let dstPort:Int
     let srcPort:Int
     let packetLength:Int
-    let captureTime:CGFloat
+    let captureTime:Double = NSProcessInfo.processInfo().systemUptime
     
-    init(dstPort:Int, srcPort:Int, packetLength:Int, captureTime:CGFloat) {
+    init(dstPort:Int, srcPort:Int, packetLength:Int) {
         self.dstPort = dstPort
         self.srcPort = srcPort
         self.packetLength = packetLength
-        self.captureTime = captureTime
-        super.init()
+        println("capTime: \(captureTime)")
     }
 }
