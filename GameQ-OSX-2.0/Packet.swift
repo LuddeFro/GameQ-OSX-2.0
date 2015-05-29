@@ -18,6 +18,5 @@ struct Packet {
         self.dstPort = dstPort
         self.srcPort = srcPort
         self.packetLength = packetLength
-        println("capTime: \(captureTime)")
     }
 }
