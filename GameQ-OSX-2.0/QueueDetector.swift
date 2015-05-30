@@ -17,4 +17,6 @@ protocol QueueDetector {
     static func stopDetection() -> Bool
     
     static func updateStatus(newStatus: Status) -> Bool
+    
+    static func reset()
 }

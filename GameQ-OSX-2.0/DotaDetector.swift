@@ -15,6 +15,10 @@ class DotaDetector:QueueDetector {
     static let capSize:Int = 300
     
     
+    static func reset() {
+        status = Status.InLobby
+    }
+    
     static func startDetection() -> Bool{
         DotaReader.start(dotaFilter, capSize: capSize, handler: DotaReader.self)
         return true

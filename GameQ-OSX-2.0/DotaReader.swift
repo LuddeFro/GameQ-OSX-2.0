@@ -30,6 +30,21 @@ class DotaReader:PacketReader{
         var time:Double = -1
     }
     
+    class func save(fileName:String) {
+        DataHandler.logPackets(packetQueue, fileName:fileName)
+    }
+    
+    class func reset(){
+        packetQueue = [Packet]()
+        queuePort = -1
+        timer78 = -1
+        timer158 = -1
+        gameTimer = [PacketTimer]()
+        packetCounter = [Int:Int]()
+        gameTimer2 = [PacketTimer]()
+        packetCounter2 = [Int:Int]()
+    }
+    
     class func addPacketToQueue(packet:Packet) {
         packetQueue.insert(packet, atIndex: 0)
         if packetQueue.count >= queueMaxSize {
@@ -37,15 +52,13 @@ class DotaReader:PacketReader{
         }
     }
     
+    
     override class func handle(srcPort:Int, dstPort:Int, iplen:Int) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         updateStatus(newPacket);
     }
     
-    class func save(fileName:String) {
-        DataHandler.logPackets(packetQueue, fileName:fileName)
-    }
     
     class func updateStatus(newPacket:Packet){
         
