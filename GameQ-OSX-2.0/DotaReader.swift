@@ -45,18 +45,23 @@ class DotaReader:PacketReader{
         packetCounter2 = [Int:Int]()
     }
     
+    override class func handle(srcPort:Int, dstPort:Int, iplen:Int) {
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        updateStatus(newPacket);
+    }
+    
+    class func handle2(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        updateStatus(newPacket);
+    }
+    
     class func addPacketToQueue(packet:Packet) {
         packetQueue.insert(packet, atIndex: 0)
         if packetQueue.count >= queueMaxSize {
             packetQueue.removeLast()
         }
-    }
-    
-    
-    override class func handle(srcPort:Int, dstPort:Int, iplen:Int) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        updateStatus(newPacket);
     }
     
     
@@ -86,7 +91,7 @@ class DotaReader:PacketReader{
             
 //            if(gameTime){DotaDetector.updateStatus(Status.GameReady)}
             if(gameTime2){DotaDetector.updateStatus(Status.GameReady)}
-            else if(stoppedQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
+            //else if(stoppedQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
             else if(!isStillQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
             break
             

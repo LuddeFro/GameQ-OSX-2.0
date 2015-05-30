@@ -17,12 +17,14 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        DotaDetector.reset()
+        DotaReader.reset()
         super.tearDown()
     }
     
     func testExample() {
-        // This is an example of a functional test case.
+       
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/dg8.csv")
         XCTAssert(true, "Pass")
     }
     

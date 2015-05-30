@@ -12,11 +12,19 @@ struct Packet {
     let dstPort:Int
     let srcPort:Int
     let packetLength:Int
-    let captureTime:Double = NSProcessInfo.processInfo().systemUptime
+    let captureTime:Double
     
     init(dstPort:Int, srcPort:Int, packetLength:Int) {
         self.dstPort = dstPort
         self.srcPort = srcPort
         self.packetLength = packetLength
+        self.captureTime = NSProcessInfo.processInfo().systemUptime
+    }
+    
+    init(dstPort:Int, srcPort:Int, packetLength:Int, time:Double) {
+        self.dstPort = dstPort
+        self.srcPort = srcPort
+        self.packetLength = packetLength
+        self.captureTime = time
     }
 }
