@@ -33,7 +33,6 @@ class DotaDetector:QueueDetector {
     
         self.status = newStatus
         println(newStatus.rawValue)
-        
         return true;
     }
     
