@@ -14,9 +14,7 @@
 #import <netinet/in.h>
 #import <arpa/inet.h>
 #import <net/ethernet.h>
-
-
-
+#include <ifaddrs.h>
 
 
 
@@ -87,10 +85,9 @@ struct sniff_ethernet {
 // total udp header length: 8 bytes (=64 bits)
 
 
-
 void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *packet)
 {
-    NSLog(@"got packet");
+//    NSLog(@"got packet");
     static int count = 1;                   /* packet counter */
     
     /* declare pointers to packet headers */
@@ -103,7 +100,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     int size_tcp;
     int size_udp;
     
-    printf("\nPacket number %d:\n", count);
+//    printf("\nPacket number %d:\n", count);
     count++;
     
     /* define ethernet header */
@@ -112,10 +109,10 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     /* define/compute ip header offset */
     ip = (struct sniff_ip*)(packet + SIZE_ETHERNET);
     size_ip = IP_HL(ip)*4;
-    printf("    header length: %u bytes\n", size_ip);
-    printf("ip->ip_p  %d\n", ip->ip_p);
+//    printf("    header length: %u bytes\n", size_ip);
+//    printf("ip->ip_p  %d\n", ip->ip_p);
     if (size_ip < 20) {
-        printf("   * Invalid IP header length: %u bytes\n", size_ip);
+//        printf("   * Invalid IP header length: %u bytes\n", size_ip);
         return;
     }
     
@@ -126,40 +123,40 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     /* determine protocol */
     switch(ip->ip_p) {
         case IPPROTO_TCP:
-            printf("   Protocol: TCP\n");
+//            printf("   Protocol: TCP\n");
             tcp = (struct sniff_tcp*)(packet + SIZE_ETHERNET + size_ip);
             size_tcp = TH_OFF(tcp)*4;
             if (size_tcp < 20) {
-                printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
+//                printf("   * Invalid TCP header length: %u bytes\n", size_tcp);
                 return;
             }
-            printf("Header length: %u bytes\n", size_tcp);
-            printf("   Src port: %d\n", ntohs(tcp->th_sport));
-            printf("   Dst port: %d\n", ntohs(tcp->th_dport));
+//            printf("Header length: %u bytes\n", size_tcp);
+//            printf("   Src port: %d\n", ntohs(tcp->th_sport));
+//            printf("   Dst port: %d\n", ntohs(tcp->th_dport));
             return;
         case IPPROTO_UDP:
-            printf("   Protocol: UDP\n");
+//            printf("   Protocol: UDP\n");
             udp = (struct sniff_udp*)(packet + SIZE_ETHERNET + size_ip);
             size_udp = ntohs(udp->uh_ulen);
             if (size_udp < 8) {
-                printf("   * Invalid UDP header length: %u bytes\n", size_udp);
+//                printf("   * Invalid UDP header length: %u bytes\n", size_udp);
             }
-            printf("Header length: %u bytes\n", size_udp);
-            printf("ip_len: %d", ntohs(ip->ip_len));
-            printf("   Src port: %d\n", ntohs(udp->uh_sport));
-            printf("   Dst port: %d\n", ntohs(udp->uh_dport));
+//            printf("Header length: %u bytes\n", size_udp);
+//            printf("ip_len: %d", ntohs(ip->ip_len));
+//            printf("   Src port: %d\n", ntohs(udp->uh_sport));
+//            printf("   Dst port: %d\n", ntohs(udp->uh_dport));
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
-            [PacketReader handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET) hlen:size_udp];
+            [PacketReader handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET)];
             return;
         case IPPROTO_ICMP:
-            printf("   Protocol: ICMP\n");
+//            printf("   Protocol: ICMP\n");
             return;
         case IPPROTO_IP:
-            printf("   Protocol: IP\n");
+//            printf("   Protocol: IP\n");
             return;
         default:
-            printf("   Protocol: unknown\n");
+//            printf("   Protocol: unknown\n");
             return;
     }
    
@@ -171,20 +168,63 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     
 }
 
-+ (void) start_loop
++ (void) start_loop:(NSString *)filterExpression
 {
     struct bpf_program fp;
     bpf_u_int32 net;
+    bpf_u_int32 mask;
     char errbuf[PCAP_ERRBUF_SIZE];
     u_char user;
-    char filter[] = "udp";
-    pcap_t *handle = pcap_create("en0", errbuf);
+    const char *filter = filterExpression.UTF8String;
+    struct ifaddrs* interfaces = NULL;
+    struct ifaddrs* temp_addr = NULL;
+    const char *dev;
+    
+    /* Find the active network device */
+    // define the device!
+    
+    // retrieve the current interfaces - returns 0 on success
+    NSInteger success = getifaddrs(&interfaces);
+    if (success == 0)
+    {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while (temp_addr != NULL)
+        {
+            if (temp_addr->ifa_addr->sa_family == AF_INET) // internetwork only
+            {
+                NSString* name = [NSString stringWithUTF8String:temp_addr->ifa_name];
+                NSString* address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                NSLog(@"interface name: %@; address: %@", name, address);
+                
+                //check for loopback address
+                if (![[address substringToIndex:3] isEqualToString:@"127"]) {
+                    dev = [name UTF8String];
+                }
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    printf("Device: %s\n", dev);
+    /* Find the properties for the device */
+    if (pcap_lookupnet(dev, &net, &mask, errbuf) == -1) {
+        fprintf(stderr, "Couldn't get netmask for device %s: %s\n", dev, errbuf);
+        net = 0;
+        mask = 0;
+    }
+    
+    handle = pcap_create(dev, errbuf);
     pcap_set_buffer_size(handle, 65);
     pcap_set_snaplen(handle, 65);
     
+    /* Set non-promiscuous mode */
+    if (pcap_set_promisc(handle, 0) == -1){
+        printf("Coudldn't set non-promiscuous");
+        return;
+    }
 
     pcap_activate(handle);
-    
     
     
     /* Compile a filter */
@@ -192,6 +232,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
         printf("Coudldn't compile filter");
         return;
     }
+    
     /* Apply a filter */
     if (pcap_setfilter(handle, &fp) == -1){
         printf("Coudldn't apply filter");
@@ -199,19 +240,32 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     }
     
     
-    NSLog(@"calling pcap_loop");
+    
+    
+    printf("capture was set up successfully\n\n");
     pcap_loop(handle, -1, parse_packet, &user);
-    NSLog(@"called pcap_loop");
+//    NSLog(@"called pcap_loop");
 
+}
+
++ (void) stop_loop
+{
+    pcap_breakloop(handle);
 }
 
 
 
+static pcap_t* handle = nil;
 
-    
-    
++ (pcap_t*) handle
+{
+    return handle;
+}
 
-    
++ (void) setHandle:(pcap_t*)value
+{
+    handle = value;
+}
 
 @end
     

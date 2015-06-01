@@ -7,19 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		832BCE701B09E4AC00FE15E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE6F1B09E4AC00FE15E2 /* AppDelegate.swift */; };
 		832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE711B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld */; };
 		832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE741B09E4AC00FE15E2 /* Images.xcassets */; };
 		832BCE781B09E4AC00FE15E2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE761B09E4AC00FE15E2 /* MainMenu.xib */; };
 		832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */; };
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
-		832BCE901B09F08500FE15E2 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE8F1B09F08500FE15E2 /* PacketReader.swift */; };
-		832BCE941B09F13B00FE15E2 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE931B09F13B00FE15E2 /* Packet.swift */; };
-		832BCE9D1B0A113D00FE15E2 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE9C1B0A113D00FE15E2 /* PacketParser.m */; };
+		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
+		AE546D2A1B19DEBF008D8A86 /* ShitDoer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC341B18A59800E5F382 /* ShitDoer.swift */; };
+		AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
+		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
+		AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
+		AE546D2E1B19DEBF008D8A86 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */; };
+		AE546D2F1B19DEBF008D8A86 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */; };
+		AE546D301B19DEBF008D8A86 /* DotaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaReader.swift */; };
+		AE546D311B19DEBF008D8A86 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* Status.swift */; };
+		AE546D321B19DEBF008D8A86 /* QueueDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */; };
+		AE546D331B19DEBF008D8A86 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */; };
+		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
+		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
+		AE98AC221B18A2AC00E5F382 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */; };
+		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
+		AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */; };
+		AE98AC261B18A2AC00E5F382 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */; };
+		AE98AC271B18A2AC00E5F382 /* QueueDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */; };
+		AE98AC281B18A2AC00E5F382 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* Status.swift */; };
+		AE98AC2A1B18A2BF00E5F382 /* DotaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaReader.swift */; };
+		AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
+		AE98AC351B18A59800E5F382 /* ShitDoer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC341B18A59800E5F382 /* ShitDoer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		832BCE7E1B09E4AC00FE15E2 /* PBXContainerItemProxy */ = {
+		AE238C141B1A0C7900B6ED09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 832BCE621B09E4AC00FE15E2 /* Project object */;
 			proxyType = 1;
@@ -31,7 +49,6 @@
 /* Begin PBXFileReference section */
 		832BCE6A1B09E4AC00FE15E2 /* GameQ-OSX-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GameQ-OSX-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		832BCE6E1B09E4AC00FE15E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		832BCE6F1B09E4AC00FE15E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		832BCE721B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameQ_OSX_2_0.xcdatamodel; sourceTree = "<group>"; };
 		832BCE741B09E4AC00FE15E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		832BCE771B09E4AC00FE15E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -39,11 +56,19 @@
 		832BCE821B09E4AC00FE15E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameQ_OSX_2_0Tests.swift; sourceTree = "<group>"; };
 		832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
-		832BCE8F1B09F08500FE15E2 /* PacketReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketReader.swift; sourceTree = "<group>"; };
-		832BCE931B09F13B00FE15E2 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		832BCE9C1B0A113D00FE15E2 /* PacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketParser.m; sourceTree = "<group>"; };
-		832BCE9E1B0A115C00FE15E2 /* PacketParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacketParser.h; sourceTree = "<group>"; };
+		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
+		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotaDetector.swift; sourceTree = "<group>"; };
+		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
+		AE98AC1C1B18A2AC00E5F382 /* PacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketParser.h; sourceTree = "<group>"; };
+		AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketParser.m; sourceTree = "<group>"; };
+		AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketReader.swift; sourceTree = "<group>"; };
+		AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueDetector.swift; sourceTree = "<group>"; };
+		AE98AC201B18A2AC00E5F382 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		AE98AC291B18A2BF00E5F382 /* DotaReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotaReader.swift; sourceTree = "<group>"; };
+		AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AE98AC341B18A59800E5F382 /* ShitDoer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShitDoer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,14 +112,12 @@
 		832BCE6C1B09E4AC00FE15E2 /* GameQ-OSX-2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				832BCE6F1B09E4AC00FE15E2 /* AppDelegate.swift */,
-				832BCE8F1B09F08500FE15E2 /* PacketReader.swift */,
-				832BCE9E1B0A115C00FE15E2 /* PacketParser.h */,
-				832BCE9C1B0A113D00FE15E2 /* PacketParser.m */,
-				832BCE951B09F14200FE15E2 /* DataStructures */,
-				832BCE741B09E4AC00FE15E2 /* Images.xcassets */,
-				832BCE761B09E4AC00FE15E2 /* MainMenu.xib */,
-				832BCE711B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld */,
+				AE98AC341B18A59800E5F382 /* ShitDoer.swift */,
+				AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */,
+				AE98AC2D1B18A32800E5F382 /* DataHandlers */,
+				AE98AC2F1B18A34200E5F382 /* PacketParsers */,
+				AE98AC301B18A37100E5F382 /* PacketReaders */,
+				AE98AC311B18A38400E5F382 /* QueueDetectors */,
 				832BCE6D1B09E4AC00FE15E2 /* Supporting Files */,
 			);
 			path = "GameQ-OSX-2.0";
@@ -102,9 +126,11 @@
 		832BCE6D1B09E4AC00FE15E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */,
-				832BCE6E1B09E4AC00FE15E2 /* Info.plist */,
+				832BCE761B09E4AC00FE15E2 /* MainMenu.xib */,
+				832BCE711B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld */,
+				832BCE741B09E4AC00FE15E2 /* Images.xcassets */,
 				832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */,
+				832BCE6E1B09E4AC00FE15E2 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -113,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */,
+				AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */,
 				832BCE811B09E4AC00FE15E2 /* Supporting Files */,
 			);
 			path = "GameQ-OSX-2.0Tests";
@@ -126,12 +153,42 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		832BCE951B09F14200FE15E2 /* DataStructures */ = {
+		AE98AC2D1B18A32800E5F382 /* DataHandlers */ = {
 			isa = PBXGroup;
 			children = (
-				832BCE931B09F13B00FE15E2 /* Packet.swift */,
+				AE98AC171B18A2AC00E5F382 /* DataHandler.swift */,
 			);
-			name = DataStructures;
+			name = DataHandlers;
+			sourceTree = "<group>";
+		};
+		AE98AC2F1B18A34200E5F382 /* PacketParsers */ = {
+			isa = PBXGroup;
+			children = (
+				832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */,
+				AE98AC1B1B18A2AC00E5F382 /* Packet.swift */,
+				AE98AC1C1B18A2AC00E5F382 /* PacketParser.h */,
+				AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */,
+			);
+			name = PacketParsers;
+			sourceTree = "<group>";
+		};
+		AE98AC301B18A37100E5F382 /* PacketReaders */ = {
+			isa = PBXGroup;
+			children = (
+				AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */,
+				AE98AC291B18A2BF00E5F382 /* DotaReader.swift */,
+			);
+			name = PacketReaders;
+			sourceTree = "<group>";
+		};
+		AE98AC311B18A38400E5F382 /* QueueDetectors */ = {
+			isa = PBXGroup;
+			children = (
+				AE98AC201B18A2AC00E5F382 /* Status.swift */,
+				AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */,
+				AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */,
+			);
+			name = QueueDetectors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,7 +222,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				832BCE7F1B09E4AC00FE15E2 /* PBXTargetDependency */,
+				AE238C151B1A0C7900B6ED09 /* PBXTargetDependency */,
 			);
 			name = "GameQ-OSX-2.0Tests";
 			productName = "GameQ-OSX-2.0Tests";
@@ -233,11 +290,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				832BCE901B09F08500FE15E2 /* PacketReader.swift in Sources */,
+				AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */,
+				AE98AC2A1B18A2BF00E5F382 /* DotaReader.swift in Sources */,
+				AE98AC221B18A2AC00E5F382 /* DotaDetector.swift in Sources */,
+				AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */,
+				AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */,
+				AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */,
+				AE98AC281B18A2AC00E5F382 /* Status.swift in Sources */,
+				AE98AC351B18A59800E5F382 /* ShitDoer.swift in Sources */,
+				AE98AC271B18A2AC00E5F382 /* QueueDetector.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
-				832BCE701B09E4AC00FE15E2 /* AppDelegate.swift in Sources */,
-				832BCE9D1B0A113D00FE15E2 /* PacketParser.m in Sources */,
-				832BCE941B09F13B00FE15E2 /* Packet.swift in Sources */,
+				AE98AC261B18A2AC00E5F382 /* PacketReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,17 +308,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */,
+				AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */,
+				AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */,
+				AE546D321B19DEBF008D8A86 /* QueueDetector.swift in Sources */,
+				AE546D331B19DEBF008D8A86 /* DotaDetector.swift in Sources */,
 				832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */,
+				AE546D2E1B19DEBF008D8A86 /* PacketParser.m in Sources */,
+				AE546D311B19DEBF008D8A86 /* Status.swift in Sources */,
+				AE546D2A1B19DEBF008D8A86 /* ShitDoer.swift in Sources */,
+				AE546D301B19DEBF008D8A86 /* DotaReader.swift in Sources */,
+				AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */,
+				AE546D2F1B19DEBF008D8A86 /* PacketReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		832BCE7F1B09E4AC00FE15E2 /* PBXTargetDependency */ = {
+		AE238C151B1A0C7900B6ED09 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 832BCE691B09E4AC00FE15E2 /* GameQ-OSX-2.0 */;
-			targetProxy = 832BCE7E1B09E4AC00FE15E2 /* PBXContainerItemProxy */;
+			targetProxy = AE238C141B1A0C7900B6ED09 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -357,11 +431,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "GameQ-OSX-2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -373,11 +448,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "GameQ-OSX-2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
 			};
 			name = Release;
@@ -385,7 +461,7 @@
 		832BCE8B1B09E4AC00FE15E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -398,14 +474,16 @@
 				INFOPLIST_FILE = "GameQ-OSX-2.0Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GameQ-OSX-2.0.app/Contents/MacOS/GameQ-OSX-2.0";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "GameQ_OSX_2_0-Swift.h";
+				TEST_HOST = "";
 			};
 			name = Debug;
 		};
 		832BCE8C1B09E4AC00FE15E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -414,7 +492,9 @@
 				INFOPLIST_FILE = "GameQ-OSX-2.0Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GameQ-OSX-2.0.app/Contents/MacOS/GameQ-OSX-2.0";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "GameQ_OSX_2_0-Swift.h";
+				TEST_HOST = "";
 			};
 			name = Release;
 		};

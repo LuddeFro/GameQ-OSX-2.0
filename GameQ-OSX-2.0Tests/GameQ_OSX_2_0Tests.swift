@@ -17,20 +17,34 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        DotaDetector.reset()
+        DotaReader.reset()
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+    func testAllFiles(){
+        
+        let filemanager:NSFileManager = NSFileManager()
+        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/")
+        while let file = files?.nextObject() as? String {
+            if file.hasSuffix("csv") { // checks the extension
+                testIterator(file)
+            }
         }
     }
     
+    func testIterator(file:String) {
+       
+        println(file)
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/" + file)
+        XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
+        tearDown()
+    }
+    
+    func testOneFile() {
+
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/d22-game.csv")
+        XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
+        tearDown()
+    }
 }
