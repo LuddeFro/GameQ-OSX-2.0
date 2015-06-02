@@ -27,7 +27,8 @@ class MasterViewController: NSViewController {
     
     
     @IBAction func quitButtonPressed(sender: NSButton) {
-     NSApplication.sharedApplication().terminate(self)
+        DotaDetector.stopDetection()
+        NSApplication.sharedApplication().terminate(self)
     }
     
     override func viewDidLoad() {

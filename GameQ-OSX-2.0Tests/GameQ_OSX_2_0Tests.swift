@@ -13,12 +13,11 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        DotaDetector.running = true
     }
     
     override func tearDown() {
         DotaDetector.reset()
-        DotaReader.reset()
         super.tearDown()
     }
     
@@ -36,6 +35,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     func testIterator(file:String) {
        
         println(file)
+        setUp()
         CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/" + file)
         XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
         tearDown()
@@ -43,6 +43,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     func testOneFile() {
 
+        setUp()
         CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/d22-game.csv")
         XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
         tearDown()
