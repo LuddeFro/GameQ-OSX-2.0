@@ -13,7 +13,6 @@ class DotaDetector:QueueDetector {
     static var running:Bool = false
     static var status:Status = Status.InLobby
     static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
-    static let capSize:Int = 300
     
     
     static func reset() {
@@ -28,7 +27,7 @@ class DotaDetector:QueueDetector {
         }
         else{
             DataHandler.game = "dota"
-            DotaReader.start(dotaFilter, capSize: capSize, handler: DotaReader.self)
+            DotaReader.start(dotaFilter, handler: DotaReader.self)
             running = true
             return true
         }

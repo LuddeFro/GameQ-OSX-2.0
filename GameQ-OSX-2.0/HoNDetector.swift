@@ -12,9 +12,7 @@ class HoNDetector:QueueDetector {
     
     static var running:Bool = false
     static var status:Status = Status.InLobby
-    static let honFilter:String = "11235<= dst port <= 11335"
-    static let capSize:Int = 300
-    
+    static let honFilter:String = "udp src portrange 11235-11335"
     
     static func reset() {
         status = Status.InLobby
@@ -28,7 +26,7 @@ class HoNDetector:QueueDetector {
         }
         else{
             DataHandler.game = "HoN"
-            HoNReader.start(honFilter, capSize: capSize, handler: HoNReader.self)
+            HoNReader.start(honFilter, handler: HoNReader.self)
             running = true
             return true
         }

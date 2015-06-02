@@ -24,7 +24,7 @@ class PacketReader:NSObject{
     }
     
     
-    class func start(filter:String, capSize:Int, handler:PacketReader.Type) {
+    class func start(filter:String, handler:PacketReader.Type) {
         self.handler = handler
         dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
             PacketParser.start_loop(filter)

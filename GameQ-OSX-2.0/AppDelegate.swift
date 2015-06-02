@@ -24,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
+        
         setUpWindow()
         masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
     }
