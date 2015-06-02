@@ -30,11 +30,12 @@ class DotaReader:PacketReader{
         var time:Double = -1
     }
     
-    class func save(fileName:String) {
-        DataHandler.logPackets(packetQueue, fileName:fileName)
+    override class func save() {
+        DataHandler.logPackets(packetQueue)
+        DotaReader.reset()
     }
     
-    class func reset(){
+    override class func reset(){
         packetQueue = [Packet]()
         queuePort = -1
         timer78 = -1
@@ -53,7 +54,7 @@ class DotaReader:PacketReader{
     
     class func handle2(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-       // println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         updateStatus(newPacket);
     }
     

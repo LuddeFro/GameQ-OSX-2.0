@@ -10,6 +10,7 @@ import Foundation
 
 class DotaDetector:QueueDetector {
     
+    static var running:Bool = false
     static var status:Status = Status.InLobby
     static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
     static let capSize:Int = 300
@@ -17,25 +18,49 @@ class DotaDetector:QueueDetector {
     
     static func reset() {
         status = Status.InLobby
+        running = false
+        DotaReader.reset()
     }
     
     static func startDetection() -> Bool{
-        DotaReader.start(dotaFilter, capSize: capSize, handler: DotaReader.self)
-        return true
+        if(running){
+            return false
+        }
+        else{
+            DotaReader.start(dotaFilter, capSize: capSize, handler: DotaReader.self)
+            running = true
+            return true
+        }
     }
     
     static func stopDetection() -> Bool{
-        DotaReader.stop()
-        return true
+        if(running){
+            DotaReader.stop()
+            reset()
+            return true
+        }
+        else{
+            return false
+        }
     }
     
     static func updateStatus(newStatus: Status) -> Bool{
-    
-        self.status = newStatus
-        println(newStatus.rawValue)
-        return true;
+        
+        if(running){
+            self.status = newStatus
+            println(newStatus.rawValue)
+            return true
+        }
+        else{
+            return false
+        }
     }
     
+    static func saveCapture() {
+        if(running){
+        DotaReader.save()
+        }
+    }
 }
 
 

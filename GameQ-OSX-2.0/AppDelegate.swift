@@ -13,70 +13,75 @@ import CoreAudio
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    
     @IBOutlet weak var window: NSWindow!
-
-
+    var masterViewController: MasterViewController!
+    
+    var statusBar = NSStatusBar.systemStatusBar()
+    var statusBarItem : NSStatusItem = NSStatusItem()
+    var menu: NSMenu = NSMenu()
+    var menuItem : NSMenuItem = NSMenuItem()
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // Insert code here to initialize your application
-        ShitDoer.doShit()
         
+        setUpWindow()
+        masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
     }
-
+    
+    func setUpWindow(){
+        self.window.titleVisibility = NSWindowTitleVisibility.Hidden
+        self.window.titlebarAppearsTransparent = true
+        self.window.styleMask |= NSFullSizeContentViewWindowMask
+        self.window.backgroundColor = NSColor.whiteColor()
+    }
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
+    
+    override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        //Add statusBarItem
+        statusBarItem = statusBar.statusItemWithLength(-1)
+        statusBarItem.menu = menu
+        statusBarItem.title = "GameQ"
+        
+        //Add menuItem to menu
+        menuItem.title = "Clicked"
+        menuItem.action = Selector("setWindowVisible:")
+        menuItem.keyEquivalent = ""
+        menu.addItem(menuItem)
+    }
     
     
-    
-    
-    // MARK: - Packet Capture
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // MARK: - End Packet Capture
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func setWindowVisible(sender: AnyObject){
+        self.window!.orderFront(self)
+    }
     
     // MARK: - Core Data stack
-
+    
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "io.gameq.com.GameQ_OSX_2_0" in the user's Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
         let appSupportURL = urls[urls.count - 1] as! NSURL
         return appSupportURL.URLByAppendingPathComponent("io.gameq.com.GameQ_OSX_2_0")
-    }()
-
+        }()
+    
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource("GameQ_OSX_2_0", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
-    }()
-
+        }()
+    
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. (The directory for the store is created, if necessary.) This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         let fileManager = NSFileManager.defaultManager()
         var shouldFail = false
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-
+        
         // Make sure the application files directory is there
         let propertiesOpt = self.applicationDocumentsDirectory.resourceValuesForKeys([NSURLIsDirectoryKey], error: &error)
         if let properties = propertiesOpt {
@@ -113,8 +118,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             return coordinator
         }
-    }()
-
+        }()
+    
     lazy var managedObjectContext: NSManagedObjectContext? = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
@@ -124,10 +129,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
-    }()
-
+        }()
+    
     // MARK: - Core Data Saving and Undo support
-
+    
     @IBAction func saveAction(sender: AnyObject!) {
         // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
         if let moc = self.managedObjectContext {
@@ -140,7 +145,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
-
+    
     func windowWillReturnUndoManager(window: NSWindow) -> NSUndoManager? {
         // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
         if let moc = self.managedObjectContext {
@@ -149,7 +154,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return nil
         }
     }
-
+    
     func applicationShouldTerminate(sender: NSApplication) -> NSApplicationTerminateReply {
         // Save changes in the application's managed object context before the application terminates.
         
@@ -190,6 +195,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // If we got here, it is time to quit.
         return .TerminateNow
     }
-
+    
 }
 

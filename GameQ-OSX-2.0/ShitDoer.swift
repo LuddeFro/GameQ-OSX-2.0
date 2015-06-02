@@ -112,7 +112,7 @@ class ShitDoer:NSObject{
                     println("Choose a file name:")
                     var filename = DataHandler.prompt()
                     println("Filename: \(filename)")
-                    DotaReader.save(filename)
+                    DotaReader.save()
                     println("Your data has been saved!")
                     DotaReader.packetQueue.removeAll(keepCapacity: true)
                     println("Continue Capture? 'yes'/'no'")

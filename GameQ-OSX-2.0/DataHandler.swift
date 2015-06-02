@@ -11,10 +11,10 @@ import Foundation
 class DataHandler:NSObject {
     
     struct Static {
-        static var game:String = ""
+        static var game:String = "Dota"
     }
     
-    class func logPackets(array:[Packet], fileName:String) {
+    class func logPackets(array:[Packet]) {
         var log:String = ""
         for i in 0..<array.count {
             log = "\(log)\(array[i].srcPort),\(array[i].dstPort),\(array[i].captureTime),\(array[i].packetLength)\n"
@@ -33,9 +33,14 @@ class DataHandler:NSObject {
         }
         
         
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = .MediumStyle
+        formatter.dateStyle = .MediumStyle
+        let name = formatter.stringFromDate(date) + ".csv"
         
         //spara filen i pathen
-        var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(Static.game).stringByAppendingPathComponent(fileName)
+        var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(Static.game).stringByAppendingPathComponent(name)
         log.writeToFile(path, atomically: true, encoding:NSUTF8StringEncoding , error: nil)
     }
     
