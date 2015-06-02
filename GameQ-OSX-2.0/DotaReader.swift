@@ -10,9 +10,6 @@ import Foundation
 
 class DotaReader:PacketReader{
     
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    
     static var queuePort:Int = -1
     static var timer78:Double = -1
     static var timer158:Double = -1
@@ -23,17 +20,6 @@ class DotaReader:PacketReader{
     
     static var gameTimer2:[PacketTimer] = [PacketTimer]()
     static var packetCounter2:[Int:Int] = [164:0, 174:0, 190:0, 206:0]
-    
-    
-    struct PacketTimer {
-        var key:Int = -1
-        var time:Double = -1
-    }
-    
-    override class func save() {
-        DataHandler.logPackets(packetQueue)
-        DotaReader.reset()
-    }
     
     override class func reset(){
         packetQueue = [Packet]()
@@ -190,7 +176,7 @@ class DotaReader:PacketReader{
                 }
             }
             
-       //     println(packetCounter)
+       //   println(packetCounter)
             if(gameTimer.count >= packetNumber && packetCounter[1300] < 2){return true}
             else {return false}
     }

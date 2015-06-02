@@ -1,25 +1,25 @@
 //
-//  Capture.swift
+//  HoNDetector.swift
 //  GameQ-OSX-2.0
 //
-//  Created by Ludvig Fröberg on 18/05/15.
+//  Created by Fabian Wikström on 6/2/15.
 //  Copyright (c) 2015 GameQ AB. All rights reserved.
 //
 
 import Foundation
 
-class DotaDetector:QueueDetector {
+class HoNDetector:QueueDetector {
     
     static var running:Bool = false
     static var status:Status = Status.InLobby
-    static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
+    static let honFilter:String = "11235<= dst port <= 11335"
     static let capSize:Int = 300
     
     
     static func reset() {
         status = Status.InLobby
         running = false
-        DotaReader.reset()
+        HoNReader.reset()
     }
     
     static func startDetection() -> Bool{
@@ -27,8 +27,8 @@ class DotaDetector:QueueDetector {
             return false
         }
         else{
-            DataHandler.game = "dota"
-            DotaReader.start(dotaFilter, capSize: capSize, handler: DotaReader.self)
+            DataHandler.game = "HoN"
+            HoNReader.start(honFilter, capSize: capSize, handler: HoNReader.self)
             running = true
             return true
         }
@@ -36,7 +36,7 @@ class DotaDetector:QueueDetector {
     
     static func stopDetection() -> Bool{
         if(running){
-            DotaReader.stop()
+            HoNReader.stop()
             reset()
             DataHandler.game = ""
             return true
@@ -60,17 +60,7 @@ class DotaDetector:QueueDetector {
     
     static func saveCapture() {
         if(running){
-        DotaReader.save()
+            HoNReader.save()
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

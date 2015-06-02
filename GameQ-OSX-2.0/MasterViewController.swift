@@ -22,7 +22,8 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
-       DotaDetector.stopDetection()
+        println("Stopped Dedection")
+        DotaDetector.stopDetection()
     }
     
     
