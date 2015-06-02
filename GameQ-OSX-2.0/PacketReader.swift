@@ -24,8 +24,12 @@ class PacketReader:NSObject{
         })
     }
     
+    class func reset(){}
+  
+    class func save(){}
     
     class func stop() {
         PacketParser.stop_loop()
+        reset()
     }
 }

@@ -26,6 +26,7 @@ class DotaDetector:QueueDetector {
     
     static func stopDetection() -> Bool{
         DotaReader.stop()
+        reset()
         return true
     }
     
@@ -34,6 +35,10 @@ class DotaDetector:QueueDetector {
         self.status = newStatus
         println(newStatus.rawValue)
         return true;
+    }
+    
+    static func saveCapture() {
+        DotaReader.save()
     }
     
 }

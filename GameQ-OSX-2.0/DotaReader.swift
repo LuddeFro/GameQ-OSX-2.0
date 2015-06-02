@@ -30,11 +30,12 @@ class DotaReader:PacketReader{
         var time:Double = -1
     }
     
-    class func save(fileName:String) {
-        DataHandler.logPackets(packetQueue, fileName:fileName)
+    override class func save() {
+        DataHandler.logPackets(packetQueue)
+        DotaReader.reset()
     }
     
-    class func reset(){
+    override class func reset(){
         packetQueue = [Packet]()
         queuePort = -1
         timer78 = -1
