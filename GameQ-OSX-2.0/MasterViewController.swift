@@ -13,7 +13,7 @@ class MasterViewController: NSViewController {
     
    
     @IBAction func startDotaButtonPressed(sender: NSButton) {
-        println("Starting Dota Detection")
+
         DotaDetector.startDetection()
         
     }
@@ -25,8 +25,7 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func capButtonPressed(sender: NSButton) {
-       println("Saving File")
-       if(DotaDetector.running){
+        if(DotaDetector.running){
        DotaDetector.saveCapture()
        }
        else if(HoNDetector.running){
@@ -35,7 +34,7 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
-        println("Stopped Detection")
+       
         if(DotaDetector.running){
             DotaDetector.stopDetection()
         }

@@ -24,29 +24,18 @@
         </customObject>
         <window title="GameQ" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="306" height="289"/>
+            <rect key="contentRect" x="588" y="317" width="350" height="450"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="306" height="289"/>
+                <rect key="frame" x="0.0" y="0.0" width="350" height="450"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2W7-hA-8rG">
-                        <rect key="frame" x="91" y="161" width="124" height="128"/>
+                        <rect key="frame" x="113" y="311" width="124" height="128"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="sq-nb512" id="9fV-FE-Ifz"/>
                     </imageView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vpv-My-2Iz">
-                        <rect key="frame" x="120" y="80" width="66" height="32"/>
-                        <buttonCell key="cell" type="push" title="Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CHO-hc-vbl">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="capButtonPressed:" target="vOE-8f-cvt" id="oHK-x3-gWf"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlE-Sp-U4g">
-                        <rect key="frame" x="118" y="47" width="70" height="32"/>
+                        <rect key="frame" x="187" y="28" width="70" height="32"/>
                         <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yd7-aF-pxv">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -56,7 +45,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fai-ix-p3k">
-                        <rect key="frame" x="120" y="14" width="66" height="32"/>
+                        <rect key="frame" x="269" y="28" width="66" height="32"/>
                         <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CZa-yG-Wzz">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -66,7 +55,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gl9-gT-HUM">
-                        <rect key="frame" x="186" y="113" width="102" height="32"/>
+                        <rect key="frame" x="15" y="13" width="102" height="32"/>
                         <buttonCell key="cell" type="push" title="Start HoN" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="d2U-dj-qr4">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -76,13 +65,23 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUQ-6M-fgv">
-                        <rect key="frame" x="27" y="113" width="103" height="32"/>
+                        <rect key="frame" x="14" y="41" width="103" height="32"/>
                         <buttonCell key="cell" type="push" title="Start Dota" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hWT-Cc-IGu">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="startDotaButtonPressed:" target="vOE-8f-cvt" id="nme-Qy-Waa"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vpv-My-2Iz">
+                        <rect key="frame" x="117" y="28" width="66" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CHO-hc-vbl">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="capButtonPressed:" target="vOE-8f-cvt" id="oHK-x3-gWf"/>
                         </connections>
                     </button>
                 </subviews>

@@ -44,7 +44,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     func testOneFile() {
 
         setUp()
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/d22-game.csv")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/dota1.csv")
         XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
         tearDown()
     }

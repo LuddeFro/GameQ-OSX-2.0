@@ -23,8 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var menuItem : NSMenuItem = NSMenuItem()
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        
-        
+    
         setUpWindow()
         masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
     }
@@ -34,6 +33,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.window.titlebarAppearsTransparent = true
         self.window.styleMask |= NSFullSizeContentViewWindowMask
         self.window.backgroundColor = NSColor.whiteColor()
+        self.window.movableByWindowBackground = true
+        
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {

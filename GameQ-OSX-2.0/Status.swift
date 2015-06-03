@@ -13,6 +13,6 @@ enum Status:String {
     case Online = "Online"
     case InLobby = "InLobby"
     case InQueue = "InQueue"
-    case GameReady =  "GameReady"
+    case GameReady = "GameReady"
     case InGame = "InGame"
 }

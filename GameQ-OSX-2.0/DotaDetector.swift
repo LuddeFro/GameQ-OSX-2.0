@@ -14,7 +14,6 @@ class DotaDetector:QueueDetector {
     static var status:Status = Status.InLobby
     static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
     
-    
     static func reset() {
         status = Status.InLobby
         running = false
@@ -26,6 +25,7 @@ class DotaDetector:QueueDetector {
             return false
         }
         else{
+            println("Starting Dota Detection")
             DataHandler.game = "dota"
             DotaReader.start(dotaFilter, handler: DotaReader.self)
             running = true
@@ -35,6 +35,7 @@ class DotaDetector:QueueDetector {
     
     static func stopDetection() -> Bool{
         if(running){
+            println("Stopping Detection")
             DotaReader.stop()
             reset()
             DataHandler.game = ""
@@ -48,8 +49,13 @@ class DotaDetector:QueueDetector {
     static func updateStatus(newStatus: Status) -> Bool{
         
         if(running){
+    
             self.status = newStatus
             println(newStatus.rawValue)
+            
+            if(newStatus == Status.GameReady){
+                DotaDetector.saveCapture()
+                DotaDetector.stopDetection()}
             return true
         }
         else{
@@ -59,6 +65,7 @@ class DotaDetector:QueueDetector {
     
     static func saveCapture() {
         if(running){
+            println("Saving File")
         DotaReader.save()
         }
     }

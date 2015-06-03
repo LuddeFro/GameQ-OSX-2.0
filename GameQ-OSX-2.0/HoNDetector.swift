@@ -34,6 +34,7 @@ class HoNDetector:QueueDetector {
     
     static func stopDetection() -> Bool{
         if(running){
+             println("Stopped Detection")
             HoNReader.stop()
             reset()
             DataHandler.game = ""
