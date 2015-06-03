@@ -240,8 +240,6 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     }
     
     
-    
-    
     printf("capture was set up successfully\n\n");
     pcap_loop(handle, -1, parse_packet, &user);
 //    NSLog(@"called pcap_loop");

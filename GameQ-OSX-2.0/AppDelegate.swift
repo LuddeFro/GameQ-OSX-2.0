@@ -26,6 +26,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
         setUpWindow()
         masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
+        
+        while(true){
+            
+           
+            
+        }
     }
     
     func setUpWindow(){
