@@ -1,23 +1,23 @@
 //
-//  Capture.swift
+//  HoNDetector.swift
 //  GameQ-OSX-2.0
 //
-//  Created by Ludvig Fröberg on 18/05/15.
+//  Created by Fabian Wikström on 6/2/15.
 //  Copyright (c) 2015 GameQ AB. All rights reserved.
 //
 
 import Foundation
 
-class DotaDetector:QueueDetector {
+class HoNDetector:QueueDetector {
     
     static var running:Bool = false
     static var status:Status = Status.InLobby
-    static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
+    static let honFilter:String = "udp src portrange 11235-11335"
     
     static func reset() {
         status = Status.InLobby
         running = false
-        DotaReader.reset()
+        HoNReader.reset()
     }
     
     static func startDetection() -> Bool{
@@ -25,9 +25,8 @@ class DotaDetector:QueueDetector {
             return false
         }
         else{
-            println("Starting Dota Detection")
-            DataHandler.game = "dota"
-            DotaReader.start(dotaFilter, handler: DotaReader.self)
+            DataHandler.game = "HoN"
+            HoNReader.start(honFilter, handler: HoNReader.self)
             running = true
             return true
         }
@@ -35,8 +34,8 @@ class DotaDetector:QueueDetector {
     
     static func stopDetection() -> Bool{
         if(running){
-            println("Stopping Detection")
-            DotaReader.stop()
+             println("Stopped Detection")
+            HoNReader.stop()
             reset()
             DataHandler.game = ""
             return true
@@ -49,13 +48,8 @@ class DotaDetector:QueueDetector {
     static func updateStatus(newStatus: Status) -> Bool{
         
         if(running){
-    
             self.status = newStatus
             println(newStatus.rawValue)
-            
-            if(newStatus == Status.GameReady){
-                DotaDetector.saveCapture()
-                DotaDetector.stopDetection()}
             return true
         }
         else{
@@ -65,18 +59,7 @@ class DotaDetector:QueueDetector {
     
     static func saveCapture() {
         if(running){
-            println("Saving File")
-        DotaReader.save()
+            HoNReader.save()
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

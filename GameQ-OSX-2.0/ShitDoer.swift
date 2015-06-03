@@ -70,7 +70,7 @@ class ShitDoer:NSObject{
                     if !matches {
                         println("Unrecognized game, please choose one of the following: \(availableGames)")
                     } else {
-                        DataHandler.Static.game = input
+                        DataHandler.game = input
                         break
                     }
                 }
@@ -81,7 +81,7 @@ class ShitDoer:NSObject{
             
             var filter:String = DataHandler.prompt()
             if filter == "pre" {
-                filter = filters[DataHandler.Static.game]!
+                filter = filters[DataHandler.game]!
             }
             
             println("filter set: \(filter)")

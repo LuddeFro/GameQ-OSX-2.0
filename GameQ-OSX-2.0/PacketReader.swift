@@ -11,13 +11,20 @@ import Foundation
 class PacketReader:NSObject{
     
     static var handler:PacketReader.Type = PacketReader.self
+    static var packetQueue:[Packet] = [Packet]()
+    static var queueMaxSize:Int = 200
+    
+    struct PacketTimer {
+        var key:Int = -1
+        var time:Double = -1
+    }
     
     class func handle(srcPort:Int, dstPort:Int, iplen:Int){
         handler.handle(srcPort, dstPort: dstPort, iplen: iplen)
     }
     
     
-    class func start(filter:String, capSize:Int, handler:PacketReader.Type) {
+    class func start(filter:String, handler:PacketReader.Type) {
         self.handler = handler
         dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
             PacketParser.start_loop(filter)
@@ -25,8 +32,11 @@ class PacketReader:NSObject{
     }
     
     class func reset(){}
-  
-    class func save(){}
+    
+    class func save(){
+        DataHandler.logPackets(packetQueue)
+        reset()
+    }
     
     class func stop() {
         PacketParser.stop_loop()

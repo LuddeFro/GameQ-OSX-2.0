@@ -11,23 +11,42 @@ import Cocoa
 class MasterViewController: NSViewController {
     
     
-    @IBAction func startButtonPressed(sender: NSButton) {
-        println("Starting Detection")
+   
+    @IBAction func startDotaButtonPressed(sender: NSButton) {
+
         DotaDetector.startDetection()
+        
+    }
+    
+    
+    @IBAction func startHoNButtonPressed(sender: NSButton) {
+        println("Starting HoN Detection")
+        HoNDetector.startDetection()
     }
     
     @IBAction func capButtonPressed(sender: NSButton) {
-       println("Saving File")
+        if(DotaDetector.running){
        DotaDetector.saveCapture()
+       }
+       else if(HoNDetector.running){
+        HoNDetector.saveCapture()
+        }
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
-       DotaDetector.stopDetection()
+       
+        if(DotaDetector.running){
+            DotaDetector.stopDetection()
+        }
+        else if(HoNDetector.running){
+            HoNDetector.stopDetection()
+        }
     }
     
     
     @IBAction func quitButtonPressed(sender: NSButton) {
         DotaDetector.stopDetection()
+        HoNDetector.stopDetection()
         NSApplication.sharedApplication().terminate(self)
     }
     

@@ -10,9 +10,6 @@ import Foundation
 
 class DotaReader:PacketReader{
     
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    
     static var queuePort:Int = -1
     static var timer78:Double = -1
     static var timer158:Double = -1
@@ -23,17 +20,6 @@ class DotaReader:PacketReader{
     
     static var gameTimer2:[PacketTimer] = [PacketTimer]()
     static var packetCounter2:[Int:Int] = [164:0, 174:0, 190:0, 206:0]
-    
-    
-    struct PacketTimer {
-        var key:Int = -1
-        var time:Double = -1
-    }
-    
-    override class func save() {
-        DataHandler.logPackets(packetQueue)
-        DotaReader.reset()
-    }
     
     override class func reset(){
         packetQueue = [Packet]()
@@ -54,7 +40,7 @@ class DotaReader:PacketReader{
     
     class func handle2(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        // println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         updateStatus(newPacket);
     }
     
@@ -83,11 +69,11 @@ class DotaReader:PacketReader{
             break
             
         case Status.InQueue:
-            var gameTime:Bool = isQueueToGame(newPacket, timeSpan: 5, maxPacket: 99, packetNumber: 3)
-            var gameTime2:Bool = isGame(newPacket, timeSpan: 5, maxPacket: 5, packetNumber: 3)
+            //var gameEarly:Bool = isGameEarly(newPacket, timeSpan: 5, maxPacket: 99, packetNumber: 3)
+            var gameLate:Bool = isGameLate(newPacket, timeSpan: 7, maxPacket: 5, packetNumber: 7)
             
-            if(gameTime){DotaDetector.updateStatus(Status.GameReady)}
-            else if(gameTime2){DotaDetector.updateStatus(Status.GameReady)}
+           // if(gameEarly){DotaDetector.updateStatus(Status.GameReady)}
+             if(gameLate){DotaDetector.updateStatus(Status.GameReady)}
             //else if(stoppedQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
             else if(!isStillQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
             break
@@ -102,11 +88,11 @@ class DotaReader:PacketReader{
     
     class func startedQueueing(packet:Packet) -> Bool{
         
-        if(packet.packetLength == 270){
-            timer78 = packet.captureTime
-            timer158 = packet.captureTime
-            return true
-        }
+//        if(packet.packetLength == 270 && (timer78 != -1 || timer158 != -1)){
+//            timer78 = packet.captureTime
+//            timer158 = packet.captureTime
+//            return true
+//        }
         
         if(packet.captureTime - timer78 > 30){timer78 = -1}
         if(packet.captureTime - timer158 > 30){timer158 = -1}
@@ -118,7 +104,7 @@ class DotaReader:PacketReader{
             timer158 = packet.captureTime
             queuePort = packet.srcPort}
         
-        if(timer78 != -1 || timer158 != -1){return true}
+        if(timer78 != -1 && timer158 != -1){return true}
         else {return false}
     }
     
@@ -148,8 +134,7 @@ class DotaReader:PacketReader{
         else{return false}
     }
     
-    class func isGame(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) ->
-        Bool{
+    class func isGameLate(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
             
             while(!gameTimer2.isEmpty && p.captureTime - gameTimer2.last!.time > timeSpan){
                 var key:Int = gameTimer2.removeLast().key
@@ -164,17 +149,16 @@ class DotaReader:PacketReader{
                     packetCounter2.updateValue(oldCount + 1, forKey: key)
                 }
             }
-            
-            if(gameTimer2.count >= packetNumber
-            && (packetCounter2[164] > 0 || packetCounter2[174] > 0)
+        
+            if((packetCounter2[164] > 0 || packetCounter2[174] > 0)
             && packetCounter2[190] > 0
             && packetCounter2[206] > 0)
             {return true}
+            else if(gameTimer2.count >= packetNumber){return true}
             else {return false}
     }
     
-    class func isQueueToGame(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) ->
-        Bool{
+    class func isGameEarly(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
             
             while(!gameTimer.isEmpty && p.captureTime - gameTimer.last!.time > timeSpan){
                 var key:Int = gameTimer.removeLast().key
@@ -190,8 +174,11 @@ class DotaReader:PacketReader{
                 }
             }
             
-       //     println(packetCounter)
-            if(gameTimer.count >= packetNumber && packetCounter[1300] < 2){return true}
+       //   println(packetCounter)
+            if(gameTimer.count >= packetNumber
+            && packetCounter[1300] < 2)
+            {return true}
+            
             else {return false}
     }
     
