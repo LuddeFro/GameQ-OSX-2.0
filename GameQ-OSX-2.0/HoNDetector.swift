@@ -25,6 +25,7 @@ class HoNDetector:QueueDetector {
             return false
         }
         else{
+            println("Starting HoN Detection")
             DataHandler.game = "HoN"
             HoNReader.start(honFilter, handler: HoNReader.self)
             running = true

@@ -70,7 +70,7 @@ class DotaReader:PacketReader{
             
         case Status.InQueue:
             //var gameEarly:Bool = isGameEarly(newPacket, timeSpan: 5, maxPacket: 99, packetNumber: 3)
-            var gameLate:Bool = isGameLate(newPacket, timeSpan: 7, maxPacket: 5, packetNumber: 7)
+            var gameLate:Bool = isGameLate(newPacket, timeSpan: 7, maxPacket: 5, packetNumber: 6)
             
            // if(gameEarly){DotaDetector.updateStatus(Status.GameReady)}
              if(gameLate){DotaDetector.updateStatus(Status.GameReady)}

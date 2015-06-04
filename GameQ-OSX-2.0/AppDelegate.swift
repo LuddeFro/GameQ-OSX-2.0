@@ -9,6 +9,7 @@
 import Cocoa
 import AudioToolbox
 import CoreAudio
+import AppKit
 
 
 @NSApplicationMain
@@ -22,16 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var menu: NSMenu = NSMenu()
     var menuItem : NSMenuItem = NSMenuItem()
     
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
     
         setUpWindow()
         masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
         
-        while(true){
-            
-           
-            
-        }
     }
     
     func setUpWindow(){
