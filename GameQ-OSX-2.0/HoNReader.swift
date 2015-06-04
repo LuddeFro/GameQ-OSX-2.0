@@ -10,7 +10,15 @@ import Foundation
 
 class HoNReader:PacketReader{
     
+    static let honFilter:String = "udp src portrange 11235-11335"
     static var gameTimer:[PacketTimer] = [PacketTimer]()
+    
+    override class func start(handler:PacketReader.Type) {
+        super.start(handler)
+        dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
+            PacketParser.start_loop(self.honFilter)
+        })
+    }
     
     override class func handle(srcPort:Int, dstPort:Int, iplen:Int) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
@@ -40,7 +48,7 @@ class HoNReader:PacketReader{
         
         addPacketToQueue(newPacket)
         
-        switch HoNDetector.status{
+        switch MasterController.status{
             
         case Status.Offline:
             break
@@ -51,7 +59,7 @@ class HoNReader:PacketReader{
         case Status.InLobby:
             
             if(isGame(newPacket, timeSpan: 5, maxPacket: 0, packetNumber: 10)){
-             HoNDetector.updateStatus(Status.GameReady)
+             MasterController.updateStatus(Status.GameReady)
             }
             
         case Status.InQueue:

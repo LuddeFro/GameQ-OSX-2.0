@@ -10,34 +10,23 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
-    
+    @IBOutlet weak var gameStatus: NSTextField!
    
-    @IBAction func startDotaButtonPressed(sender: NSButton) {DotaDetector.startDetection()}
-    @IBAction func startHoNButtonPressed(sender: NSButton) {HoNDetector.startDetection()}
+    @IBAction func startButtonPressed(sender: NSButton) {
+        MasterController.startDetection()
+    }
     
     @IBAction func capButtonPressed(sender: NSButton) {
-        if(DotaDetector.running){
-       DotaDetector.saveCapture()
-       }
-       else if(HoNDetector.running){
-        HoNDetector.saveCapture()
-        }
+       MasterController.saveCapture()
     }
     
     
     @IBAction func stopButtonPressed(sender: NSButton) {
-       
-        if(DotaDetector.running){
-            DotaDetector.stopDetection()
-        }
-        else if(HoNDetector.running){
-            HoNDetector.stopDetection()
-        }
+       MasterController.stopDetection()
     }
     
     @IBAction func quitButtonPressed(sender: NSButton) {
-        DotaDetector.stopDetection()
-        HoNDetector.stopDetection()
+        MasterController.stopDetection()
         NSApplication.sharedApplication().terminate(self)
     }
     
@@ -49,15 +38,18 @@ class MasterViewController: NSViewController {
      func update() {
         
             var ws = NSWorkspace.sharedWorkspace()
-            var apps = ws.runningApplications
+            var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
             var activeApps:Set<String> = Set<String>()
-            
-            for app in apps as! [NSRunningApplication] {
-                activeApps.insert(app.localizedName!)
+        
+            for app in apps {
+                var appName:String? = app.localizedName
+                if(appName != nil){activeApps.insert(appName!)}
             }
             
-            if(activeApps.contains("dota_osx") && !DotaDetector.running){
-                DotaDetector.startDetection()
+            if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
+                
+                MasterController.gameDetection(Game.Dota)
+                gameStatus.stringValue = MasterController.game.rawValue
             }
         }
     }

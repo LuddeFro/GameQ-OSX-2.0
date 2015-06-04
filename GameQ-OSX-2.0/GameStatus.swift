@@ -16,3 +16,10 @@ enum Status:String {
     case GameReady = "GameReady"
     case InGame = "InGame"
 }
+
+enum Game:String {
+    
+    case Dota = "Dota"
+    case HoN = "Heroes of Newerth"
+    case NoGame = "No Game"
+}

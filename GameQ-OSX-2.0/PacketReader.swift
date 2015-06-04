@@ -13,6 +13,7 @@ class PacketReader:NSObject{
     static var handler:PacketReader.Type = PacketReader.self
     static var packetQueue:[Packet] = [Packet]()
     static var queueMaxSize:Int = 200
+    static var isCapturing = false
     
     struct PacketTimer {
         var key:Int = -1
@@ -23,13 +24,10 @@ class PacketReader:NSObject{
         handler.handle(srcPort, dstPort: dstPort, iplen: iplen)
     }
     
-    
-    class func start(filter:String, handler:PacketReader.Type) {
+    class func start(handler:PacketReader.Type) {
         self.handler = handler
-        dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
-            PacketParser.start_loop(filter)
-        })
-    }
+        isCapturing = true
+        }
     
     class func reset(){}
     
@@ -39,7 +37,9 @@ class PacketReader:NSObject{
     }
     
     class func stop() {
+        if(isCapturing){
         PacketParser.stop_loop()
+        }
         reset()
     }
 }

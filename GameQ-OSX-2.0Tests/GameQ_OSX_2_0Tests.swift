@@ -13,11 +13,12 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        DotaDetector.running = true
+        MasterController.game = Game.Dota
+        MasterController.status = Status.InLobby
     }
     
     override func tearDown() {
-        DotaDetector.reset()
+        MasterController.reset()
         super.tearDown()
     }
     
@@ -37,15 +38,15 @@ class GameQ_OSX_2_0Tests: XCTestCase {
         println(file)
         setUp()
         CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/" + file)
-        XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
+        XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
         tearDown()
     }
     
     func testOneFile() {
 
         setUp()
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/dota1.csv")
-        XCTAssert(DotaDetector.status == Status.GameReady, "Test Passed")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/Jun 4, 2015, 4:33:04 PM.csv")
+        XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
         tearDown()
     }
 }

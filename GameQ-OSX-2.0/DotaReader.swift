@@ -10,6 +10,8 @@ import Foundation
 
 class DotaReader:PacketReader{
     
+    static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
+
     static var queuePort:Int = -1
     static var timer78:Double = -1
     static var timer158:Double = -1
@@ -20,6 +22,13 @@ class DotaReader:PacketReader{
     
     static var gameTimer2:[PacketTimer] = [PacketTimer]()
     static var packetCounter2:[Int:Int] = [164:0, 174:0, 190:0, 206:0]
+    
+    override class func start(handler:PacketReader.Type) {
+        super.start(handler)
+        dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
+            PacketParser.start_loop(self.dotaFilter)
+        })
+    }
     
     override class func reset(){
         packetQueue = [Packet]()
@@ -40,7 +49,7 @@ class DotaReader:PacketReader{
     
     class func handle2(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        // println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         updateStatus(newPacket);
     }
     
@@ -56,7 +65,7 @@ class DotaReader:PacketReader{
         
         addPacketToQueue(newPacket)
         
-        switch DotaDetector.status{
+        switch MasterController.status{
             
         case Status.Offline:
             break
@@ -65,17 +74,17 @@ class DotaReader:PacketReader{
             break
             
         case Status.InLobby:
-            if(startedQueueing(newPacket)){DotaDetector.updateStatus(Status.InQueue)}
+            if(startedQueueing(newPacket)){MasterController.updateStatus(Status.InQueue)}
             break
             
         case Status.InQueue:
             //var gameEarly:Bool = isGameEarly(newPacket, timeSpan: 5, maxPacket: 99, packetNumber: 3)
-            var gameLate:Bool = isGameLate(newPacket, timeSpan: 7, maxPacket: 5, packetNumber: 6)
+            var gameLate:Bool = isGameLate(newPacket, timeSpan: 10, maxPacket: 5, packetNumber: 6)
             
            // if(gameEarly){DotaDetector.updateStatus(Status.GameReady)}
-             if(gameLate){DotaDetector.updateStatus(Status.GameReady)}
+             if(gameLate){MasterController.updateStatus(Status.GameReady)}
             //else if(stoppedQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
-            else if(!isStillQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
+            else if(!isStillQueueing(newPacket)){MasterController.updateStatus(Status.InLobby)}
             break
             
         case Status.GameReady:
@@ -150,6 +159,7 @@ class DotaReader:PacketReader{
                 }
             }
         
+            println(packetCounter2)
             if((packetCounter2[164] > 0 || packetCounter2[174] > 0)
             && packetCounter2[190] > 0
             && packetCounter2[206] > 0)
@@ -173,8 +183,8 @@ class DotaReader:PacketReader{
                     packetCounter.updateValue(oldCount + 1, forKey: key)
                 }
             }
-            
-       //   println(packetCounter)
+        
+        //  println(packetCounter)
             if(gameTimer.count >= packetNumber
             && packetCounter[1300] < 2)
             {return true}
