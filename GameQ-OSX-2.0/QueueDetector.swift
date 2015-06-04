@@ -21,4 +21,7 @@ protocol QueueDetector {
     static func reset()
     
     static func saveCapture()
+    
+    //vafan
 }
+
