@@ -24,6 +24,7 @@ class MasterViewController: NSViewController {
         }
     }
     
+    
     @IBAction func stopButtonPressed(sender: NSButton) {
        
         if(DotaDetector.running){
