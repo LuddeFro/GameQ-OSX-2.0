@@ -14,7 +14,6 @@
 		AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
-		AE546D2A1B19DEBF008D8A86 /* ShitDoer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC341B18A59800E5F382 /* ShitDoer.swift */; };
 		AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
 		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -22,23 +21,16 @@
 		AE546D2F1B19DEBF008D8A86 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */; };
 		AE546D301B19DEBF008D8A86 /* DotaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaReader.swift */; };
 		AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
-		AE546D321B19DEBF008D8A86 /* QueueDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */; };
-		AE546D331B19DEBF008D8A86 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */; };
 		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
-		AE954B4F1B1DD30600C5E8D6 /* HoNDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE954B4E1B1DD30600C5E8D6 /* HoNDetector.swift */; };
 		AE954B511B1DD36900C5E8D6 /* HoNReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE954B501B1DD36900C5E8D6 /* HoNReader.swift */; };
-		AE954B521B1DE09D00C5E8D6 /* HoNDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE954B4E1B1DD30600C5E8D6 /* HoNDetector.swift */; };
 		AE954B531B1DE09D00C5E8D6 /* HoNReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE954B501B1DD36900C5E8D6 /* HoNReader.swift */; };
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
-		AE98AC221B18A2AC00E5F382 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */; };
 		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
 		AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */; };
 		AE98AC261B18A2AC00E5F382 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */; };
-		AE98AC271B18A2AC00E5F382 /* QueueDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */; };
 		AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE98AC2A1B18A2BF00E5F382 /* DotaReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaReader.swift */; };
 		AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
-		AE98AC351B18A59800E5F382 /* ShitDoer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC341B18A59800E5F382 /* ShitDoer.swift */; };
 		AECB07481B207367001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
 		AECB07491B207812001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
 		AEEF87C11B1DB52C00DDD45D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE761B09E4AC00FE15E2 /* MainMenu.xib */; };
@@ -69,19 +61,15 @@
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
-		AE954B4E1B1DD30600C5E8D6 /* HoNDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNDetector.swift; sourceTree = "<group>"; };
 		AE954B501B1DD36900C5E8D6 /* HoNReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNReader.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
-		AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotaDetector.swift; sourceTree = "<group>"; };
 		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		AE98AC1C1B18A2AC00E5F382 /* PacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketParser.h; sourceTree = "<group>"; };
 		AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketParser.m; sourceTree = "<group>"; };
 		AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketReader.swift; sourceTree = "<group>"; };
-		AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueDetector.swift; sourceTree = "<group>"; };
 		AE98AC201B18A2AC00E5F382 /* GameStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
 		AE98AC291B18A2BF00E5F382 /* DotaReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotaReader.swift; sourceTree = "<group>"; };
 		AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AE98AC341B18A59800E5F382 /* ShitDoer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShitDoer.swift; sourceTree = "<group>"; };
 		AECB07471B207367001C7C18 /* MasterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterController.swift; sourceTree = "<group>"; };
 		AEEF87CA1B1DBC1B00DDD45D /* sq-nb512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-nb512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +115,6 @@
 		832BCE6C1B09E4AC00FE15E2 /* GameQ-OSX-2.0 */ = {
 			isa = PBXGroup;
 			children = (
-				AECB074A1B207E4B001C7C18 /* Old Classes */,
 				AE0D7E9A1B1D9B5200B23150 /* Controller Classes */,
 				AE98AC2D1B18A32800E5F382 /* DataHandlers */,
 				AE98AC301B18A37100E5F382 /* PacketReaders */,
@@ -205,17 +192,6 @@
 				AE954B501B1DD36900C5E8D6 /* HoNReader.swift */,
 			);
 			name = PacketReaders;
-			sourceTree = "<group>";
-		};
-		AECB074A1B207E4B001C7C18 /* Old Classes */ = {
-			isa = PBXGroup;
-			children = (
-				AE98AC341B18A59800E5F382 /* ShitDoer.swift */,
-				AE98AC1F1B18A2AC00E5F382 /* QueueDetector.swift */,
-				AE98AC181B18A2AC00E5F382 /* DotaDetector.swift */,
-				AE954B4E1B1DD30600C5E8D6 /* HoNDetector.swift */,
-			);
-			name = "Old Classes";
 			sourceTree = "<group>";
 		};
 		AECB074B1B207E84001C7C18 /* DataHolders */ = {
@@ -340,16 +316,12 @@
 				AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */,
 				AE98AC2A1B18A2BF00E5F382 /* DotaReader.swift in Sources */,
 				AE954B511B1DD36900C5E8D6 /* HoNReader.swift in Sources */,
-				AE98AC221B18A2AC00E5F382 /* DotaDetector.swift in Sources */,
 				AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */,
 				AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */,
 				AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */,
 				AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */,
-				AE98AC351B18A59800E5F382 /* ShitDoer.swift in Sources */,
 				AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */,
-				AE98AC271B18A2AC00E5F382 /* QueueDetector.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
-				AE954B4F1B1DD30600C5E8D6 /* HoNDetector.swift in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,18 +334,14 @@
 				AECB07491B207812001C7C18 /* MasterController.swift in Sources */,
 				AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */,
 				AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */,
-				AE546D321B19DEBF008D8A86 /* QueueDetector.swift in Sources */,
-				AE546D331B19DEBF008D8A86 /* DotaDetector.swift in Sources */,
 				832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */,
 				AE546D2E1B19DEBF008D8A86 /* PacketParser.m in Sources */,
 				AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */,
-				AE546D2A1B19DEBF008D8A86 /* ShitDoer.swift in Sources */,
 				AE546D301B19DEBF008D8A86 /* DotaReader.swift in Sources */,
 				AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */,
 				AE546D2F1B19DEBF008D8A86 /* PacketReader.swift in Sources */,
 				AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */,
 				AE954B531B1DE09D00C5E8D6 /* HoNReader.swift in Sources */,
-				AE954B521B1DE09D00C5E8D6 /* HoNDetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
