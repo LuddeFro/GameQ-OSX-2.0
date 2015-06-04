@@ -14,6 +14,7 @@ class MasterController:NSObject {
     static var game:Game = Game.NoGame
     static var detector:GameDetector.Type = GameDetector.self
     static var isFailMode:Bool = false
+    static var isTesting:Bool = false
     
     static func gameDetection(game:Game){
         self.game = game
@@ -49,7 +50,7 @@ class MasterController:NSObject {
             self.status = newStatus
             println(newStatus.rawValue)
             
-            if(newStatus == Status.GameReady){
+            if(newStatus == Status.GameReady && isTesting == false){
                 saveCapture()
             }
         }

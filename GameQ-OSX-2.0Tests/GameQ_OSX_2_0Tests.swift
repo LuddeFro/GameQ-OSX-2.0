@@ -13,19 +13,21 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        MasterController.game = Game.Dota
+        MasterController.gameDetection(Game.Dota)
         MasterController.status = Status.InLobby
+        MasterController.isTesting = true
     }
     
     override func tearDown() {
         MasterController.reset()
+        MasterController.isTesting = false
         super.tearDown()
     }
     
     func testAllFiles(){
         
         let filemanager:NSFileManager = NSFileManager()
-        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/")
+        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/")
         while let file = files?.nextObject() as? String {
             if file.hasSuffix("csv") { // checks the extension
                 testIterator(file)
@@ -37,16 +39,13 @@ class GameQ_OSX_2_0Tests: XCTestCase {
        
         println(file)
         setUp()
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/dota/" + file)
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/" + file)
         XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
         tearDown()
     }
     
     func testOneFile() {
-
-        setUp()
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/Jun 4, 2015, 4:33:04 PM.csv")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/g9game.csv")
         XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
-        tearDown()
     }
 }

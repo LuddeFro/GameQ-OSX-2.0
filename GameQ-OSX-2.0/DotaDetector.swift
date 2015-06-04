@@ -17,6 +17,9 @@ class DotaDetector:PacketDetector{
     static var timer158:Double = -1
     static let queueKeys:[Int] = [78,158]
     
+    static var queueTimer:[PacketTimer] = [PacketTimer]()
+    static var queueCounter:[Int:Int] = [78:0, 158:0, 270:0, 285:0]
+    
     static var gameTimerEarly:[PacketTimer] = [PacketTimer]()
     static var packetCounterEarly:[Int:Int] = [600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0, 1200:0, 1300:0]
     
@@ -43,6 +46,8 @@ class DotaDetector:PacketDetector{
         gameTimerLate = [PacketTimer]()
         packetCounterLate = [164:0, 174:0, 190:0, 206:0]
         inGameTimer = [PacketTimer]()
+        queueTimer = [PacketTimer]()
+        queueCounter = [78:0, 158:0, 270:0, 285:0]
     }
     
     override class func updateStatus(newPacket:Packet){
@@ -58,15 +63,15 @@ class DotaDetector:PacketDetector{
             break
             
         case Status.InLobby:
-            if(startedQueueing(newPacket)){MasterController.updateStatus(Status.InQueue)}
+            if(startedQueueing(newPacket, timeSpan: 30, maxPacket: 5, packetNumber: 2)){MasterController.updateStatus(Status.InQueue)}
             break
             
         case Status.InQueue:
-            var gameEarly:Bool = isGameEarly(newPacket, timeSpan: 5, maxPacket: 99, packetNumber: 3)
             var gameLate:Bool = isGameLate(newPacket, timeSpan: 10, maxPacket: 5, packetNumber: 6)
-            
-            if(gameEarly){MasterController.updateStatus(Status.GameReady)}
-            else if(gameLate){MasterController.updateStatus(Status.GameReady)}
+            var gameEarly:Bool = isGameEarly(newPacket, timeSpan: 9, maxPacket: 99, packetNumber: 3)
+                       
+            if(gameLate){MasterController.updateStatus(Status.GameReady)}
+            else if(gameEarly){MasterController.updateStatus(Status.GameReady)}
             else if(!isStillQueueing(newPacket)){MasterController.updateStatus(Status.InLobby)}
             break
             
@@ -80,25 +85,51 @@ class DotaDetector:PacketDetector{
         }
     }
     
-    class func startedQueueing(packet:Packet) -> Bool{
-        
-//        if(packet.packetLength == 270 && (timer78 != -1 || timer158 != -1)){
+//    class func startedQueueing(packet:Packet) -> Bool{
+//        
+////        if(packet.packetLength == 270 && (timer78 != -1 || timer158 != -1)){
+////            timer78 = packet.captureTime
+////            timer158 = packet.captureTime
+////            return true
+////        }
+//        
+//        if(packet.captureTime - timer78 > 30){timer78 = -1}
+//        if(packet.captureTime - timer158 > 30){timer158 = -1}
+//        
+//        if(packet.packetLength == 78){
 //            timer78 = packet.captureTime
+//            queuePort = packet.srcPort}
+//        if(packet.packetLength == 158){
 //            timer158 = packet.captureTime
-//            return true
-//        }
+//            queuePort = packet.srcPort}
+//        
+//        if(timer78 != -1 && timer158 != -1){return true}
+//        else {return false}
+//    }
+    
+    class func startedQueueing(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
+       
+        while(!queueTimer.isEmpty && p.captureTime - queueTimer.last!.time > timeSpan){
+            var key:Int = queueTimer.removeLast().key
+            var oldCount:Int = queueCounter[key]!
+            queueCounter.updateValue(oldCount - 1, forKey: key)
+        }
         
-        if(packet.captureTime - timer78 > 30){timer78 = -1}
-        if(packet.captureTime - timer158 > 30){timer158 = -1}
+        for key in queueCounter.keys{
+            if(p.packetLength <= key + maxPacket && p.packetLength >= key){
+                queueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                var oldCount:Int = queueCounter[key]!
+                queueCounter.updateValue(oldCount + 1, forKey: key)
+            }
+        }
         
-        if(packet.packetLength == 78){
-            timer78 = packet.captureTime
-            queuePort = packet.srcPort}
-        if(packet.packetLength == 158){
-            timer158 = packet.captureTime
-            queuePort = packet.srcPort}
-        
-        if(timer78 != -1 && timer158 != -1){return true}
+        //println(queueCounter)
+        if(queueCounter[78] > 0 && queueCounter[158] > 0)
+        {
+        timer78 = p.captureTime
+        timer158 = p.captureTime
+        queuePort = p.srcPort
+        return true}
         else {return false}
     }
     
@@ -166,7 +197,6 @@ class DotaDetector:PacketDetector{
                 }
             }
         
-            println(packetCounterEarly)
             if(gameTimerEarly.count >= packetNumber
             && packetCounterEarly[1300] < 2
             && gameTimerLate.count > 0)
