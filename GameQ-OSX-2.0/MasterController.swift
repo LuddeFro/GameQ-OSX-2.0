@@ -12,7 +12,7 @@ class MasterController:NSObject {
     
     static var status:Status = Status.Offline
     static var game:Game = Game.NoGame
-    static var detector:PacketReader.Type = PacketReader.self
+    static var detector:GameDetector.Type = GameDetector.self
     
     static func gameDetection(game:Game){
         self.game = game
@@ -22,11 +22,11 @@ class MasterController:NSObject {
             
         case Game.Dota:
             println("Setting up Dota Detection")
-            detector = DotaReader.self
+            detector = DotaDetector.self
             break
         case Game.HoN:
             println("Setting up HoN Detection")
-            detector = HoNReader.self
+            detector = HoNDetector.self
             break
         default:
             break
@@ -36,7 +36,7 @@ class MasterController:NSObject {
     static func startDetection(){
         if(game != Game.NoGame){
         println("Starting " + game.rawValue + " Detection")
-        detector.start(detector.self)
+        detector.start()
         }
     }
     
@@ -47,10 +47,10 @@ class MasterController:NSObject {
             self.status = newStatus
             println(newStatus.rawValue)
             
-//            if(newStatus == Status.GameReady){
-//                saveCapture()
-//                stopDetection()
-//            }
+            if(newStatus == Status.GameReady){
+                saveCapture()
+                stopDetection()
+            }
         }
     }
     

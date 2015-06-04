@@ -8,9 +8,9 @@
 
 import Foundation
 
-class PacketReader:NSObject{
+class PacketReader:GameDetector {
     
-    static var handler:PacketReader.Type = PacketReader.self
+    static var detector:PacketReader.Type = PacketReader.self
     static var packetQueue:[Packet] = [Packet]()
     static var queueMaxSize:Int = 200
     static var isCapturing = false
@@ -21,24 +21,29 @@ class PacketReader:NSObject{
     }
     
     class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        handler.handle(srcPort, dstPort: dstPort, iplen: iplen)
+        detector.handle(srcPort, dstPort: dstPort, iplen: iplen)
     }
     
-    class func start(handler:PacketReader.Type) {
-        self.handler = handler
+    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int){
+        detector.handleTest(srcPort, dstPort: dstPort, iplen: iplen)
+    }
+    
+    override class func start() {
         isCapturing = true
-        }
+    }
     
-    class func reset(){}
+    override class func reset(){}
     
-    class func save(){
+    class func updateStatus(newPacket: Packet) {}
+    
+    override class func save(){
         DataHandler.logPackets(packetQueue)
         reset()
     }
     
-    class func stop() {
+    override class func stop() {
         if(isCapturing){
-        PacketParser.stop_loop()
+            PacketParser.stop_loop()
         }
         reset()
     }

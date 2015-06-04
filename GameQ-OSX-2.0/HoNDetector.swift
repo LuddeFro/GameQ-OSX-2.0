@@ -8,13 +8,14 @@
 
 import Foundation
 
-class HoNReader:PacketReader{
+class HoNDetector:PacketReader{
     
     static let honFilter:String = "udp src portrange 11235-11335"
     static var gameTimer:[PacketTimer] = [PacketTimer]()
     
-    override class func start(handler:PacketReader.Type) {
-        super.start(handler)
+    override class func start() {
+        super.start()
+        detector = self
         dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
             PacketParser.start_loop(self.honFilter)
         })
@@ -30,7 +31,7 @@ class HoNReader:PacketReader{
         gameTimer = [PacketTimer]()
     }
     
-    class func handle2(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         updateStatus(newPacket);
@@ -44,7 +45,7 @@ class HoNReader:PacketReader{
         }
     }
     
-    class func updateStatus(newPacket:Packet){
+    override class func updateStatus(newPacket:Packet){
         
         addPacketToQueue(newPacket)
         
