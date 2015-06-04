@@ -18,7 +18,7 @@
 		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
 		AE546D2E1B19DEBF008D8A86 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */; };
-		AE546D2F1B19DEBF008D8A86 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */; };
+		AE546D2F1B19DEBF008D8A86 /* PacketDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketDetector.swift */; };
 		AE546D301B19DEBF008D8A86 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */; };
 		AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
@@ -27,7 +27,7 @@
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
 		AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */; };
-		AE98AC261B18A2AC00E5F382 /* PacketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */; };
+		AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1E1B18A2AC00E5F382 /* PacketDetector.swift */; };
 		AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE98AC2A1B18A2BF00E5F382 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */; };
 		AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
@@ -70,7 +70,7 @@
 		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
 		AE98AC1C1B18A2AC00E5F382 /* PacketParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketParser.h; sourceTree = "<group>"; };
 		AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketParser.m; sourceTree = "<group>"; };
-		AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketReader.swift; sourceTree = "<group>"; };
+		AE98AC1E1B18A2AC00E5F382 /* PacketDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketDetector.swift; sourceTree = "<group>"; };
 		AE98AC201B18A2AC00E5F382 /* GameStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
 		AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotaDetector.swift; sourceTree = "<group>"; };
 		AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 				AE98AC2D1B18A32800E5F382 /* DataHandlers */,
 				AEA350B51B20A6340096B682 /* GameDetectors */,
 				AE98AC2F1B18A34200E5F382 /* PacketParsers */,
-				AECB074B1B207E84001C7C18 /* DataHolders */,
+				AECB074B1B207E84001C7C18 /* Custom Structs */,
 				832BCE6D1B09E4AC00FE15E2 /* Supporting Files */,
 			);
 			path = "GameQ-OSX-2.0";
@@ -193,7 +193,7 @@
 		AE98AC301B18A37100E5F382 /* PacketDetectors */ = {
 			isa = PBXGroup;
 			children = (
-				AE98AC1E1B18A2AC00E5F382 /* PacketReader.swift */,
+				AE98AC1E1B18A2AC00E5F382 /* PacketDetector.swift */,
 				AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */,
 				AE954B501B1DD36900C5E8D6 /* HoNDetector.swift */,
 			);
@@ -210,13 +210,13 @@
 			name = GameDetectors;
 			sourceTree = "<group>";
 		};
-		AECB074B1B207E84001C7C18 /* DataHolders */ = {
+		AECB074B1B207E84001C7C18 /* Custom Structs */ = {
 			isa = PBXGroup;
 			children = (
 				AE98AC201B18A2AC00E5F382 /* GameStatus.swift */,
 				AE98AC1B1B18A2AC00E5F382 /* Packet.swift */,
 			);
-			name = DataHolders;
+			name = "Custom Structs";
 			sourceTree = "<group>";
 		};
 		AEEF87C51B1DBA7C00DDD45D /* Logos */ = {
@@ -340,7 +340,7 @@
 				AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */,
 				AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
-				AE98AC261B18A2AC00E5F382 /* PacketReader.swift in Sources */,
+				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +359,7 @@
 				AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */,
 				AE546D301B19DEBF008D8A86 /* DotaDetector.swift in Sources */,
 				AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */,
-				AE546D2F1B19DEBF008D8A86 /* PacketReader.swift in Sources */,
+				AE546D2F1B19DEBF008D8A86 /* PacketDetector.swift in Sources */,
 				AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */,
 				AE954B531B1DE09D00C5E8D6 /* HoNDetector.swift in Sources */,
 			);

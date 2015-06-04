@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DotaDetector:PacketReader{
+class DotaDetector:PacketDetector{
     
     static let dotaFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
 
@@ -41,26 +41,6 @@ class DotaDetector:PacketReader{
         gameTimerLate = [PacketTimer]()
         packetCounterLate = [164:0, 174:0, 190:0, 206:0]
     }
-    
-    override class func handle(srcPort:Int, dstPort:Int, iplen:Int) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        updateStatus(newPacket);
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        updateStatus(newPacket);
-    }
-    
-    class func addPacketToQueue(packet:Packet) {
-        packetQueue.insert(packet, atIndex: 0)
-        if packetQueue.count >= queueMaxSize {
-            packetQueue.removeLast()
-        }
-    }
-    
     
     override class func updateStatus(newPacket:Packet){
         

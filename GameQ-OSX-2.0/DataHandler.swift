@@ -10,6 +10,8 @@ import Foundation
 
 class DataHandler:NSObject {
     
+    static var folderName:String = ""
+    
     class func logPackets(array:[Packet]) {
         var log:String = ""
         for i in 0..<array.count {
@@ -23,7 +25,7 @@ class DataHandler:NSObject {
         if (!NSFileManager.defaultManager().fileExistsAtPath(masterFolderPath)) {
             NSFileManager.defaultManager() .createDirectoryAtPath(masterFolderPath, withIntermediateDirectories: false, attributes: nil, error: &error)
         }
-        var gameFolerPath = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(MasterController.game.rawValue)
+        var gameFolerPath = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName)
         if (!NSFileManager.defaultManager().fileExistsAtPath(gameFolerPath)) {
             NSFileManager.defaultManager() .createDirectoryAtPath(gameFolerPath, withIntermediateDirectories: false, attributes: nil, error: &error)
         }
@@ -35,7 +37,7 @@ class DataHandler:NSObject {
         let name = formatter.stringFromDate(date) + ".csv"
         
         //spara filen i pathen
-        var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(MasterController.game.rawValue).stringByAppendingPathComponent(name)
+        var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName).stringByAppendingPathComponent(name)
         log.writeToFile(path, atomically: true, encoding:NSUTF8StringEncoding , error: nil)
         println(name)
     }
