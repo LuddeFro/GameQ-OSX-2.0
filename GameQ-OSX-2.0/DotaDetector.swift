@@ -23,6 +23,8 @@ class DotaDetector:PacketDetector{
     static var gameTimerLate:[PacketTimer] = [PacketTimer]()
     static var packetCounterLate:[Int:Int] = [164:0, 174:0, 190:0, 206:0]
     
+    static var inGameTimer:[PacketTimer] = [PacketTimer]()
+    
     override class func start() {
         super.start()
         detector = self
@@ -40,6 +42,7 @@ class DotaDetector:PacketDetector{
         packetCounterEarly = [600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0, 1200:0, 1300:0]
         gameTimerLate = [PacketTimer]()
         packetCounterLate = [164:0, 174:0, 190:0, 206:0]
+        inGameTimer = [PacketTimer]()
     }
     
     override class func updateStatus(newPacket:Packet){
@@ -64,11 +67,12 @@ class DotaDetector:PacketDetector{
             
             if(gameEarly){MasterController.updateStatus(Status.GameReady)}
             else if(gameLate){MasterController.updateStatus(Status.GameReady)}
-            //else if(stoppedQueueing(newPacket)){DotaDetector.updateStatus(Status.InLobby)}
             else if(!isStillQueueing(newPacket)){MasterController.updateStatus(Status.InLobby)}
             break
             
         case Status.GameReady:
+            var inGame = isInGame(newPacket, timeSpan: 5, packetNumber: 30)
+            if(inGame){MasterController.updateStatus(Status.InGame)}
             break
             
         case Status.InGame:
@@ -100,6 +104,13 @@ class DotaDetector:PacketDetector{
     
     class func isStillQueueing(packet:Packet) -> Bool{
         
+//        if(packet.packetLength == 254 || packet.packetLength == 286){
+//            timer78 = -1
+//            timer158 = -1
+//            return true
+//        }
+//        else{return false}
+        
         if(packet.captureTime - timer78 > 40){timer78 = -1}
         if(packet.captureTime - timer158 > 40){timer158 = -1}
         
@@ -112,16 +123,6 @@ class DotaDetector:PacketDetector{
     
         if(timer78 != -1 || timer158 != -1){return true}
         else {return false}
-    }
-    
-    class func stoppedQueueing(packet:Packet) -> Bool{
-        
-        if(packet.packetLength == 254 || packet.packetLength == 286){
-            timer78 = -1
-            timer158 = -1
-            return true
-        }
-        else{return false}
     }
     
     class func isGameLate(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
@@ -174,7 +175,15 @@ class DotaDetector:PacketDetector{
             else {return false}
     }
     
-    class func isStillInGame(){
+    class func isInGame(p:Packet, timeSpan:Double, packetNumber:Int) -> Bool{
         
+        while(!inGameTimer.isEmpty && p.captureTime - inGameTimer.last!.time > timeSpan){
+            inGameTimer.removeLast()
+        }
+        
+        inGameTimer.insert(PacketTimer(key: p.srcPort, time: p.captureTime),atIndex: 0)
+        
+        if(inGameTimer.count >= packetNumber){return true}
+        else {return false}
     }
 }

@@ -60,7 +60,7 @@ class HoNDetector:PacketDetector{
     class func isGame(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
         
         while(!gameTimer.isEmpty && p.captureTime - gameTimer.last!.time > timeSpan){
-            gameTimer.removeLast().key
+            gameTimer.removeLast()
         }
         
         gameTimer.insert(PacketTimer(key: p.srcPort, time: p.captureTime),atIndex: 0)

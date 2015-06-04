@@ -51,7 +51,6 @@ class MasterController:NSObject {
             
             if(newStatus == Status.GameReady){
                 saveCapture()
-                stopDetection()
             }
         }
     }
