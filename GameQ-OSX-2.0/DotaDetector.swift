@@ -69,10 +69,11 @@ class DotaDetector:PacketDetector{
         case Status.InQueue:
             var gameLate:Bool = isGameLate(newPacket, timeSpan: 10, maxPacket: 5, packetNumber: 6)
             var gameEarly:Bool = isGameEarly(newPacket, timeSpan: 9, maxPacket: 99, packetNumber: 3)
+            var stillQueueing:Bool = isStillQueueing(newPacket, timeSpan: 30, maxPacket: 5, packetNumber: 2)
                        
             if(gameLate){MasterController.updateStatus(Status.GameReady)}
             else if(gameEarly){MasterController.updateStatus(Status.GameReady)}
-            else if(!isStillQueueing(newPacket)){MasterController.updateStatus(Status.InLobby)}
+            else if(!stillQueueing){MasterController.updateStatus(Status.InLobby)}
             break
             
         case Status.GameReady:
@@ -84,28 +85,6 @@ class DotaDetector:PacketDetector{
             break
         }
     }
-    
-//    class func startedQueueing(packet:Packet) -> Bool{
-//        
-////        if(packet.packetLength == 270 && (timer78 != -1 || timer158 != -1)){
-////            timer78 = packet.captureTime
-////            timer158 = packet.captureTime
-////            return true
-////        }
-//        
-//        if(packet.captureTime - timer78 > 30){timer78 = -1}
-//        if(packet.captureTime - timer158 > 30){timer158 = -1}
-//        
-//        if(packet.packetLength == 78){
-//            timer78 = packet.captureTime
-//            queuePort = packet.srcPort}
-//        if(packet.packetLength == 158){
-//            timer158 = packet.captureTime
-//            queuePort = packet.srcPort}
-//        
-//        if(timer78 != -1 && timer158 != -1){return true}
-//        else {return false}
-//    }
     
     class func startedQueueing(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
        
@@ -124,35 +103,36 @@ class DotaDetector:PacketDetector{
         }
         
         //println(queueCounter)
-        if(queueCounter[78] > 0 && queueCounter[158] > 0)
-        {
-        timer78 = p.captureTime
-        timer158 = p.captureTime
+        if(queueCounter[78] > 0 && queueCounter[158] > 0){
         queuePort = p.srcPort
-        return true}
+        return true
+        }
         else {return false}
     }
     
-    class func isStillQueueing(packet:Packet) -> Bool{
+    class func isStillQueueing(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
         
-//        if(packet.packetLength == 254 || packet.packetLength == 286){
-//            timer78 = -1
-//            timer158 = -1
-//            return true
-//        }
-//        else{return false}
+        while(!queueTimer.isEmpty && p.captureTime - queueTimer.last!.time > timeSpan){
+            var key:Int = queueTimer.removeLast().key
+            var oldCount:Int = queueCounter[key]!
+            queueCounter.updateValue(oldCount - 1, forKey: key)
+        }
         
-        if(packet.captureTime - timer78 > 40){timer78 = -1}
-        if(packet.captureTime - timer158 > 40){timer158 = -1}
+        for key in queueCounter.keys{
+            if(p.packetLength <= key + maxPacket && p.packetLength >= key){
+                queueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                var oldCount:Int = queueCounter[key]!
+                queueCounter.updateValue(oldCount + 1, forKey: key)
+            }
+        }
         
-        if(packet.packetLength == 78){
-            timer78 = packet.captureTime
-            queuePort = packet.srcPort}
-        if(packet.packetLength == 158){
-            timer158 = packet.captureTime
-            queuePort = packet.srcPort}
-    
-        if(timer78 != -1 || timer158 != -1){return true}
+        //println(queueCounter)
+        if(queueCounter[78] > 0 || queueCounter[158] > 0)
+        {
+            timer78 = p.captureTime
+            timer158 = p.captureTime
+            queuePort = p.srcPort
+            return true}
         else {return false}
     }
     
