@@ -43,7 +43,8 @@ class PacketDetector:GameDetector {
         }
     }
     
-    override class func reset(){}
+    override class func reset(){
+    packetQueue = [Packet]()}
     
     class func updateStatus(newPacket: Packet) {}
     
