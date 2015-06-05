@@ -1,5 +1,5 @@
 //
-//  HoNDetector.swift
+//  HoNReader.swift
 //  GameQ-OSX-2.0
 //
 //  Created by Fabian Wikström on 6/2/15.
@@ -8,58 +8,64 @@
 
 import Foundation
 
-class HoNDetector:QueueDetector {
+class HoNDetector:PacketDetector{
     
-    static var running:Bool = false
-    static var status:Status = Status.InLobby
     static let honFilter:String = "udp src portrange 11235-11335"
+    static var gameTimer:[PacketTimer] = [PacketTimer]()
     
-    static func reset() {
-        status = Status.InLobby
-        running = false
-        HoNReader.reset()
+    override class func start() {
+        super.start()
+        detector = self
+        dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
+            PacketParser.start_loop(self.honFilter)
+        })
     }
     
-    static func startDetection() -> Bool{
-        if(running){
-            return false
-        }
-        else{
-            DataHandler.game = "HoN"
-            HoNReader.start(honFilter, handler: HoNReader.self)
-            running = true
-            return true
-        }
+
+    override class func reset(){
+        gameTimer = [PacketTimer]()
     }
     
-    static func stopDetection() -> Bool{
-        if(running){
-             println("Stopped Detection")
-            HoNReader.stop()
-            reset()
-            DataHandler.game = ""
-            return true
-        }
-        else{
-            return false
-        }
-    }
     
-    static func updateStatus(newStatus: Status) -> Bool{
+    override class func updateStatus(newPacket:Packet){
         
-        if(running){
-            self.status = newStatus
-            println(newStatus.rawValue)
-            return true
-        }
-        else{
-            return false
+        addPacketToQueue(newPacket)
+        
+        switch MasterController.status{
+            
+        case Status.Offline:
+            break
+            
+        case Status.Online:
+            break
+            
+        case Status.InLobby:
+            
+            if(isGame(newPacket, timeSpan: 5, maxPacket: 0, packetNumber: 10)){
+             MasterController.updateStatus(Status.GameReady)
+            }
+            
+        case Status.InQueue:
+            
+            break
+            
+        case Status.GameReady:
+            break
+            
+        case Status.InGame:
+            break
         }
     }
     
-    static func saveCapture() {
-        if(running){
-            HoNReader.save()
+    class func isGame(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
+        
+        while(!gameTimer.isEmpty && p.captureTime - gameTimer.last!.time > timeSpan){
+            gameTimer.removeLast()
         }
+        
+        gameTimer.insert(PacketTimer(key: p.srcPort, time: p.captureTime),atIndex: 0)
+        
+        if(gameTimer.count >= packetNumber){return true}
+        else {return false}
     }
 }

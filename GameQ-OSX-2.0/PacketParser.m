@@ -147,7 +147,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
 //            printf("   Dst port: %d\n", ntohs(udp->uh_dport));
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
-            [PacketReader handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET)];
+            [PacketDetector handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET)];
             return;
         case IPPROTO_ICMP:
 //            printf("   Protocol: ICMP\n");
@@ -238,8 +238,6 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
         printf("Coudldn't apply filter");
         return;
     }
-    
-    
     
     
     printf("capture was set up successfully\n\n");

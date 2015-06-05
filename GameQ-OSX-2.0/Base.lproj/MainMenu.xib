@@ -19,6 +19,7 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="vOE-8f-cvt" customClass="MasterViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target">
             <connections>
+                <outlet property="gameStatus" destination="Y1K-43-FrG" id="qc5-6j-gUG"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="cge-1e-tRI"/>
             </connections>
         </customObject>
@@ -30,12 +31,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="350" height="450"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2W7-hA-8rG">
-                        <rect key="frame" x="113" y="311" width="124" height="128"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="sq-nb512" id="9fV-FE-Ifz"/>
-                    </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlE-Sp-U4g">
-                        <rect key="frame" x="187" y="28" width="70" height="32"/>
+                        <rect key="frame" x="192" y="56" width="70" height="32"/>
                         <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yd7-aF-pxv">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -45,7 +42,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fai-ix-p3k">
-                        <rect key="frame" x="269" y="28" width="66" height="32"/>
+                        <rect key="frame" x="270" y="56" width="66" height="32"/>
                         <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CZa-yG-Wzz">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -54,29 +51,9 @@
                             <action selector="quitButtonPressed:" target="vOE-8f-cvt" id="cid-Qy-O5t"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gl9-gT-HUM">
-                        <rect key="frame" x="15" y="13" width="102" height="32"/>
-                        <buttonCell key="cell" type="push" title="Start HoN" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="d2U-dj-qr4">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="startHoNButtonPressed:" target="vOE-8f-cvt" id="V1Y-1P-9O5"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUQ-6M-fgv">
-                        <rect key="frame" x="14" y="41" width="103" height="32"/>
-                        <buttonCell key="cell" type="push" title="Start Dota" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hWT-Cc-IGu">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="startDotaButtonPressed:" target="vOE-8f-cvt" id="nme-Qy-Waa"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vpv-My-2Iz">
-                        <rect key="frame" x="117" y="28" width="66" height="32"/>
-                        <buttonCell key="cell" type="push" title="Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CHO-hc-vbl">
+                        <rect key="frame" x="95" y="86" width="91" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CHO-hc-vbl">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -84,9 +61,67 @@
                             <action selector="capButtonPressed:" target="vOE-8f-cvt" id="oHK-x3-gWf"/>
                         </connections>
                     </button>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2W7-hA-8rG">
+                        <rect key="frame" x="113" y="311" width="124" height="128"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="sq-nb512" id="9fV-FE-Ifz"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RPd-Dr-13a">
+                        <rect key="frame" x="78" y="265" width="194" height="29"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" id="mTc-jd-dKH">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zhu-lE-CRB">
+                        <rect key="frame" x="78" y="221" width="194" height="29"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="T9j-9q-yRd">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6j5-Gz-zeu">
+                        <rect key="frame" x="20" y="56" width="70" height="32"/>
+                        <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ETV-0m-7C4">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="startButtonPressed:" target="vOE-8f-cvt" id="qkQ-iK-ccg"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y1K-43-FrG">
+                        <rect key="frame" x="156" y="150" width="38" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="v1n-kh-ym3">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVO-hD-D2T">
+                        <rect key="frame" x="88" y="53" width="104" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save Miss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zvT-wX-n2O">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="capFailButtonPressed:" target="vOE-8f-cvt" id="2Tu-S7-Kp7"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APf-5v-WXS">
+                        <rect key="frame" x="92" y="20" width="97" height="32"/>
+                        <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9JB-5V-z9i">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="failModePressed:" target="vOE-8f-cvt" id="PUr-JT-l31"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="187" y="95.5"/>
+            <point key="canvasLocation" x="187" y="95"/>
         </window>
     </objects>
     <resources>

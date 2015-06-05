@@ -10,47 +10,58 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBOutlet weak var gameStatus: NSTextField!
     
-   
-    @IBAction func startDotaButtonPressed(sender: NSButton) {
-
-        DotaDetector.startDetection()
-        
-    }
-    
-    
-    @IBAction func startHoNButtonPressed(sender: NSButton) {
-        println("Starting HoN Detection")
-        HoNDetector.startDetection()
+    @IBAction func startButtonPressed(sender: NSButton) {
+        MasterController.startDetection()
     }
     
     @IBAction func capButtonPressed(sender: NSButton) {
-        if(DotaDetector.running){
-       DotaDetector.saveCapture()
-       }
-       else if(HoNDetector.running){
-        HoNDetector.saveCapture()
-        }
+        MasterController.saveCapture()
+    }
+    
+    @IBAction func capFailButtonPressed(sender: NSButton) {
+        MasterController.saveMissedCapture()
+    }
+    
+    @IBAction func failModePressed(sender: NSButton) {
+        MasterController.failMode()
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
-       
-        if(DotaDetector.running){
-            DotaDetector.stopDetection()
-        }
-        else if(HoNDetector.running){
-            HoNDetector.stopDetection()
-        }
+        MasterController.stopDetection()
     }
     
-    
     @IBAction func quitButtonPressed(sender: NSButton) {
-        DotaDetector.stopDetection()
-        HoNDetector.stopDetection()
+        MasterController.stopDetection()
         NSApplication.sharedApplication().terminate(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+    }
+    
+    func update() {
+        
+        var ws = NSWorkspace.sharedWorkspace()
+        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
+        var activeApps:Set<String> = Set<String>()
+        
+        for app in apps {
+            var appName:String? = app.localizedName
+            if(appName != nil){activeApps.insert(appName!)}
+        }
+        
+        if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
+            MasterController.gameDetection(Game.Dota)
+            gameStatus.stringValue = MasterController.game.rawValue
+        }
+        
+        //ADD HEROES OF NEWERTH
+//        else if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
+//            MasterController.gameDetection(Game.Dota)
+//            gameStatus.stringValue = MasterController.game.rawValue
+//        }
     }
 }
