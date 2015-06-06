@@ -1,3 +1,14 @@
+
+//
+//  CSGODetector.swift
+//  GameQ-OSX-2.0
+//
+//  Created by Fabian Wikström on 6/6/15.
+//  Copyright (c) 2015 GameQ AB. All rights reserved.
+//
+
+import Foundation
+
 //
 //  HoNReader.swift
 //  GameQ-OSX-2.0
@@ -8,16 +19,17 @@
 
 import Foundation
 
-class HoNDetector:PacketDetector{
+class CSGODetector:PacketDetector{
     
-    static let honFilter:String = "udp src portrange 11235-11335"
+    static let csgoFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
+
     static var gameTimer:[PacketTimer] = [PacketTimer]()
     
     override class func start() {
         detector = self
         if(!isCapturing){
             dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
-                self.packetParser.start_loop(self.honFilter)
+                self.packetParser.start_loop(self.csgoFilter)
             })
         }
         super.start()

@@ -84,6 +84,19 @@ struct sniff_ethernet {
 #define SIZE_UDP        8               /* length of UDP header */
 // total udp header length: 8 bytes (=64 bits)
 
++(PacketParser *)getSharedInstance{
+    static PacketParser * sharedInstance =nil;
+    static dispatch_once_t pred;
+    
+    if (sharedInstance) return sharedInstance;
+    
+    dispatch_once(&pred, ^{
+        sharedInstance = [PacketParser alloc];
+        sharedInstance = [sharedInstance init];
+    });
+    
+    return sharedInstance;
+}
 
 void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *packet)
 {
@@ -168,7 +181,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     
 }
 
-+ (void) start_loop:(NSString *)filterExpression
+- (void) start_loop:(NSString *)filterExpression
 {
     struct bpf_program fp;
     bpf_u_int32 net;
@@ -246,7 +259,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
 
 }
 
-+ (void) stop_loop
+- (void) stop_loop
 {
     pcap_breakloop(handle);
 }

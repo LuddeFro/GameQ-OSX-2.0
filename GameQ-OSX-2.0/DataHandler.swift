@@ -10,9 +10,10 @@ import Foundation
 
 class DataHandler:NSObject {
     
-    static var folderName:String = ""
+    static let sharedInstance = DataHandler()
+    var folderName:String = ""
     
-    class func logPackets(array:[Packet]) {
+    func logPackets(array:[Packet]) {
         var log:String = ""
         for i in 0..<array.count {
             log = "\(log)\(array[i].srcPort),\(array[i].dstPort),\(array[i].captureTime),\(array[i].packetLength)\n"
@@ -25,7 +26,7 @@ class DataHandler:NSObject {
         if (!NSFileManager.defaultManager().fileExistsAtPath(masterFolderPath)) {
             NSFileManager.defaultManager() .createDirectoryAtPath(masterFolderPath, withIntermediateDirectories: false, attributes: nil, error: &error)
         }
-        var gameFolerPath = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName)
+        var gameFolerPath = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(self.folderName)
         if (!NSFileManager.defaultManager().fileExistsAtPath(gameFolerPath)) {
             NSFileManager.defaultManager() .createDirectoryAtPath(gameFolerPath, withIntermediateDirectories: false, attributes: nil, error: &error)
         }
@@ -42,7 +43,7 @@ class DataHandler:NSObject {
         println(name)
     }
     
-    class func prompt() -> String {
+    func prompt() -> String {
         println()
         return String(NSString(data: NSFileHandle.fileHandleWithStandardInput().availableData, encoding:NSUTF8StringEncoding)!.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet()))
     }

@@ -15,11 +15,12 @@ class MasterController:NSObject {
     static var detector:GameDetector.Type = GameDetector.self
     static var isFailMode:Bool = false
     static var isTesting:Bool = false
+    static let dataHandler = DataHandler.sharedInstance
     
     static func gameDetection(game:Game){
         self.game = game
         self.status = Status.InLobby
-        DataHandler.folderName = game.rawValue
+        dataHandler.folderName = game.rawValue
         
         switch self.game{
             
@@ -79,7 +80,7 @@ class MasterController:NSObject {
     static func saveMissedCapture(){
         if(game != Game.NoGame){
             println("Saving Missed File")
-            DataHandler.folderName = game.rawValue + "missed"
+            dataHandler.folderName = game.rawValue + "missed"
             detector.save()
         }
     }
@@ -88,13 +89,13 @@ class MasterController:NSObject {
     
         if(isFailMode){
             println("FailMode Off")
-            DataHandler.folderName = game.rawValue
+            dataHandler.folderName = game.rawValue
             isFailMode = false
         }
         
         else{
             println("FailMode On")
-            DataHandler.folderName = game.rawValue + "ForcedFails"
+            dataHandler.folderName = game.rawValue + "ForcedFails"
             isFailMode = true
         }
     }

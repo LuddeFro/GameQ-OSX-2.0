@@ -20,6 +20,7 @@
         <customObject id="vOE-8f-cvt" customClass="MasterViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target">
             <connections>
                 <outlet property="gameStatus" destination="Y1K-43-FrG" id="qc5-6j-gUG"/>
+                <outlet property="statusLabel" destination="cvK-Wi-5uK" id="D2D-bE-qAv"/>
                 <outlet property="view" destination="EiT-Mj-1SZ" id="cge-1e-tRI"/>
             </connections>
         </customObject>
@@ -91,14 +92,6 @@
                             <action selector="startButtonPressed:" target="vOE-8f-cvt" id="qkQ-iK-ccg"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y1K-43-FrG">
-                        <rect key="frame" x="156" y="150" width="38" height="17"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="v1n-kh-ym3">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVO-hD-D2T">
                         <rect key="frame" x="88" y="53" width="104" height="32"/>
                         <buttonCell key="cell" type="push" title="Save Miss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zvT-wX-n2O">
@@ -119,6 +112,22 @@
                             <action selector="failModePressed:" target="vOE-8f-cvt" id="PUr-JT-l31"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvK-Wi-5uK">
+                        <rect key="frame" x="139" y="131" width="79" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="tBG-3s-pLJ">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y1K-43-FrG">
+                        <rect key="frame" x="139" y="156" width="66" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Game" id="v1n-kh-ym3">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <point key="canvasLocation" x="187" y="95"/>

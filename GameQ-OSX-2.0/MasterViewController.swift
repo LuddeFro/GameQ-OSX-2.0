@@ -12,6 +12,9 @@ class MasterViewController: NSViewController {
     
     @IBOutlet weak var gameStatus: NSTextField!
     
+    @IBOutlet weak var statusLabel: NSTextField!
+    
+    
     @IBAction func startButtonPressed(sender: NSButton) {
         MasterController.startDetection()
     }
@@ -55,13 +58,20 @@ class MasterViewController: NSViewController {
         
         if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
             MasterController.gameDetection(Game.Dota)
+        }
+            
+        else if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
+            MasterController.gameDetection(Game.Dota)
             gameStatus.stringValue = MasterController.game.rawValue
         }
         
         //ADD HEROES OF NEWERTH
-//        else if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
-//            MasterController.gameDetection(Game.Dota)
-//            gameStatus.stringValue = MasterController.game.rawValue
-//        }
+        //        else if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
+        //            MasterController.gameDetection(Game.Dota)
+        //            gameStatus.stringValue = MasterController.game.rawValue
+        //        }
+        
+        gameStatus.stringValue = MasterController.game.rawValue
+        statusLabel.stringValue = MasterController.status.rawValue
     }
 }
