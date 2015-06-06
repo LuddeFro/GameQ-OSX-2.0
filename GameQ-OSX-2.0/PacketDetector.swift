@@ -14,6 +14,8 @@ class PacketDetector:GameDetector {
     static var packetQueue:[Packet] = [Packet]()
     static var queueMaxSize:Int = 200
     static var isCapturing = false
+    static let dataHandler = DataHandler.sharedInstance
+    static let packetParser:PacketParser = PacketParser.getSharedInstance()
     
     struct PacketTimer {
         var key:Int = -1
@@ -49,13 +51,13 @@ class PacketDetector:GameDetector {
     class func updateStatus(newPacket: Packet) {}
     
     override class func save(){
-        DataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(packetQueue)
         reset()
     }
     
     override class func stop() {
         if(isCapturing){
-            PacketParser.stop_loop()
+            packetParser.stop_loop()
             isCapturing = false
         }
         reset()

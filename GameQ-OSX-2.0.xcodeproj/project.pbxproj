@@ -13,6 +13,8 @@
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
 		AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
+		AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
+		AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
 		AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
 		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
@@ -64,6 +66,7 @@
 		832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		AE226CB61B2316D0009B7D9B /* CSGODetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSGODetector.swift; sourceTree = "<group>"; };
 		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
 		AE954B501B1DD36900C5E8D6 /* HoNDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNDetector.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
@@ -196,6 +199,7 @@
 				AE98AC1E1B18A2AC00E5F382 /* PacketDetector.swift */,
 				AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */,
 				AE954B501B1DD36900C5E8D6 /* HoNDetector.swift */,
+				AE226CB61B2316D0009B7D9B /* CSGODetector.swift */,
 			);
 			name = PacketDetectors;
 			sourceTree = "<group>";
@@ -341,6 +345,7 @@
 				AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
+				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +367,7 @@
 				AE546D2F1B19DEBF008D8A86 /* PacketDetector.swift in Sources */,
 				AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */,
 				AE954B531B1DE09D00C5E8D6 /* HoNDetector.swift in Sources */,
+				AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
