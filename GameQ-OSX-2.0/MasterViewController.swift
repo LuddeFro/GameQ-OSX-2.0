@@ -60,16 +60,9 @@ class MasterViewController: NSViewController {
             MasterController.gameDetection(Game.Dota)
         }
             
-        else if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
-            MasterController.gameDetection(Game.Dota)
-            gameStatus.stringValue = MasterController.game.rawValue
+        else if(activeApps.contains("csgo_osx") && MasterController.game == Game.NoGame){
+            MasterController.gameDetection(Game.CSGO)
         }
-        
-        //ADD HEROES OF NEWERTH
-        //        else if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
-        //            MasterController.gameDetection(Game.Dota)
-        //            gameStatus.stringValue = MasterController.game.rawValue
-        //        }
         
         gameStatus.stringValue = MasterController.game.rawValue
         statusLabel.stringValue = MasterController.status.rawValue

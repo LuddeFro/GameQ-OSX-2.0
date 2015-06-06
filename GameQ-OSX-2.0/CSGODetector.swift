@@ -21,7 +21,7 @@ import Foundation
 
 class CSGODetector:PacketDetector{
     
-    static let csgoFilter:String = "udp src portrange 27000-27030 or udp dst port 27005 or udp src port 4380"
+    static let csgoFilter:String = "(udp src portrange 27000-28000 and udp dst portrange 27000-27050) or udp dst port 27005 or udp dst port 51840"
 
     static var gameTimer:[PacketTimer] = [PacketTimer]()
     
@@ -37,7 +37,7 @@ class CSGODetector:PacketDetector{
     
     
     override class func reset(){
-        gameTimer = [PacketTimer]()
+        super.reset()
     }
     
     
@@ -55,10 +55,7 @@ class CSGODetector:PacketDetector{
             
         case Status.InLobby:
             
-            if(isGame(newPacket, timeSpan: 5, maxPacket: 0, packetNumber: 10)){
-                MasterController.updateStatus(Status.GameReady)
-            }
-            
+            break
         case Status.InQueue:
             
             break

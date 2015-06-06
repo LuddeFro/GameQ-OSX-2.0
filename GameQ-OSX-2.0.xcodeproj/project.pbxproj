@@ -14,6 +14,7 @@
 		AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
+		AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
 		AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
 		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
@@ -366,6 +367,7 @@
 				AE546D2F1B19DEBF008D8A86 /* PacketDetector.swift in Sources */,
 				AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */,
 				AE954B531B1DE09D00C5E8D6 /* HoNDetector.swift in Sources */,
+				AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

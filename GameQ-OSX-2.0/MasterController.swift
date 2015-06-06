@@ -32,6 +32,9 @@ class MasterController:NSObject {
             println("Setting up HoN Detection")
             detector = HoNDetector.self
             break
+        case Game.CSGO:
+            println("Setting up CSGO Detection")
+            detector = CSGODetector.self
         default:
             break
         }
