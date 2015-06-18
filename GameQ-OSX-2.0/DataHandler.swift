@@ -36,9 +36,11 @@ class DataHandler:NSObject {
         formatter.timeStyle = .MediumStyle
         formatter.dateStyle = .MediumStyle
         let name = formatter.stringFromDate(date) + ".csv"
+        let trimmedName = name.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+
         
         //spara filen i pathen
-        var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName).stringByAppendingPathComponent(name)
+        var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName).stringByAppendingPathComponent(trimmedName)
         log.writeToFile(path, atomically: true, encoding:NSUTF8StringEncoding , error: nil)
         println(name)
     }

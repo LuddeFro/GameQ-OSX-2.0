@@ -35,7 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.window.titleVisibility = NSWindowTitleVisibility.Hidden
         self.window.titlebarAppearsTransparent = true
         self.window.styleMask |= NSFullSizeContentViewWindowMask
-        self.window.backgroundColor = NSColor.whiteColor()
+        self.window.backgroundColor = NSColor(netHex: 0x535F6D)
         self.window.movableByWindowBackground = true
         
     }
@@ -200,6 +200,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // If we got here, it is time to quit.
         return .TerminateNow
     }
-    
 }
+
 

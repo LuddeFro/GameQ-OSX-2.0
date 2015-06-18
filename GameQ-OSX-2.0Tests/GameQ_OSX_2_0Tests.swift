@@ -45,7 +45,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     }
     
     func testOneFile() {
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/g9game.csv")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dotamissed/asd5.csv")
         XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
     }
 }

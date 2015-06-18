@@ -53,10 +53,6 @@ class MasterController:NSObject {
             
             self.status = newStatus
             println(newStatus.rawValue)
-            
-            if(newStatus == Status.GameReady && isTesting == false){
-                saveCapture()
-            }
         }
     }
     
