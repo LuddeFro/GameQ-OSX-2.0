@@ -28,14 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
         setUpWindow()
         masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
-        
     }
     
     func setUpWindow(){
         self.window.titleVisibility = NSWindowTitleVisibility.Hidden
         self.window.titlebarAppearsTransparent = true
         self.window.styleMask |= NSFullSizeContentViewWindowMask
-        self.window.backgroundColor = NSColor(netHex: 0x535F6D)
+        self.window.backgroundColor = NSColor(netHex: 0x465568)
         self.window.movableByWindowBackground = true
         
     }

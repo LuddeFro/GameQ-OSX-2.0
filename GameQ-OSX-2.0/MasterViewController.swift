@@ -37,6 +37,7 @@ class MasterViewController: NSViewController {
     
     @IBAction func quitButtonPressed(sender: NSButton) {
         MasterController.stopDetection()
+        MasterController.updateStatus(Status.Offline)
         NSApplication.sharedApplication().terminate(self)
     }
     

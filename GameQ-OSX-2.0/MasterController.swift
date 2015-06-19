@@ -10,7 +10,7 @@ import Foundation
 
 class MasterController:NSObject {
     
-    static var status:Status = Status.Offline
+    static var status:Status = Status.Online
     static var game:Game = Game.NoGame
     static var detector:GameDetector.Type = GameDetector.self
     static var isFailMode:Bool = false

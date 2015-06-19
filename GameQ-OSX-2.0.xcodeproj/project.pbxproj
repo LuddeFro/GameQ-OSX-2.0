@@ -15,6 +15,7 @@
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE199A331B32E76100EC5870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE199A321B32E76100EC5870 /* Helpers.swift */; };
 		AE199A341B32E80300EC5870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE199A321B32E76100EC5870 /* Helpers.swift */; };
+		AE199A361B33038E00EC5870 /* Draft1.png in Resources */ = {isa = PBXBuildFile; fileRef = AE199A351B33038E00EC5870 /* Draft1.png */; };
 		AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
@@ -41,9 +42,9 @@
 		AEBC5A271B20C36000A92F52 /* GameDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC5A251B20C32800A92F52 /* GameDetector.swift */; };
 		AECB07481B207367001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
 		AECB07491B207812001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
+		AED102B41B342C3200755007 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED102B31B342C3200755007 /* Storyboard.storyboard */; };
 		AEEF87C11B1DB52C00DDD45D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE761B09E4AC00FE15E2 /* MainMenu.xib */; };
 		AEEF87C21B1DB62F00DDD45D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE761B09E4AC00FE15E2 /* MainMenu.xib */; };
-		AEEF87CB1B1DBC1B00DDD45D /* sq-nb512.png in Resources */ = {isa = PBXBuildFile; fileRef = AEEF87CA1B1DBC1B00DDD45D /* sq-nb512.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		AE199A321B32E76100EC5870 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		AE199A351B33038E00EC5870 /* Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Draft1.png; sourceTree = "<group>"; };
 		AE226CB61B2316D0009B7D9B /* CSGODetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSGODetector.swift; sourceTree = "<group>"; };
 		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
 		AE954B501B1DD36900C5E8D6 /* HoNDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNDetector.swift; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetectorProtocol.swift; sourceTree = "<group>"; };
 		AEBC5A251B20C32800A92F52 /* GameDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetector.swift; sourceTree = "<group>"; };
 		AECB07471B207367001C7C18 /* MasterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterController.swift; sourceTree = "<group>"; };
-		AEEF87CA1B1DBC1B00DDD45D /* sq-nb512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sq-nb512.png"; sourceTree = "<group>"; };
+		AED102B31B342C3200755007 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				832BCE761B09E4AC00FE15E2 /* MainMenu.xib */,
+				AED102B31B342C3200755007 /* Storyboard.storyboard */,
 				AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */,
 				AECB07471B207367001C7C18 /* MasterController.swift */,
 				AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */,
@@ -230,7 +233,7 @@
 		AEEF87C51B1DBA7C00DDD45D /* Logos */ = {
 			isa = PBXGroup;
 			children = (
-				AEEF87CA1B1DBC1B00DDD45D /* sq-nb512.png */,
+				AE199A351B33038E00EC5870 /* Draft1.png */,
 			);
 			name = Logos;
 			sourceTree = "<group>";
@@ -316,8 +319,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEEF87C21B1DB62F00DDD45D /* MainMenu.xib in Resources */,
+				AED102B41B342C3200755007 /* Storyboard.storyboard in Resources */,
 				832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */,
-				AEEF87CB1B1DBC1B00DDD45D /* sq-nb512.png in Resources */,
+				AE199A361B33038E00EC5870 /* Draft1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
