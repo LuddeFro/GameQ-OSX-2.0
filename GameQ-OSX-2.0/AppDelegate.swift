@@ -15,54 +15,37 @@ import AppKit
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    @IBOutlet weak var window: NSWindow!
-    var masterViewController: MasterViewController!
     
-    var statusBar = NSStatusBar.systemStatusBar()
-    var statusBarItem : NSStatusItem = NSStatusItem()
-    var menu: NSMenu = NSMenu()
-    var menuItem : NSMenuItem = NSMenuItem()
+//    var statusBar = NSStatusBar.systemStatusBar()
+//    var statusBarItem : NSStatusItem = NSStatusItem()
+//    var menu: NSMenu = NSMenu()
+//    var menuItem : NSMenuItem = NSMenuItem()
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-    
-        setUpWindow()
-        masterViewController = MasterViewController(nibName: "MasterViewController", bundle: nil)
-    }
-    
-    func setUpWindow(){
-        self.window.titleVisibility = NSWindowTitleVisibility.Hidden
-        self.window.titlebarAppearsTransparent = true
-        self.window.styleMask |= NSFullSizeContentViewWindowMask
-        self.window.backgroundColor = NSColor(netHex: 0x465568)
-        self.window.movableByWindowBackground = true
         
     }
+    
     
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
     
-    override func awakeFromNib() {
-        
-        super.awakeFromNib()
-        
-        //Add statusBarItem
-        statusBarItem = statusBar.statusItemWithLength(-1)
-        statusBarItem.menu = menu
-        statusBarItem.title = "GameQ"
-        
-        //Add menuItem to menu
-        menuItem.title = "Clicked"
-        menuItem.action = Selector("setWindowVisible:")
-        menuItem.keyEquivalent = ""
-        menu.addItem(menuItem)
-    }
-    
-    
-    func setWindowVisible(sender: AnyObject){
-        self.window!.orderFront(self)
-    }
+//    override func awakeFromNib() {
+//        
+//        super.awakeFromNib()
+//        
+//        //Add statusBarItem
+//        statusBarItem = statusBar.statusItemWithLength(-1)
+//        statusBarItem.menu = menu
+//        statusBarItem.title = "GameQ"
+//        
+//        //Add menuItem to menu
+//        menuItem.title = "Clicked"
+//        menuItem.action = Selector("setWindowVisible:")
+//        menuItem.keyEquivalent = ""
+//        menu.addItem(menuItem)
+//    }
     
     // MARK: - Core Data stack
     

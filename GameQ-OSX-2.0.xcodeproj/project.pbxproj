@@ -40,11 +40,13 @@
 		AEA350B41B20A5CA0096B682 /* GameDetectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */; };
 		AEBC5A261B20C32800A92F52 /* GameDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC5A251B20C32800A92F52 /* GameDetector.swift */; };
 		AEBC5A271B20C36000A92F52 /* GameDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBC5A251B20C32800A92F52 /* GameDetector.swift */; };
+		AEC97A6F1B3448E800FE752D /* MyCustomSwiftAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */; };
+		AEC97A701B3448E800FE752D /* MyCustomSwiftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */; };
 		AECB07481B207367001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
 		AECB07491B207812001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
-		AED102B41B342C3200755007 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AED102B31B342C3200755007 /* Storyboard.storyboard */; };
-		AEEF87C11B1DB52C00DDD45D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE761B09E4AC00FE15E2 /* MainMenu.xib */; };
-		AEEF87C21B1DB62F00DDD45D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE761B09E4AC00FE15E2 /* MainMenu.xib */; };
+		AEF4B5B11B343C2E0001AF42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF4B5AF1B343C2E0001AF42 /* Main.storyboard */; };
+		AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */; };
+		AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4B5B31B343C7A0001AF42 /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +64,6 @@
 		832BCE6E1B09E4AC00FE15E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		832BCE721B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameQ_OSX_2_0.xcdatamodel; sourceTree = "<group>"; };
 		832BCE741B09E4AC00FE15E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		832BCE771B09E4AC00FE15E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		832BCE7D1B09E4AC00FE15E2 /* GameQ-OSX-2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GameQ-OSX-2.0Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		832BCE821B09E4AC00FE15E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameQ_OSX_2_0Tests.swift; sourceTree = "<group>"; };
@@ -84,8 +85,12 @@
 		AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetectorProtocol.swift; sourceTree = "<group>"; };
 		AEBC5A251B20C32800A92F52 /* GameDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetector.swift; sourceTree = "<group>"; };
+		AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomSwiftAnimator.swift; sourceTree = "<group>"; };
+		AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomSwiftSegue.swift; sourceTree = "<group>"; };
 		AECB07471B207367001C7C18 /* MasterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterController.swift; sourceTree = "<group>"; };
-		AED102B31B342C3200755007 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		AEF4B5AF1B343C2E0001AF42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		AEF4B5B31B343C7A0001AF42 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +150,8 @@
 				AEEF87C51B1DBA7C00DDD45D /* Logos */,
 				832BCE711B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld */,
 				AE199A321B32E76100EC5870 /* Helpers.swift */,
+				AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */,
+				AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */,
 				832BCE741B09E4AC00FE15E2 /* Images.xcassets */,
 				832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */,
 				832BCE6E1B09E4AC00FE15E2 /* Info.plist */,
@@ -173,9 +180,10 @@
 		AE0D7E9A1B1D9B5200B23150 /* Controller Classes */ = {
 			isa = PBXGroup;
 			children = (
-				832BCE761B09E4AC00FE15E2 /* MainMenu.xib */,
-				AED102B31B342C3200755007 /* Storyboard.storyboard */,
+				AEF4B5AF1B343C2E0001AF42 /* Main.storyboard */,
+				AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */,
 				AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */,
+				AEF4B5B31B343C7A0001AF42 /* WindowController.swift */,
 				AECB07471B207367001C7C18 /* MasterController.swift */,
 				AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */,
 			);
@@ -318,10 +326,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEEF87C21B1DB62F00DDD45D /* MainMenu.xib in Resources */,
-				AED102B41B342C3200755007 /* Storyboard.storyboard in Resources */,
 				832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */,
 				AE199A361B33038E00EC5870 /* Draft1.png in Resources */,
+				AEF4B5B11B343C2E0001AF42 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +336,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEEF87C11B1DB52C00DDD45D /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +349,8 @@
 				AECB07481B207367001C7C18 /* MasterController.swift in Sources */,
 				AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */,
 				AE98AC2A1B18A2BF00E5F382 /* DotaDetector.swift in Sources */,
+				AEC97A701B3448E800FE752D /* MyCustomSwiftSegue.swift in Sources */,
+				AEC97A6F1B3448E800FE752D /* MyCustomSwiftAnimator.swift in Sources */,
 				AE954B511B1DD36900C5E8D6 /* HoNDetector.swift in Sources */,
 				AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */,
 				AEA350B31B20A5370096B682 /* GameDetectorProtocol.swift in Sources */,
@@ -352,8 +360,10 @@
 				AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */,
 				AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
+				AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
+				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
 				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,17 +400,6 @@
 			targetProxy = AE238C141B1A0C7900B6ED09 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		832BCE761B09E4AC00FE15E2 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				832BCE771B09E4AC00FE15E2 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		832BCE851B09E4AC00FE15E2 /* Debug */ = {

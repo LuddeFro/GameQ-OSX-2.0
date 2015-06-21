@@ -14,7 +14,6 @@ class MasterViewController: NSViewController {
     
     @IBOutlet weak var statusLabel: NSTextField!
     
-    
     @IBAction func startButtonPressed(sender: NSButton) {
         MasterController.startDetection()
     }
@@ -35,15 +34,20 @@ class MasterViewController: NSViewController {
         MasterController.stopDetection()
     }
     
+    
+    
     @IBAction func quitButtonPressed(sender: NSButton) {
         MasterController.stopDetection()
         MasterController.updateStatus(Status.Offline)
         NSApplication.sharedApplication().terminate(self)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         var timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        
+      
     }
     
     func update() {
@@ -65,7 +69,8 @@ class MasterViewController: NSViewController {
             MasterController.gameDetection(Game.CSGO)
         }
         
-        gameStatus.stringValue = MasterController.game.rawValue
         statusLabel.stringValue = MasterController.status.rawValue
+        gameStatus.stringValue = MasterController.game.rawValue
+
     }
 }
