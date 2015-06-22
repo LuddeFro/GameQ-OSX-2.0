@@ -667,7 +667,7 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController storyboardIdentifier="containerViewController" id="XfG-lQ-9wD" customClass="ContainerViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
+                    <view key="view" autoresizesSubviews="NO" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
@@ -705,7 +705,7 @@
         <scene sceneID="fdA-PC-e1K">
             <objects>
                 <viewController id="wFD-yq-twe" customClass="MasterViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="bfK-wO-M3S">
+                    <view key="view" autoresizesSubviews="NO" id="bfK-wO-M3S">
                         <rect key="frame" x="0.0" y="0.0" width="370" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -777,17 +777,6 @@
                                     <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
                                 </connections>
                             </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="115" y="200" width="168" height="158"/>
-                            </customView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="71" y="102" width="164" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="zd5-qh-jq7">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-AV-KK7">
                                 <rect key="frame" x="207" y="39" width="90" height="32"/>
                                 <buttonCell key="cell" type="push" title="Log Out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
@@ -798,12 +787,28 @@
                                     <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="W2D-KF-BOI"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
+                                <rect key="frame" x="129" y="102" width="164" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="zd5-qh-jq7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="183" y="347" width="5" height="96"/>
+                            </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpK-4P-0eX" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="183" y="71" width="5" height="96"/>
+                            </customView>
+                            <customView identifier="Timer" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="105" y="179" width="160" height="160"/>
+                            </customView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
-                        <outlet property="view" destination="bfK-wO-M3S" id="ncG-ja-lf5"/>
                     </connections>
                 </viewController>
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

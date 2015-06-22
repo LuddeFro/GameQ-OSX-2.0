@@ -9,14 +9,27 @@
 import Cocoa
 
 class Timer: NSView {
-
+    
     let circlePathLayer = CAShapeLayer()
-    let circleRadius: CGFloat = 20.0
+    let circleRadius: CGFloat = 75
+    
+    var progress: CGFloat {
+        get {
+            return circlePathLayer.strokeEnd
+        }
+        set {
+            if (newValue > 1) {
+                circlePathLayer.strokeEnd = 1
+            } else if (newValue < 0) {
+                circlePathLayer.strokeEnd = 0
+            } else {
+                circlePathLayer.strokeEnd = newValue
+            }
+        }
+    }
     
     override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
-        // Drawing code here.
-        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,13 +44,19 @@ class Timer: NSView {
     }
     
     func configure() {
+        circlePathLayer.strokeStart = 0.0
+        progress = 0.9
         circlePathLayer.frame = bounds
-        circlePathLayer.lineWidth = 2
-        circlePathLayer.fillColor = NSColor.whiteColor().CGColor
-        circlePathLayer.strokeColor = NSColor.redColor().CGColor
-        circlePathLayer.frame = bounds
-        circlePathLayer.bounds = bounds
+        circlePathLayer.lineWidth = 5
+        circlePathLayer.fillColor = NSColor.clearColor().CGColor
+        circlePathLayer.strokeColor = NSColor(netHex: 0xFF6861).CGColor
         layer!.addSublayer(circlePathLayer)
+        }
+    
+    override func resizeSubviewsWithOldSize(oldSize: NSSize) {
+        super.resizeSubviewsWithOldSize(oldSize)
+        circlePathLayer.frame = bounds
+        circlePathLayer.path = circlePath().CGPath
     }
     
     func circleFrame() -> CGRect {
@@ -50,4 +69,5 @@ class Timer: NSView {
     func circlePath() -> NSBezierPath {
         return NSBezierPath(ovalInRect: circleFrame())
     }
+    
 }
