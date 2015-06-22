@@ -44,8 +44,7 @@ class Timer: NSView {
     }
     
     func configure() {
-        circlePathLayer.strokeStart = 0.0
-        progress = 0.9
+        progress = 0
         circlePathLayer.frame = bounds
         circlePathLayer.lineWidth = 5
         circlePathLayer.fillColor = NSColor.clearColor().CGColor
@@ -59,15 +58,15 @@ class Timer: NSView {
         circlePathLayer.path = circlePath().CGPath
     }
     
-    func circleFrame() -> CGRect {
-        var circleFrame = CGRect(x: 0, y: 0, width: 2*circleRadius, height: 2*circleRadius)
-        circleFrame.origin.x = CGRectGetMidX(circlePathLayer.bounds) - CGRectGetMidX(circleFrame)
-        circleFrame.origin.y = CGRectGetMidY(circlePathLayer.bounds) - CGRectGetMidY(circleFrame)
-        return circleFrame
-    }
-    
     func circlePath() -> NSBezierPath {
-        return NSBezierPath(ovalInRect: circleFrame())
+        
+        var circleFrame = CGRect(x: 0, y: 0, width: 2*circleRadius, height: 2*circleRadius)
+        var x = CGRectGetMidX(circlePathLayer.bounds) - CGRectGetMidX(circleFrame)
+        var y = CGRectGetMidY(circlePathLayer.bounds) - CGRectGetMidY(circleFrame)
+
+        var path:NSBezierPath = NSBezierPath()
+        path.appendBezierPathWithArcWithCenter(NSPoint(x: x + circleRadius, y: y + circleRadius), radius: circleRadius, startAngle: 90, endAngle: -270, clockwise: true)
+        return path
     }
     
 }

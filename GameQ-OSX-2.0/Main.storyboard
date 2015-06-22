@@ -759,14 +759,6 @@
                                     <action selector="failModePressed:" target="wFD-yq-twe" id="Qfb-e4-7ut"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-y1-xbg">
-                                <rect key="frame" x="220" y="99" width="164" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Game" id="2n0-Yd-m7h">
-                                    <font key="font" size="14" name="HelveticaNeue"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
                                 <rect key="frame" x="231" y="-2" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
@@ -804,11 +796,20 @@
                             <customView identifier="Timer" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="105" y="179" width="160" height="160"/>
                             </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-y1-xbg">
+                                <rect key="frame" x="211" y="91" width="173" height="28"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Game" id="2n0-Yd-m7h">
+                                    <font key="font" size="14" name="HelveticaNeue"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
+                        <outlet property="timer" destination="CSV-MA-BZY" id="LaK-Ba-gjI"/>
                     </connections>
                 </viewController>
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

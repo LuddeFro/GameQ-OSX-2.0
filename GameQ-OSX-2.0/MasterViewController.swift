@@ -10,6 +10,8 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBOutlet weak var timer: Timer!
+    
     @IBOutlet weak var gameStatus: NSTextField!
     
     @IBOutlet weak var statusLabel: NSTextField!
@@ -42,7 +44,7 @@ class MasterViewController: NSViewController {
         NSApplication.sharedApplication().terminate(self)
     }
     
-    var time = 0;
+    var time = 0.0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
