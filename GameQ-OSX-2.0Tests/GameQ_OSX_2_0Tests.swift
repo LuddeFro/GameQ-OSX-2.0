@@ -13,7 +13,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        MasterController.gameDetection(Game.Dota)
+        MasterController.updateGame(Game.Dota)
         MasterController.status = Status.InLobby
         MasterController.isTesting = true
     }
@@ -45,7 +45,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     }
     
     func testOneFile() {
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dotamissed/asd5.csv")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dotamissed/asd.csv")
         XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
     }
 }

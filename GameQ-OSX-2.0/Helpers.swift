@@ -33,6 +33,21 @@ class CustomLine: NSView {
     }
 }
 
+extension NSView {
+    func rotate360Degrees(duration: CFTimeInterval = 0.5, completionDelegate: AnyObject? = nil) {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(M_PI * 2.0)
+        rotateAnimation.duration = duration
+        if let delegate: AnyObject = completionDelegate {
+            rotateAnimation.delegate = delegate
+        }
+        // `addAnimation` will execute *only* if the layer exists
+        self.wantsLayer = true
+        self.layer?.addAnimation(rotateAnimation, forKey: nil)
+    }
+}
+
 extension NSBezierPath {
     
     var CGPath: CGPathRef {

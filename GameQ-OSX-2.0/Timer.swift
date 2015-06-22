@@ -29,6 +29,17 @@ class Timer: NSView {
     }
     
     override func drawRect(dirtyRect: NSRect) {
+        
+        var circleFrame = CGRect(x: 0, y: 0, width: 2*circleRadius, height: 2*circleRadius)
+        var x = CGRectGetMidX(circlePathLayer.bounds) - CGRectGetMidX(circleFrame)
+        var y = CGRectGetMidY(circlePathLayer.bounds) - CGRectGetMidY(circleFrame)
+        
+        var path:NSBezierPath = NSBezierPath()
+        path.appendBezierPathWithArcWithCenter(NSPoint(x: x + circleRadius, y: y + circleRadius), radius: circleRadius, startAngle: 90, endAngle: -270, clockwise: true)
+        
+        path.lineWidth = 5
+        NSColor(netHex: 0x323f4f).setStroke()
+        path.stroke()
     }
     
     override init(frame: CGRect) {
@@ -50,7 +61,7 @@ class Timer: NSView {
         circlePathLayer.fillColor = NSColor.clearColor().CGColor
         circlePathLayer.strokeColor = NSColor(netHex: 0xFF6861).CGColor
         layer!.addSublayer(circlePathLayer)
-        }
+    }
     
     override func resizeSubviewsWithOldSize(oldSize: NSSize) {
         super.resizeSubviewsWithOldSize(oldSize)
@@ -63,9 +74,10 @@ class Timer: NSView {
         var circleFrame = CGRect(x: 0, y: 0, width: 2*circleRadius, height: 2*circleRadius)
         var x = CGRectGetMidX(circlePathLayer.bounds) - CGRectGetMidX(circleFrame)
         var y = CGRectGetMidY(circlePathLayer.bounds) - CGRectGetMidY(circleFrame)
-
+        
         var path:NSBezierPath = NSBezierPath()
         path.appendBezierPathWithArcWithCenter(NSPoint(x: x + circleRadius, y: y + circleRadius), radius: circleRadius, startAngle: 90, endAngle: -270, clockwise: true)
+    
         return path
     }
     

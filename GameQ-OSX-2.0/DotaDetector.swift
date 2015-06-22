@@ -103,14 +103,14 @@ class DotaDetector:PacketDetector
         case Status.InLobby:
             var inGame = isInGame(newPacket, timeSpan: 5, packetNumber: 40)
             var gameReady = isGameReady(newPacket)
-
-            if(inGame){MasterController.updateStatus(Status.InGame)}
             
+            if(inGame){MasterController.updateStatus(Status.InGame)}
+                
             else if(gameReady){
                 MasterController.updateStatus(Status.GameReady)
                 resetsrcQueueTimer()
             }
-         
+                
             else if(startedQueueing(newPacket, timeSpan: 30, maxPacket:5, packetNumber: 2))
             {MasterController.updateStatus(Status.InQueue)}
             
@@ -135,14 +135,12 @@ class DotaDetector:PacketDetector
             
             if(saveCounter == 10 && !MasterController.isTesting){
                 MasterController.saveCapture()
-                MasterController.stopDetection()
+                //MasterController.stopDetection()
             }
             
-//           var inGame = isInGame(newPacket, timeSpan: 5, packetNumber: 40)
-//           var backToQueue = startedQueueing(newPacket, timeSpan: 30, maxPacket:0, packetNumber: 2)
-//            
-//           if(inGame){MasterController.updateStatus(Status.InGame)}
-            // else if(backToQueue){MasterController.updateStatus(Status.InQueue)}
+            var inGame = isInGame(newPacket, timeSpan: 5, packetNumber: 40)
+            
+            if(inGame){MasterController.updateStatus(Status.InGame)}
             break
             
         case Status.InGame:
@@ -265,14 +263,14 @@ class DotaDetector:PacketDetector
         
         println(srcQueueCounter)
         println(dstQueueCounter)
-
+        
         if(isProbablyGame){return true}
         if(stopQueueCounter[78] > 1 && stopQueueCounter[250] > 0){return false}
         //else if(srcQueueCounter[78] > 0 && srcQueueCounter[158] > 0 || isProbablyGame){return true}
         if((srcQueueCounter[78]! + srcQueueCounter[158]! + dstQueueCounter[126]! + dstQueueCounter[142]! > 2)
-        && (srcQueueCounter[78] > 0 && srcQueueCounter[158] > 0 &&
-        ( dstQueueCounter[126] > 0 ||  dstQueueCounter[142] > 0))){
-        return true}
+            && (srcQueueCounter[78] > 0 && srcQueueCounter[158] > 0 &&
+                ( dstQueueCounter[126] > 0 ||  dstQueueCounter[142] > 0))){
+                    return true}
         else {return false}
     }
     
@@ -300,27 +298,27 @@ class DotaDetector:PacketDetector
         for key in packetCounterEarly.keys{
             if(p.packetLength <= key + 100 && p.packetLength >= key && (p.srcPort == queuePort || queuePort ==
                 -1)){
-                gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = packetCounterEarly[key]!
-                packetCounterEarly.updateValue(oldCount + 1, forKey: key)
+                    gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                    var oldCount:Int = packetCounterEarly[key]!
+                    packetCounterEarly.updateValue(oldCount + 1, forKey: key)
             }
         }
         
         for key in dstPacketCounter.keys{
             if(p.packetLength <= key + 5 && p.packetLength >= key && (p.dstPort == queuePort || queuePort ==
                 -1)){
-                dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = dstPacketCounter[key]!
-                dstPacketCounter.updateValue(oldCount + 1, forKey: key)
+                    dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                    var oldCount:Int = dstPacketCounter[key]!
+                    dstPacketCounter.updateValue(oldCount + 1, forKey: key)
             }
         }
         
         for key in packetCounterLate.keys{
             if(p.packetLength <= key + 5 && p.packetLength >= key && (p.srcPort == queuePort || queuePort  ==
                 -1)){
-                gameTimerLate.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = packetCounterLate[key]!
-                packetCounterLate.updateValue(oldCount + 1, forKey: key)
+                    gameTimerLate.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                    var oldCount:Int = packetCounterLate[key]!
+                    packetCounterLate.updateValue(oldCount + 1, forKey: key)
             }
         }
         
@@ -336,16 +334,16 @@ class DotaDetector:PacketDetector
             && gameTimerLate.count > 0
             && dstPacketCounter[78] > 1)
         {return true}
-        
+            
         else if((packetCounterLate[164] > 0 || packetCounterLate[174] > 0)
             && packetCounterLate[190] > 0
             && packetCounterLate[206] > 0)
         {return true}
         else if(gameTimerLate.count >= 6){return true}
         else {return false}
-
-    }
         
+    }
+    
     class func isInGame(p:Packet, timeSpan:Double, packetNumber:Int) -> Bool{
         
         while(!inGameTimer.isEmpty && p.captureTime - inGameTimer.last!.time > timeSpan){

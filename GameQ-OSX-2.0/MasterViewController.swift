@@ -12,6 +12,8 @@ class MasterViewController: NSViewController {
     
     @IBOutlet weak var timer: Timer!
     
+    @IBOutlet weak var queueTimer: QueueTimer!
+    
     @IBOutlet weak var gameStatus: NSTextField!
     
     @IBOutlet weak var statusLabel: NSTextField!
@@ -22,7 +24,7 @@ class MasterViewController: NSViewController {
     
     @IBAction func capButtonPressed(sender: NSButton) {
         MasterController.saveCapture()
-    }
+        }
     
     @IBAction func capFailButtonPressed(sender: NSButton) {
         MasterController.saveMissedCapture()
@@ -37,43 +39,32 @@ class MasterViewController: NSViewController {
     }
     
     
-    
     @IBAction func quitButtonPressed(sender: NSButton) {
         MasterController.stopDetection()
         MasterController.updateStatus(Status.Offline)
         NSApplication.sharedApplication().terminate(self)
     }
     
-    var time = 0.0;
+    var counter = NSTimer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        MasterController.start()
     }
     
-    func update() {
-        
-        var ws = NSWorkspace.sharedWorkspace()
-        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
-        var activeApps:Set<String> = Set<String>()
-        
-        for app in apps {
-            var appName:String? = app.localizedName
-            if(appName != nil){activeApps.insert(appName!)}
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func getStatus(sender: NSNotification) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.gameStatus.stringValue = MasterController.game.rawValue
+            self.statusLabel.stringValue = MasterController.status.rawValue
+            self.timer.progress = CGFloat(MasterController.counter / MasterController.countDownLength)
         }
-        
-        if(activeApps.contains("dota_osx") && MasterController.game == Game.NoGame){
-            MasterController.gameDetection(Game.Dota)
-        }
-            
-        else if(activeApps.contains("csgo_osx") && MasterController.game == Game.NoGame){
-            MasterController.gameDetection(Game.CSGO)
-        }
-        
-        statusLabel.stringValue = MasterController.status.rawValue
-        gameStatus.stringValue = MasterController.game.rawValue
-
     }
 }

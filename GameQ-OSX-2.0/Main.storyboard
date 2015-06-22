@@ -706,11 +706,11 @@
             <objects>
                 <viewController id="wFD-yq-twe" customClass="MasterViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="bfK-wO-M3S">
-                        <rect key="frame" x="0.0" y="0.0" width="370" height="450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="371" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-kO-0T9">
-                                <rect key="frame" x="161" y="-2" width="70" height="32"/>
+                                <rect key="frame" x="279" y="167" width="70" height="32"/>
                                 <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AMs-Jk-xWN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -720,7 +720,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-pb-ry3">
-                                <rect key="frame" x="67" y="44" width="91" height="32"/>
+                                <rect key="frame" x="-1" y="188" width="91" height="32"/>
                                 <buttonCell key="cell" type="push" title="Save Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f7P-Je-VmQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -730,7 +730,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-oI-xmy">
-                                <rect key="frame" x="-1" y="-2" width="70" height="32"/>
+                                <rect key="frame" x="9" y="147" width="70" height="32"/>
                                 <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBQ-7k-VOF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -740,7 +740,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx">
-                                <rect key="frame" x="64" y="21" width="104" height="32"/>
+                                <rect key="frame" x="-2" y="221" width="104" height="32"/>
                                 <buttonCell key="cell" type="push" title="Save Miss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -750,7 +750,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9b-ND-Nn0">
-                                <rect key="frame" x="64" y="-2" width="97" height="32"/>
+                                <rect key="frame" x="264" y="127" width="97" height="32"/>
                                 <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LB2-i1-1Bx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -760,7 +760,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
-                                <rect key="frame" x="231" y="-2" width="66" height="32"/>
+                                <rect key="frame" x="279" y="200" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -770,7 +770,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-AV-KK7">
-                                <rect key="frame" x="207" y="39" width="90" height="32"/>
+                                <rect key="frame" x="267" y="250" width="90" height="32"/>
                                 <buttonCell key="cell" type="push" title="Log Out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -779,42 +779,53 @@
                                     <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="W2D-KF-BOI"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="129" y="102" width="164" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="zd5-qh-jq7">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="183" y="347" width="5" height="96"/>
+                                <rect key="frame" x="183" y="313" width="5" height="30"/>
                             </customView>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpK-4P-0eX" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="183" y="71" width="5" height="96"/>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GoJ-Pl-DN0" customClass="QueueTimer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="105" y="145" width="160" height="160"/>
                             </customView>
                             <customView identifier="Timer" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="105" y="179" width="160" height="160"/>
+                                <rect key="frame" x="105" y="145" width="160" height="160"/>
+                            </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpK-4P-0eX" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="183" y="107" width="5" height="30"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-y1-xbg">
-                                <rect key="frame" x="211" y="91" width="173" height="28"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Game" id="2n0-Yd-m7h">
-                                    <font key="font" size="14" name="HelveticaNeue"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <rect key="frame" x="16" y="40" width="339" height="34"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="GAME" id="2n0-Yd-m7h">
+                                    <font key="font" size="20" name="Axis"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
+                                <rect key="frame" x="103" y="70" width="167" height="29"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="GAME READY" id="zd5-qh-jq7">
+                                    <font key="font" size="20" name="Axis"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OEE-3r-iZD">
+                                <rect key="frame" x="126" y="361" width="114" height="77"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Draft1" id="RLu-Tu-MSC"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
+                        <outlet property="queueTimer" destination="GoJ-Pl-DN0" id="bu6-5h-GnB"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
                         <outlet property="timer" destination="CSV-MA-BZY" id="LaK-Ba-gjI"/>
                     </connections>
                 </viewController>
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1109" y="973"/>
+            <point key="canvasLocation" x="1109.5" y="973"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Draft1" width="412" height="401"/>
+    </resources>
 </document>
