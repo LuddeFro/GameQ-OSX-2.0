@@ -10,9 +10,6 @@ import Cocoa
 
 class LoginViewController: NSViewController {
     
-    @IBAction func loginPressed(sender: AnyObject) {
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

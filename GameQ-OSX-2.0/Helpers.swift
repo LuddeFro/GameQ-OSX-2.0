@@ -24,9 +24,14 @@ extension NSColor {
     }
 }
 
-class DrawLine: NSView {
+class CustomLine: NSView {
     
-    
-    
+    override func drawRect(dirtyRect: NSRect) {
+        super.drawRect(dirtyRect)
+        NSColor(netHex: 0x323f4f).setFill()
+        NSRectFill(dirtyRect);
+    }
 }
+
+
 

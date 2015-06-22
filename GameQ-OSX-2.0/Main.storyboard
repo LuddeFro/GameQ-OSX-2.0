@@ -663,35 +663,43 @@
             </objects>
             <point key="canvasLocation" x="33.5" y="361"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Container View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="LoginViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="containerViewController" id="XfG-lQ-9wD" customClass="ContainerViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUB-iQ-QGa">
-                                <rect key="frame" x="148" y="175" width="75" height="32"/>
-                                <buttonCell key="cell" type="push" title="Login" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DwP-gd-tYc">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="loginPressed:" target="XfG-lQ-9wD" id="ZO0-gj-vk7"/>
-                                    <segue destination="wFD-yq-twe" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="0dz-6y-onr"/>
-                                </connections>
-                            </button>
-                            <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3V-G9-acT">
-                                <rect key="frame" x="148" y="368" width="75" height="82"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageAlignment="topLeft" imageScaling="proportionallyDown" image="Draft1" id="0JR-9G-AmU"/>
-                            </imageView>
-                        </subviews>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="33" y="973"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="gsj-I2-oW9">
+            <objects>
+                <viewController storyboardIdentifier="loginViewController" id="ldi-Q6-qY3" customClass="LoginViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Fz1-sf-mPO">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="450"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rG8-2I-bdm">
+                                <rect key="frame" x="214" y="242" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Login" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZZk-Mq-6Bq">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="wFD-yq-twe" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="xuo-Ah-FJQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="wRV-Ex-bUH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="973"/>
         </scene>
         <!--Master View Controller-->
         <scene sceneID="fdA-PC-e1K">
@@ -759,18 +767,6 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-ot-YT0">
-                                <rect key="frame" x="144" y="345" width="82" height="92"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Draft1" id="m2K-zH-2ey"/>
-                            </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="20" y="99" width="164" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="zd5-qh-jq7">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
                                 <rect key="frame" x="231" y="-2" width="66" height="32"/>
                                 <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
@@ -779,6 +775,27 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
+                                </connections>
+                            </button>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="115" y="200" width="168" height="158"/>
+                            </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
+                                <rect key="frame" x="71" y="102" width="164" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="zd5-qh-jq7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-AV-KK7">
+                                <rect key="frame" x="207" y="39" width="90" height="32"/>
+                                <buttonCell key="cell" type="push" title="Log Out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="W2D-KF-BOI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -791,10 +808,7 @@
                 </viewController>
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="525" y="973"/>
+            <point key="canvasLocation" x="1109" y="973"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Draft1" width="412" height="401"/>
-    </resources>
 </document>
