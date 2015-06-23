@@ -27,7 +27,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     func testAllFiles(){
         
         let filemanager:NSFileManager = NSFileManager()
-        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/")
+        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/")
         while let file = files?.nextObject() as? String {
             if file.hasSuffix("csv") { // checks the extension
                 testIterator(file)
@@ -39,13 +39,13 @@ class GameQ_OSX_2_0Tests: XCTestCase {
        
         println(file)
         setUp()
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota/" + file)
-        XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/" + file)
+        XCTAssert(MasterController.status == Status.GameReady || MasterController.status == Status.InGame, "Test Passed")
         tearDown()
     }
     
     func testOneFile() {
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dotamissed/asd.csv")
-        XCTAssert(MasterController.status == Status.GameReady, "Test Passed")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/1234.csv")
+        XCTAssert(MasterController.status == Status.GameReady || MasterController.status == Status.InGame, "Test Passed")
     }
 }

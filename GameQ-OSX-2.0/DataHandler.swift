@@ -42,7 +42,7 @@ class DataHandler:NSObject {
         //spara filen i pathen
         var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName).stringByAppendingPathComponent(trimmedName)
         log.writeToFile(path, atomically: true, encoding:NSUTF8StringEncoding , error: nil)
-        println(name)
+        println(trimmedName)
     }
     
     func prompt() -> String {

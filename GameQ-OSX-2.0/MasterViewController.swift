@@ -134,6 +134,7 @@ class MasterViewController: NSViewController {
             countDown.stringValue = ""
         }
         countDownTimer.invalidate()
+        counter = 0
     }
     
     func update2() {

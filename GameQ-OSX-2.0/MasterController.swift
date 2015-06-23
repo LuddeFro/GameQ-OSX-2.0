@@ -20,47 +20,6 @@ class MasterController:NSObject {
     static var countDownLength:Int = -1
     static var counter:Int = 0
     
-    
-    static func start(){
-        
-        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
-    }
-    
-    static func update() {
-        
-        if(status == Status.GameReady){
-            counter = counter + 1
-        }
-        
-        if(counter >= countDownLength && status == Status.GameReady){
-            counter = 0
-            updateStatus(Status.InGame)
-        }
-        
-        var ws = NSWorkspace.sharedWorkspace()
-        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
-        var activeApps:Set<String> = Set<String>()
-        var currentGame:Game = Game.NoGame
-        
-        for app in apps {
-            var appName:String? = app.localizedName
-            if(appName != nil){activeApps.insert(appName!)}
-        }
-        
-        if(activeApps.contains("dota_osx")){
-            currentGame = Game.Dota
-        }
-            
-        else if(activeApps.contains("csgo_osx")){
-            currentGame = Game.CSGO
-        }
-        
-        if(self.game != currentGame){
-            updateGame(currentGame)
-        }
-    }
-    
-    
     static func updateGame(game:Game){
         self.game = game
         self.status = Status.InLobby
@@ -84,6 +43,7 @@ class MasterController:NSObject {
             break
         }
         
+        startDetection()
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
     
@@ -96,8 +56,9 @@ class MasterController:NSObject {
     
     static func updateStatus(newStatus: Status){
         
-        status = newStatus
+        if(status != newStatus && newStatus == Status.GameReady){detector.save()}
         
+        status = newStatus
         println(newStatus.rawValue)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
@@ -144,4 +105,44 @@ class MasterController:NSObject {
             isFailMode = true
         }
     }
+    
+    static func start(){
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+    }
+    
+    static func update() {
+        
+        if(status == Status.GameReady){
+            counter = counter + 1
+        }
+        
+        if(counter >= countDownLength && status == Status.GameReady){
+            counter = 0
+            updateStatus(Status.InGame)
+        }
+        
+        var ws = NSWorkspace.sharedWorkspace()
+        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
+        var activeApps:Set<String> = Set<String>()
+        var currentGame:Game = Game.NoGame
+        
+        for app in apps {
+            var appName:String? = app.localizedName
+            if(appName != nil){activeApps.insert(appName!)}
+        }
+        
+        if(activeApps.contains("dota_osx")){
+            currentGame = Game.Dota
+        }
+            
+        else if(activeApps.contains("csgo_osx")){
+            currentGame = Game.CSGO
+        }
+        
+        if(self.game != currentGame){
+            updateGame(currentGame)
+        }
+    }
+
 }
