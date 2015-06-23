@@ -138,11 +138,11 @@ class MasterViewController: NSViewController {
     
     func update2() {
         counter = counter + 0.1
-        self.timer.progress = CGFloat(counter / MasterController.countDownLength)
-        var time:Int = Int(MasterController.countDownLength - counter)
+        self.timer.progress = CGFloat(counter / Float(MasterController.countDownLength))
+        var time:Int = Int(Float(MasterController.countDownLength) - counter)
         self.countDown.stringValue = String(time)
         
-        if(counter > MasterController.countDownLength) {
+        if(counter > Float(MasterController.countDownLength)) {
             countDownTimer.invalidate()
             counter = 0
         }

@@ -17,16 +17,25 @@ class MasterController:NSObject {
     static var isFailMode:Bool = false
     static var isTesting:Bool = false
     static let dataHandler = DataHandler.sharedInstance
-    
-    static var countDownLength: Float = 10
+    static var countDownLength:Int = -1
+    static var counter:Int = 0
     
     
     static func start(){
         
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
     static func update() {
+        
+        if(status == Status.GameReady){
+            counter = counter + 1
+        }
+        
+        if(counter >= countDownLength && status == Status.GameReady){
+            counter = 0
+            updateStatus(Status.InGame)
+        }
         
         var ws = NSWorkspace.sharedWorkspace()
         var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
@@ -87,13 +96,7 @@ class MasterController:NSObject {
     
     static func updateStatus(newStatus: Status){
         
-        if(status != Status.GameReady && newStatus == Status.GameReady){
-            status = newStatus
-        }
-            
-        else{
-            status = newStatus
-        }
+        status = newStatus
         
         println(newStatus.rawValue)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)

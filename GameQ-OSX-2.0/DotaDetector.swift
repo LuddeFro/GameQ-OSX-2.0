@@ -123,28 +123,28 @@ class DotaDetector:PacketDetector
             if(gameReady){
                 MasterController.updateStatus(Status.GameReady)
                 resetsrcQueueTimer()
+                resetdstQueueTimer()
+                resetGameTimer()
             }
             else if(!stillQueueing){
                 MasterController.updateStatus(Status.InLobby)
                 resetsrcQueueTimer()
+                resetdstQueueTimer()
             }
             break
             
         case Status.GameReady:
             saveCounter++
-            
             if(saveCounter == 10 && !MasterController.isTesting){
                 MasterController.saveCapture()
-                //MasterController.stopDetection()
             }
-            
-            var inGame = isInGame(newPacket, timeSpan: 5, packetNumber: 40)
-            
-            if(inGame){MasterController.updateStatus(Status.InGame)}
             break
             
         case Status.InGame:
-            break
+            var inGame = isInGame(newPacket, timeSpan: 5, packetNumber: 20)
+            
+            if(inGame){MasterController.updateStatus(Status.InGame)}
+            else{MasterController.updateStatus(Status.InLobby)}
         }
         
         println()
@@ -337,7 +337,8 @@ class DotaDetector:PacketDetector
             
         else if((packetCounterLate[164] > 0 || packetCounterLate[174] > 0)
             && packetCounterLate[190] > 0
-            && packetCounterLate[206] > 0)
+            && packetCounterLate[206] > 0
+            && packetCounterEarly.count > 0)
         {return true}
         else if(gameTimerLate.count >= 6){return true}
         else {return false}
