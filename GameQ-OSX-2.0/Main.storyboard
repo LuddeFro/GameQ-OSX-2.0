@@ -779,12 +779,17 @@
                                     <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="W2D-KF-BOI"/>
                                 </connections>
                             </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="183" y="313" width="5" height="30"/>
-                            </customView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GoJ-Pl-DN0" customClass="QueueTimer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="105" y="145" width="160" height="160"/>
                             </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCh-fi-bsJ">
+                                <rect key="frame" x="140" y="205" width="93" height="39"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dG7-ln-pID">
+                                    <font key="font" size="23" name="Axis"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <customView identifier="Timer" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="105" y="145" width="160" height="160"/>
                             </customView>
@@ -792,17 +797,9 @@
                                 <rect key="frame" x="183" y="107" width="5" height="30"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-y1-xbg">
-                                <rect key="frame" x="16" y="40" width="339" height="34"/>
+                                <rect key="frame" x="16" y="28" width="339" height="34"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="GAME" id="2n0-Yd-m7h">
-                                    <font key="font" size="20" name="Axis"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="103" y="70" width="167" height="29"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="GAME READY" id="zd5-qh-jq7">
-                                    <font key="font" size="20" name="Axis"/>
+                                    <font key="font" size="24" name="Axis"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -811,9 +808,21 @@
                                 <rect key="frame" x="126" y="361" width="114" height="77"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Draft1" id="RLu-Tu-MSC"/>
                             </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
+                                <rect key="frame" x="81" y="70" width="208" height="29"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="STATUS" id="zd5-qh-jq7">
+                                    <font key="font" size="24" name="Axis"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="183" y="323" width="5" height="30"/>
+                            </customView>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="countDown" destination="TCh-fi-bsJ" id="RsR-Hj-OCa"/>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
                         <outlet property="queueTimer" destination="GoJ-Pl-DN0" id="bu6-5h-GnB"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>

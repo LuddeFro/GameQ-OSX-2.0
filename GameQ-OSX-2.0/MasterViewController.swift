@@ -12,6 +12,8 @@ class MasterViewController: NSViewController {
     
     @IBOutlet weak var timer: Timer!
     
+    @IBOutlet weak var countDown: NSTextField!
+    
     @IBOutlet weak var queueTimer: QueueTimer!
     
     @IBOutlet weak var gameStatus: NSTextField!
@@ -24,7 +26,7 @@ class MasterViewController: NSViewController {
     
     @IBAction func capButtonPressed(sender: NSButton) {
         MasterController.saveCapture()
-        }
+    }
     
     @IBAction func capFailButtonPressed(sender: NSButton) {
         MasterController.saveMissedCapture()
@@ -45,7 +47,8 @@ class MasterViewController: NSViewController {
         NSApplication.sharedApplication().terminate(self)
     }
     
-    var counter = NSTimer()
+    var countDownTimer = NSTimer()
+    var counter: Float = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +56,9 @@ class MasterViewController: NSViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
         MasterController.start()
+        
+        self.gameStatus.stringValue = MasterController.game.rawValue
+        self.statusLabel.stringValue = MasterController.status.rawValue
     }
     
     override func viewWillDisappear() {
@@ -62,9 +68,83 @@ class MasterViewController: NSViewController {
     
     func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
+            
             self.gameStatus.stringValue = MasterController.game.rawValue
             self.statusLabel.stringValue = MasterController.status.rawValue
-            self.timer.progress = CGFloat(MasterController.counter / MasterController.countDownLength)
+            
+            switch MasterController.status {
+                
+            case Status.Offline:
+                self.queueTimer.isGame = false
+                self.queueTimer.reset()
+                self.resetTimer(false)
+                self.timer.progress = 0
+                break
+                
+            case Status.Online:
+                self.queueTimer.isGame = false
+                self.queueTimer.reset()
+                self.resetTimer(false)
+                self.timer.progress = 0
+                break
+                
+            case Status.InLobby:
+                self.queueTimer.isGame = false
+                self.queueTimer.reset()
+                self.resetTimer(false)
+                self.timer.progress = 0
+                break
+                
+            case Status.InQueue:
+                self.queueTimer.start()
+                self.timer.progress = 0
+                break
+                
+            case Status.GameReady:
+                self.queueTimer.isGame = true
+                self.queueTimer.reset()
+                self.startTimer()
+                break
+                
+            case Status.InGame:
+                self.queueTimer.isGame = true
+                self.queueTimer.reset()
+                self.resetTimer(true)
+                break
+                
+            default:
+            break
+            }
+        }
+    }
+    
+    func startTimer(){
+        dispatch_async(dispatch_get_main_queue()) {
+            self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update2"), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func resetTimer(isGame: Bool){
+        if(isGame){
+            timer.progress = 1
+            countDown.stringValue = "Enjoy!"
+        }
+        else{
+            timer.progress = 0
+            countDown.stringValue = ""
+        }
+        countDownTimer.invalidate()
+    }
+    
+    func update2() {
+        counter = counter + 0.1
+        self.timer.progress = CGFloat(counter / MasterController.countDownLength)
+        var time:Int = Int(MasterController.countDownLength - counter)
+        self.countDown.stringValue = String(time)
+        
+        if(counter > MasterController.countDownLength) {
+            countDownTimer.invalidate()
+            counter = 0
         }
     }
 }

@@ -18,9 +18,7 @@ class MasterController:NSObject {
     static var isTesting:Bool = false
     static let dataHandler = DataHandler.sharedInstance
     
-    static var countDownTimer = NSTimer()
     static var countDownLength: Float = 10
-    static var counter: Float = 0
     
     
     static func start(){
@@ -91,7 +89,6 @@ class MasterController:NSObject {
         
         if(status != Status.GameReady && newStatus == Status.GameReady){
             status = newStatus
-            startTimer()
         }
             
         else{
@@ -111,7 +108,7 @@ class MasterController:NSObject {
     }
     
     static func reset() {
-        status = Status.InLobby
+        updateStatus(Status.InLobby)
         detector.reset()
     }
     
@@ -142,24 +139,6 @@ class MasterController:NSObject {
             println("FailMode On")
             dataHandler.folderName = game.rawValue + "ForcedFails"
             isFailMode = true
-            startTimer()
-        }
-    }
-    
-    static func startTimer(){
-        dispatch_async(dispatch_get_main_queue()) {
-        self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update2"), userInfo: nil, repeats: true)
-        }
-    }
-    
-    static func update2() {
-        counter = counter + 0.1
-        NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
-        if(counter > countDownLength) {
-            countDownTimer.invalidate()
-            MasterController.updateStatus(Status.InLobby)
-            counter = 0
-            NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         }
     }
 }
