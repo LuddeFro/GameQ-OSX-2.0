@@ -36,7 +36,8 @@ class DotaDetector:PacketDetector
     
     static var isProbablyGame:Bool = false
     static var inGameTimer:[PacketTimer] = [PacketTimer]()
-    static var inGameMaxSize:Int = 50
+    static let inGameMaxSize:Int = 70
+    static var inGamePacketCounter:[Int:Int] = [Int:Int]()
     
     static var saveCounter = 0;
     
@@ -83,6 +84,7 @@ class DotaDetector:PacketDetector
     
     class func resetInGameTimer(){
         inGameTimer = [PacketTimer]()
+        inGamePacketCounter = [Int:Int]()
     }
     
     override class func updateStatus(newPacket:Packet){
@@ -120,7 +122,8 @@ class DotaDetector:PacketDetector
         var inGame:Bool = isInGame(newPacket, timeSpan: 5, packetNumber: 30)
         resetGameTimer()
         
-        if(inGame){MasterController.updateStatus(Status.InGame)}
+        if(inGame){MasterController.updateStatus(Status.InGame)
+            resetQueueTimer()}
         }
         
         //IN GAME
@@ -129,6 +132,7 @@ class DotaDetector:PacketDetector
             
         if(!inGame){MasterController.updateStatus(Status.InLobby)
             resetQueueTimer()
+            resetInGameTimer()
             }
         }
         
@@ -141,22 +145,19 @@ class func queueStarted(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:I
     
     while(!srcQueueTimer.isEmpty && p.captureTime - srcQueueTimer.last!.time > timeSpan){
         var key:Int = srcQueueTimer.removeLast().key
-        var oldCount:Int = srcQueueCounter[key]!
-        srcQueueCounter.updateValue(oldCount - 1, forKey: key)
+        srcQueueCounter[key]! = srcQueueCounter[key]! - 1
     }
     
     while(!dstQueueTimer.isEmpty && p.captureTime - dstQueueTimer.last!.time > timeSpan){
         var key:Int = dstQueueTimer.removeLast().key
-        var oldCount:Int = dstQueueCounter[key]!
-        dstQueueCounter.updateValue(oldCount - 1, forKey: key)
+        dstQueueCounter[key]! = dstQueueCounter[key]! - 1
     }
     
     for key in srcQueueCounter.keys{
         if((p.packetLength <= key + maxPacket && p.packetLength >= key)
             && p.srcPort <= portMax && p.srcPort >= portMin){
                 srcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = srcQueueCounter[key]!
-                srcQueueCounter.updateValue(oldCount + 1, forKey: key)
+                srcQueueCounter[key]! = srcQueueCounter[key]! + 1
         }
     }
     
@@ -164,8 +165,7 @@ class func queueStarted(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:I
         if((p.packetLength <= key + maxPacket && p.packetLength >= key)
             && p.dstPort <= portMax && p.dstPort >= portMin){
                 dstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = dstQueueCounter[key]!
-                dstQueueCounter.updateValue(oldCount + 1, forKey: key)
+                dstQueueCounter[key]! = dstQueueCounter[key]! + 1
         }
     }
     
@@ -201,22 +201,19 @@ class func isStillQueueing(p:Packet, timeSpan:Double, maxPacket:Int, packetNumbe
     
     while(!srcQueueTimer.isEmpty && p.captureTime - srcQueueTimer.last!.time > timeSpan){
         var key:Int = srcQueueTimer.removeLast().key
-        var oldCount:Int = srcQueueCounter[key]!
-        srcQueueCounter.updateValue(oldCount - 1, forKey: key)
+        srcQueueCounter[key]! = srcQueueCounter[key]! - 1
     }
     
     while(!dstQueueTimer.isEmpty && p.captureTime - dstQueueTimer.last!.time > timeSpan){
         var key:Int = dstQueueTimer.removeLast().key
-        var oldCount:Int = dstQueueCounter[key]!
-        dstQueueCounter.updateValue(oldCount - 1, forKey: key)
+        dstQueueCounter[key]! = dstQueueCounter[key]! - 1
     }
     
     for key in srcQueueCounter.keys{
         if((p.packetLength <= key + maxPacket && p.packetLength >= key)
             && p.srcPort <= portMax && p.srcPort >= portMin){
                 srcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = srcQueueCounter[key]!
-                srcQueueCounter.updateValue(oldCount + 1, forKey: key)
+                srcQueueCounter[key]! = srcQueueCounter[key]! + 1
         }
     }
     
@@ -224,29 +221,25 @@ class func isStillQueueing(p:Packet, timeSpan:Double, maxPacket:Int, packetNumbe
         if((p.packetLength <= key + maxPacket && p.packetLength >= key)
             && p.dstPort <= portMax && p.dstPort >= portMin){
                 dstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = dstQueueCounter[key]!
-                dstQueueCounter.updateValue(oldCount + 1, forKey: key)
+                dstQueueCounter[key]! = dstQueueCounter[key]! + 1
         }
     }
     
     while(!stopQueueTimer.isEmpty && p.captureTime - stopQueueTimer.last!.time > 2){
         var key:Int = stopQueueTimer.removeLast().key
-        var oldCount:Int = stopQueueCounter[key]!
-        stopQueueCounter.updateValue(oldCount - 1, forKey: key)
+        stopQueueCounter[key]! = stopQueueCounter[key]! - 1
     }
     
     
     if(p.packetLength <= 250 + 50 && p.packetLength >= 250
          && p.srcPort <= portMax && p.srcPort >= portMin){
         stopQueueTimer.insert(PacketTimer(key: 250, time: p.captureTime),atIndex: 0)
-        var oldCount:Int = stopQueueCounter[250]!
-        stopQueueCounter.updateValue(oldCount + 1, forKey: 250)
+        stopQueueCounter[250]! = stopQueueCounter[250]! + 1
     }
         
     else if(p.packetLength == 78){
         stopQueueTimer.insert(PacketTimer(key: 78, time: p.captureTime),atIndex: 0)
-        var oldCount:Int = stopQueueCounter[78]!
-        stopQueueCounter.updateValue(oldCount + 1, forKey: 78)
+        stopQueueCounter[78]! = stopQueueCounter[78]! + 1
     }
     
 //    println(srcQueueCounter)
@@ -267,20 +260,17 @@ class func isGameReady(p:Packet) -> Bool{
     
     while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 10){
         var key:Int = gameTimerEarly.removeLast().key
-        var oldCount:Int = packetCounterEarly[key]!
-        packetCounterEarly.updateValue(oldCount - 1, forKey: key)
+   packetCounterEarly[key]! = packetCounterEarly[key]! - 1
     }
     
     while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 10){
         var key:Int = dstGameTimer.removeLast().key
-        var oldCount:Int = dstPacketCounter[key]!
-        dstPacketCounter.updateValue(oldCount - 1, forKey: key)
+         dstPacketCounter[key]! = dstPacketCounter[key]! - 1
     }
     
     while(!gameTimerLate.isEmpty && p.captureTime - gameTimerLate.last!.time > 10){
         var key:Int = gameTimerLate.removeLast().key
-        var oldCount:Int = packetCounterLate[key]!
-        packetCounterLate.updateValue(oldCount - 1, forKey: key)
+        packetCounterLate[key]! = packetCounterLate[key]! - 1
     }
     
     
@@ -288,8 +278,7 @@ class func isGameReady(p:Packet) -> Bool{
         if(p.packetLength <= key + 100 && p.packetLength >= key && (p.srcPort == queuePort || queuePort ==
             -1) && p.srcPort <= portMax && p.srcPort >= portMin){
                 gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = packetCounterEarly[key]!
-                packetCounterEarly.updateValue(oldCount + 1, forKey: key)
+                 packetCounterEarly[key]! =  packetCounterEarly[key]! + 1
         }
     }
     
@@ -297,8 +286,7 @@ class func isGameReady(p:Packet) -> Bool{
         if(p.packetLength <= key + 5 && p.packetLength >= key && (p.dstPort == queuePort || queuePort ==
             -1) && p.dstPort <= portMax && p.dstPort >= portMin){
                 dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = dstPacketCounter[key]!
-                dstPacketCounter.updateValue(oldCount + 1, forKey: key)
+                dstPacketCounter[key]! = dstPacketCounter[key]! + 1
         }
     }
     
@@ -306,8 +294,7 @@ class func isGameReady(p:Packet) -> Bool{
         if(p.packetLength <= key + 5 && p.packetLength >= key && (p.srcPort == queuePort || queuePort  ==
             -1) && p.srcPort <= portMax && p.srcPort >= portMin){
                 gameTimerLate.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                var oldCount:Int = packetCounterLate[key]!
-                packetCounterLate.updateValue(oldCount + 1, forKey: key)
+                packetCounterLate[key]! = packetCounterLate[key]! + 1
         }
     }
     
@@ -336,15 +323,31 @@ class func isGameReady(p:Packet) -> Bool{
 
 class func isInGame(p:Packet, timeSpan:Double, packetNumber:Int) -> Bool{
     
-    if(p.packetLength > 70){
-        inGameTimer.insert(PacketTimer(key: p.srcPort, time: p.captureTime),atIndex: 0)
+    var port:Int = -1
+    if(p.srcPort >= 27000 && p.srcPort <= 28999){port = p.srcPort}
+    else if(p.dstPort >= 27000 && p.dstPort <= 28999){port = p.dstPort}
+    
+    if(p.packetLength > 70 && port != -1){
+        inGameTimer.insert(PacketTimer(key: port, time: p.captureTime),atIndex: 0)
+        if(inGamePacketCounter[port] == nil){inGamePacketCounter[port] = 1}
+        else {inGamePacketCounter[port] = inGamePacketCounter[port]! + 1}
     }
     
     while(!inGameTimer.isEmpty && p.captureTime - inGameTimer.last!.time > timeSpan || inGameTimer.count >= inGameMaxSize){
-        inGameTimer.removeLast()
+        var remove = inGameTimer.removeLast().key
+        inGamePacketCounter[remove] = inGamePacketCounter[remove]! - 1
     }
     
-    if(inGameTimer.count >= packetNumber){return true}
+    var maxNumber = 0
+    
+    for packet in inGamePacketCounter{
+        maxNumber = max(maxNumber, packet.1)
+    }
+    
+//    println(inGamePacketCounter)
+//    println(maxNumber)
+//    println(inGameTimer.count)
+    if(inGameTimer.count >= packetNumber && maxNumber > 40){return true}
     else {return false}
 }
 }

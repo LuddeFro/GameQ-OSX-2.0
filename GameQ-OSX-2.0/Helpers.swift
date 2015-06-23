@@ -33,6 +33,18 @@ class CustomLine: NSView {
     }
 }
 
+extension String {
+    func filter(pred: Character -> Bool) -> String {
+        var res = String()
+        for c in self {
+            if (pred(c)) {
+                res.append(c)
+            }
+        }
+        return res
+    }
+}
+
 extension NSBezierPath {
     
     var CGPath: CGPathRef {
@@ -41,6 +53,7 @@ extension NSBezierPath {
             return self.transformToCGPath()
         }
     }
+    
     
     /// Transforms the NSBezierPath into a CGPathRef
     ///

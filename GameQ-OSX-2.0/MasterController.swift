@@ -56,7 +56,7 @@ class MasterController:NSObject {
     
     static func updateStatus(newStatus: Status){
         
-        if(status != newStatus && newStatus == Status.GameReady){detector.save()}
+        if(status != newStatus && newStatus == Status.GameReady && !isTesting){detector.save()}
         
         status = newStatus
         println(newStatus.rawValue)
