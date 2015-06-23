@@ -327,7 +327,7 @@ class func isInGame(p:Packet, timeSpan:Double, packetNumber:Int) -> Bool{
     if(p.srcPort >= 27000 && p.srcPort <= 28999){port = p.srcPort}
     else if(p.dstPort >= 27000 && p.dstPort <= 28999){port = p.dstPort}
     
-    if(p.packetLength > 70 && port != -1){
+    if(port != -1){
         inGameTimer.insert(PacketTimer(key: port, time: p.captureTime),atIndex: 0)
         if(inGamePacketCounter[port] == nil){inGamePacketCounter[port] = 1}
         else {inGamePacketCounter[port] = inGamePacketCounter[port]! + 1}
@@ -347,7 +347,7 @@ class func isInGame(p:Packet, timeSpan:Double, packetNumber:Int) -> Bool{
 //    println(inGamePacketCounter)
 //    println(maxNumber)
 //    println(inGameTimer.count)
-    if(inGameTimer.count >= packetNumber && maxNumber > 40){return true}
+    if(maxNumber > 40){return true}
     else {return false}
 }
 }
