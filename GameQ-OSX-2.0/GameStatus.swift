@@ -9,18 +9,18 @@
 import Foundation
 
 enum Status:String {
-    case Offline = "Offline"
-    case Online = "Online"
-    case InLobby = "InLobby"
-    case InQueue = "InQueue"
-    case GameReady = "GameReady"
-    case InGame = "InGame"
+    case Offline = "OFFLINE"
+    case Online = "ONLINE"
+    case InLobby = "IN LOBBY"
+    case InQueue = "IN QUEUE"
+    case GameReady = "GAME READY"
+    case InGame = "IN GAME"
 }
 
 enum Game:String {
     
-    case Dota = "Dota"
-    case HoN = "Heroes of Newerth"
-    case CSGO = "Counter Strike Global Offensive"
-    case NoGame = "No Game"
+    case Dota = "DOTA2"
+    case HoN = "HEROES OF NEWERTH"
+    case CSGO = "COUNTER STRIKE GLOBAL OFFENSIVE"
+    case NoGame = "NO GAME ACTIVE"
 }

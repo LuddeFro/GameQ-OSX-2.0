@@ -7,17 +7,20 @@
 //
 
 import Foundation
+import Cocoa
 
 class MasterController:NSObject {
     
-    static var status:Status = Status.Offline
+    static var status:Status = Status.Online
     static var game:Game = Game.NoGame
     static var detector:GameDetector.Type = GameDetector.self
     static var isFailMode:Bool = false
     static var isTesting:Bool = false
     static let dataHandler = DataHandler.sharedInstance
+    static var countDownLength:Int = -1
+    static var counter:Int = 0
     
-    static func gameDetection(game:Game){
+    static func updateGame(game:Game){
         self.game = game
         self.status = Status.InLobby
         dataHandler.folderName = game.rawValue
@@ -27,6 +30,7 @@ class MasterController:NSObject {
         case Game.Dota:
             println("Setting up Dota Detection")
             detector = DotaDetector.self
+            countDownLength = 45
             break
         case Game.HoN:
             println("Setting up HoN Detection")
@@ -38,26 +42,25 @@ class MasterController:NSObject {
         default:
             break
         }
+        
+        startDetection()
+        NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
     
     static func startDetection(){
         if(game != Game.NoGame){
-        println("Starting " + game.rawValue + " Detection")
-        detector.start()
+            println("Starting " + game.rawValue + " Detection")
+            detector.start()
         }
     }
     
     static func updateStatus(newStatus: Status){
         
-        if(game != Game.NoGame){
-            
-            self.status = newStatus
-            println(newStatus.rawValue)
-            
-            if(newStatus == Status.GameReady && isTesting == false){
-                saveCapture()
-            }
-        }
+        if(status != newStatus && newStatus == Status.GameReady && !isTesting){detector.save()}
+        
+        status = newStatus
+        println(newStatus.rawValue)
+        NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
     
     static func stopDetection(){
@@ -69,7 +72,7 @@ class MasterController:NSObject {
     }
     
     static func reset() {
-        status = Status.InLobby
+        updateStatus(Status.InLobby)
         detector.reset()
     }
     
@@ -89,17 +92,57 @@ class MasterController:NSObject {
     }
     
     static func failMode(){
-    
+        
         if(isFailMode){
             println("FailMode Off")
             dataHandler.folderName = game.rawValue
             isFailMode = false
         }
-        
+            
         else{
             println("FailMode On")
             dataHandler.folderName = game.rawValue + "ForcedFails"
             isFailMode = true
         }
     }
+    
+    static func start(){
+        
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+    }
+    
+    static func update() {
+        
+        if(status == Status.GameReady){
+            counter = counter + 1
+        }
+        
+        if(counter >= countDownLength && status == Status.GameReady){
+            counter = 0
+            updateStatus(Status.InGame)
+        }
+        
+        var ws = NSWorkspace.sharedWorkspace()
+        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
+        var activeApps:Set<String> = Set<String>()
+        var currentGame:Game = Game.NoGame
+        
+        for app in apps {
+            var appName:String? = app.localizedName
+            if(appName != nil){activeApps.insert(appName!)}
+        }
+        
+        if(activeApps.contains("dota_osx")){
+            currentGame = Game.Dota
+        }
+            
+        else if(activeApps.contains("csgo_osx")){
+            currentGame = Game.CSGO
+        }
+        
+        if(self.game != currentGame){
+            updateGame(currentGame)
+        }
+    }
+
 }

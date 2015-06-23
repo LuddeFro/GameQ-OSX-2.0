@@ -52,7 +52,6 @@ class PacketDetector:GameDetector {
     
     override class func save(){
         dataHandler.logPackets(packetQueue)
-        reset()
     }
     
     override class func stop() {
