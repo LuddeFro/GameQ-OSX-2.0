@@ -35,11 +35,11 @@ class PacketDetector:GameDetector {
     class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        updateStatus(newPacket);
+        detector.updateStatus(newPacket);
     }
     
-    class func addPacketToQueue(packet:Packet) {
-        packetQueue.insert(packet, atIndex: 0)
+    class func addPacketToQueue(newPacket:Packet) {
+        packetQueue.insert(newPacket, atIndex: 0)
         if packetQueue.count >= queueMaxSize {
             packetQueue.removeLast()
         }

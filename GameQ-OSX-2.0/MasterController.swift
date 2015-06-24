@@ -22,7 +22,6 @@ class MasterController:NSObject {
     
     static func updateGame(game:Game){
         self.game = game
-        self.status = Status.InLobby
         dataHandler.folderName = game.rawValue
         
         switch self.game{
@@ -30,20 +29,31 @@ class MasterController:NSObject {
         case Game.Dota:
             println("Setting up Dota Detection")
             detector = DotaDetector.self
+            self.status = Status.InLobby
             countDownLength = 45
+            startDetection()
             break
         case Game.HoN:
             println("Setting up HoN Detection")
             detector = HoNDetector.self
+            self.status = Status.InLobby
+            startDetection()
             break
         case Game.CSGO:
             println("Setting up CSGO Detection")
             detector = CSGODetector.self
+            self.status = Status.InLobby
+            countDownLength = 20
+            startDetection()
+        case Game.NoGame:
+            println("No game Active")
+            self.status = Status.Online
+            startDetection()
+            break
         default:
             break
         }
         
-        startDetection()
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
     
@@ -139,6 +149,8 @@ class MasterController:NSObject {
         else if(activeApps.contains("csgo_osx")){
             currentGame = Game.CSGO
         }
+        
+        else {currentGame = Game.NoGame}
         
         if(self.game != currentGame){
             updateGame(currentGame)

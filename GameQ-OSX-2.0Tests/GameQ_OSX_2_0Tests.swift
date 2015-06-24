@@ -13,7 +13,6 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        MasterController.updateGame(Game.Dota)
         MasterController.status = Status.InLobby
         MasterController.isTesting = true
     }
@@ -24,18 +23,18 @@ class GameQ_OSX_2_0Tests: XCTestCase {
         super.tearDown()
     }
     
-    func testAllFiles(){
-        
+    func testAllFilesDota2(){
+        MasterController.updateGame(Game.Dota)
         let filemanager:NSFileManager = NSFileManager()
         let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/")
         while let file = files?.nextObject() as? String {
             if file.hasSuffix("csv") { // checks the extension
-                testIterator(file)
+                testIteratorDota2(file)
             }
         }
     }
     
-    func testIterator(file:String) {
+    func testIteratorDota2(file:String) {
        
         println(file)
         setUp()
@@ -44,8 +43,36 @@ class GameQ_OSX_2_0Tests: XCTestCase {
         tearDown()
     }
     
-    func testOneFile() {
+    func testOneFileDota2(){
+        MasterController.updateGame(Game.Dota)
         CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/Jun 23, 2015, 105140 PM.csv")
         XCTAssert(MasterController.status == Status.GameReady || MasterController.status == Status.InGame, "Test Passed")
     }
+    
+    func testAllFilesCS(){
+        MasterController.updateGame(Game.CSGO)
+        let filemanager:NSFileManager = NSFileManager()
+        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/")
+        while let file = files?.nextObject() as? String {
+            if file.hasSuffix("csv") { // checks the extension
+                testIteratorCS(file)
+            }
+        }
+    }
+    
+    func testIteratorCS(file:String) {
+        
+        println(file)
+        setUp()
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/" + file)
+        XCTAssert(MasterController.status == Status.GameReady || MasterController.status == Status.InGame, "Test Passed")
+        tearDown()
+    }
+    
+    func testOneFileCS(){
+        MasterController.updateGame(Game.CSGO)
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/Jun 24, 2015, 10742 PM.csv")
+        XCTAssert(MasterController.status == Status.GameReady || MasterController.status == Status.InGame, "Test Passed")
+    }
+    
 }
