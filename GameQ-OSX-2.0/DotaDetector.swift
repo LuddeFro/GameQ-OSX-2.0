@@ -75,6 +75,7 @@ class DotaDetector:GameDetector, PacketDetector{
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
+        packetQueue = [Packet]()
         dataHandler.logPackets(packetQueue)
     }
     

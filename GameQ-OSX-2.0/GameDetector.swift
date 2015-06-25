@@ -39,6 +39,11 @@ class GameDetector:NSObject, GameDetectorProtocol {
             startTimer()
         }
         
+        else{
+            countDownTimer.invalidate()
+            counter = 0
+        }
+        
         status = newStatus
         println(newStatus.rawValue)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
@@ -95,6 +100,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     static func update() {
         
+        println("hello")
+        
         if(status == Status.GameReady){
             counter = counter + 1
         }
@@ -102,6 +109,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
         if(counter >= countDownLength && status == Status.GameReady){
             counter = 0
             updateStatus(Status.InGame)
+            println("timer set Ingame")
             countDownTimer.invalidate()
         }
     }

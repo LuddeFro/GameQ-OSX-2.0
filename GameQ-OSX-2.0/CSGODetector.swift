@@ -64,6 +64,7 @@ class CSGODetector:GameDetector, PacketDetector{
     
     override class func saveDetection(){
         super.saveDetection()
+        packetQueue = [Packet]()
         dataHandler.logPackets(packetQueue)
     }
     
@@ -173,8 +174,9 @@ class CSGODetector:GameDetector, PacketDetector{
             
             //IN GAME
         else  if(status == Status.InGame){
+            resetGameTimer()
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
-            if(!inGame){updateStatus(Status.InLobby)}
+            if(!inGame){updateStatus(Status.InQueue)}
             
         }
             
