@@ -75,11 +75,17 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func stopDetection(){
         println("Stopping Detection")
-        updateStatus(Status.InLobby)
+        self.game = Game.NoGame
+        updateStatus(Status.Online)
         isFailMode = false
         isTesting = false
         counter = -1
         countDownLength = -1
+    }
+    
+    class func getStatusString() -> String {
+        
+        return self.status.rawValue
     }
     
     static func startTimer(){

@@ -1,3 +1,4 @@
+
 //
 //  MasterViewController.swift
 //  GameQ-OSX-2.0
@@ -70,8 +71,8 @@ class MasterViewController: NSViewController {
     func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
             
-            self.gameStatus.stringValue = GameDetector.game.rawValue
-            self.statusLabel.stringValue = GameDetector.status.rawValue
+            self.gameStatus.stringValue = self.detector.game.rawValue
+            self.statusLabel.stringValue = self.detector.getStatusString()
             
             switch GameDetector.status {
                 
@@ -124,7 +125,7 @@ class MasterViewController: NSViewController {
         var ws = NSWorkspace.sharedWorkspace()
         var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
         var activeApps:Set<String> = Set<String>()
-        var currentGame:Game = Game.NoGame
+        var newGame:Game = Game.NoGame
         
         for app in apps {
             var appName:String? = app.localizedName
@@ -133,19 +134,24 @@ class MasterViewController: NSViewController {
         
         if(activeApps.contains("dota_osx")){
              detector = DotaDetector.self
-             currentGame = Game.Dota
+             newGame = Game.Dota
         }
             
         else if(activeApps.contains("csgo_osx")){
              detector = CSGODetector.self
-             currentGame = Game.CSGO
+             newGame = Game.CSGO
         }
             
-        else {currentGame = Game.NoGame}
+        else {newGame = Game.NoGame}
         
-        if(game != currentGame){
+        if(game != newGame && newGame != Game.NoGame){
             detector.startDetection()
-            game = currentGame
+            game = newGame
+        }
+        
+        else if(game != newGame && newGame == Game.NoGame) {
+            detector.stopDetection()
+            game = newGame
         }
     }
     

@@ -40,7 +40,7 @@ class DotaDetector:GameDetector, PacketDetector{
     
     static var isProbablyGame:Bool = false
     static var inGameTimer:[PacketTimer] = [PacketTimer]()
-    static let inGameMaxSize:Int = 70
+    static let inGameMaxSize:Int = 100
     static var inGamePacketCounter:[Int:Int] = [Int:Int]()
     
     static var saveCounter = 0;
@@ -392,7 +392,7 @@ class DotaDetector:GameDetector, PacketDetector{
         //    println(inGamePacketCounter)
         //    println(maxNumber)
         //    println(inGameTimer.count)
-        if(maxNumber > 40){return true}
+        if(maxNumber > 70){return true}
         else {return false}
     }
 }
