@@ -8,8 +8,12 @@
 
 import Foundation
 
-class DotaDetector:PacketDetector
-{
+class DotaDetector:GameDetector, PacketDetector{
+    
+    static var packetQueue:[Packet] = [Packet]()
+    static var queueMaxSize:Int = 200
+    static var isCapturing = false
+    static var packetParser:PacketParser = PacketParser.getSharedInstance()
     
     static let dotaFilter:String = "udp src portrange 27000-28999 or udp dst portrange 27000-28999"
     static let portMin:Int = 27000
@@ -41,22 +45,46 @@ class DotaDetector:PacketDetector
     
     static var saveCounter = 0;
     
-    override class func start() {
+    override class func startDetection() {
+        self.game = Game.Dota
+        self.detector = self
+        self.countDownLength = 45
+        updateStatus(Status.InLobby)
+        super.startDetection()
+        
         if(!isCapturing){
             dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
                 self.packetParser.start_loop(self.dotaFilter, detector: self
-                )
-            })
-        }
-        super.start()
+                )})}
+        isCapturing = true
     }
     
-    override class func reset(){
-        super.reset()
+    override class func resetDetection(){
+        super.resetDetection()
         resetQueueTimer()
         resetGameTimer()
         resetInGameTimer()
-        saveCounter = 0;
+        saveCounter = 0
+    }
+    
+    
+    override class func saveDetection(){
+        super.saveDetection()
+        dataHandler.logPackets(packetQueue)
+    }
+    
+    override class func saveMissedDetection(){
+        super.saveMissedDetection()
+        dataHandler.logPackets(packetQueue)
+    }
+    
+    override class func stopDetection(){
+        if(isCapturing){
+            packetParser.stop_loop()
+            isCapturing = false
+        }
+        resetDetection()
+        super.stopDetection()
     }
     
     class func resetQueueTimer(){
@@ -88,13 +116,13 @@ class DotaDetector:PacketDetector
     }
     
     
-    override class func handle(srcPort:Int, dstPort:Int, iplen:Int){
+    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         update(newPacket);
     }
     
-    override class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         update(newPacket);
@@ -103,48 +131,51 @@ class DotaDetector:PacketDetector
     
     class func update(newPacket: Packet){
         
-        addPacketToQueue(newPacket)
+        packetQueue.insert(newPacket, atIndex: 0)
+        if packetQueue.count >= queueMaxSize {
+            packetQueue.removeLast()
+        }
         
         
         //IN LOBBY
-        if(MasterController.status == Status.InLobby){
+        if(status == Status.InLobby){
             
             var inGame:Bool = isInGame(newPacket, timeSpan: 5, packetNumber: 30)
             var gameReady:Bool = isGameReady(newPacket)
             var startedQueueing:Bool = queueStarted(newPacket, timeSpan: 30, maxPacket:5, packetNumber: 2)
             
-            if(inGame){MasterController.updateStatus(Status.InGame)}
-            else if(gameReady){MasterController.updateStatus(Status.GameReady)}
-            else if(startedQueueing){MasterController.updateStatus(Status.InQueue)}
+            if(inGame){updateStatus(Status.InGame)}
+            else if(gameReady){updateStatus(Status.GameReady)}
+            else if(startedQueueing){updateStatus(Status.InQueue)}
         }
             
             //IN QUEUE
-        else  if(MasterController.status == Status.InQueue){
+        else  if(status == Status.InQueue){
             var inGame:Bool = isInGame(newPacket, timeSpan: 5, packetNumber: 30)
             var gameReady:Bool = isGameReady(newPacket)
             var stillQueueing:Bool = isStillQueueing(newPacket, timeSpan: 30, maxPacket: 5, packetNumber: 2)
             
-            if(inGame){MasterController.updateStatus(Status.InGame)}
-            else if(gameReady){MasterController.updateStatus(Status.GameReady)}
-            else if(!stillQueueing){MasterController.updateStatus(Status.InLobby)
+            if(inGame){updateStatus(Status.InGame)}
+            else if(gameReady){updateStatus(Status.GameReady)}
+            else if(!stillQueueing){updateStatus(Status.InLobby)
                 resetQueueTimer()
             }
         }
             
             //GAME READY
-        else if(MasterController.status == Status.GameReady){
+        else if(status == Status.GameReady){
             var inGame:Bool = isInGame(newPacket, timeSpan: 6, packetNumber: 30)
             resetGameTimer()
             
-            if(inGame){MasterController.updateStatus(Status.InGame)
+            if(inGame){updateStatus(Status.InGame)
                 resetQueueTimer()}
         }
             
             //IN GAME
-        else  if(MasterController.status == Status.InGame){
+        else  if(status == Status.InGame){
             var inGame:Bool = isInGame(newPacket, timeSpan: 6, packetNumber: 30)
             
-            if(!inGame){MasterController.updateStatus(Status.InLobby)
+            if(!inGame){updateStatus(Status.InLobby)
                 resetQueueTimer()
                 resetInGameTimer()
             }
@@ -154,7 +185,6 @@ class DotaDetector:PacketDetector
             
         }
     }
-    
     
     class func queueStarted(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
         

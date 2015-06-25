@@ -28,3 +28,8 @@ struct Packet {
         self.captureTime = time
     }
 }
+
+struct PacketTimer {
+    var key:Int = -1
+    var time:Double = -1
+}

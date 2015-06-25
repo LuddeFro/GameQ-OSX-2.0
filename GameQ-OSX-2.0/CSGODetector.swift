@@ -9,17 +9,12 @@
 
 import Foundation
 
-//
-//  HoNReader.swift
-//  GameQ-OSX-2.0
-//
-//  Created by Fabian Wikström on 6/2/15.
-//  Copyright (c) 2015 GameQ AB. All rights reserved.
-//
-
-import Foundation
-
-class CSGODetector:PacketDetector{
+class CSGODetector:GameDetector, PacketDetector{
+    
+    static var packetQueue:[Packet] = [Packet]()
+    static var queueMaxSize:Int = 200
+    static var isCapturing = false
+    static var packetParser:PacketParser = PacketParser.getSharedInstance()
     
     static let csgoFilter:String = "udp src portrange 27000-28000 or udp dst portrange 27000-28000 or udp dst port 27005 or udp src port 27015 or udp src port 27005 or udp dst port 27015"
     
@@ -47,35 +42,47 @@ class CSGODetector:PacketDetector{
     static var time:Double = -1
     static var timer = NSTimer()
     
-    override class func start() {
+    override class func startDetection() {
+        self.game = Game.CSGO
+        self.detector = self
+        self.countDownLength = 20
+        updateStatus(Status.InLobby)
+        super.startDetection()
+        
         if(!isCapturing){
             dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
-                self.packetParser.start_loop(self.csgoFilter, detector: self)
-            })
-        }
-        super.start()
+                self.packetParser.start_loop(self.csgoFilter, detector: self
+                )})}
+        isCapturing = true
+    }
+    
+    override class func resetDetection(){
+        super.resetDetection()
+        resetGameTimer()
     }
     
     
-    override class func reset(){
-        super.reset()
-        foundServer = false
-        soonGame = false
-        
-        gameTimerEarly = [PacketTimer]()
-        packetCounterEarly = [170:0]
-        
-        gameTimerLate = [PacketTimer]()
-        packetCounterLate = [60:0, 590:0]
-        
-        dstGameTimer = [PacketTimer]()
-        dstPacketCounter = [75:0]
-        
-        timer.invalidate()
-        time = -1
+    override class func saveDetection(){
+        super.saveDetection()
+        dataHandler.logPackets(packetQueue)
+    }
+    
+    override class func saveMissedDetection(){
+        super.saveMissedDetection()
+        dataHandler.logPackets(packetQueue)
+    }
+    
+    override class func stopDetection(){
+        if(isCapturing){
+            packetParser.stop_loop()
+            isCapturing = false
+        }
+        resetDetection()
+        super.stopDetection()
     }
     
     class func resetGameTimer(){
+        
         foundServer = false
         soonGame = false
         
@@ -94,13 +101,13 @@ class CSGODetector:PacketDetector{
         time = -1
     }
     
-    override class func handle(srcPort:Int, dstPort:Int, iplen:Int){
+     class func handle(srcPort:Int, dstPort:Int, iplen:Int){
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         update(newPacket);
     }
     
-    override class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+     class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
         println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
         update(newPacket);
@@ -108,35 +115,37 @@ class CSGODetector:PacketDetector{
     
     class func update(newPacket:Packet){
         
-        addPacketToQueue(newPacket)
-        
+        packetQueue.insert(newPacket, atIndex: 0)
+        if packetQueue.count >= queueMaxSize {
+            packetQueue.removeLast()
+        }
         
         //IN LOBBY
-        if(MasterController.status == Status.InLobby){
+        if(status == Status.InLobby){
             
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
             var gameReady:Bool = isGameReady(newPacket)
             
-            if(inGame){MasterController.updateStatus(Status.InGame)}
-            else if(gameReady){MasterController.updateStatus(Status.GameReady)
+            if(inGame){updateStatus(Status.InGame)}
+            else if(gameReady){updateStatus(Status.GameReady)
                 resetGameTimer()}
         }
             
             //IN QUEUE
-        else  if(MasterController.status == Status.InQueue){
+        else  if(status == Status.InQueue){
             
         }
             
             //GAME READY
-        else if(MasterController.status == Status.GameReady){
+        else if(status == Status.GameReady){
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
-            if(inGame){MasterController.updateStatus(Status.InGame)}
+            if(inGame){updateStatus(Status.InGame)}
         }
             
             //IN GAME
-        else  if(MasterController.status == Status.InGame){
+        else  if(status == Status.InGame){
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
-            if(!inGame){MasterController.updateStatus(Status.InLobby)}
+            if(!inGame){updateStatus(Status.InLobby)}
             
         }
             
@@ -153,7 +162,7 @@ class CSGODetector:PacketDetector{
         }
         
         var t:Double = -1
-        if(MasterController.isTesting){t = 0.5}
+        if(isTesting){t = 0.5}
         else{t = 2}
         
         while(!gameTimerLate.isEmpty && p.captureTime - gameTimerLate.last!.time > t){
@@ -235,7 +244,7 @@ class CSGODetector:PacketDetector{
         if(soonGame == true){
             time = time + 0.2
             if(isGameReady(Packet(dstPort: -1, srcPort: -1, packetLength: -1, time: time))){
-                MasterController.updateStatus(Status.GameReady)
+                updateStatus(Status.GameReady)
                 timer.invalidate()
             }
         }

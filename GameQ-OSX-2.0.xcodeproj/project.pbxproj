@@ -21,7 +21,6 @@
 		AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
-		AE415BAC1B3C001600B609F3 /* GameDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE415BAB1B3C001600B609F3 /* GameDetector.swift */; };
 		AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
 		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -44,8 +43,8 @@
 		AEACCC2C1B3735D900271BBC /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEACCC2A1B3734BA00271BBC /* Timer.swift */; };
 		AEC97A6F1B3448E800FE752D /* MyCustomSwiftAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */; };
 		AEC97A701B3448E800FE752D /* MyCustomSwiftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */; };
-		AECB07481B207367001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
-		AECB07491B207812001C7C18 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* MasterController.swift */; };
+		AECB07481B207367001C7C18 /* GameDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* GameDetector.swift */; };
+		AECB07491B207812001C7C18 /* GameDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB07471B207367001C7C18 /* GameDetector.swift */; };
 		AEF4B5B11B343C2E0001AF42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF4B5AF1B343C2E0001AF42 /* Main.storyboard */; };
 		AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */; };
 		AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4B5B31B343C7A0001AF42 /* WindowController.swift */; };
@@ -77,7 +76,6 @@
 		AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTimer.swift; sourceTree = "<group>"; };
 		AE226CB61B2316D0009B7D9B /* CSGODetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSGODetector.swift; sourceTree = "<group>"; };
 		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
-		AE415BAB1B3C001600B609F3 /* GameDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetector.swift; sourceTree = "<group>"; };
 		AE8C420F1B374D000050D686 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
@@ -91,7 +89,7 @@
 		AEACCC2A1B3734BA00271BBC /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomSwiftAnimator.swift; sourceTree = "<group>"; };
 		AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomSwiftSegue.swift; sourceTree = "<group>"; };
-		AECB07471B207367001C7C18 /* MasterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterController.swift; sourceTree = "<group>"; };
+		AECB07471B207367001C7C18 /* GameDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetector.swift; sourceTree = "<group>"; };
 		AEF4B5AF1B343C2E0001AF42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AEF4B5B31B343C7A0001AF42 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 		AE0D7E9A1B1D9B5200B23150 /* Controller Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AECB07471B207367001C7C18 /* MasterController.swift */,
 				AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */,
 			);
 			name = "Controller Classes";
@@ -237,7 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */,
-				AE415BAB1B3C001600B609F3 /* GameDetector.swift */,
+				AECB07471B207367001C7C18 /* GameDetector.swift */,
 				AE98AC301B18A37100E5F382 /* PacketDetectors */,
 			);
 			name = GameDetectors;
@@ -360,7 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AECB07481B207367001C7C18 /* MasterController.swift in Sources */,
+				AECB07481B207367001C7C18 /* GameDetector.swift in Sources */,
 				AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */,
 				AE98AC2A1B18A2BF00E5F382 /* DotaDetector.swift in Sources */,
 				AEACCC2B1B3734BA00271BBC /* Timer.swift in Sources */,
@@ -377,7 +374,6 @@
 				AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */,
 				AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
-				AE415BAC1B3C001600B609F3 /* GameDetector.swift in Sources */,
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
 				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
 				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
@@ -389,7 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */,
-				AECB07491B207812001C7C18 /* MasterController.swift in Sources */,
+				AECB07491B207812001C7C18 /* GameDetector.swift in Sources */,
 				AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */,
 				AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */,
 				832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */,
