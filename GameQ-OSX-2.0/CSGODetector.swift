@@ -48,10 +48,9 @@ class CSGODetector:PacketDetector{
     static var timer = NSTimer()
     
     override class func start() {
-        detector = self
         if(!isCapturing){
             dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
-                self.packetParser.start_loop(self.csgoFilter)
+                self.packetParser.start_loop(self.csgoFilter, detector: self)
             })
         }
         super.start()
@@ -95,7 +94,19 @@ class CSGODetector:PacketDetector{
         time = -1
     }
     
-    override class func updateStatus(newPacket:Packet){
+    override class func handle(srcPort:Int, dstPort:Int, iplen:Int){
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        update(newPacket);
+    }
+    
+    override class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        update(newPacket);
+    }
+    
+    class func update(newPacket:Packet){
         
         addPacketToQueue(newPacket)
         

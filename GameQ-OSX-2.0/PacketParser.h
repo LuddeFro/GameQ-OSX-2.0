@@ -16,7 +16,7 @@
 @property pcap_t* handle;
 
 static void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *packet);
-- (void) start_loop:(NSString*)filterExpression;
+- (void) start_loop:(NSString*)filterExpression detector:(Class)newDetector;
 + (pcap_t *) handle;
 + (void) setHandle:(pcap_t*)value;
 - (void) stop_loop;

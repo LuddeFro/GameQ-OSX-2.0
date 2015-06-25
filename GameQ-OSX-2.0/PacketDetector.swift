@@ -10,7 +10,6 @@ import Foundation
 
 class PacketDetector:GameDetector {
     
-    static var detector:PacketDetector.Type = PacketDetector.self
     static var packetQueue:[Packet] = [Packet]()
     static var queueMaxSize:Int = 200
     static var isCapturing = false
@@ -27,15 +26,11 @@ class PacketDetector:GameDetector {
     }
     
     class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        detector.updateStatus(newPacket);
+        println("no real detector used")
     }
     
     class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        detector.updateStatus(newPacket);
+       println("no real detector used")
     }
     
     class func addPacketToQueue(newPacket:Packet) {

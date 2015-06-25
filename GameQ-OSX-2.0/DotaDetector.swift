@@ -42,10 +42,10 @@ class DotaDetector:PacketDetector
     static var saveCounter = 0;
     
     override class func start() {
-        detector = self
         if(!isCapturing){
             dispatch_async(dispatch_queue_create("io.gameq.osx.pcap", nil), {
-                self.packetParser.start_loop(self.dotaFilter)
+                self.packetParser.start_loop(self.dotaFilter, detector: self
+                )
             })
         }
         super.start()
@@ -87,7 +87,21 @@ class DotaDetector:PacketDetector
         inGamePacketCounter = [Int:Int]()
     }
     
-    override class func updateStatus(newPacket:Packet){
+    
+    override class func handle(srcPort:Int, dstPort:Int, iplen:Int){
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        update(newPacket);
+    }
+    
+    override class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        update(newPacket);
+    }
+    
+    
+    class func update(newPacket: Packet){
         
         addPacketToQueue(newPacket)
         
@@ -140,6 +154,7 @@ class DotaDetector:PacketDetector
             
         }
     }
+    
     
     class func queueStarted(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
         
