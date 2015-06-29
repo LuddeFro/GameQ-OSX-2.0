@@ -1,3 +1,4 @@
+
 //
 //  MasterViewController.swift
 //  GameQ-OSX-2.0
@@ -21,44 +22,46 @@ class MasterViewController: NSViewController {
     @IBOutlet weak var statusLabel: NSTextField!
     
     @IBAction func startButtonPressed(sender: NSButton) {
-        MasterController.startDetection()
+        detector.startDetection()
     }
     
     @IBAction func capButtonPressed(sender: NSButton) {
-        MasterController.saveCapture()
+        detector.saveDetection()
     }
     
     @IBAction func capFailButtonPressed(sender: NSButton) {
-        MasterController.saveMissedCapture()
+        detector.saveMissedDetection()
     }
     
     @IBAction func failModePressed(sender: NSButton) {
-        MasterController.failMode()
+        detector.failMode()
+        detector.startTimer()
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
-        MasterController.stopDetection()
+        detector.stopDetection()
     }
     
     
     @IBAction func quitButtonPressed(sender: NSButton) {
-        MasterController.stopDetection()
-        MasterController.updateStatus(Status.Offline)
+        detector.stopDetection()
+        detector.updateStatus(Status.Offline)
         NSApplication.sharedApplication().terminate(self)
     }
     
     var countDownTimer = NSTimer()
     var counter: Float = 0
+    var detector:GameDetector.Type = GameDetector.self
+    var game:Game = Game.NoGame
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
-        MasterController.start()
-        
-        self.gameStatus.stringValue = MasterController.game.rawValue
-        self.statusLabel.stringValue = MasterController.status.rawValue
+        self.gameStatus.stringValue = GameDetector.game.rawValue
+        self.statusLabel.stringValue = GameDetector.status.rawValue
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear() {
@@ -69,10 +72,10 @@ class MasterViewController: NSViewController {
     func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
             
-            self.gameStatus.stringValue = MasterController.game.rawValue
-            self.statusLabel.stringValue = MasterController.status.rawValue
+            self.gameStatus.stringValue = self.detector.game.rawValue
+            self.statusLabel.stringValue = self.detector.getStatusString()
             
-            switch MasterController.status {
+            switch GameDetector.status {
                 
             case Status.Offline:
                 self.queueTimer.isGame = false
@@ -96,6 +99,9 @@ class MasterViewController: NSViewController {
                 break
                 
             case Status.InQueue:
+                self.queueTimer.isGame = false
+                self.queueTimer.reset()
+                self.resetTimer(false)
                 self.queueTimer.start()
                 self.timer.progress = 0
                 break
@@ -115,6 +121,51 @@ class MasterViewController: NSViewController {
             default:
             break
             }
+        }
+    }
+    
+    func update() {
+        
+        var ws = NSWorkspace.sharedWorkspace()
+        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
+        var activeApps:Set<String> = Set<String>()
+        var newGame:Game = Game.NoGame
+        
+        for app in apps {
+            var appName:String? = app.localizedName
+            if(appName != nil){activeApps.insert(appName!)}
+        }
+        
+        if(activeApps.contains("dota_osx")){
+             detector = DotaDetector.self
+             newGame = Game.Dota
+        }
+            
+        else if(activeApps.contains("csgo_osx")){
+             detector = CSGODetector.self
+             newGame = Game.CSGO
+        }
+            
+        else if(activeApps.contains("Heroes")){
+            detector = HOTSDetector.self
+            newGame = Game.HOTS
+        }
+            
+        else if(activeApps.contains("Heroes of Newerth")){
+            detector = HoNDetector.self
+            newGame = Game.HOTS
+        }
+            
+        else {newGame = Game.NoGame}
+        
+        if(game != newGame && newGame != Game.NoGame){
+            detector.startDetection()
+            game = newGame
+        }
+        
+        else if(game != newGame && newGame == Game.NoGame) {
+            detector.stopDetection()
+            game = newGame
         }
     }
     
@@ -139,11 +190,11 @@ class MasterViewController: NSViewController {
     
     func update2() {
         counter = counter + 0.1
-        self.timer.progress = CGFloat(counter / Float(MasterController.countDownLength))
-        var time:Int = Int(Float(MasterController.countDownLength) - counter)
+        self.timer.progress = CGFloat(counter / Float(GameDetector.countDownLength))
+        var time:Int = Int(Float(GameDetector.countDownLength) - counter)
         self.countDown.stringValue = String(time)
         
-        if(counter > Float(MasterController.countDownLength)) {
+        if(counter > Float(GameDetector.countDownLength)) {
             countDownTimer.invalidate()
             counter = 0
         }

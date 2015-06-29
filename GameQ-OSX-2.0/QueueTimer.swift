@@ -55,6 +55,7 @@ class QueueTimer: NSView {
     func reset() {
         self.isRotating = false
         self.needsDisplay = true
+        self.layer!.removeAllAnimations()
     }
     
     func rotate360Degrees(duration: CFTimeInterval = 0.5, completionDelegate: AnyObject? = nil) {

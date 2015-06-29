@@ -8,57 +8,16 @@
 
 import Foundation
 
-class PacketDetector:GameDetector {
+protocol PacketDetector:NSObjectProtocol, GameDetectorProtocol {
     
-    static var detector:PacketDetector.Type = PacketDetector.self
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static let dataHandler = DataHandler.sharedInstance
-    static let packetParser:PacketParser = PacketParser.getSharedInstance()
+    static var packetQueue:[Packet] {get set}
+    static var queueMaxSize:Int {get set}
+    static var isCapturing:Bool {get set}
+    static var packetParser:PacketParser {get set}
     
-    struct PacketTimer {
-        var key:Int = -1
-        var time:Double = -1
-    }
+    static func handle(srcPort:Int, dstPort:Int, iplen:Int)
     
-    override class func start() {
-        isCapturing = true
-    }
+    static func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double)
     
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        detector.updateStatus(newPacket);
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        updateStatus(newPacket);
-    }
-    
-    class func addPacketToQueue(packet:Packet) {
-        packetQueue.insert(packet, atIndex: 0)
-        if packetQueue.count >= queueMaxSize {
-            packetQueue.removeLast()
-        }
-    }
-    
-    override class func reset(){
-    packetQueue = [Packet]()}
-    
-    class func updateStatus(newPacket: Packet) {}
-    
-    override class func save(){
-        dataHandler.logPackets(packetQueue)
-    }
-    
-    override class func stop() {
-        if(isCapturing){
-            packetParser.stop_loop()
-            isCapturing = false
-        }
-        reset()
-    }
+    static func update(newPacket: Packet)
 }

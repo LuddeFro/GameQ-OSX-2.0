@@ -98,6 +98,8 @@ struct sniff_ethernet {
     return sharedInstance;
 }
 
+static Class detector;
+
 void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *packet)
 {
 //    NSLog(@"got packet");
@@ -160,7 +162,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
 //            printf("   Dst port: %d\n", ntohs(udp->uh_dport));
             int dport = ntohs(udp->uh_dport);
             int sport = ntohs(udp->uh_sport);
-            [PacketDetector handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET)];
+            [detector handle:sport dstPort:dport iplen:(ntohs(ip->ip_len) + SIZE_ETHERNET)];
             return;
         case IPPROTO_ICMP:
 //            printf("   Protocol: ICMP\n");
@@ -171,6 +173,7 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
         default:
 //            printf("   Protocol: unknown\n");
             return;
+            
     }
    
     
@@ -181,8 +184,9 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     
 }
 
-- (void) start_loop:(NSString *)filterExpression
+- (void) start_loop:(NSString *)filterExpression detector:(Class)newDetector
 {
+    detector = newDetector;
     struct bpf_program fp;
     bpf_u_int32 net;
     bpf_u_int32 mask;

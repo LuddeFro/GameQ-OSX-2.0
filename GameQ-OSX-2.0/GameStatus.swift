@@ -21,6 +21,7 @@ enum Game:String {
     
     case Dota = "DOTA2"
     case HoN = "HEROES OF NEWERTH"
-    case CSGO = "COUNTER STRIKE GLOBAL OFFENSIVE"
+    case CSGO = "CSGO"
+    case HOTS = "HOTS"
     case NoGame = "NO GAME ACTIVE"
 }

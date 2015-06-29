@@ -10,11 +10,19 @@ import Foundation
 
 protocol GameDetectorProtocol : NSObjectProtocol {
     
-    static func start()
+    static func startDetection()
     
-    static func stop()
+    static func updateStatus(newStatus: Status)
     
-    static func save()
+    static func saveDetection()
     
-    static func reset()
+    static func saveMissedDetection()
+    
+    static func failMode()
+    
+    static func resetDetection()
+    
+    static func stopDetection()
+    
+    static func getStatusString() -> String
 }

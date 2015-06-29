@@ -808,17 +808,17 @@
                                 <rect key="frame" x="126" y="361" width="114" height="77"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Draft1" id="RLu-Tu-MSC"/>
                             </imageView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="183" y="323" width="5" height="30"/>
+                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="81" y="70" width="208" height="29"/>
+                                <rect key="frame" x="55" y="70" width="261" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="STATUS" id="zd5-qh-jq7">
                                     <font key="font" size="24" name="Axis"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="183" y="323" width="5" height="30"/>
-                            </customView>
                         </subviews>
                     </view>
                     <connections>
