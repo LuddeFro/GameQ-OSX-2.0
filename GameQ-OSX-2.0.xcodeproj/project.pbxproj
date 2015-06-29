@@ -11,6 +11,8 @@
 		832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE741B09E4AC00FE15E2 /* Images.xcassets */; };
 		832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */; };
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
+		AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
+		AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
 		AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE199A331B32E76100EC5870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE199A321B32E76100EC5870 /* Helpers.swift */; };
@@ -70,6 +72,7 @@
 		832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameQ_OSX_2_0Tests.swift; sourceTree = "<group>"; };
 		832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		AE008B951B3C3101000EEA45 /* HOTSDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HOTSDetector.swift; sourceTree = "<group>"; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		AE199A321B32E76100EC5870 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		AE199A351B33038E00EC5870 /* Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Draft1.png; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 				AE98AC1E1B18A2AC00E5F382 /* PacketDetector.swift */,
 				AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */,
 				AE226CB61B2316D0009B7D9B /* CSGODetector.swift */,
+				AE008B951B3C3101000EEA45 /* HOTSDetector.swift */,
 			);
 			name = PacketDetectors;
 			sourceTree = "<group>";
@@ -372,6 +376,7 @@
 				AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
 				AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */,
+				AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */,
 				AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
@@ -398,6 +403,7 @@
 				AE546D2F1B19DEBF008D8A86 /* PacketDetector.swift in Sources */,
 				AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */,
 				AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */,
+				AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */,
 				AEACCC2C1B3735D900271BBC /* Timer.swift in Sources */,
 				AE1B694C1B38C6A800D0FA73 /* QueueTimer.swift in Sources */,
 			);

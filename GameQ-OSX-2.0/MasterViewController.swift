@@ -35,6 +35,7 @@ class MasterViewController: NSViewController {
     
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
+        detector.startTimer()
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
@@ -143,6 +144,11 @@ class MasterViewController: NSViewController {
         else if(activeApps.contains("csgo_osx")){
              detector = CSGODetector.self
              newGame = Game.CSGO
+        }
+            
+        else if(activeApps.contains("Heroes")){
+            detector = HOTSDetector.self
+            newGame = Game.HOTS
         }
             
         else {newGame = Game.NoGame}

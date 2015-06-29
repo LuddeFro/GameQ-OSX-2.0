@@ -94,13 +94,12 @@ class GameDetector:NSObject, GameDetectorProtocol {
     }
     
     static func startTimer(){
-        
-        countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+       
+        dispatch_async(dispatch_get_main_queue()) {
+        self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)}
     }
     
     static func update() {
-        
-        println("hello")
         
         if(status == Status.GameReady){
             counter = counter + 1
@@ -109,7 +108,6 @@ class GameDetector:NSObject, GameDetectorProtocol {
         if(counter >= countDownLength && status == Status.GameReady){
             counter = 0
             updateStatus(Status.InGame)
-            println("timer set Ingame")
             countDownTimer.invalidate()
         }
     }
