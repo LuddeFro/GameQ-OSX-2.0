@@ -151,6 +151,11 @@ class MasterViewController: NSViewController {
             newGame = Game.HOTS
         }
             
+        else if(activeApps.contains("Heroes of Newerth")){
+            detector = HoNDetector.self
+            newGame = Game.HOTS
+        }
+            
         else {newGame = Game.NoGame}
         
         if(game != newGame && newGame != Game.NoGame){
