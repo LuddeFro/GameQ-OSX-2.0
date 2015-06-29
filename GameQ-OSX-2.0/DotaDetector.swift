@@ -71,12 +71,13 @@ class DotaDetector:GameDetector, PacketDetector{
     override class func saveDetection(){
         super.saveDetection()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
-        packetQueue = [Packet]()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func stopDetection(){

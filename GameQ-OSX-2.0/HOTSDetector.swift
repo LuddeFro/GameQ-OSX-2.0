@@ -62,13 +62,14 @@ class HOTSDetector: GameDetector, PacketDetector {
     
     override class func saveDetection(){
         super.saveDetection()
-        packetQueue = [Packet]()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func stopDetection(){

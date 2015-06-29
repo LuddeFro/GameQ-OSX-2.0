@@ -23,5 +23,6 @@ enum Game:String {
     case HoN = "HEROES OF NEWERTH"
     case CSGO = "CSGO"
     case HOTS = "HOTS"
+    case LoL = "LoL"
     case NoGame = "NO GAME ACTIVE"
 }

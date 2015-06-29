@@ -13,8 +13,8 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        GameDetector.status = Status.InLobby
-        GameDetector.isTesting = true
+        GameDetector.detector.status = Status.InLobby
+        GameDetector.detector.isTesting = true
     }
     
     override func tearDown() {
@@ -75,4 +75,28 @@ class GameQ_OSX_2_0Tests: XCTestCase {
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
     }
     
+    func testAllFilesLoL(){
+        GameDetector.detector = LoLDetector.self
+        let filemanager:NSFileManager = NSFileManager()
+        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/LoL/")
+        while let file = files?.nextObject() as? String {
+            if file.hasSuffix("csv") { // checks the extension
+                testIteratorLoL(file)
+            }
+        }
+    }
+    
+    func testIteratorLoL(file:String){
+        println(file)
+        setUp()
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/LoL/" + file)
+        XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
+        tearDown()
+    }
+    
+    func testOneFileLoL(){
+        GameDetector.detector = LoLDetector.self
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/Jun 24, 2015, 10742 PM.csv")
+        XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
+    }
 }

@@ -84,7 +84,8 @@ public class CSV {
                     var dst:Int = row["dst"]!.toInt()!
                     var iplen:Int = row["iplen"]!.toInt()!
                     var time:Double = (row["time"]! as NSString).doubleValue
-                    DotaDetector.handleTest(src, dstPort: dst, iplen: iplen, time: time)
+                    
+                    LoLDetector.handleTest(src, dstPort: dst, iplen: iplen, time: time)
                 }
             }
         }
