@@ -30,8 +30,11 @@ class LoLDetector: GameDetector, PacketDetector {
     static var gameTimerEarly:[PacketTimer] = [PacketTimer]()
     static var packetCounterEarly:[Int:Int] = [1300:0]
     
-//    static var dstGameTimer:[PacketTimer] = [PacketTimer]()
-//    static var dstPacketCounter:[Int:Int] = [-1:0]
+    static var stopQueueTimer:[PacketTimer] = [PacketTimer]()
+    static var stopQueueCounter:[Int:Int] = [350:0, 140:0, 750:0, 810:0]
+    
+    //    static var dstGameTimer:[PacketTimer] = [PacketTimer]()
+    //    static var dstPacketCounter:[Int:Int] = [-1:0]
     
     static var gameTimer:[PacketTimer] = [PacketTimer]()
     
@@ -87,7 +90,11 @@ class LoLDetector: GameDetector, PacketDetector {
         srcQueueCounter = [400:0, 790:0]
         queuePort = -1
         dstQueueTimer = [PacketTimer]()
-        dstQueueCounter = [500:0, 750:0]    }
+        dstQueueCounter = [500:0, 750:0]
+        
+        stopQueueTimer = [PacketTimer]()
+        stopQueueCounter = [350:0, 140:0, 750:0, 810:0]
+    }
     
     class func resetGameTimer(){
         
@@ -97,8 +104,8 @@ class LoLDetector: GameDetector, PacketDetector {
         gameTimerEarly = [PacketTimer]()
         packetCounterEarly = [1300:0]
         
-//        dstGameTimer = [PacketTimer]()
-//        dstPacketCounter = [-1:0]
+        //        dstGameTimer = [PacketTimer]()
+        //        dstPacketCounter = [-1:0]
         
         gameTimer = [PacketTimer]()
         
@@ -156,14 +163,18 @@ class LoLDetector: GameDetector, PacketDetector {
         //IN LOBBY
         if(status == Status.InLobby){
             var queueing = isQueueing(newPacket)
-            if(queueing){updateStatus(Status.InQueue)}
+            if(queueing){updateStatus(Status.InQueue)
+            resetQueueTimer()}
         }
             
             //IN QUEUE
         else  if(status == Status.InQueue){
             var gameReady = isGameReady(newPacket)
-           
+            var stoppedQueue = stoppedQueueing(newPacket)
+            
             if(gameReady){updateStatus(Status.GameReady)}
+            else if(stoppedQueue){updateStatus(Status.InLobby)
+            resetQueueTimer()}
         }
             
             //GAME READY
@@ -195,7 +206,6 @@ class LoLDetector: GameDetector, PacketDetector {
         }
         
         
-        
         for key in srcQueueCounter.keys{
             if(p.packetLength <= key + 99 && p.packetLength >= key && (p.srcPort == queuePort || queuePort == -1) && ports.contains(p.srcPort)){
                 srcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
@@ -212,10 +222,37 @@ class LoLDetector: GameDetector, PacketDetector {
         
         println(srcQueueCounter)
         println(dstQueueCounter)
+        println(srcQueueTimer.count)
+        println(dstQueueTimer.count)
         
-        if(srcQueueCounter[400] > 0 && srcQueueCounter[750] > 0 && dstQueueCounter[500] > 0 && dstQueueCounter[700] > 0){return true}
+        if((srcQueueCounter[400] > 0 || srcQueueCounter[750] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[700] > 0) && (srcQueueTimer.count + dstQueueTimer.count >= 3))
+        {return true}
         else{return false}
     }
+    
+    class func stoppedQueueing(p:Packet) -> Bool{
+        
+        while(!stopQueueTimer.isEmpty && p.captureTime - stopQueueTimer.last!.time > 2){
+            var key:Int = stopQueueTimer.removeLast().key
+            stopQueueCounter[key]! = stopQueueCounter[key]! - 1
+        }
+        
+        for key in stopQueueCounter.keys{
+            if(p.packetLength <= key + 50 && p.packetLength >= key && (ports.contains(p.dstPort) || ports.contains(p.srcPort))){
+                stopQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                stopQueueCounter[key]! = stopQueueCounter[key]! + 1
+            }
+        }
+        
+        println(stopQueueCounter)
+        
+        
+        
+        if((stopQueueCounter[350] > 0 || stopQueueCounter[750] > 0) && (stopQueueCounter[810] > 0 || stopQueueCounter[140] > 0) && (stopQueueTimer.count >= 3))
+        {return true}
+        else{return false}
+    }
+    
     
     class func isGameReady(p:Packet) -> Bool{
         
@@ -223,13 +260,13 @@ class LoLDetector: GameDetector, PacketDetector {
             var key:Int = gameTimerEarly.removeLast().key
             packetCounterEarly[key]! = packetCounterEarly[key]! - 1
         }
-//        
-//        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 3){
-//            var key:Int = dstGameTimer.removeLast().key
-//            dstPacketCounter[key]! = dstPacketCounter[key]! - 1
-//        }
+        //
+        //        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 3){
+        //            var key:Int = dstGameTimer.removeLast().key
+        //            dstPacketCounter[key]! = dstPacketCounter[key]! - 1
+        //        }
         
-
+        
         for key in packetCounterEarly.keys{
             if(p.packetLength <= key + 99 && p.packetLength >= key && (p.srcPort == queuePort || queuePort == -1) && ports.contains(p.srcPort)){
                 gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
@@ -237,16 +274,16 @@ class LoLDetector: GameDetector, PacketDetector {
             }
         }
         
-//        for key in dstPacketCounter.keys{
-//            if(p.packetLength <= key + 30 && p.packetLength >= key && ports.contains(p.dstPort)){
-//                dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-//                dstPacketCounter[key]! = dstPacketCounter[key]! + 1
-//            }
-//        }
+        //        for key in dstPacketCounter.keys{
+        //            if(p.packetLength <= key + 30 && p.packetLength >= key && ports.contains(p.dstPort)){
+        //                dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+        //                dstPacketCounter[key]! = dstPacketCounter[key]! + 1
+        //            }
+        //        }
         
         println(packetCounterEarly)
-//        println(dstPacketCounter)
-       
+        //        println(dstPacketCounter)
+        
         if(packetCounterEarly[1300] > 1){return true}
         else{return false}
     }
