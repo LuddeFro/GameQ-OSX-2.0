@@ -22,10 +22,10 @@ class LoLDetector: GameDetector, PacketDetector {
     static var queuePort:Int = -1
     
     static var srcQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var srcQueueCounter:[Int:Int] = [400:0, 750:0]
+    static var srcQueueCounter:[Int:Int] = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
     
     static var dstQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var dstQueueCounter:[Int:Int] = [500:0, 700:0]
+    static var dstQueueCounter:[Int:Int] = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
     
     static var gameTimerEarly:[PacketTimer] = [PacketTimer]()
     static var packetCounterEarly:[Int:Int] = [1300:0]
@@ -87,10 +87,10 @@ class LoLDetector: GameDetector, PacketDetector {
     
     class func resetQueueTimer(){
         srcQueueTimer = [PacketTimer]()
-        srcQueueCounter = [400:0, 790:0]
+        srcQueueCounter = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
         queuePort = -1
         dstQueueTimer = [PacketTimer]()
-        dstQueueCounter = [500:0, 750:0]
+        dstQueueCounter = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
         
         stopQueueTimer = [PacketTimer]()
         stopQueueCounter = [350:0, 140:0, 750:0, 810:0]
@@ -223,9 +223,10 @@ class LoLDetector: GameDetector, PacketDetector {
         println(srcQueueTimer.count)
         println(dstQueueTimer.count)
         
-        if((srcQueueCounter[400] > 0 || srcQueueCounter[750] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[700] > 0) && (srcQueueTimer.count + dstQueueTimer.count >= 3))
-        {return true}
-        else{return false}
+//        if((srcQueueCounter[400] > 0 || srcQueueCounter[750] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[700] > 0) && (srcQueueTimer.count + dstQueueTimer.count >= 3))
+//        {return true}
+//        else{return false}
+        return false
     }
     
     class func stoppedQueueing(p:Packet) -> Bool{
