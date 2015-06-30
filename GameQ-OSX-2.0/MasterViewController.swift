@@ -172,6 +172,14 @@ class MasterViewController: NSViewController {
             detector.stopDetection()
             game = newGame
         }
+        
+        if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
+            detector.updateStatus(Status.InLobby)
+        }
+        
+        else if((detector.game == Game.LoL) && (detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
+            LoLDetector.updateStatus(Status.InGame)
+        }
     }
     
     func startTimer(){

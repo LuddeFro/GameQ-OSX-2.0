@@ -185,8 +185,6 @@ class LoLDetector: GameDetector, PacketDetector {
             
             //IN GAME
         else  if(status == Status.InGame){
-            //            var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:50)
-            //            if(!inGame){updateStatus(Status.InLobby)}
         }
             
         else {
