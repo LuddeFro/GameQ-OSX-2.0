@@ -23,6 +23,11 @@
 		AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
 		AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */; };
+		AE2C08541B4C0FF9009A1836 /* LoginHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C08531B4C0FF9009A1836 /* LoginHolder.swift */; };
+		AE2C08591B4C14F1009A1836 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C08561B4C14F1009A1836 /* Colors.swift */; };
+		AE2C085A1B4C14F1009A1836 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C08561B4C14F1009A1836 /* Colors.swift */; };
+		AE2C085C1B4C1CE9009A1836 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C085B1B4C1CE9009A1836 /* SignUpController.swift */; };
+		AE2C085D1B4C1CE9009A1836 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2C085B1B4C1CE9009A1836 /* SignUpController.swift */; };
 		AE349E721B41643900823189 /* HoNDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE349E711B41643900823189 /* HoNDetector.swift */; };
 		AE349E731B416D0D00823189 /* HoNDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE349E711B41643900823189 /* HoNDetector.swift */; };
 		AE349E751B417BC200823189 /* LoLDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE349E741B417BC200823189 /* LoLDetector.swift */; };
@@ -35,6 +40,8 @@
 		AE546D301B19DEBF008D8A86 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */; };
 		AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
+		AE5BEA741B4C276F00B6ADA0 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEA731B4C276F00B6ADA0 /* ConnectionHandler.swift */; };
+		AE5BEA751B4C279A00B6ADA0 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BEA731B4C276F00B6ADA0 /* ConnectionHandler.swift */; };
 		AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C420F1B374D000050D686 /* ContainerViewController.swift */; };
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -83,8 +90,12 @@
 		AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTimer.swift; sourceTree = "<group>"; };
 		AE226CB61B2316D0009B7D9B /* CSGODetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSGODetector.swift; sourceTree = "<group>"; };
 		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
+		AE2C08531B4C0FF9009A1836 /* LoginHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginHolder.swift; sourceTree = "<group>"; };
+		AE2C08561B4C14F1009A1836 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		AE2C085B1B4C1CE9009A1836 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		AE349E711B41643900823189 /* HoNDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNDetector.swift; sourceTree = "<group>"; };
 		AE349E741B417BC200823189 /* LoLDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoLDetector.swift; sourceTree = "<group>"; };
+		AE5BEA731B4C276F00B6ADA0 /* ConnectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHandler.swift; sourceTree = "<group>"; };
 		AE8C420F1B374D000050D686 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
@@ -163,6 +174,8 @@
 				AEEF87C51B1DBA7C00DDD45D /* Logos */,
 				832BCE711B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld */,
 				AE199A321B32E76100EC5870 /* Helpers.swift */,
+				AE2C08531B4C0FF9009A1836 /* LoginHolder.swift */,
+				AE2C08561B4C14F1009A1836 /* Colors.swift */,
 				AEACCC2A1B3734BA00271BBC /* Timer.swift */,
 				AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */,
 				AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */,
@@ -205,6 +218,7 @@
 			children = (
 				AE8C420F1B374D000050D686 /* ContainerViewController.swift */,
 				AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */,
+				AE2C085B1B4C1CE9009A1836 /* SignUpController.swift */,
 				AEF4B5B31B343C7A0001AF42 /* WindowController.swift */,
 				AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */,
 			);
@@ -214,6 +228,7 @@
 		AE98AC2D1B18A32800E5F382 /* DataHandlers */ = {
 			isa = PBXGroup;
 			children = (
+				AE5BEA731B4C276F00B6ADA0 /* ConnectionHandler.swift */,
 				AE98AC171B18A2AC00E5F382 /* DataHandler.swift */,
 			);
 			name = DataHandlers;
@@ -377,9 +392,12 @@
 				AEC97A701B3448E800FE752D /* MyCustomSwiftSegue.swift in Sources */,
 				AEC97A6F1B3448E800FE752D /* MyCustomSwiftAnimator.swift in Sources */,
 				AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */,
+				AE5BEA741B4C276F00B6ADA0 /* ConnectionHandler.swift in Sources */,
+				AE2C085C1B4C1CE9009A1836 /* SignUpController.swift in Sources */,
 				AE349E721B41643900823189 /* HoNDetector.swift in Sources */,
 				AEA350B31B20A5370096B682 /* GameDetectorProtocol.swift in Sources */,
 				AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */,
+				AE2C08541B4C0FF9009A1836 /* LoginHolder.swift in Sources */,
 				AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */,
 				AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */,
 				AE1B694B1B38C09800D0FA73 /* QueueTimer.swift in Sources */,
@@ -388,6 +406,7 @@
 				AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */,
 				AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */,
 				AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */,
+				AE2C08591B4C14F1009A1836 /* Colors.swift in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
 				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
@@ -402,6 +421,7 @@
 				AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */,
 				AECB07491B207812001C7C18 /* GameDetector.swift in Sources */,
 				AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */,
+				AE2C085D1B4C1CE9009A1836 /* SignUpController.swift in Sources */,
 				AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */,
 				832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */,
 				AE546D2E1B19DEBF008D8A86 /* PacketParser.m in Sources */,
@@ -409,6 +429,7 @@
 				AE349E761B417C7D00823189 /* LoLDetector.swift in Sources */,
 				AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */,
 				AE546D301B19DEBF008D8A86 /* DotaDetector.swift in Sources */,
+				AE2C085A1B4C14F1009A1836 /* Colors.swift in Sources */,
 				AE349E731B416D0D00823189 /* HoNDetector.swift in Sources */,
 				AE238C111B19F4BF00B6ED09 /* SwiftCSV.swift in Sources */,
 				AE199A341B32E80300EC5870 /* Helpers.swift in Sources */,
@@ -417,6 +438,7 @@
 				AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */,
 				AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */,
 				AEACCC2C1B3735D900271BBC /* Timer.swift in Sources */,
+				AE5BEA751B4C279A00B6ADA0 /* ConnectionHandler.swift in Sources */,
 				AE1B694C1B38C6A800D0FA73 /* QueueTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
