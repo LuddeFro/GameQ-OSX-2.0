@@ -11,6 +11,9 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBOutlet weak var logOutButton: NSButton!
+    
+    @IBOutlet weak var missedQueueButton: NSButton!
     @IBOutlet weak var timer: Timer!
     
     @IBOutlet weak var countDown: NSTextField!
@@ -56,6 +59,14 @@ class MasterViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(12)
+        let style = NSMutableParagraphStyle()
+        style.alignment = .CenterTextAlignment
+        
+        logOutButton.attributedTitle = NSAttributedString(string: "Log Out", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        
+        missedQueueButton.attributedTitle = NSAttributedString(string: "Report Missed ", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
@@ -119,7 +130,7 @@ class MasterViewController: NSViewController {
                 break
                 
             default:
-            break
+                break
             }
         }
     }
@@ -137,13 +148,13 @@ class MasterViewController: NSViewController {
         }
         
         if(activeApps.contains("dota_osx")){
-             detector = DotaDetector.self
-             newGame = Game.Dota
+            detector = DotaDetector.self
+            newGame = Game.Dota
         }
             
         else if(activeApps.contains("csgo_osx")){
-             detector = CSGODetector.self
-             newGame = Game.CSGO
+            detector = CSGODetector.self
+            newGame = Game.CSGO
         }
             
         else if(activeApps.contains("Heroes")){
@@ -167,7 +178,7 @@ class MasterViewController: NSViewController {
             detector.startDetection()
             game = newGame
         }
-        
+            
         else if(game != newGame && newGame == Game.NoGame) {
             detector.stopDetection()
             game = newGame
@@ -176,7 +187,7 @@ class MasterViewController: NSViewController {
         if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
             detector.updateStatus(Status.InLobby)
         }
-        
+            
         else if((detector.game == Game.LoL) && (detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
             LoLDetector.updateStatus(Status.InGame)
         }

@@ -22,6 +22,16 @@ class LoginViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(12)
+        let style = NSMutableParagraphStyle()
+        style.alignment = .CenterTextAlignment
+        
+        loginButton.attributedTitle = NSAttributedString(string: "Login", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        
+        signUpButton.attributedTitle = NSAttributedString(string: "Sign Up", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        
+        
     }
 
     override var representedObject: AnyObject? {

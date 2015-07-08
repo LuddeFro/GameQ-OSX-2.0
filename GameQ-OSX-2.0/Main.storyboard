@@ -684,7 +684,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-Mf-A4l" customClass="SignUpButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-Mf-A4l" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="35" y="28" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="lgi-7X-a6e">
                                     <behavior key="behavior" lightByContents="YES"/>
@@ -721,7 +721,7 @@
                                     </secureTextField>
                                 </subviews>
                             </customView>
-                            <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="LoginButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                            <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="35" y="76" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Login" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="m9d-8B-6Ah">
                                     <behavior key="behavior" lightByContents="YES"/>
@@ -752,7 +752,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-gq-Ybc" customClass="BackButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-gq-Ybc" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="35" y="28" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Back" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="lW7-Vu-hLK">
                                     <behavior key="behavior" lightByContents="YES"/>
@@ -762,13 +762,14 @@
                                     <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="2vk-2S-oDg"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMz-tR-KhG" customClass="SignUpButton2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMz-tR-KhG" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="35" y="76" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="S9c-Mu-tPa">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="signUpButtonPressed:" target="arN-cW-vAf" id="2mI-pb-aXB"/>
                                     <segue destination="wFD-yq-twe" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="tdo-0j-1WT"/>
                                 </connections>
                             </button>
@@ -815,6 +816,11 @@
                             </customView>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="ZQA-gq-Ybc" id="XNO-ZG-r1k"/>
+                        <outlet property="backButtonPressed" destination="ZQA-gq-Ybc" id="o4I-fk-0K5"/>
+                        <outlet property="signUpButton" destination="HMz-tR-KhG" id="nrO-IL-VGM"/>
+                    </connections>
                 </viewController>
                 <customObject id="nUr-1G-cPA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -858,10 +864,10 @@
                                     <action selector="startButtonPressed:" target="wFD-yq-twe" id="YmO-0f-pk5"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx">
-                                <rect key="frame" x="-2" y="221" width="104" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save Miss" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="24" y="13" width="150" height="40"/>
+                                <buttonCell key="cell" type="bevel" title="Save Miss" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
@@ -888,21 +894,11 @@
                                     <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-AV-KK7">
-                                <rect key="frame" x="267" y="250" width="90" height="32"/>
-                                <buttonCell key="cell" type="push" title="Log Out" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="W2D-KF-BOI"/>
-                                </connections>
-                            </button>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GoJ-Pl-DN0" customClass="QueueTimer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="105" y="145" width="160" height="160"/>
+                                <rect key="frame" x="105" y="177" width="160" height="160"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TCh-fi-bsJ">
-                                <rect key="frame" x="140" y="205" width="93" height="39"/>
+                                <rect key="frame" x="140" y="237" width="93" height="39"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dG7-ln-pID">
                                     <font key="font" size="23" name="Axis"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -910,13 +906,13 @@
                                 </textFieldCell>
                             </textField>
                             <customView identifier="Timer" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSV-MA-BZY" customClass="Timer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="105" y="145" width="160" height="160"/>
+                                <rect key="frame" x="105" y="177" width="160" height="160"/>
                             </customView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpK-4P-0eX" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="183" y="107" width="5" height="30"/>
+                                <rect key="frame" x="183" y="139" width="5" height="30"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-y1-xbg">
-                                <rect key="frame" x="16" y="28" width="339" height="34"/>
+                                <rect key="frame" x="16" y="60" width="339" height="34"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="GAME" id="2n0-Yd-m7h">
                                     <font key="font" size="24" name="Axis"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -924,25 +920,37 @@
                                 </textFieldCell>
                             </textField>
                             <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OEE-3r-iZD">
-                                <rect key="frame" x="126" y="361" width="114" height="77"/>
+                                <rect key="frame" x="128" y="384" width="114" height="77"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Draft1" id="RLu-Tu-MSC"/>
                             </imageView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="183" y="323" width="5" height="30"/>
+                                <rect key="frame" x="183" y="345" width="5" height="30"/>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="55" y="70" width="261" height="29"/>
+                                <rect key="frame" x="55" y="102" width="261" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="STATUS" id="zd5-qh-jq7">
                                     <font key="font" size="24" name="Axis"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-AV-KK7" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="197" y="13" width="150" height="40"/>
+                                <buttonCell key="cell" type="bevel" title="Log Out" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="W2D-KF-BOI"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="countDown" destination="TCh-fi-bsJ" id="RsR-Hj-OCa"/>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
+                        <outlet property="logOutButton" destination="Dch-AV-KK7" id="jw1-xA-WDQ"/>
+                        <outlet property="missedQueueButton" destination="7aE-Du-svx" id="PWn-Ok-DWC"/>
                         <outlet property="queueTimer" destination="GoJ-Pl-DN0" id="bu6-5h-GnB"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
                         <outlet property="timer" destination="CSV-MA-BZY" id="LaK-Ba-gjI"/>
@@ -957,7 +965,7 @@
         <image name="Draft1" width="412" height="401"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2vk-2S-oDg"/>
+        <segue reference="W2D-KF-BOI"/>
         <segue reference="tdo-0j-1WT"/>
     </inferredMetricsTieBreakers>
 </document>

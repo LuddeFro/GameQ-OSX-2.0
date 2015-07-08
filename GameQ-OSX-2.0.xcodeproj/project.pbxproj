@@ -13,10 +13,8 @@
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
 		AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
 		AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
-		AE0759B01B4D20BB000EFD94 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759AF1B4D20BB000EFD94 /* LoginButton.swift */; };
-		AE0759B21B4D3106000EFD94 /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759B11B4D3106000EFD94 /* SignUpButton.swift */; };
-		AE0759B61B4D3495000EFD94 /* SignUpButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759B51B4D3494000EFD94 /* SignUpButton2.swift */; };
-		AE0759B81B4D34AE000EFD94 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759B71B4D34AE000EFD94 /* BackButton.swift */; };
+		AE0759B01B4D20BB000EFD94 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */; };
+		AE0759B21B4D3106000EFD94 /* BlueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759B11B4D3106000EFD94 /* BlueButton.swift */; };
 		AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE199A331B32E76100EC5870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE199A321B32E76100EC5870 /* Helpers.swift */; };
@@ -86,10 +84,8 @@
 		832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		AE008B951B3C3101000EEA45 /* HOTSDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HOTSDetector.swift; sourceTree = "<group>"; };
-		AE0759AF1B4D20BB000EFD94 /* LoginButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginButton.swift; path = ../LoginButton.swift; sourceTree = "<group>"; };
-		AE0759B11B4D3106000EFD94 /* SignUpButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
-		AE0759B51B4D3494000EFD94 /* SignUpButton2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpButton2.swift; sourceTree = "<group>"; };
-		AE0759B71B4D34AE000EFD94 /* BackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrangeButton.swift; path = ../OrangeButton.swift; sourceTree = "<group>"; };
+		AE0759B11B4D3106000EFD94 /* BlueButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		AE199A321B32E76100EC5870 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		AE199A351B33038E00EC5870 /* Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Draft1.png; sourceTree = "<group>"; };
@@ -213,10 +209,8 @@
 		AE0759B41B4D333C000EFD94 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				AE0759AF1B4D20BB000EFD94 /* LoginButton.swift */,
-				AE0759B11B4D3106000EFD94 /* SignUpButton.swift */,
-				AE0759B51B4D3494000EFD94 /* SignUpButton2.swift */,
-				AE0759B71B4D34AE000EFD94 /* BackButton.swift */,
+				AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */,
+				AE0759B11B4D3106000EFD94 /* BlueButton.swift */,
 				AE2C08531B4C0FF9009A1836 /* LoginHolder.swift */,
 			);
 			name = Buttons;
@@ -401,7 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE349E751B417BC200823189 /* LoLDetector.swift in Sources */,
-				AE0759B01B4D20BB000EFD94 /* LoginButton.swift in Sources */,
+				AE0759B01B4D20BB000EFD94 /* OrangeButton.swift in Sources */,
 				AECB07481B207367001C7C18 /* GameDetector.swift in Sources */,
 				AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */,
 				AE98AC2A1B18A2BF00E5F382 /* DotaDetector.swift in Sources */,
@@ -414,10 +408,8 @@
 				AEA350B31B20A5370096B682 /* GameDetectorProtocol.swift in Sources */,
 				AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */,
 				AE2C08541B4C0FF9009A1836 /* LoginHolder.swift in Sources */,
-				AE0759B81B4D34AE000EFD94 /* BackButton.swift in Sources */,
 				AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */,
 				AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */,
-				AE0759B61B4D3495000EFD94 /* SignUpButton2.swift in Sources */,
 				AE1B694B1B38C09800D0FA73 /* QueueTimer.swift in Sources */,
 				AE0D7E9C1B1D9EFE00B23150 /* MasterViewController.swift in Sources */,
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
@@ -429,7 +421,7 @@
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
 				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
 				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
-				AE0759B21B4D3106000EFD94 /* SignUpButton.swift in Sources */,
+				AE0759B21B4D3106000EFD94 /* BlueButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
