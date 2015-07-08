@@ -10,21 +10,31 @@ import Cocoa
 
 class LoginViewController: NSViewController {
     
+    @IBOutlet weak var loginProgress1: NSProgressIndicator!
+    
+    @IBOutlet weak var loginProgress2: NSProgressIndicator!
     @IBAction func loginButtonPressed(sender: AnyObject) {
         
         dispatch_async(dispatch_get_main_queue()) {
-            self.statusLabel.stringValue = "logging in..."
+           self.loginProgress1.startAnimation(self)
+           self.loginProgress2.startAnimation(self)
+
         }
+        
         
         ConnectionHandler.login(emailField.stringValue, password: passwordField.stringValue, finalCallBack:{ (success:Bool, err:String?) in
             if success {
                 println("Jay")
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.loginProgress1.stopAnimation(self)
+                    self.loginProgress2.stopAnimation(self)
                     self.performSegueWithIdentifier("LoginToMaster", sender: nil)
                 }
             } else {
                 println("nay")
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.loginProgress1.stopAnimation(self)
+                    self.loginProgress2.stopAnimation(self)
                     self.statusLabel.stringValue = err!
                 }
             }

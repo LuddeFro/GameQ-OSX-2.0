@@ -685,7 +685,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-Mf-A4l" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="29" width="300" height="40"/>
+                                <rect key="frame" x="35" y="46" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="lgi-7X-a6e">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -695,7 +695,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="77" width="300" height="40"/>
+                                <rect key="frame" x="35" y="94" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Login" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="m9d-8B-6Ah">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -708,7 +708,7 @@ DQ
                                 </connections>
                             </button>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6w-ut-KdO" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="142" width="300" height="87"/>
+                                <rect key="frame" x="35" y="159" width="300" height="87"/>
                                 <subviews>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="roH-RO-Y63">
                                         <rect key="frame" x="10" y="52" width="280" height="24"/>
@@ -735,18 +735,36 @@ DQ
                                 </subviews>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXA-bN-nIk">
-                                <rect key="frame" x="37" y="119" width="297" height="17"/>
+                                <rect key="frame" x="37" y="134" width="297" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" " placeholderString=" " id="7l1-4e-CGL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoI-WK-oua">
+                                <rect key="frame" x="112" y="14" width="147" height="32"/>
+                                <buttonCell key="cell" type="bevel" title="Forgot your password?" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Nwg-LU-8sl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="6mk-Ld-Lsx" kind="popover" popoverAnchorView="IoI-WK-oua" popoverBehavior="t" preferredEdge="minY" id="KZa-ej-VBo"/>
+                                </connections>
+                            </button>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="caU-wn-xxE">
+                                <rect key="frame" x="343" y="213" width="16" height="16"/>
+                            </progressIndicator>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="zRA-bX-6sq">
+                                <rect key="frame" x="343" y="173" width="16" height="16"/>
+                            </progressIndicator>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="roH-RO-Y63" id="Jub-Sh-e8V"/>
                         <outlet property="loginButton" destination="lQi-T1-bFl" id="Xq5-vM-2Sx"/>
+                        <outlet property="loginProgress1" destination="caU-wn-xxE" id="Deh-Bc-Mgl"/>
+                        <outlet property="loginProgress2" destination="zRA-bX-6sq" id="FL1-LC-wpf"/>
                         <outlet property="passwordField" destination="Gtj-BO-ieb" id="DR9-5t-9VC"/>
                         <outlet property="signUpButton" destination="1tU-Mf-A4l" id="ur7-fm-nT2"/>
                         <outlet property="statusLabel" destination="QXA-bN-nIk" id="6p0-Ep-ws9"/>
@@ -756,6 +774,55 @@ DQ
                 <customObject id="wRV-Ex-bUH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="920" y="727.5"/>
+        </scene>
+        <!--Forgot Password Controller-->
+        <scene sceneID="Hl1-oj-qdW">
+            <objects>
+                <viewController id="6mk-Ld-Lsx" customClass="ForgotPasswordController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="6Sk-C6-bpj">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19q-GM-ec7">
+                                <rect key="frame" x="12" y="139" width="257" height="36"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Enter your email and we will send you a new password" id="WYk-Zf-B59">
+                                    <font key="font" metaFont="system" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28K-kQ-Kx0" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="14" y="85" width="273" height="46"/>
+                                <subviews>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbz-6J-FCD">
+                                        <rect key="frame" x="10" y="11" width="250" height="24"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="left" placeholderString="Email" drawsBackground="YES" id="bQc-UE-vZC">
+                                            <font key="font" size="20" name="HelveticaNeue"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </customView>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etw-Cn-jns" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="24" y="31" width="253" height="41"/>
+                                <buttonCell key="cell" type="squareTextured" title="Get new Password" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="7Dm-gx-3aU">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="submitButtonPressed:" target="6mk-Ld-Lsx" id="8sB-xm-qCf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="submitButton" destination="etw-Cn-jns" id="uua-em-4ja"/>
+                    </connections>
+                </viewController>
+                <customObject id="QIj-0u-iWh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="687" y="1263"/>
         </scene>
         <!--Sign Up Controller-->
         <scene sceneID="FVX-bw-lCM">
@@ -852,7 +919,7 @@ DQ
                 </viewController>
                 <customObject id="nUr-1G-cPA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="967" y="1550"/>
+            <point key="canvasLocation" x="1285" y="1392"/>
         </scene>
         <!--Master View Controller-->
         <scene sceneID="fdA-PC-e1K">
@@ -862,54 +929,14 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-kO-0T9">
-                                <rect key="frame" x="279" y="167" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AMs-Jk-xWN">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="20" y="15" width="150" height="37"/>
+                                <buttonCell key="cell" type="squareTextured" title="Save Miss" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="stopButtonPressed:" target="wFD-yq-twe" id="z99-uK-zMY"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-pb-ry3">
-                                <rect key="frame" x="-1" y="188" width="91" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f7P-Je-VmQ">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="capButtonPressed:" target="wFD-yq-twe" id="ddd-FA-2Rj"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-oI-xmy">
-                                <rect key="frame" x="9" y="147" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBQ-7k-VOF">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="startButtonPressed:" target="wFD-yq-twe" id="YmO-0f-pk5"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9b-ND-Nn0">
-                                <rect key="frame" x="264" y="127" width="97" height="32"/>
-                                <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LB2-i1-1Bx">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="failModePressed:" target="wFD-yq-twe" id="Qfb-e4-7ut"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
-                                <rect key="frame" x="279" y="200" width="66" height="32"/>
-                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
+                                    <action selector="capFailButtonPressed:" target="wFD-yq-twe" id="9Hc-6E-JeK"/>
                                 </connections>
                             </button>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GoJ-Pl-DN0" customClass="QueueTimer" customModule="GameQ_OSX_2_0" customModuleProvider="target">
@@ -944,6 +971,12 @@ DQ
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="183" y="345" width="5" height="30"/>
                             </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KJD-VZ-InT" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="280" y="254" width="30" height="5"/>
+                            </customView>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uNO-Qg-MO1" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="57" y="254" width="30" height="5"/>
+                            </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
                                 <rect key="frame" x="55" y="102" width="261" height="29"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="STATUS" id="zd5-qh-jq7">
@@ -962,14 +995,64 @@ DQ
                                     <action selector="logOutPressed:" target="wFD-yq-twe" id="7Tu-iM-QCp"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="20" y="15" width="150" height="37"/>
-                                <buttonCell key="cell" type="squareTextured" title="Save Miss" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
-                                    <behavior key="behavior" lightByContents="YES"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSi-Ex-3KD">
+                                <rect key="frame" x="255" y="422" width="110" height="32"/>
+                                <buttonCell key="cell" type="push" title="Change pw" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tll-DJ-iVe">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="capFailButtonPressed:" target="wFD-yq-twe" id="9Hc-6E-JeK"/>
+                                    <segue destination="DPB-nK-ZV1" kind="popover" popoverAnchorView="nSi-Ex-3KD" popoverBehavior="t" preferredEdge="maxX" id="Si9-cK-3Dy"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-kO-0T9">
+                                <rect key="frame" x="1" y="305" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AMs-Jk-xWN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="stopButtonPressed:" target="wFD-yq-twe" id="z99-uK-zMY"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-pb-ry3">
+                                <rect key="frame" x="1" y="404" width="91" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f7P-Je-VmQ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="capButtonPressed:" target="wFD-yq-twe" id="ddd-FA-2Rj"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-oI-xmy">
+                                <rect key="frame" x="1" y="371" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBQ-7k-VOF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="startButtonPressed:" target="wFD-yq-twe" id="YmO-0f-pk5"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9b-ND-Nn0">
+                                <rect key="frame" x="1" y="272" width="97" height="32"/>
+                                <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LB2-i1-1Bx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="failModePressed:" target="wFD-yq-twe" id="Qfb-e4-7ut"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
+                                <rect key="frame" x="1" y="338" width="66" height="32"/>
+                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -989,6 +1072,86 @@ DQ
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1536" y="728"/>
+        </scene>
+        <!--Change Password Controller-->
+        <scene sceneID="oHL-sJ-Qvw">
+            <objects>
+                <viewController id="DPB-nK-ZV1" customClass="ChangePasswordController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Aag-g7-lpf">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Jw-mE-GOG">
+                                <rect key="frame" x="13" y="204" width="257" height="26"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Change Password" id="rgz-P9-eBy">
+                                    <font key="font" metaFont="system" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gLa-oF-aVa" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="24" y="16" width="253" height="41"/>
+                                <buttonCell key="cell" type="squareTextured" title="Change Password" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="oHc-6b-15F">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="submitButtonPressed:" target="DPB-nK-ZV1" id="iTI-bE-92E"/>
+                                </connections>
+                            </button>
+                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZxZ-R9-qR3" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="15" y="74" width="270" height="122"/>
+                                <subviews>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ul-fl-RrZ" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="79" width="270" height="1"/>
+                                    </customView>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZc-A9-RJF">
+                                        <rect key="frame" x="10" y="11" width="250" height="24"/>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Repeat New Password" drawsBackground="YES" usesSingleLineMode="YES" id="4DU-wF-ZzE">
+                                            <font key="font" metaFont="system" size="20"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <allowedInputSourceLocales>
+                                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                            </allowedInputSourceLocales>
+                                        </secureTextFieldCell>
+                                    </secureTextField>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0vr-dI-0Jm">
+                                        <rect key="frame" x="10" y="49" width="250" height="24"/>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="New Password" drawsBackground="YES" usesSingleLineMode="YES" id="04Q-KG-6fd">
+                                            <font key="font" metaFont="system" size="20"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <allowedInputSourceLocales>
+                                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                            </allowedInputSourceLocales>
+                                        </secureTextFieldCell>
+                                    </secureTextField>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UD8-v0-CAl" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="41" width="270" height="1"/>
+                                    </customView>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1b-B3-Rdq">
+                                        <rect key="frame" x="10" y="88" width="250" height="24"/>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Old Password" drawsBackground="YES" usesSingleLineMode="YES" id="VQd-mT-n4y">
+                                            <font key="font" metaFont="system" size="20"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <allowedInputSourceLocales>
+                                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                            </allowedInputSourceLocales>
+                                        </secureTextFieldCell>
+                                    </secureTextField>
+                                </subviews>
+                            </customView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="submitButton" destination="gLa-oF-aVa" id="9FK-lj-tkF"/>
+                    </connections>
+                </viewController>
+                <customObject id="W9T-vi-7KL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1988" y="529"/>
         </scene>
         <!--Report Controller-->
         <scene sceneID="JTs-OP-OmQ">
@@ -1015,9 +1178,9 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJH-Kd-pUU">
-                                <rect key="frame" x="8" y="189" width="157" height="58"/>
+                                <rect key="frame" x="8" y="189" width="272" height="58"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                <size key="cellSize" width="180" height="18"/>
+                                <size key="cellSize" width="239" height="18"/>
                                 <size key="intercellSpacing" width="4" height="2"/>
                                 <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="Xqw-XT-4Vn">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1033,7 +1196,7 @@ DQ
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
-                                        <buttonCell type="radio" title="Unwanted Notifcation" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
+                                        <buttonCell type="radio" title="I got a notification when I shouldn't" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -1051,7 +1214,7 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGK-6z-Wbs">
-                                <rect key="frame" x="9" y="255" width="276" height="34"/>
+                                <rect key="frame" x="9" y="255" width="276" height="36"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Please select a category and leave a comment below" id="U1f-1u-Nbc">
                                     <font key="font" metaFont="system" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1070,7 +1233,7 @@ DQ
                 </viewController>
                 <customObject id="Xkg-ws-DN3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1605" y="1486"/>
+            <point key="canvasLocation" x="1861" y="1470"/>
         </scene>
     </scenes>
     <resources>
@@ -1078,6 +1241,6 @@ DQ
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f9D-qx-hky"/>
-        <segue reference="rX2-V3-Egi"/>
+        <segue reference="oTI-Y7-tEr"/>
     </inferredMetricsTieBreakers>
 </document>

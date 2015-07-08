@@ -53,6 +53,8 @@
 		AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE98AC2A1B18A2BF00E5F382 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */; };
 		AE98AC2C1B18A30500E5F382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
+		AE990B3E1B4D8F1C009735BD /* ForgotPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE990B3D1B4D8F1C009735BD /* ForgotPasswordController.swift */; };
+		AE990B401B4D92E3009735BD /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE990B3F1B4D92E3009735BD /* ChangePasswordController.swift */; };
 		AEA350B31B20A5370096B682 /* GameDetectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */; };
 		AEA350B41B20A5CA0096B682 /* GameDetectorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */; };
 		AEACCC2B1B3734BA00271BBC /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEACCC2A1B3734BA00271BBC /* Timer.swift */; };
@@ -111,6 +113,8 @@
 		AE98AC201B18A2AC00E5F382 /* GameStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
 		AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotaDetector.swift; sourceTree = "<group>"; };
 		AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AE990B3D1B4D8F1C009735BD /* ForgotPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordController.swift; sourceTree = "<group>"; };
+		AE990B3F1B4D92E3009735BD /* ChangePasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		AEA350B21B20A5370096B682 /* GameDetectorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetectorProtocol.swift; sourceTree = "<group>"; };
 		AEACCC2A1B3734BA00271BBC /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomSwiftAnimator.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				AE5B6C291B4D5ACE00C263C4 /* ReportController.swift */,
 				AEF4B5B31B343C7A0001AF42 /* WindowController.swift */,
 				AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */,
+				AE990B3F1B4D92E3009735BD /* ChangePasswordController.swift */,
+				AE990B3D1B4D8F1C009735BD /* ForgotPasswordController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -424,10 +430,12 @@
 				832BCE731B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld in Sources */,
 				AEF4B5B51B343C7A0001AF42 /* WindowController.swift in Sources */,
 				AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */,
+				AE990B401B4D92E3009735BD /* ChangePasswordController.swift in Sources */,
 				AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */,
 				AE2C08591B4C14F1009A1836 /* Colors.swift in Sources */,
 				AE98AC261B18A2AC00E5F382 /* PacketDetector.swift in Sources */,
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
+				AE990B3E1B4D8F1C009735BD /* ForgotPasswordController.swift in Sources */,
 				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
 				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
 				AE0759B21B4D3106000EFD94 /* BlueButton.swift in Sources */,

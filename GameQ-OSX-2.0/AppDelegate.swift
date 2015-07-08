@@ -16,10 +16,10 @@ import AppKit
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     
-//    var statusBar = NSStatusBar.systemStatusBar()
-//    var statusBarItem : NSStatusItem = NSStatusItem()
-//    var menu: NSMenu = NSMenu()
-//    var menuItem : NSMenuItem = NSMenuItem()
+    var statusBar = NSStatusBar.systemStatusBar()
+    var statusBarItem : NSStatusItem = NSStatusItem()
+    var menu: NSMenu = NSMenu()
+    var menuItem : NSMenuItem = NSMenuItem()
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -30,21 +30,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-//    override func awakeFromNib() {
-//        
-//        super.awakeFromNib()
-//        
-//        //Add statusBarItem
-//        statusBarItem = statusBar.statusItemWithLength(-1)
-//        statusBarItem.menu = menu
-//        statusBarItem.title = "GameQ"
-//        
-//        //Add menuItem to menu
-//        menuItem.title = "Clicked"
-//        menuItem.action = Selector("setWindowVisible:")
-//        menuItem.keyEquivalent = ""
-//        menu.addItem(menuItem)
-//    }
+    override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        //Add statusBarItem
+        statusBarItem = statusBar.statusItemWithLength(-1)
+        statusBarItem.menu = menu
+        statusBarItem.title = "GameQ"
+        
+        //Add menuItem to menu
+        menuItem.title = "Clicked"
+        menuItem.action = Selector("setWindowVisible:")
+        menuItem.keyEquivalent = ""
+        menu.addItem(menuItem)
+    }
     
     // MARK: - Core Data stack
     
