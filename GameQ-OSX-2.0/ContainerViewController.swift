@@ -18,7 +18,5 @@ class ContainerViewController: NSViewController {
         self.insertChildViewController(sourceViewController, atIndex: 0)
         self.view.addSubview(sourceViewController.view)
         self.view.frame = sourceViewController.view.frame
-
     }
-    
 }

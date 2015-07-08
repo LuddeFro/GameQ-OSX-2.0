@@ -12,7 +12,11 @@ import Cocoa
 class MasterViewController: NSViewController {
     
     @IBAction func logOutPressed(sender: AnyObject) {
-        performSegueWithIdentifier("MasterToLogin", sender: nil)
+        
+        ConnectionHandler.logout({ (success:Bool, err:String?) in
+        })
+        
+        self.performSegueWithIdentifier("MasterToLogin", sender: nil)
     }
     
     @IBOutlet weak var logOutButton: NSButton!

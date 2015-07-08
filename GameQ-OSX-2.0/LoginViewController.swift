@@ -11,7 +11,24 @@ import Cocoa
 class LoginViewController: NSViewController {
     
     @IBAction func loginButtonPressed(sender: AnyObject) {
-        performSegueWithIdentifier("LoginToMaster", sender: nil)
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.statusLabel.stringValue = "logging in..."
+        }
+        
+        ConnectionHandler.login(emailField.stringValue, password: passwordField.stringValue, finalCallBack:{ (success:Bool, err:String?) in
+            if success {
+                println("Jay")
+                dispatch_async(dispatch_get_main_queue()) {
+                self.performSegueWithIdentifier("LoginToMaster", sender: nil)
+                }
+            } else {
+                println("nay")
+                dispatch_async(dispatch_get_main_queue()) {
+                self.statusLabel.stringValue = err!
+                }
+            }
+        })
     }
     
     @IBOutlet weak var statusLabel: NSTextField!

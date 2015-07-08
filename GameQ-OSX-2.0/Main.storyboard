@@ -694,14 +694,16 @@
                                     <segue destination="arN-cW-vAf" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="EqI-qz-b7t"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXA-bN-nIk">
-                                <rect key="frame" x="37" y="117" width="297" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" " placeholderString="&quot;&quot;" id="7l1-4e-CGL">
+                            <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="77" width="300" height="40"/>
+                                <buttonCell key="cell" type="squareTextured" title="Login" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="m9d-8B-6Ah">
+                                    <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="loginButtonPressed:" target="ldi-Q6-qY3" id="JEQ-3v-uEE"/>
+                                </connections>
+                            </button>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6w-ut-KdO" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="35" y="142" width="300" height="87"/>
                                 <subviews>
@@ -729,16 +731,14 @@
                                     </secureTextField>
                                 </subviews>
                             </customView>
-                            <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="77" width="300" height="40"/>
-                                <buttonCell key="cell" type="squareTextured" title="Login" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="m9d-8B-6Ah">
-                                    <behavior key="behavior" lightByContents="YES"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXA-bN-nIk">
+                                <rect key="frame" x="37" y="119" width="297" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" " placeholderString=" " id="7l1-4e-CGL">
                                     <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="loginButtonPressed:" target="ldi-Q6-qY3" id="JEQ-3v-uEE"/>
-                                </connections>
-                            </button>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -773,7 +773,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMz-tR-KhG" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="68" width="300" height="40"/>
+                                <rect key="frame" x="35" y="63" width="300" height="40"/>
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="S9c-Mu-tPa">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -782,14 +782,6 @@
                                     <action selector="signUpPressed:" target="arN-cW-vAf" id="ZLP-zg-f5O"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Siw-6l-DWp">
-                                <rect key="frame" x="37" y="99" width="297" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" " placeholderString="&quot;&quot;" id="rZk-5o-ChN">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vzk-Qk-u3f" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="35" y="124" width="300" height="122"/>
                                 <subviews>
@@ -831,11 +823,22 @@
                                     </customView>
                                 </subviews>
                             </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Siw-6l-DWp">
+                                <rect key="frame" x="33" y="105" width="297" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="" id="rZk-5o-ChN">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="ZQA-gq-Ybc" id="XNO-ZG-r1k"/>
                         <outlet property="backButtonPressed" destination="ZQA-gq-Ybc" id="o4I-fk-0K5"/>
+                        <outlet property="emailField" destination="KjD-1i-DWR" id="UEq-Tp-xYb"/>
+                        <outlet property="passwordField1" destination="3rx-3U-z2H" id="JDF-IU-eGf"/>
+                        <outlet property="passwordField2" destination="LXO-q2-cPB" id="zZA-pO-mZU"/>
                         <outlet property="signUpButton" destination="HMz-tR-KhG" id="nrO-IL-VGM"/>
                         <outlet property="statusLabel" destination="Siw-6l-DWp" id="LhT-0U-BQI"/>
                         <segue destination="wFD-yq-twe" kind="custom" identifier="SignUpToMaster" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="rX2-V3-Egi"/>

@@ -43,6 +43,7 @@
 		AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
 		AE5B6C271B4D4C1500C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
+		AE5B6C281B4D51DB00C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
 		AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C420F1B374D000050D686 /* ContainerViewController.swift */; };
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -454,6 +455,7 @@
 				AE226CB81B2318F5009B7D9B /* CSGODetector.swift in Sources */,
 				AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */,
 				AEACCC2C1B3735D900271BBC /* Timer.swift in Sources */,
+				AE5B6C281B4D51DB00C263C4 /* ConnectionHandler.swift in Sources */,
 				AE1B694C1B38C6A800D0FA73 /* QueueTimer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
