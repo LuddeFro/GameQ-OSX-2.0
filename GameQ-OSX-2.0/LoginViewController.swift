@@ -13,14 +13,15 @@ class LoginViewController: NSViewController {
     @IBAction func loginButton(sender: AnyObject) {
     }
     
+    @IBOutlet weak var loginButton: NSButton!
+    
+    @IBOutlet weak var signUpButton: NSButton!
     @IBOutlet weak var emailField: NSTextField!
     
     @IBOutlet weak var passwordField: NSSecureTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override var representedObject: AnyObject? {

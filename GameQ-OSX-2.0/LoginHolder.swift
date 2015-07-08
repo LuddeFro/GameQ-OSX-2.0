@@ -11,26 +11,26 @@ import Cocoa
 class LoginHolder: NSView {
     
     override func drawRect(dirtyRect: NSRect) {
-        var path = NSBezierPath(roundedRect: dirtyRect, xRadius: 10, yRadius: 10)
+        var path = NSBezierPath(roundedRect: dirtyRect, xRadius: 3, yRadius: 3)
         NSColor.whiteColor().setFill()
         NSColor(netHex: 0x323f4f).setStroke()
         path.lineWidth = 2
         path.fill()
         path.stroke()
         self.wantsLayer = true
-        self.layer!.cornerRadius  = 10
+        self.layer!.cornerRadius  = 3
     }
     
     override init(frame: NSRect) {
         super.init(frame: frame)
         self.wantsLayer = true
-        self.layer!.cornerRadius  = 10
+        self.layer!.cornerRadius  = 3
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.wantsLayer = true
-        self.layer!.cornerRadius  = 10
+        self.layer!.cornerRadius  = 3
     }
 }
 

@@ -40,7 +40,7 @@ class MyCustomSwiftAnimator: NSObject, NSViewControllerPresentationAnimator {
         topVC.view.layerContentsRedrawPolicy = .OnSetNeedsDisplay
         
         NSAnimationContext.runAnimationGroup({ (context) -> Void in
-            context.duration = 0.5
+            context.duration = 0.2
             topVC.view.animator().alphaValue = 0
             }, completionHandler: {
                 topVC.view.removeFromSuperview()
