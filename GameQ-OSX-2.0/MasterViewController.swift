@@ -11,6 +11,10 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBAction func logOutPressed(sender: AnyObject) {
+        performSegueWithIdentifier("MasterToLogin", sender: nil)
+    }
+    
     @IBOutlet weak var logOutButton: NSButton!
     
     @IBOutlet weak var missedQueueButton: NSButton!

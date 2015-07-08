@@ -10,9 +10,13 @@ import Cocoa
 
 class SignUpController: NSViewController {
     
-    @IBOutlet weak var backButtonPressed: NSButton!
-    @IBAction func signUpButtonPressed(sender: AnyObject) {
+    @IBAction func signUpPressed(sender: AnyObject) {
+    performSegueWithIdentifier("SignUpToMaster", sender: nil)
     }
+    
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var backButtonPressed: NSButton!
+    
     @IBOutlet weak var backButton: NSButton!
     @IBOutlet weak var signUpButton: NSButton!
     override func viewDidLoad() {

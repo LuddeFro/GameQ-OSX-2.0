@@ -10,8 +10,11 @@ import Cocoa
 
 class LoginViewController: NSViewController {
     
-    @IBAction func loginButton(sender: AnyObject) {
+    @IBAction func loginButtonPressed(sender: AnyObject) {
+        performSegueWithIdentifier("LoginToMaster", sender: nil)
     }
+    
+    @IBOutlet weak var statusLabel: NSTextField!
     
     @IBOutlet weak var loginButton: NSButton!
     
@@ -30,8 +33,6 @@ class LoginViewController: NSViewController {
         loginButton.attributedTitle = NSAttributedString(string: "Login", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
         signUpButton.attributedTitle = NSAttributedString(string: "Sign Up", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
-        
-        
     }
 
     override var representedObject: AnyObject? {
@@ -39,7 +40,5 @@ class LoginViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
 }
 

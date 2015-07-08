@@ -42,6 +42,7 @@
 		AE546D301B19DEBF008D8A86 /* DotaDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC291B18A2BF00E5F382 /* DotaDetector.swift */; };
 		AE546D311B19DEBF008D8A86 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC201B18A2AC00E5F382 /* GameStatus.swift */; };
 		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
+		AE5B6C271B4D4C1500C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
 		AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C420F1B374D000050D686 /* ContainerViewController.swift */; };
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -97,6 +98,7 @@
 		AE2C085B1B4C1CE9009A1836 /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		AE349E711B41643900823189 /* HoNDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNDetector.swift; sourceTree = "<group>"; };
 		AE349E741B417BC200823189 /* LoLDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoLDetector.swift; sourceTree = "<group>"; };
+		AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHandler.swift; sourceTree = "<group>"; };
 		AE8C420F1B374D000050D686 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				AE98AC171B18A2AC00E5F382 /* DataHandler.swift */,
+				AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */,
 			);
 			name = DataHandlers;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				TargetAttributes = {
 					832BCE691B09E4AC00FE15E2 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = NZ5DEAP476;
 					};
 					832BCE7C1B09E4AC00FE15E2 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -407,6 +411,7 @@
 				AE349E721B41643900823189 /* HoNDetector.swift in Sources */,
 				AEA350B31B20A5370096B682 /* GameDetectorProtocol.swift in Sources */,
 				AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */,
+				AE5B6C271B4D4C1500C263C4 /* ConnectionHandler.swift in Sources */,
 				AE2C08541B4C0FF9009A1836 /* LoginHolder.swift in Sources */,
 				AE98AC251B18A2AC00E5F382 /* PacketParser.m in Sources */,
 				AE98AC281B18A2AC00E5F382 /* GameStatus.swift in Sources */,
