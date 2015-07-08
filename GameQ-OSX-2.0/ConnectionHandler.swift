@@ -10,6 +10,8 @@ class ConnectionHandler : NSObject {
     static let deviceIdKey:String = "device_id_key"
     static let tokenKey:String = "token_key" //only mobile
     private static var sessionId:String = ""
+    static let emailKey = "email_key"
+    static let passwordKey = "password_key"
     
     
     private static func getStringFrom(json:Dictionary<String, AnyObject>, key:String) -> String {
@@ -61,7 +63,8 @@ class ConnectionHandler : NSObject {
         if let token = loadToken() { //only mobile
             tokenString = "token=\(token)"
         }
-        let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
+        let arguments = "email=\(email)&password=\(password)&\(tokenString)&\(diString)" // mobile version
+        //let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
         postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
@@ -71,6 +74,8 @@ class ConnectionHandler : NSObject {
                 if !success {
                     err = self.getStringFrom(json, key: "error")
                 } else {
+                    self.savePassword(password)
+                    self.saveEmail(email)
                     let retDI = self.getIntFrom(json, key: "device_id")
                     println("returned DI: \(retDI)")
                     if retDI != 0 {
@@ -105,12 +110,14 @@ class ConnectionHandler : NSObject {
                     err = self.getStringFrom(json, key: "error")
                 } else {
                     //logout success
+                    
                     self.sessionId = ""
                 }
             } else {
                 println("json parse fail")
             }
-            
+            self.saveEmail("")
+            self.savePassword("")
             finalCallBack(success: success, err: err)
         })
     }
@@ -125,8 +132,8 @@ class ConnectionHandler : NSObject {
         if let token = loadToken() { //only mobile
             tokenString = "token=\(token)"
         }
-        
-        let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
+        let arguments = "email=\(email)&password=\(password)&\(tokenString)&\(diString)" // mobile version
+        //let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
         postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
@@ -136,6 +143,8 @@ class ConnectionHandler : NSObject {
                 if !success {
                     err = self.getStringFrom(json, key: "error")
                 } else {
+                    self.savePassword(password)
+                    self.saveEmail(email)
                     let retDI = self.getStringFrom(json, key: "device_id")
                     if retDI != ""{
                         self.saveDeviceId(retDI)
@@ -351,6 +360,24 @@ class ConnectionHandler : NSObject {
     
     
     
+    static func loginWithRememberedDetails(finalCallBack:(success:Bool, err:String?)->()) {
+        var s:Bool = false
+        if let email = loadEmail() {
+            if let password = loadPassword() {
+                if email != "" && password != "" {
+                    s = true
+                    self.login(email, password: password, finalCallBack: { (success:Bool, err:String?) in
+                        finalCallBack(success: success, err: err)
+                    })
+                }
+            }
+        }
+        if !s {
+            finalCallBack(success: false, err: "Unable to load previous login details!")
+        }
+    }
+    
+    
     static func saveToken(token:String) {
         saveSingle(tokenKey, value: token)
     }
@@ -366,6 +393,23 @@ class ConnectionHandler : NSObject {
     private static func loadDeviceId() -> (String?){
         return loadSingle(deviceIdKey) as? String
     }
+    
+    private static func saveEmail(email:String) {
+        saveSingle(emailKey, value: email)
+    }
+    
+    static func loadEmail() -> (String?){
+        return loadSingle(emailKey) as? String
+    }
+    
+    private static func savePassword(password:String) {
+        saveSingle(passwordKey, value: password)
+    }
+    
+    private static func loadPassword() -> (String?){
+        return loadSingle(passwordKey) as? String
+    }
+    
     
     
     /**

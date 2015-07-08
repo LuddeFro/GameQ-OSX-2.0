@@ -20,12 +20,12 @@ class LoginViewController: NSViewController {
             if success {
                 println("Jay")
                 dispatch_async(dispatch_get_main_queue()) {
-                self.performSegueWithIdentifier("LoginToMaster", sender: nil)
+                    self.performSegueWithIdentifier("LoginToMaster", sender: nil)
                 }
             } else {
                 println("nay")
                 dispatch_async(dispatch_get_main_queue()) {
-                self.statusLabel.stringValue = err!
+                    self.statusLabel.stringValue = err!
                 }
             }
         })
@@ -50,11 +50,21 @@ class LoginViewController: NSViewController {
         loginButton.attributedTitle = NSAttributedString(string: "Login", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
         signUpButton.attributedTitle = NSAttributedString(string: "Sign Up", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        
+        
+        ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
+            if success {
+                println("Jay")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.performSegueWithIdentifier("LoginToMaster", sender: nil)
+                }
+            }
+        })
     }
-
+    
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
 }

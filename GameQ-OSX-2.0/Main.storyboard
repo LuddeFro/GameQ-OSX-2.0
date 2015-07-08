@@ -1015,9 +1015,9 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJH-Kd-pUU">
-                                <rect key="frame" x="8" y="189" width="272" height="58"/>
+                                <rect key="frame" x="8" y="189" width="157" height="58"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                <size key="cellSize" width="244" height="18"/>
+                                <size key="cellSize" width="180" height="18"/>
                                 <size key="intercellSpacing" width="4" height="2"/>
                                 <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="Xqw-XT-4Vn">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1033,7 +1033,7 @@ DQ
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
-                                        <buttonCell type="radio" title="I got a notificaton when I should not" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
+                                        <buttonCell type="radio" title="Unwanted Notifcation" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
