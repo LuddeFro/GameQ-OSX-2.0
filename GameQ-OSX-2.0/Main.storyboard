@@ -1015,9 +1015,9 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJH-Kd-pUU">
-                                <rect key="frame" x="8" y="194" width="157" height="58"/>
+                                <rect key="frame" x="8" y="189" width="272" height="58"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                <size key="cellSize" width="156" height="18"/>
+                                <size key="cellSize" width="244" height="18"/>
                                 <size key="intercellSpacing" width="4" height="2"/>
                                 <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="Xqw-XT-4Vn">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1025,29 +1025,21 @@ DQ
                                 </buttonCell>
                                 <cells>
                                     <column>
-                                        <buttonCell type="radio" title="Feedback" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="BvO-gl-Jww">
+                                        <buttonCell type="radio" title="General Feedback" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="BvO-gl-Jww">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
-                                        <buttonCell type="radio" title="Missed Queue" imagePosition="left" alignment="left" inset="2" id="hf4-lA-ROV">
+                                        <buttonCell type="radio" title="I did not get a notification" imagePosition="left" alignment="left" inset="2" id="hf4-lA-ROV">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
-                                        <buttonCell type="radio" title="Unwanted Notifcation" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
+                                        <buttonCell type="radio" title="I got a notificaton when I should not" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </column>
                                 </cells>
                             </matrix>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGK-6z-Wbs">
-                                <rect key="frame" x="6" y="263" width="136" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please bla bla bla bla" id="U1f-1u-Nbc">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NmM-p0-RIT" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="68" y="20" width="164" height="32"/>
                                 <buttonCell key="cell" type="squareTextured" title="Submit" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="eB9-nW-ePO">
@@ -1058,9 +1050,18 @@ DQ
                                     <action selector="submitButtonPressed:" target="SSw-vW-DUh" id="4G8-tE-CYb"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGK-6z-Wbs">
+                                <rect key="frame" x="9" y="255" width="276" height="34"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Please select a category and leave a comment below" id="U1f-1u-Nbc">
+                                    <font key="font" metaFont="system" size="14"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="commentField" destination="lHK-Qn-p6j" id="l0o-WD-mZQ"/>
                         <outlet property="feedbackLabel" destination="BvO-gl-Jww" id="Gc0-be-kjc"/>
                         <outlet property="missedQueueLabel" destination="hf4-lA-ROV" id="aw0-fu-Z8l"/>
                         <outlet property="submitButton" destination="NmM-p0-RIT" id="qzd-CU-71f"/>
@@ -1069,7 +1070,7 @@ DQ
                 </viewController>
                 <customObject id="Xkg-ws-DN3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1629" y="1236"/>
+            <point key="canvasLocation" x="1605" y="1486"/>
         </scene>
     </scenes>
     <resources>

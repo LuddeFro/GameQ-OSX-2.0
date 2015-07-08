@@ -26,12 +26,12 @@ class ConnectionHandler : NSObject {
     }
     
     private static func postRequest(arguments:String, apiExtension:String, responseHandler:(responseJSON:AnyObject!) -> ()) {
-        let urlString = "\(baseURL)\(apiExtension)?key=68440fe0484ad2bb1656b56d234ca5f463f723c3d3d58c3398190877d1d963bb&\(arguments)"
+        let urlString = "\(baseURL)\(apiExtension)?"
         println(urlString)
         let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         request.HTTPMethod = "POST"
         
-        request.HTTPBody = "".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "key=68440fe0484ad2bb1656b56d234ca5f463f723c3d3d58c3398190877d1d963bb&\(arguments)".dataUsingEncoding(NSUTF8StringEncoding)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
             data, response, error in
             
@@ -125,7 +125,7 @@ class ConnectionHandler : NSObject {
         if let token = loadToken() { //only mobile
             tokenString = "token=\(token)"
         }
-
+        
         let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
         postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
@@ -455,7 +455,31 @@ class ConnectionHandler : NSObject {
         
     }
     
-    
+    static func submitFeedback(feedbackString:String, finalCallBack:(success:Bool, err:String?)->()) {
+        let apiExtension = "submitFeedback"
+        var diString = ""
+        if let deviceId = loadDeviceId() {
+            diString = "device_id=\(deviceId)"
+        }
+        let arguments = "session_token=\(sessionId)&\(diString)&feedback=\(feedbackString)"
+        postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
+            var success:Bool = false
+            var err:String? = nil
+            
+            if let json = responseJSON as? Dictionary<String, AnyObject> {
+                success = self.getIntFrom(json, key: "success") != 0
+                if !success {
+                    err = self.getStringFrom(json, key: "error")
+                } else {
+                    //csv submission succeeded
+                }
+            } else {
+                println("json parse fail")
+            }
+            
+            finalCallBack(success: success, err: err)
+        })
+    }
 }
 
 

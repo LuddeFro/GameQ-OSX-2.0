@@ -73,13 +73,13 @@ class MasterViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(12)
+        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()
         style.alignment = .CenterTextAlignment
         
         logOutButton.attributedTitle = NSAttributedString(string: "Log Out", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
-        missedQueueButton.attributedTitle = NSAttributedString(string: "Report Missed ", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        missedQueueButton.attributedTitle = NSAttributedString(string: "Send Feedback", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
