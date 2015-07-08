@@ -23,7 +23,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
     static var countDownTimer:NSTimer = NSTimer()
     
     class func startDetection(){
-
+        
         dataHandler.folderName = self.game.rawValue
         counter = 0
     }
@@ -38,7 +38,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
             detector.saveDetection()
             startTimer()
         }
-        
+            
         else{
             countDownTimer.invalidate()
             counter = 0
@@ -47,6 +47,10 @@ class GameDetector:NSObject, GameDetectorProtocol {
         status = newStatus
         println(newStatus.rawValue)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
+        
+        ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
+        println("succesfully updated status")
+        })
     }
     
     class func saveDetection() {
@@ -63,7 +67,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
         dataHandler.folderName = game.rawValue + "missed"
     }
     
-   final class func failMode(){
+    final class func failMode(){
         
         if(isFailMode){
             println("FailMode Off")
@@ -94,9 +98,9 @@ class GameDetector:NSObject, GameDetectorProtocol {
     }
     
     static func startTimer(){
-       
+        
         dispatch_async(dispatch_get_main_queue()) {
-        self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)}
+            self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)}
     }
     
     static func update() {

@@ -21,7 +21,6 @@ class MasterViewController: NSViewController {
     }
     
     
-    
     @IBOutlet weak var logOutButton: NSButton!
     
     @IBOutlet weak var missedQueueButton: NSButton!
