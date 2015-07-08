@@ -19,6 +19,8 @@ class MasterViewController: NSViewController {
         self.performSegueWithIdentifier("MasterToLogin", sender: nil)
     }
     
+    
+    
     @IBOutlet weak var logOutButton: NSButton!
     
     @IBOutlet weak var missedQueueButton: NSButton!
@@ -41,7 +43,10 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func capFailButtonPressed(sender: NSButton) {
-        detector.saveMissedDetection()
+
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("MasterToReport", sender: nil)
+        }
     }
     
     @IBAction func failModePressed(sender: NSButton) {

@@ -699,6 +699,9 @@
                                 <buttonCell key="cell" type="squareTextured" title="Login" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="m9d-8B-6Ah">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="loginButtonPressed:" target="ldi-Q6-qY3" id="JEQ-3v-uEE"/>
@@ -777,6 +780,9 @@
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="S9c-Mu-tPa">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="signUpPressed:" target="arN-cW-vAf" id="ZLP-zg-f5O"/>
@@ -886,16 +892,6 @@
                                     <action selector="startButtonPressed:" target="wFD-yq-twe" id="YmO-0f-pk5"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="24" y="13" width="150" height="40"/>
-                                <buttonCell key="cell" type="bevel" title="Save Miss" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
-                                    <behavior key="behavior" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="capFailButtonPressed:" target="wFD-yq-twe" id="9Hc-6E-JeK"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9b-ND-Nn0">
                                 <rect key="frame" x="264" y="127" width="97" height="32"/>
                                 <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LB2-i1-1Bx">
@@ -958,12 +954,22 @@
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dch-AV-KK7" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="197" y="13" width="150" height="40"/>
-                                <buttonCell key="cell" type="bevel" title="Log Out" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
+                                <buttonCell key="cell" type="squareTextured" title="Log Out" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="AHN-AV-to3">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="logOutPressed:" target="wFD-yq-twe" id="7Tu-iM-QCp"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-Du-svx" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="20" y="15" width="150" height="37"/>
+                                <buttonCell key="cell" type="squareTextured" title="Save Miss" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="3hi-wN-b5j">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="capFailButtonPressed:" target="wFD-yq-twe" id="9Hc-6E-JeK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -977,18 +983,100 @@
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
                         <outlet property="timer" destination="CSV-MA-BZY" id="LaK-Ba-gjI"/>
                         <segue destination="ldi-Q6-qY3" kind="custom" identifier="MasterToLogin" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="f9D-qx-hky"/>
+                        <segue destination="SSw-vW-DUh" kind="popover" identifier="MasterToReport" popoverAnchorView="7aE-Du-svx" popoverBehavior="t" preferredEdge="maxX" id="ipH-kv-zqw"/>
                     </connections>
                 </viewController>
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1575" y="705"/>
+            <point key="canvasLocation" x="1536" y="728"/>
+        </scene>
+        <!--Report Controller-->
+        <scene sceneID="JTs-OP-OmQ">
+            <objects>
+                <viewController id="SSw-vW-DUh" customClass="ReportController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="vGE-cV-LaR">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lHK-Qn-p6j">
+                                <rect key="frame" x="11" y="60" width="281" height="104"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="0bB-zG-gm6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lGu-TD-Hnz">
+                                <rect key="frame" x="9" y="169" width="65" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Comment" id="PGB-nE-VTP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJH-Kd-pUU">
+                                <rect key="frame" x="8" y="194" width="157" height="58"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                <size key="cellSize" width="156" height="18"/>
+                                <size key="intercellSpacing" width="4" height="2"/>
+                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="Xqw-XT-4Vn">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <cells>
+                                    <column>
+                                        <buttonCell type="radio" title="Feedback" imagePosition="left" alignment="left" state="on" tag="1" inset="2" id="BvO-gl-Jww">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <buttonCell type="radio" title="Missed Queue" imagePosition="left" alignment="left" inset="2" id="hf4-lA-ROV">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <buttonCell type="radio" title="Unwanted Notifcation" imagePosition="left" alignment="left" inset="2" id="iyP-eF-XBg">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </column>
+                                </cells>
+                            </matrix>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGK-6z-Wbs">
+                                <rect key="frame" x="6" y="263" width="136" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please bla bla bla bla" id="U1f-1u-Nbc">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NmM-p0-RIT" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="68" y="20" width="164" height="32"/>
+                                <buttonCell key="cell" type="squareTextured" title="Submit" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="eB9-nW-ePO">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="submitButtonPressed:" target="SSw-vW-DUh" id="4G8-tE-CYb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="feedbackLabel" destination="BvO-gl-Jww" id="Gc0-be-kjc"/>
+                        <outlet property="missedQueueLabel" destination="hf4-lA-ROV" id="aw0-fu-Z8l"/>
+                        <outlet property="submitButton" destination="NmM-p0-RIT" id="qzd-CU-71f"/>
+                        <outlet property="unwantedLabel" destination="iyP-eF-XBg" id="i3j-Vb-DkI"/>
+                    </connections>
+                </viewController>
+                <customObject id="Xkg-ws-DN3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1629" y="1236"/>
         </scene>
     </scenes>
     <resources>
         <image name="Draft1" width="412" height="401"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2vk-2S-oDg"/>
+        <segue reference="f9D-qx-hky"/>
         <segue reference="rX2-V3-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

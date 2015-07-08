@@ -43,7 +43,7 @@ class LoginViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(12)
+        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()
         style.alignment = .CenterTextAlignment
         

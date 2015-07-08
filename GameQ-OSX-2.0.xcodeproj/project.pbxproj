@@ -44,6 +44,7 @@
 		AE546D361B19E7E1008D8A86 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
 		AE5B6C271B4D4C1500C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
 		AE5B6C281B4D51DB00C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
+		AE5B6C2A1B4D5ACE00C263C4 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C291B4D5ACE00C263C4 /* ReportController.swift */; };
 		AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C420F1B374D000050D686 /* ContainerViewController.swift */; };
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE98AC241B18A2AC00E5F382 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -100,6 +101,7 @@
 		AE349E711B41643900823189 /* HoNDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoNDetector.swift; sourceTree = "<group>"; };
 		AE349E741B417BC200823189 /* LoLDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoLDetector.swift; sourceTree = "<group>"; };
 		AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHandler.swift; sourceTree = "<group>"; };
+		AE5B6C291B4D5ACE00C263C4 /* ReportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportController.swift; sourceTree = "<group>"; };
 		AE8C420F1B374D000050D686 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		AE98AC1B1B18A2AC00E5F382 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				AE8C420F1B374D000050D686 /* ContainerViewController.swift */,
 				AEF4B5B01B343C2E0001AF42 /* LoginViewController.swift */,
 				AE2C085B1B4C1CE9009A1836 /* SignUpController.swift */,
+				AE5B6C291B4D5ACE00C263C4 /* ReportController.swift */,
 				AEF4B5B31B343C7A0001AF42 /* WindowController.swift */,
 				AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */,
 			);
@@ -428,6 +431,7 @@
 				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
 				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
 				AE0759B21B4D3106000EFD94 /* BlueButton.swift in Sources */,
+				AE5B6C2A1B4D5ACE00C263C4 /* ReportController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
