@@ -8,16 +8,6 @@
 
 import Foundation
 
-//
-//  HOTSDetector.swift
-//  GameQ-OSX-2.0
-//
-//  Created by Fabian Wikström on 6/25/15.
-//  Copyright (c) 2015 GameQ AB. All rights reserved.
-//
-
-import Foundation
-
 class HoNDetector: GameDetector, PacketDetector {
     
     static var packetQueue:[Packet] = [Packet]()
@@ -72,13 +62,14 @@ class HoNDetector: GameDetector, PacketDetector {
     
     override class func saveDetection(){
         super.saveDetection()
-        packetQueue = [Packet]()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func stopDetection(){

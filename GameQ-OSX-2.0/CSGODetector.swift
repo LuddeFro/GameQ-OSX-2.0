@@ -64,13 +64,14 @@ class CSGODetector:GameDetector, PacketDetector{
     
     override class func saveDetection(){
         super.saveDetection()
-        packetQueue = [Packet]()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
         dataHandler.logPackets(packetQueue)
+        packetQueue = [Packet]()
     }
     
     override class func stopDetection(){
@@ -169,12 +170,12 @@ class CSGODetector:GameDetector, PacketDetector{
             //GAME READY
         else if(status == Status.GameReady){
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
-            if(inGame){updateStatus(Status.InGame)}
+            if(inGame){updateStatus(Status.InGame)
+            resetGameTimer()}
         }
             
             //IN GAME
         else  if(status == Status.InGame){
-            resetGameTimer()
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
             if(!inGame){updateStatus(Status.InQueue)}
             

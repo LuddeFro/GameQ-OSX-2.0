@@ -33,6 +33,15 @@ class CustomLine: NSView {
     }
 }
 
+class CustomLine2: NSView {
+    
+    override func drawRect(dirtyRect: NSRect) {
+        super.drawRect(dirtyRect)
+        NSColor(netHex: 0x323f4f).setFill()
+        NSRectFill(dirtyRect);
+    }
+}
+
 extension String {
     func filter(pred: Character -> Bool) -> String {
         var res = String()

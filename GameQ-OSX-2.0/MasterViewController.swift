@@ -11,15 +11,52 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+
+    @IBOutlet weak var settingsButton: NSButton!
+    @IBOutlet weak var feedbackButton: NSButton!
+    @IBOutlet weak var logOutButton: NSButton!
+    @IBOutlet weak var missedQueueButton: NSButton!
     @IBOutlet weak var timer: Timer!
-    
     @IBOutlet weak var countDown: NSTextField!
-    
     @IBOutlet weak var queueTimer: QueueTimer!
-    
     @IBOutlet weak var gameStatus: NSTextField!
-    
     @IBOutlet weak var statusLabel: NSTextField!
+    
+    @IBOutlet weak var saveMissButton: NSButton!
+    
+    @IBOutlet weak var isTestingButton: NSButton!
+    
+    @IBOutlet weak var saveCapButton: NSButton!
+    
+    @IBOutlet weak var startButton: NSButton!
+    
+    @IBOutlet weak var quitButton: NSButton!
+    
+    @IBOutlet weak var stopButton: NSButton!
+    
+    @IBOutlet weak var failmodebutton: NSButton!
+    
+    @IBAction func isTestingPressed(sender: AnyObject) {
+        if(detector.testMode){
+            println("testing off")
+            detector.testMode = false}
+        else{
+            println("testing on")
+            detector.testMode = true}
+    }
+    
+    @IBAction func saveMissedPressed(sender: AnyObject) {
+        detector.saveMissedDetection()
+    }
+    
+    @IBAction func logOutPressed(sender: AnyObject) {
+        
+        disableAllButtons()
+        ConnectionHandler.logout({ (success:Bool, err:String?) in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.appDelegate.didLogOut()
+                self.performSegueWithIdentifier("MasterToLogin", sender: nil)
+            }})}
     
     @IBAction func startButtonPressed(sender: NSButton) {
         detector.startDetection()
@@ -30,8 +67,9 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func capFailButtonPressed(sender: NSButton) {
-        detector.saveMissedDetection()
-    }
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("MasterToReport", sender: nil)
+        }}
     
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
@@ -42,13 +80,13 @@ class MasterViewController: NSViewController {
         detector.stopDetection()
     }
     
-    
     @IBAction func quitButtonPressed(sender: NSButton) {
         detector.stopDetection()
         detector.updateStatus(Status.Offline)
         NSApplication.sharedApplication().terminate(self)
     }
     
+    let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
     var countDownTimer = NSTimer()
     var counter: Float = 0
     var detector:GameDetector.Type = GameDetector.self
@@ -57,10 +95,46 @@ class MasterViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
+        let style = NSMutableParagraphStyle()
+        style.alignment = .CenterTextAlignment
+        
+        logOutButton.attributedTitle = NSAttributedString(string: "Log Out", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        
+        missedQueueButton.attributedTitle = NSAttributedString(string: "Send Feedback", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
         self.gameStatus.stringValue = GameDetector.game.rawValue
         self.statusLabel.stringValue = GameDetector.status.rawValue
+        
+        
+        if(ConnectionHandler.loadEmail() == "asd@asd.com"){
+            failmodebutton.enabled = true
+            failmodebutton.hidden = false
+            
+            isTestingButton.enabled = true
+            isTestingButton.hidden = false
+            
+            startButton.enabled = true
+            startButton.hidden = false
+            
+            stopButton.enabled = true
+            stopButton.hidden = false
+            
+            saveCapButton.enabled = true
+            saveCapButton.hidden = false
+            
+            saveMissButton.enabled = true
+            saveMissButton.hidden = false
+            
+            quitButton.enabled = true
+            quitButton.hidden = false
+        }
+        
+        
+        //CHANGE THIS
+        detector.updateStatus(Status.Online)
         var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
@@ -119,11 +193,13 @@ class MasterViewController: NSViewController {
                 break
                 
             default:
-            break
+                break
             }
         }
     }
     
+    
+    //THIS MUST BE MOVED
     func update() {
         
         var ws = NSWorkspace.sharedWorkspace()
@@ -137,13 +213,13 @@ class MasterViewController: NSViewController {
         }
         
         if(activeApps.contains("dota_osx")){
-             detector = DotaDetector.self
-             newGame = Game.Dota
+            detector = DotaDetector.self
+            newGame = Game.Dota
         }
             
         else if(activeApps.contains("csgo_osx")){
-             detector = CSGODetector.self
-             newGame = Game.CSGO
+            detector = CSGODetector.self
+            newGame = Game.CSGO
         }
             
         else if(activeApps.contains("Heroes")){
@@ -153,7 +229,12 @@ class MasterViewController: NSViewController {
             
         else if(activeApps.contains("Heroes of Newerth")){
             detector = HoNDetector.self
-            newGame = Game.HOTS
+            newGame = Game.HoN
+        }
+            
+        else if(activeApps.contains("LolClient")){
+            detector = LoLDetector.self
+            newGame = Game.LoL
         }
             
         else {newGame = Game.NoGame}
@@ -162,10 +243,18 @@ class MasterViewController: NSViewController {
             detector.startDetection()
             game = newGame
         }
-        
+            
         else if(game != newGame && newGame == Game.NoGame) {
             detector.stopDetection()
             game = newGame
+        }
+        
+        if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
+            detector.updateStatus(Status.InLobby)
+        }
+            
+        else if((detector.game == Game.LoL) && (detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
+            LoLDetector.updateStatus(Status.InGame)
         }
     }
     
@@ -198,5 +287,17 @@ class MasterViewController: NSViewController {
             countDownTimer.invalidate()
             counter = 0
         }
+    }
+    
+    private func disableAllButtons(){
+    logOutButton.enabled = false
+    settingsButton.enabled = false
+    feedbackButton.enabled = false
+    }
+    
+    private func enableAllButtons(){
+        logOutButton.enabled = true
+        settingsButton.enabled = true
+        feedbackButton.enabled = true
     }
 }

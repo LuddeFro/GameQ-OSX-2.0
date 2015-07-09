@@ -69,8 +69,7 @@ public class CSV {
         
         return columns
     }
-    
-    class func readOneCSV(pathIn:String?){
+        class func readOneCSV(pathIn:String?){
         
         if let path = pathIn {
             var error: NSErrorPointer = nil
@@ -84,6 +83,7 @@ public class CSV {
                     var dst:Int = row["dst"]!.toInt()!
                     var iplen:Int = row["iplen"]!.toInt()!
                     var time:Double = (row["time"]! as NSString).doubleValue
+                    
                     DotaDetector.handleTest(src, dstPort: dst, iplen: iplen, time: time)
                 }
             }

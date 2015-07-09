@@ -110,10 +110,12 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
     const struct sniff_ip *ip;              /* The IP header */
     const struct sniff_tcp *tcp;            /* The TCP header */
     const struct sniff_udp *udp;
+    const char *payload;                    /* Packet payload */
     
     int size_ip;
     int size_tcp;
     int size_udp;
+    int size_payload;
     
 //    printf("\nPacket number %d:\n", count);
     count++;
@@ -148,6 +150,23 @@ void parse_packet(u_char *user, const struct pcap_pkthdr *header, const u_char *
 //            printf("Header length: %u bytes\n", size_tcp);
 //            printf("   Src port: %d\n", ntohs(tcp->th_sport));
 //            printf("   Dst port: %d\n", ntohs(tcp->th_dport));
+            
+            /* define/compute tcp payload (segment) offset */
+            payload = (char *)(packet + SIZE_ETHERNET + size_ip + size_tcp);
+            
+            /* compute tcp payload (segment) size */
+            size_payload = ntohs(ip->ip_len) - (size_ip + size_tcp);
+            
+            /*
+             * Print payload data; it might be binary, so don't just
+             * treat it as a string.
+             */
+            if (size_payload > 0) {
+               // printf("   Payload (%d bytes):\n", size_payload);
+               // print_payload(payload, size_payload);
+            }
+            
+            [detector handle:ntohs(tcp->th_sport) dstPort:ntohs(tcp->th_dport) iplen:size_payload];
             return;
         case IPPROTO_UDP:
 //            printf("   Protocol: UDP\n");
