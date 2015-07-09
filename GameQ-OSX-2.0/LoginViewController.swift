@@ -22,8 +22,9 @@ class LoginViewController: NSViewController {
             
         }
         
-        
+        disableAllButtons()
         ConnectionHandler.login(emailField.stringValue, password: passwordField.stringValue, finalCallBack:{ (success:Bool, err:String?) in
+            self.enableAllButtons()
             if success {
                 println("Jay")
                 dispatch_async(dispatch_get_main_queue()) {
@@ -38,9 +39,7 @@ class LoginViewController: NSViewController {
                     self.loginProgress2.stopAnimation(self)
                     self.statusLabel.stringValue = err!
                 }
-            }
-        })
-    }
+            }})}
     
     @IBOutlet weak var statusLabel: NSTextField!
     
@@ -70,14 +69,32 @@ class LoginViewController: NSViewController {
         forgotPasswordButton.attributedTitle = NSAttributedString(string: "Forgot your password?", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style2, NSFontAttributeName: font2])
         
         
+        //THIS SHOULD BE MOVED
+        disableAllButtons()
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
+            self.enableAllButtons()
             if success {
                 println("Jay")
                 dispatch_async(dispatch_get_main_queue()) {
                     self.performSegueWithIdentifier("LoginToMaster", sender: nil)
-                }
-            }
+                }}
         })
+    }
+    
+    private func disableAllButtons(){
+        dispatch_async(dispatch_get_main_queue()) {
+        self.forgotPasswordButton.enabled = false
+        self.loginButton.enabled = false
+        self.signUpButton.enabled = false
+        }
+    }
+    
+    private func enableAllButtons(){
+        dispatch_async(dispatch_get_main_queue()) {
+        self.forgotPasswordButton.enabled = true
+        self.loginButton.enabled = true
+        self.signUpButton.enabled = true
+        }
     }
 }
 

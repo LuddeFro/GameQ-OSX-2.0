@@ -17,7 +17,6 @@ class ReportController: NSViewController {
         
         if(feedbackLabel.state == NSOnState && !commentField.stringValue.isEmpty){
             ConnectionHandler.submitFeedback(commentField.stringValue, finalCallBack: {(success: Bool, error:String?) in
-                
                 if(success){println("submission worked")}
                 else{println(error)}
             })
