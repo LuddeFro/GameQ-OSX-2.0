@@ -19,9 +19,8 @@ class ReportController: NSViewController {
             ConnectionHandler.submitFeedback(commentField.stringValue, finalCallBack: {(success: Bool, error:String?) in
                 if(success){println("submission worked")}
                 else{println(error)}
-            })
-        }
-            
+            })}
+        
         else if(missedQueueLabel.state == NSOnState){
             println("Not yet implemented")
         }

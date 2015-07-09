@@ -12,15 +12,12 @@ class LoginViewController: NSViewController {
     
     @IBOutlet weak var loginProgress1: NSProgressIndicator!
     @IBOutlet weak var forgotPasswordButton: NSButton!
-    
     @IBOutlet weak var loginProgress2: NSProgressIndicator!
     @IBAction func loginButtonPressed(sender: AnyObject) {
-        
         dispatch_async(dispatch_get_main_queue()) {
             self.loginProgress1.startAnimation(self)
             self.loginProgress2.startAnimation(self)
-            
-        }
+    }
         
         disableAllButtons()
         ConnectionHandler.login(emailField.stringValue, password: passwordField.stringValue, finalCallBack:{ (success:Bool, err:String?) in
@@ -30,6 +27,7 @@ class LoginViewController: NSViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.loginProgress1.stopAnimation(self)
                     self.loginProgress2.stopAnimation(self)
+                    self.appDelegate.didLogin()
                     self.performSegueWithIdentifier("LoginToMaster", sender: nil)
                 }
             } else {
@@ -50,6 +48,8 @@ class LoginViewController: NSViewController {
     
     @IBOutlet weak var passwordField: NSSecureTextField!
     
+    let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,9 +67,6 @@ class LoginViewController: NSViewController {
         style2.alignment = .CenterTextAlignment
         
         forgotPasswordButton.attributedTitle = NSAttributedString(string: "Forgot your password?", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style2, NSFontAttributeName: font2])
-        
-        
-        //THIS SHOULD BE MOVED
     }
     
     private func disableAllButtons(){

@@ -54,6 +54,7 @@ class MasterViewController: NSViewController {
         disableAllButtons()
         ConnectionHandler.logout({ (success:Bool, err:String?) in
             dispatch_async(dispatch_get_main_queue()) {
+                self.appDelegate.didLogOut()
                 self.performSegueWithIdentifier("MasterToLogin", sender: nil)
             }})}
     
@@ -85,6 +86,7 @@ class MasterViewController: NSViewController {
         NSApplication.sharedApplication().terminate(self)
     }
     
+    let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
     var countDownTimer = NSTimer()
     var counter: Float = 0
     var detector:GameDetector.Type = GameDetector.self

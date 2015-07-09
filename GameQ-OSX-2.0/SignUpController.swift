@@ -19,7 +19,7 @@ class SignUpController: NSViewController {
     @IBOutlet weak var emailField: NSTextField!
     @IBOutlet weak var backButton: NSButton!
     @IBOutlet weak var signUpButton: NSButton!
-    
+    let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
     
     @IBAction func signUpPressed(sender: AnyObject) {
         if(passwordField1.stringValue != passwordField2.stringValue){
@@ -47,6 +47,7 @@ class SignUpController: NSViewController {
                         self.progress1.stopAnimation(self)
                         self.progress2.stopAnimation(self)
                         self.progress3.stopAnimation(self)
+                        self.appDelegate.didLogin()
                     }
                 } else {
                     println("nay")

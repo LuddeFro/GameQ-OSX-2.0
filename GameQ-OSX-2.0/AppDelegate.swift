@@ -15,28 +15,31 @@ import AppKit
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    
     var statusBar = NSStatusBar.systemStatusBar()
     var statusBarItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
-    var menuItem : NSMenuItem = NSMenuItem()
+    var preferencesItem : NSMenuItem = NSMenuItem()
+    var loginItem : NSMenuItem = NSMenuItem()
+    var quitItem : NSMenuItem = NSMenuItem()
+    var statusItem:NSMenuItem = NSMenuItem()
+    var emailItem : NSMenuItem = NSMenuItem()
     var windowController:NSWindowController?
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
+            dispatch_async(dispatch_get_main_queue()) {
+                let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
+                self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
+                self.didLogin()
+            }
             if success {
-                dispatch_async(dispatch_get_main_queue()) {
-                    let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
-                    self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
-                }
             }
             else{
                 println(err)
                 dispatch_async(dispatch_get_main_queue()) {
-                    let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
-                    self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
+                    self.didLogOut()
                     self.windowController?.showWindow(self)
                 }
             }})}
@@ -53,17 +56,50 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem.menu = menu
         statusBarItem.title = "GameQ"
         
-        //Add menuItem to menu
-        menuItem.title = "Open"
-        menuItem.action = Selector("setWindowVisible:")
-        menuItem.keyEquivalent = ""
-        menu.addItem(menuItem)
+        loginItem.title = "Login"
+        loginItem.action = Selector("setWindowVisible:")
+        loginItem.keyEquivalent = ""
+        
+        preferencesItem.title = "Preferences"
+        preferencesItem.action = Selector("setWindowVisible:")
+        preferencesItem.keyEquivalent = ""
+        
+        quitItem.title = "Quit"
+        quitItem.action = Selector("quitApplication:")
+        quitItem.keyEquivalent = ""
+        
+        menu.addItem(preferencesItem)
     }
     
     func setWindowVisible(sender: AnyObject){
         dispatch_async(dispatch_get_main_queue()) {
             self.windowController?.showWindow(sender)
         }
+    }
+    
+    func quitApplication(sender: AnyObject){
+    NSApplication.sharedApplication().terminate(self)
+    }
+    
+    func didLogin(){
+    menu.removeAllItems()
+    emailItem.title = ConnectionHandler.loadEmail()!
+    emailItem.enabled = false
+    menu.addItem(emailItem)
+    statusItem.title = Encoding.getStringFromStatus(GameDetector.status)
+    statusItem.enabled = false
+    menu.addItem(statusItem)
+    menu.addItem(NSMenuItem.separatorItem())
+    menu.addItem(preferencesItem)
+    menu.addItem(NSMenuItem.separatorItem())
+    menu.addItem(quitItem)
+    }
+    
+    func didLogOut(){
+    menu.removeAllItems()
+        
+    menu.addItem(loginItem)
+    menu.addItem(quitItem)
     }
     
     // MARK: - Core Data stack
