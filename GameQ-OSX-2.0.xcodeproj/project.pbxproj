@@ -88,7 +88,7 @@
 		832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		AE008B951B3C3101000EEA45 /* HOTSDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HOTSDetector.swift; sourceTree = "<group>"; };
-		AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OrangeButton.swift; path = ../OrangeButton.swift; sourceTree = "<group>"; };
+		AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		AE0759B11B4D3106000EFD94 /* BlueButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		AE199A321B32E76100EC5870 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
