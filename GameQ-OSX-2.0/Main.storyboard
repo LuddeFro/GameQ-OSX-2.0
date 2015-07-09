@@ -799,7 +799,7 @@ DQ
                                     <constraint firstAttribute="width" constant="300" id="FO5-Wm-KxO"/>
                                     <constraint firstAttribute="height" constant="20" id="Mec-Mm-KzI"/>
                                 </constraints>
-                                <buttonCell key="cell" type="bevel" title="Forgot your password?" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Nwg-LU-8sl">
+                                <buttonCell key="cell" type="squareTextured" title="Forgot your password?" bezelStyle="texturedSquare" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Nwg-LU-8sl">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -851,7 +851,7 @@ DQ
                 </viewController>
                 <customObject id="wRV-Ex-bUH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920" y="715"/>
+            <point key="canvasLocation" x="960" y="739"/>
         </scene>
         <!--Forgot Password Controller-->
         <scene sceneID="Hl1-oj-qdW">
@@ -936,12 +936,13 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="statusLabel" destination="VFM-FV-nTJ" id="Lnq-Yb-l4Y"/>
                         <outlet property="submitButton" destination="etw-Cn-jns" id="uua-em-4ja"/>
                     </connections>
                 </viewController>
                 <customObject id="QIj-0u-iWh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687" y="1263"/>
+            <point key="canvasLocation" x="979" y="1295"/>
         </scene>
         <!--Sign Up Controller-->
         <scene sceneID="FVX-bw-lCM">
@@ -1150,7 +1151,7 @@ DQ
                 </viewController>
                 <customObject id="nUr-1G-cPA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1191" y="1696"/>
+            <point key="canvasLocation" x="960" y="64"/>
         </scene>
         <!--Master View Controller-->
         <scene sceneID="fdA-PC-e1K">
@@ -1222,19 +1223,19 @@ DQ
                                     <action selector="logOutPressed:" target="wFD-yq-twe" id="7Tu-iM-QCp"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSi-Ex-3KD">
-                                <rect key="frame" x="255" y="422" width="110" height="32"/>
-                                <buttonCell key="cell" type="push" title="Change pw" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tll-DJ-iVe">
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S4Q-Se-CRP">
+                                <rect key="frame" x="94" y="437" width="103" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save miss" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Oi6-IA-xqA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="DPB-nK-ZV1" kind="popover" popoverAnchorView="nSi-Ex-3KD" popoverBehavior="t" preferredEdge="maxX" id="Si9-cK-3Dy"/>
+                                    <action selector="saveMissedPressed:" target="wFD-yq-twe" id="wtb-4Y-DMK"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-kO-0T9">
-                                <rect key="frame" x="1" y="305" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AMs-Jk-xWN">
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYD-kO-0T9">
+                                <rect key="frame" x="-4" y="255" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AMs-Jk-xWN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1242,9 +1243,9 @@ DQ
                                     <action selector="stopButtonPressed:" target="wFD-yq-twe" id="z99-uK-zMY"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-pb-ry3">
-                                <rect key="frame" x="1" y="404" width="91" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save Cap" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f7P-Je-VmQ">
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm6-pb-ry3">
+                                <rect key="frame" x="-4" y="354" width="91" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save Cap" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f7P-Je-VmQ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1252,9 +1253,9 @@ DQ
                                     <action selector="capButtonPressed:" target="wFD-yq-twe" id="ddd-FA-2Rj"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-oI-xmy">
-                                <rect key="frame" x="1" y="371" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBQ-7k-VOF">
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MoA-oI-xmy">
+                                <rect key="frame" x="-4" y="321" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DBQ-7k-VOF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1262,9 +1263,9 @@ DQ
                                     <action selector="startButtonPressed:" target="wFD-yq-twe" id="YmO-0f-pk5"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9b-ND-Nn0">
-                                <rect key="frame" x="1" y="272" width="97" height="32"/>
-                                <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LB2-i1-1Bx">
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9b-ND-Nn0">
+                                <rect key="frame" x="-4" y="222" width="97" height="32"/>
+                                <buttonCell key="cell" type="push" title="FailMode" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LB2-i1-1Bx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1272,9 +1273,9 @@ DQ
                                     <action selector="failModePressed:" target="wFD-yq-twe" id="Qfb-e4-7ut"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
-                                <rect key="frame" x="1" y="338" width="66" height="32"/>
-                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azw-1E-jxV">
+                                <rect key="frame" x="-4" y="288" width="66" height="32"/>
+                                <buttonCell key="cell" type="push" title="Quit" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQr-RN-hzA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1282,15 +1283,42 @@ DQ
                                     <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m6V-l1-zGG">
+                                <rect key="frame" x="-4" y="387" width="94" height="32"/>
+                                <buttonCell key="cell" type="push" title="isTesting" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Cp-wr-SjN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="isTestingPressed:" target="wFD-yq-twe" id="XnT-wn-06z"/>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="urm-Yo-WPv">
+                                <rect key="frame" x="318" y="425" width="40" height="40"/>
+                                <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSSmartBadgeTemplate" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="H2m-Gm-bRV">
+                                    <behavior key="behavior" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="DPB-nK-ZV1" kind="popover" popoverAnchorView="urm-Yo-WPv" popoverBehavior="t" preferredEdge="minY" id="shK-Zl-du5"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="countDown" destination="TCh-fi-bsJ" id="RsR-Hj-OCa"/>
+                        <outlet property="failmodebutton" destination="L9b-ND-Nn0" id="82W-d8-V1B"/>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
+                        <outlet property="isTestingButton" destination="m6V-l1-zGG" id="Vez-0u-Srg"/>
                         <outlet property="logOutButton" destination="Dch-AV-KK7" id="jw1-xA-WDQ"/>
                         <outlet property="missedQueueButton" destination="7aE-Du-svx" id="PWn-Ok-DWC"/>
                         <outlet property="queueTimer" destination="GoJ-Pl-DN0" id="bu6-5h-GnB"/>
+                        <outlet property="quitButton" destination="Azw-1E-jxV" id="qSK-4v-WGK"/>
+                        <outlet property="saveCapButton" destination="hm6-pb-ry3" id="cZO-xL-ACK"/>
+                        <outlet property="saveMissButton" destination="S4Q-Se-CRP" id="HCg-5K-tyi"/>
+                        <outlet property="startButton" destination="MoA-oI-xmy" id="Zfu-1H-YoF"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
+                        <outlet property="stopButton" destination="mYD-kO-0T9" id="5F4-jA-q8s"/>
                         <outlet property="timer" destination="CSV-MA-BZY" id="LaK-Ba-gjI"/>
                         <segue destination="ldi-Q6-qY3" kind="custom" identifier="MasterToLogin" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="f9D-qx-hky"/>
                         <segue destination="SSw-vW-DUh" kind="popover" identifier="MasterToReport" popoverAnchorView="7aE-Du-svx" popoverBehavior="t" preferredEdge="maxX" id="ipH-kv-zqw"/>
@@ -1298,7 +1326,7 @@ DQ
                 </viewController>
                 <customObject id="2Lt-by-3OD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1536" y="728"/>
+            <point key="canvasLocation" x="1568" y="216"/>
         </scene>
         <!--Change Password Controller-->
         <scene sceneID="oHL-sJ-Qvw">
@@ -1437,6 +1465,7 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="statusLabel" destination="RRO-ES-XBa" id="nFw-WX-lUq"/>
                         <outlet property="submitButton" destination="gLa-oF-aVa" id="9FK-lj-tkF"/>
                     </connections>
                 </viewController>
@@ -1524,14 +1553,15 @@ DQ
                 </viewController>
                 <customObject id="Xkg-ws-DN3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2203" y="1428"/>
+            <point key="canvasLocation" x="2048" y="0.0"/>
         </scene>
     </scenes>
     <resources>
         <image name="GameQ-Logo2" width="550" height="550"/>
+        <image name="NSSmartBadgeTemplate" width="14" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2vk-2S-oDg"/>
+        <segue reference="f9D-qx-hky"/>
         <segue reference="oTI-Y7-tEr"/>
     </inferredMetricsTieBreakers>
 </document>

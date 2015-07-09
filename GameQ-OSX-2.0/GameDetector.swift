@@ -15,6 +15,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
     static var game:Game = Game.NoGame
     static var isFailMode:Bool = false
     static var isTesting:Bool = false
+    static var testMode:Bool = false
     static let dataHandler = DataHandler.sharedInstance
     static var detector:GameDetector.Type = GameDetector.self
     
@@ -48,9 +49,10 @@ class GameDetector:NSObject, GameDetectorProtocol {
         println(newStatus.rawValue)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
+        if(!isTesting && !testMode){
         ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
         println("succesfully updated status")
-        })
+        })}
     }
     
     class func saveDetection() {

@@ -179,15 +179,11 @@
 		832BCE6D1B09E4AC00FE15E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AEFE3CCD1B4E98C7008DE5C2 /* Other */,
+				AEFE3CCC1B4E98B7008DE5C2 /* Segue */,
+				AEFE3CCB1B4E9892008DE5C2 /* Timers */,
 				AE0759B41B4D333C000EFD94 /* Buttons */,
-				AEEF87C51B1DBA7C00DDD45D /* Logos */,
 				832BCE711B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodeld */,
-				AE199A321B32E76100EC5870 /* Helpers.swift */,
-				AE2C08561B4C14F1009A1836 /* Colors.swift */,
-				AEACCC2A1B3734BA00271BBC /* Timer.swift */,
-				AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */,
-				AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */,
-				AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */,
 				832BCE741B09E4AC00FE15E2 /* Images.xcassets */,
 				832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */,
 				832BCE6E1B09E4AC00FE15E2 /* Info.plist */,
@@ -297,11 +293,31 @@
 			name = "Custom Structs";
 			sourceTree = "<group>";
 		};
-		AEEF87C51B1DBA7C00DDD45D /* Logos */ = {
+		AEFE3CCB1B4E9892008DE5C2 /* Timers */ = {
 			isa = PBXGroup;
 			children = (
+				AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */,
+				AEACCC2A1B3734BA00271BBC /* Timer.swift */,
 			);
-			name = Logos;
+			name = Timers;
+			sourceTree = "<group>";
+		};
+		AEFE3CCC1B4E98B7008DE5C2 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				AEC97A6D1B3448E800FE752D /* MyCustomSwiftAnimator.swift */,
+				AEC97A6E1B3448E800FE752D /* MyCustomSwiftSegue.swift */,
+			);
+			name = Segue;
+			sourceTree = "<group>";
+		};
+		AEFE3CCD1B4E98C7008DE5C2 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				AE199A321B32E76100EC5870 /* Helpers.swift */,
+				AE2C08561B4C14F1009A1836 /* Colors.swift */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

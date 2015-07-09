@@ -10,6 +10,7 @@ import Cocoa
 
 class ChangePasswordController: NSViewController {
         
+    @IBOutlet weak var statusLabel: NSTextField!
         let font1 = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style1 = NSMutableParagraphStyle()
     

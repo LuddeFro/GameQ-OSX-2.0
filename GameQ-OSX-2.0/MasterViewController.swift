@@ -11,28 +11,46 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
-    @IBAction func logOutPressed(sender: AnyObject) {
-        
-        ConnectionHandler.logout({ (success:Bool, err:String?) in
-            dispatch_async(dispatch_get_main_queue()) {
-            self.performSegueWithIdentifier("MasterToLogin", sender: nil)
-            }
-        })
-    }
-    
-    
     @IBOutlet weak var logOutButton: NSButton!
-    
     @IBOutlet weak var missedQueueButton: NSButton!
     @IBOutlet weak var timer: Timer!
-    
     @IBOutlet weak var countDown: NSTextField!
-    
     @IBOutlet weak var queueTimer: QueueTimer!
-    
     @IBOutlet weak var gameStatus: NSTextField!
-    
     @IBOutlet weak var statusLabel: NSTextField!
+    
+    @IBOutlet weak var saveMissButton: NSButton!
+    
+    @IBOutlet weak var isTestingButton: NSButton!
+    
+    @IBOutlet weak var saveCapButton: NSButton!
+    
+    @IBOutlet weak var startButton: NSButton!
+    
+    @IBOutlet weak var quitButton: NSButton!
+    
+    @IBOutlet weak var stopButton: NSButton!
+    
+    @IBOutlet weak var failmodebutton: NSButton!
+    
+    @IBAction func isTestingPressed(sender: AnyObject) {
+        if(detector.testMode){
+            println("testing off")
+            detector.testMode = false}
+        else{
+            println("testing on")
+            detector.testMode = true}
+    }
+    
+    @IBAction func saveMissedPressed(sender: AnyObject) {
+        detector.saveMissedDetection()
+    }
+    
+    @IBAction func logOutPressed(sender: AnyObject) {
+        ConnectionHandler.logout({ (success:Bool, err:String?) in
+            dispatch_async(dispatch_get_main_queue()) {
+                self.performSegueWithIdentifier("MasterToLogin", sender: nil)
+            }})}
     
     @IBAction func startButtonPressed(sender: NSButton) {
         detector.startDetection()
@@ -43,11 +61,9 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func capFailButtonPressed(sender: NSButton) {
-
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier("MasterToReport", sender: nil)
-        }
-    }
+        }}
     
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
@@ -57,7 +73,6 @@ class MasterViewController: NSViewController {
     @IBAction func stopButtonPressed(sender: NSButton) {
         detector.stopDetection()
     }
-    
     
     @IBAction func quitButtonPressed(sender: NSButton) {
         detector.stopDetection()
@@ -85,6 +100,32 @@ class MasterViewController: NSViewController {
         
         self.gameStatus.stringValue = GameDetector.game.rawValue
         self.statusLabel.stringValue = GameDetector.status.rawValue
+        
+        if(ConnectionHandler.loadEmail() == "asd@asd.com"){
+            failmodebutton.enabled = true
+            failmodebutton.hidden = false
+            
+            isTestingButton.enabled = true
+            isTestingButton.hidden = false
+            
+            startButton.enabled = true
+            startButton.hidden = false
+            
+            stopButton.enabled = true
+            stopButton.hidden = false
+            
+            saveCapButton.enabled = true
+            saveCapButton.hidden = false
+            
+            saveMissButton.enabled = true
+            saveMissButton.hidden = false
+            
+            quitButton.enabled = true
+            quitButton.hidden = false
+        }
+        
+        
+        //CHANGE THIS
         detector.updateStatus(Status.Online)
         var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
@@ -92,9 +133,6 @@ class MasterViewController: NSViewController {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        dispatch_async(dispatch_get_main_queue()) {
-            GameDetector.updateStatus(Status.Offline)
-        }
     }
     
     func getStatus(sender: NSNotification) {
@@ -152,6 +190,8 @@ class MasterViewController: NSViewController {
         }
     }
     
+    
+    //THIS MUST BE MOVED
     func update() {
         
         var ws = NSWorkspace.sharedWorkspace()

@@ -22,14 +22,14 @@ class ConnectionHandler : NSObject {
     
     private static func getIntFrom(json:Dictionary<String, AnyObject>, key:String) -> Int {
         if let value = json[key] as? Int {
-            println("value: \(value)")
+            //println("value: \(value)")
             return value
         } else { return 0 }
     }
     
     private static func postRequest(arguments:String, apiExtension:String, responseHandler:(responseJSON:AnyObject!) -> ()) {
         let urlString = "\(baseURL)\(apiExtension)?"
-        println(urlString)
+        //println(urlString)
         let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         request.HTTPMethod = "POST"
         
@@ -38,13 +38,13 @@ class ConnectionHandler : NSObject {
             data, response, error in
             
             if error != nil {
-                println("error=\(error)")
+                //println("error=\(error)")
                 return
             }
             
-            //println("response = \(response)")
+            ////println("response = \(response)")
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("responseString = \(responseString!)")
+            //println("responseString = \(responseString!)")
             
             var jsonErrorOptional:NSError?
             let responseJSON:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &jsonErrorOptional)
@@ -77,16 +77,16 @@ class ConnectionHandler : NSObject {
                     self.savePassword(password)
                     self.saveEmail(email)
                     let retDI = self.getIntFrom(json, key: "device_id")
-                    println("returned DI: \(retDI)")
+                    //println("returned DI: \(retDI)")
                     if retDI != 0 {
                         self.saveDeviceId("\(retDI)")
-                        println("saved DI")
+                        //println("saved DI")
                         
                     }
                     self.sessionId = self.getStringFrom(json, key: "session_token")
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -114,7 +114,7 @@ class ConnectionHandler : NSObject {
                     self.sessionId = ""
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             self.saveEmail("")
             self.savePassword("")
@@ -152,7 +152,7 @@ class ConnectionHandler : NSObject {
                     self.sessionId = self.getStringFrom(json, key: "session_token")
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -182,7 +182,7 @@ class ConnectionHandler : NSObject {
                     //set status success
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -208,7 +208,7 @@ class ConnectionHandler : NSObject {
                     //success
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -234,7 +234,7 @@ class ConnectionHandler : NSObject {
                     //success
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -260,7 +260,7 @@ class ConnectionHandler : NSObject {
                     downloadLink = self.getStringFrom(json, key: "download_link")
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err, newestVersion:newestVersion, link:downloadLink)
@@ -286,7 +286,7 @@ class ConnectionHandler : NSObject {
                     //csv submission succeeded
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -321,7 +321,7 @@ class ConnectionHandler : NSObject {
                     self.sessionId = self.getStringFrom(json, key: "session_token")
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
@@ -343,20 +343,12 @@ class ConnectionHandler : NSObject {
                     //success mothafucka
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
         })
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -435,7 +427,7 @@ class ConnectionHandler : NSObject {
                 }
                 var error2: NSError?
                 if !managedContext.save(&error2) {
-                    println("saveSingle1 Could not save \(error2), \(error2?.userInfo)")
+                    //println("saveSingle1 Could not save \(error2), \(error2?.userInfo)")
                 }
             } else {
                 //-----
@@ -449,7 +441,7 @@ class ConnectionHandler : NSObject {
                 managedObject.setValue(value, forKey: attribute)
             }
         } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+            //println("Could not fetch \(error), \(error!.userInfo)")
         }
         
         
@@ -457,7 +449,7 @@ class ConnectionHandler : NSObject {
         
         var error2: NSError?
         if !managedContext.save(&error2) {
-            println("saveSingle2 Could not save \(error2), \(error2?.userInfo)")
+            //println("saveSingle2 Could not save \(error2), \(error2?.userInfo)")
         }
         
     }
@@ -470,7 +462,7 @@ class ConnectionHandler : NSObject {
     description: Loads attribute from disk
     */
     private class func loadSingle(attribute:String) -> AnyObject? {
-        println("loading \(attribute) for Singles")
+        //println("loading \(attribute) for Singles")
         let entity = "Singles"
         let managedContext = (NSApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         //2
@@ -485,15 +477,15 @@ class ConnectionHandler : NSObject {
         
         if let results = fetchedResults {
             if results.count > 0 {
-                println("found entries")
-                println("\(results[0].valueForKey(attribute))")
+                //println("found entries")
+                //println("\(results[0].valueForKey(attribute))")
                 return results[0].valueForKey(attribute)
             } else {
-                println("no results")
+                //println("no results")
                 return nil
             }
         } else {
-            println("Could not fetch \(error), \(error!.userInfo)")
+            //println("Could not fetch \(error), \(error!.userInfo)")
             return nil
         }
         
@@ -518,7 +510,7 @@ class ConnectionHandler : NSObject {
                     //csv submission succeeded
                 }
             } else {
-                println("json parse fail")
+                //println("json parse fail")
             }
             
             finalCallBack(success: success, err: err)
