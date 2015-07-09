@@ -42,12 +42,12 @@ enum Game:String {
     
     static func getIntFromGame(game:Game) -> Int{
         switch game{
+        case .NoGame: return 0
         case .Dota: return 1
         case .HoN: return 2
         case .CSGO: return 3
         case .HOTS: return 4
         case .LoL: return 5
-        case .NoGame: return 6
         }
     }
     

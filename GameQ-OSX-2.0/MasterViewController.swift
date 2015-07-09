@@ -11,6 +11,8 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBOutlet weak var settingsButton: NSButton!
+    @IBOutlet weak var feedbackButton: NSButton!
     @IBOutlet weak var logOutButton: NSButton!
     @IBOutlet weak var missedQueueButton: NSButton!
     @IBOutlet weak var timer: Timer!
@@ -47,6 +49,8 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func logOutPressed(sender: AnyObject) {
+        
+        disableAllButtons()
         ConnectionHandler.logout({ (success:Bool, err:String?) in
             dispatch_async(dispatch_get_main_queue()) {
                 self.performSegueWithIdentifier("MasterToLogin", sender: nil)
@@ -100,6 +104,7 @@ class MasterViewController: NSViewController {
         
         self.gameStatus.stringValue = GameDetector.game.rawValue
         self.statusLabel.stringValue = GameDetector.status.rawValue
+        
         
         if(ConnectionHandler.loadEmail() == "asd@asd.com"){
             failmodebutton.enabled = true
@@ -279,5 +284,17 @@ class MasterViewController: NSViewController {
             countDownTimer.invalidate()
             counter = 0
         }
+    }
+    
+    private func disableAllButtons(){
+    logOutButton.enabled = false
+    settingsButton.enabled = false
+    feedbackButton.enabled = false
+    }
+    
+    private func enableAllButtons(){
+        logOutButton.enabled = true
+        settingsButton.enabled = true
+        feedbackButton.enabled = true
     }
 }

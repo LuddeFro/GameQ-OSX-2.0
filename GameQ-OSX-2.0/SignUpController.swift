@@ -22,14 +22,12 @@ class SignUpController: NSViewController {
     
     
     @IBAction func signUpPressed(sender: AnyObject) {
-        
         if(passwordField1.stringValue != passwordField2.stringValue){
             dispatch_async(dispatch_get_main_queue()) {
                 self.statusLabel.stringValue = "Passwords are not the same"
                 self.passwordField1.stringValue = ""
                 self.passwordField2.stringValue = ""
-            }
-        }
+            }}
             
         else{
             

@@ -1414,6 +1414,7 @@ DQ
                     <connections>
                         <outlet property="countDown" destination="TCh-fi-bsJ" id="RsR-Hj-OCa"/>
                         <outlet property="failmodebutton" destination="L9b-ND-Nn0" id="82W-d8-V1B"/>
+                        <outlet property="feedbackButton" destination="7aE-Du-svx" id="sf2-Sd-kku"/>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
                         <outlet property="isTestingButton" destination="m6V-l1-zGG" id="Vez-0u-Srg"/>
                         <outlet property="logOutButton" destination="Dch-AV-KK7" id="jw1-xA-WDQ"/>
@@ -1422,6 +1423,7 @@ DQ
                         <outlet property="quitButton" destination="Azw-1E-jxV" id="qSK-4v-WGK"/>
                         <outlet property="saveCapButton" destination="hm6-pb-ry3" id="cZO-xL-ACK"/>
                         <outlet property="saveMissButton" destination="S4Q-Se-CRP" id="HCg-5K-tyi"/>
+                        <outlet property="settingsButton" destination="urm-Yo-WPv" id="ggv-7K-RZL"/>
                         <outlet property="startButton" destination="MoA-oI-xmy" id="Zfu-1H-YoF"/>
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
                         <outlet property="stopButton" destination="mYD-kO-0T9" id="5F4-jA-q8s"/>
@@ -1470,7 +1472,7 @@ DQ
                                             <constraint firstAttribute="width" constant="280" id="Nq1-K1-fHN"/>
                                             <constraint firstAttribute="height" constant="25" id="W4R-Gl-YMg"/>
                                         </constraints>
-                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Repeat Password" drawsBackground="YES" id="p3j-FH-uzt">
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="New Password" drawsBackground="YES" id="p3j-FH-uzt">
                                             <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1485,7 +1487,7 @@ DQ
                                             <constraint firstAttribute="height" constant="25" id="Bxr-Vn-qhL"/>
                                             <constraint firstAttribute="width" constant="280" id="ikT-bV-fVx"/>
                                         </constraints>
-                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password" drawsBackground="YES" id="coH-as-Beg">
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Repeat New Password" drawsBackground="YES" id="coH-as-Beg">
                                             <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1507,7 +1509,7 @@ DQ
                                             <constraint firstAttribute="width" constant="280" id="gXt-FY-eMe"/>
                                             <constraint firstAttribute="height" constant="25" id="ysj-Yd-Zpn"/>
                                         </constraints>
-                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password" drawsBackground="YES" id="Thc-EA-nXQ">
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Current Password" drawsBackground="YES" id="Thc-EA-nXQ">
                                             <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1571,6 +1573,9 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentPassword" destination="Y5k-ax-Hb4" id="9wb-Q0-AJD"/>
+                        <outlet property="newPassword" destination="rlo-p1-Hg7" id="QW5-iZ-GET"/>
+                        <outlet property="repeatPassword" destination="qpQ-ry-UEI" id="Oe1-zN-sEc"/>
                         <outlet property="statusLabel" destination="RRO-ES-XBa" id="nFw-WX-lUq"/>
                         <outlet property="submitButton" destination="gLa-oF-aVa" id="9FK-lj-tkF"/>
                     </connections>
