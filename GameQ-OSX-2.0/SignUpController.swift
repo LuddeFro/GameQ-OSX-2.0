@@ -10,6 +10,14 @@ import Cocoa
 
 class SignUpController: NSViewController {
     
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var progress1: NSProgressIndicator!
+    
+    @IBOutlet weak var progress2: NSProgressIndicator!
+
+    @IBOutlet weak var progress3: NSProgressIndicator!
+    
+    
     @IBAction func signUpPressed(sender: AnyObject) {
         
         if(passwordField1.stringValue != passwordField2.stringValue){
@@ -23,6 +31,9 @@ class SignUpController: NSViewController {
         else{
         
             dispatch_async(dispatch_get_main_queue()) {
+            self.progress1.startAnimation(self)
+                 self.progress2.startAnimation(self)
+                 self.progress3.startAnimation(self)
               self.statusLabel.stringValue = "Creating Account..."
             }
             
@@ -32,11 +43,17 @@ class SignUpController: NSViewController {
             if success {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.performSegueWithIdentifier("SignUpToMaster", sender: nil)
+                    self.progress1.stopAnimation(self)
+                    self.progress2.stopAnimation(self)
+                    self.progress3.stopAnimation(self)
                 }
             } else {
                 println("nay")
                 dispatch_async(dispatch_get_main_queue()) {
                     self.statusLabel.stringValue = err!
+                    self.progress1.stopAnimation(self)
+                    self.progress2.stopAnimation(self)
+                    self.progress3.stopAnimation(self)
                 }
             }
         })
@@ -46,14 +63,12 @@ class SignUpController: NSViewController {
     @IBOutlet weak var passwordField2: NSSecureTextField!
     @IBOutlet weak var passwordField1: NSSecureTextField!
     @IBOutlet weak var emailField: NSTextField!
-    @IBOutlet weak var statusLabel: NSTextField!
     @IBOutlet weak var backButtonPressed: NSButton!
-    
     @IBOutlet weak var backButton: NSButton!
     @IBOutlet weak var signUpButton: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()

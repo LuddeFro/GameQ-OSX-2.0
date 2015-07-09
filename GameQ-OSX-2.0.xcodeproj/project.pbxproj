@@ -19,7 +19,6 @@
 		AE0D7E9D1B1DA60300B23150 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */; };
 		AE199A331B32E76100EC5870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE199A321B32E76100EC5870 /* Helpers.swift */; };
 		AE199A341B32E80300EC5870 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE199A321B32E76100EC5870 /* Helpers.swift */; };
-		AE199A361B33038E00EC5870 /* Draft1.png in Resources */ = {isa = PBXBuildFile; fileRef = AE199A351B33038E00EC5870 /* Draft1.png */; };
 		AE1B694B1B38C09800D0FA73 /* QueueTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */; };
 		AE1B694C1B38C6A800D0FA73 /* QueueTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */; };
 		AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE226CB61B2316D0009B7D9B /* CSGODetector.swift */; };
@@ -93,7 +92,6 @@
 		AE0759B11B4D3106000EFD94 /* BlueButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
 		AE0D7E9B1B1D9EFE00B23150 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		AE199A321B32E76100EC5870 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		AE199A351B33038E00EC5870 /* Draft1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Draft1.png; sourceTree = "<group>"; };
 		AE1B694A1B38C09800D0FA73 /* QueueTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueTimer.swift; sourceTree = "<group>"; };
 		AE226CB61B2316D0009B7D9B /* CSGODetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSGODetector.swift; sourceTree = "<group>"; };
 		AE238C101B19F4BF00B6ED09 /* SwiftCSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCSV.swift; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 		AEEF87C51B1DBA7C00DDD45D /* Logos */ = {
 			isa = PBXGroup;
 			children = (
-				AE199A351B33038E00EC5870 /* Draft1.png */,
 			);
 			name = Logos;
 			sourceTree = "<group>";
@@ -389,7 +386,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */,
-				AE199A361B33038E00EC5870 /* Draft1.png in Resources */,
 				AEF4B5B11B343C2E0001AF42 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

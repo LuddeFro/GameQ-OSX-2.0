@@ -11,14 +11,15 @@ import Cocoa
 class LoginViewController: NSViewController {
     
     @IBOutlet weak var loginProgress1: NSProgressIndicator!
+    @IBOutlet weak var forgotPasswordButton: NSButton!
     
     @IBOutlet weak var loginProgress2: NSProgressIndicator!
     @IBAction func loginButtonPressed(sender: AnyObject) {
         
         dispatch_async(dispatch_get_main_queue()) {
-           self.loginProgress1.startAnimation(self)
-           self.loginProgress2.startAnimation(self)
-
+            self.loginProgress1.startAnimation(self)
+            self.loginProgress2.startAnimation(self)
+            
         }
         
         
@@ -62,6 +63,13 @@ class LoginViewController: NSViewController {
         signUpButton.attributedTitle = NSAttributedString(string: "Sign Up", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
         
+        let font2 = NSFont(name: "Helvetica", size: 14) ?? NSFont.labelFontOfSize(14)
+        let style2 = NSMutableParagraphStyle()
+        style2.alignment = .CenterTextAlignment
+        
+        forgotPasswordButton.attributedTitle = NSAttributedString(string: "Forgot your password?", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style2, NSFontAttributeName: font2])
+        
+        
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
             if success {
                 println("Jay")
@@ -70,12 +78,6 @@ class LoginViewController: NSViewController {
                 }
             }
         })
-    }
-    
-    override var representedObject: AnyObject? {
-        didSet {
-            // Update the view, if already loaded.
-        }
     }
 }
 

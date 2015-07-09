@@ -85,12 +85,16 @@ class MasterViewController: NSViewController {
         
         self.gameStatus.stringValue = GameDetector.game.rawValue
         self.statusLabel.stringValue = GameDetector.status.rawValue
+        detector.updateStatus(Status.Online)
         var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        dispatch_async(dispatch_get_main_queue()) {
+            GameDetector.updateStatus(Status.Offline)
+        }
     }
     
     func getStatus(sender: NSNotification) {

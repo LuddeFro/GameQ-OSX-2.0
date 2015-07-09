@@ -681,11 +681,15 @@
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="ldi-Q6-qY3" customClass="LoginViewController" customModule="GameQ_OSX_2_0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Fz1-sf-mPO">
-                        <rect key="frame" x="0.0" y="0.0" width="370" height="471"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-Mf-A4l" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="46" width="300" height="40"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-Mf-A4l" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="37" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AeC-Gt-Uy4"/>
+                                    <constraint firstAttribute="width" constant="300" id="bDJ-jJ-LUm"/>
+                                </constraints>
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="lgi-7X-a6e">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -694,8 +698,12 @@
                                     <segue destination="arN-cW-vAf" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="EqI-qz-b7t"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="94" width="300" height="40"/>
+                            <button springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQi-T1-bFl" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="82" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="66C-Ga-7Zy"/>
+                                    <constraint firstAttribute="width" constant="300" id="ceQ-4m-oGg"/>
+                                </constraints>
                                 <buttonCell key="cell" type="squareTextured" title="Login" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="m9d-8B-6Ah">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -707,24 +715,36 @@ DQ
                                     <action selector="loginButtonPressed:" target="ldi-Q6-qY3" id="JEQ-3v-uEE"/>
                                 </connections>
                             </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6w-ut-KdO" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="159" width="300" height="87"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="C6w-ut-KdO" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="150" width="300" height="90"/>
                                 <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="roH-RO-Y63">
-                                        <rect key="frame" x="10" y="52" width="280" height="24"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="roH-RO-Y63">
+                                        <rect key="frame" x="10" y="55" width="280" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="ceK-iJ-bdg"/>
+                                            <constraint firstAttribute="width" constant="280" id="ex1-aF-6RM"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="left" placeholderString="Email" drawsBackground="YES" id="cUV-yj-avA">
-                                            <font key="font" size="20" name="HelveticaNeue"/>
+                                            <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="muQ-Wa-IIc" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="42" width="300" height="1"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="muQ-Wa-IIc" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="300" height="2"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="2" id="IHe-0L-aD2"/>
+                                            <constraint firstAttribute="width" constant="300" id="wpn-K4-Me3"/>
+                                        </constraints>
                                     </customView>
-                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gtj-BO-ieb">
-                                        <rect key="frame" x="10" y="10" width="280" height="24"/>
-                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password" drawsBackground="YES" usesSingleLineMode="YES" id="gpt-bp-atP">
-                                            <font key="font" metaFont="system" size="20"/>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gtj-BO-ieb">
+                                        <rect key="frame" x="10" y="10" width="280" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="7wp-12-Xsj"/>
+                                            <constraint firstAttribute="width" constant="280" id="RGz-kC-NbS"/>
+                                        </constraints>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password" drawsBackground="YES" id="gpt-bp-atP">
+                                            <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <allowedInputSourceLocales>
@@ -733,17 +753,52 @@ DQ
                                         </secureTextFieldCell>
                                     </secureTextField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Gtj-BO-ieb" secondAttribute="bottom" constant="10" id="2nf-Cc-WqM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gtj-BO-ieb" secondAttribute="trailing" constant="10" id="5qn-Oz-dHO"/>
+                                    <constraint firstItem="muQ-Wa-IIc" firstAttribute="leading" secondItem="C6w-ut-KdO" secondAttribute="leading" id="5u1-ZB-CVs"/>
+                                    <constraint firstAttribute="height" constant="90" id="6aP-pr-GdE"/>
+                                    <constraint firstAttribute="width" constant="300" id="Fdp-fT-jVT"/>
+                                    <constraint firstAttribute="trailing" secondItem="muQ-Wa-IIc" secondAttribute="trailing" id="JIC-Av-LRd"/>
+                                    <constraint firstAttribute="trailing" secondItem="roH-RO-Y63" secondAttribute="trailing" constant="10" id="RHG-jQ-Eff"/>
+                                    <constraint firstItem="roH-RO-Y63" firstAttribute="top" secondItem="C6w-ut-KdO" secondAttribute="top" constant="10" id="YIY-Nh-yDm"/>
+                                    <constraint firstItem="Gtj-BO-ieb" firstAttribute="leading" secondItem="C6w-ut-KdO" secondAttribute="leading" constant="10" id="i0S-sN-Tml"/>
+                                    <constraint firstItem="muQ-Wa-IIc" firstAttribute="top" secondItem="roH-RO-Y63" secondAttribute="bottom" constant="9" id="kmq-fF-XbW"/>
+                                    <constraint firstItem="roH-RO-Y63" firstAttribute="leading" secondItem="C6w-ut-KdO" secondAttribute="leading" constant="10" id="oxn-C8-tE9"/>
+                                </constraints>
                             </customView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXA-bN-nIk">
-                                <rect key="frame" x="37" y="134" width="297" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title=" " placeholderString=" " id="7l1-4e-CGL">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QXA-bN-nIk">
+                                <rect key="frame" x="33" y="127" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="wK7-8g-kkt"/>
+                                    <constraint firstAttribute="width" constant="300" id="zrh-hY-9aS"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString=" " id="7l1-4e-CGL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoI-WK-oua">
-                                <rect key="frame" x="112" y="14" width="147" height="32"/>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="caU-wn-xxE">
+                                <rect key="frame" x="345" y="165" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="owc-Cn-unh"/>
+                                    <constraint firstAttribute="height" constant="16" id="qP7-2w-puU"/>
+                                </constraints>
+                            </progressIndicator>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="zRA-bX-6sq">
+                                <rect key="frame" x="345" y="209" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="FSh-hA-Hy5"/>
+                                    <constraint firstAttribute="width" constant="16" id="KfQ-yi-l10"/>
+                                </constraints>
+                            </progressIndicator>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="IoI-WK-oua">
+                                <rect key="frame" x="35" y="12" width="300" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="FO5-Wm-KxO"/>
+                                    <constraint firstAttribute="height" constant="20" id="Mec-Mm-KzI"/>
+                                </constraints>
                                 <buttonCell key="cell" type="bevel" title="Forgot your password?" bezelStyle="rounded" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Nwg-LU-8sl">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -752,16 +807,39 @@ DQ
                                     <segue destination="6mk-Ld-Lsx" kind="popover" popoverAnchorView="IoI-WK-oua" popoverBehavior="t" preferredEdge="minY" id="KZa-ej-VBo"/>
                                 </connections>
                             </button>
-                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="caU-wn-xxE">
-                                <rect key="frame" x="343" y="213" width="16" height="16"/>
-                            </progressIndicator>
-                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="zRA-bX-6sq">
-                                <rect key="frame" x="343" y="173" width="16" height="16"/>
-                            </progressIndicator>
+                            <imageView translatesAutoresizingMaskIntoConstraints="NO" id="f9h-ms-UIl">
+                                <rect key="frame" x="110" y="280" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="NC7-Zk-S7i"/>
+                                    <constraint firstAttribute="height" constant="150" id="Zqe-HN-6gA"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="GameQ-Logo2" id="YB4-c9-Cy5"/>
+                            </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="lQi-T1-bFl" secondAttribute="centerX" id="1jf-IS-fCR"/>
+                            <constraint firstAttribute="centerX" secondItem="1tU-Mf-A4l" secondAttribute="centerX" id="3k9-VW-m31"/>
+                            <constraint firstItem="1tU-Mf-A4l" firstAttribute="top" secondItem="lQi-T1-bFl" secondAttribute="bottom" constant="5" id="4Fo-Oy-d9U"/>
+                            <constraint firstAttribute="bottom" secondItem="caU-wn-xxE" secondAttribute="bottom" constant="165" id="8yz-pt-331"/>
+                            <constraint firstItem="C6w-ut-KdO" firstAttribute="top" secondItem="f9h-ms-UIl" secondAttribute="bottom" constant="40" id="IOg-9p-kBe"/>
+                            <constraint firstItem="zRA-bX-6sq" firstAttribute="top" secondItem="Fz1-sf-mPO" secondAttribute="top" constant="245" id="Lb7-0u-Mx7"/>
+                            <constraint firstItem="caU-wn-xxE" firstAttribute="leading" secondItem="C6w-ut-KdO" secondAttribute="trailing" constant="10" id="Pec-YQ-ce2"/>
+                            <constraint firstItem="lQi-T1-bFl" firstAttribute="top" secondItem="QXA-bN-nIk" secondAttribute="bottom" constant="5" id="WC2-B8-jTa"/>
+                            <constraint firstAttribute="centerX" secondItem="IoI-WK-oua" secondAttribute="centerX" id="WJL-3w-R9d"/>
+                            <constraint firstItem="zRA-bX-6sq" firstAttribute="leading" secondItem="C6w-ut-KdO" secondAttribute="trailing" constant="9.5" id="Y0m-jE-QT5"/>
+                            <constraint firstItem="QXA-bN-nIk" firstAttribute="top" secondItem="C6w-ut-KdO" secondAttribute="bottom" constant="5" id="hBB-st-QFG"/>
+                            <constraint firstItem="IoI-WK-oua" firstAttribute="top" secondItem="1tU-Mf-A4l" secondAttribute="bottom" constant="5" id="kgC-UQ-z6s"/>
+                            <constraint firstAttribute="centerX" secondItem="1tU-Mf-A4l" secondAttribute="centerX" id="kkf-Ew-cJq"/>
+                            <constraint firstItem="f9h-ms-UIl" firstAttribute="top" secondItem="Fz1-sf-mPO" secondAttribute="top" constant="40" id="q1n-qd-Lho"/>
+                            <constraint firstAttribute="centerX" secondItem="f9h-ms-UIl" secondAttribute="centerX" id="qpR-n6-smM"/>
+                            <constraint firstAttribute="centerX" secondItem="C6w-ut-KdO" secondAttribute="centerX" id="wzx-kN-DHK"/>
+                            <constraint firstAttribute="centerX" secondItem="QXA-bN-nIk" secondAttribute="centerX" id="yQr-ys-6g7"/>
+                            <constraint firstItem="C6w-ut-KdO" firstAttribute="top" secondItem="Fz1-sf-mPO" secondAttribute="top" constant="230" id="yek-ua-An2"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="roH-RO-Y63" id="Jub-Sh-e8V"/>
+                        <outlet property="forgotPasswordButton" destination="IoI-WK-oua" id="ncr-Pv-Btj"/>
                         <outlet property="loginButton" destination="lQi-T1-bFl" id="Xq5-vM-2Sx"/>
                         <outlet property="loginProgress1" destination="caU-wn-xxE" id="Deh-Bc-Mgl"/>
                         <outlet property="loginProgress2" destination="zRA-bX-6sq" id="FL1-LC-wpf"/>
@@ -783,29 +861,48 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19q-GM-ec7">
-                                <rect key="frame" x="12" y="139" width="257" height="36"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19q-GM-ec7">
+                                <rect key="frame" x="8" y="139" width="284" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="Oeo-uN-lhm"/>
+                                    <constraint firstAttribute="height" constant="36" id="Ri8-Xm-l8r"/>
+                                </constraints>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Enter your email and we will send you a new password" id="WYk-Zf-B59">
                                     <font key="font" metaFont="system" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28K-kQ-Kx0" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="14" y="85" width="273" height="46"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="28K-kQ-Kx0" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="10" y="84" width="280" height="45"/>
                                 <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbz-6J-FCD">
-                                        <rect key="frame" x="10" y="11" width="250" height="24"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hbz-6J-FCD">
+                                        <rect key="frame" x="10" y="10" width="260" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="mYZ-Z5-1rI"/>
+                                            <constraint firstAttribute="width" constant="260" id="ppM-fi-BLj"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="left" placeholderString="Email" drawsBackground="YES" id="bQc-UE-vZC">
-                                            <font key="font" size="20" name="HelveticaNeue"/>
+                                            <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hbz-6J-FCD" secondAttribute="bottom" constant="10" id="E6a-fY-wDy"/>
+                                    <constraint firstAttribute="width" constant="280" id="VLW-d0-JSc"/>
+                                    <constraint firstItem="hbz-6J-FCD" firstAttribute="top" secondItem="28K-kQ-Kx0" secondAttribute="top" constant="10" id="eBf-KS-o5J"/>
+                                    <constraint firstAttribute="height" constant="45" id="sGK-g1-doE"/>
+                                    <constraint firstAttribute="centerX" secondItem="hbz-6J-FCD" secondAttribute="centerX" id="wnq-9B-j9V"/>
+                                </constraints>
                             </customView>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="etw-Cn-jns" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="24" y="31" width="253" height="41"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="etw-Cn-jns" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="10" y="34" width="280" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="giW-wT-Abt"/>
+                                    <constraint firstAttribute="width" constant="280" id="tcF-XC-Gc6"/>
+                                </constraints>
                                 <buttonCell key="cell" type="squareTextured" title="Get new Password" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="7Dm-gx-3aU">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -815,6 +912,14 @@ DQ
                                 </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="28K-kQ-Kx0" secondAttribute="centerX" id="0Sd-Do-e7Y"/>
+                            <constraint firstAttribute="centerX" secondItem="etw-Cn-jns" secondAttribute="centerX" id="C7m-wR-rJW"/>
+                            <constraint firstItem="28K-kQ-Kx0" firstAttribute="top" secondItem="19q-GM-ec7" secondAttribute="bottom" constant="10" id="CeU-w6-IIc"/>
+                            <constraint firstItem="etw-Cn-jns" firstAttribute="top" secondItem="28K-kQ-Kx0" secondAttribute="bottom" constant="10" id="Fkq-5o-X6K"/>
+                            <constraint firstItem="19q-GM-ec7" firstAttribute="top" secondItem="6Sk-C6-bpj" secondAttribute="top" constant="25" id="Yla-5Y-pWT"/>
+                            <constraint firstAttribute="centerX" secondItem="19q-GM-ec7" secondAttribute="centerX" id="mal-oQ-f5u"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="submitButton" destination="etw-Cn-jns" id="uua-em-4ja"/>
@@ -832,8 +937,12 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="370" height="470"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-gq-Ybc" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="20" width="300" height="40"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-gq-Ybc" customClass="BlueButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="37" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="VR5-hO-Klg"/>
+                                    <constraint firstAttribute="height" constant="40" id="kjl-HK-RAX"/>
+                                </constraints>
                                 <buttonCell key="cell" type="squareTextured" title="Back" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="lW7-Vu-hLK">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -842,8 +951,12 @@ DQ
                                     <segue destination="ldi-Q6-qY3" kind="custom" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="2vk-2S-oDg"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HMz-tR-KhG" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="63" width="300" height="40"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="HMz-tR-KhG" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="82" width="300" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="Zbz-tV-EqP"/>
+                                    <constraint firstAttribute="height" constant="40" id="sYn-c4-k7l"/>
+                                </constraints>
                                 <buttonCell key="cell" type="squareTextured" title="Sign Up" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="S9c-Mu-tPa">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -855,24 +968,36 @@ DQ
                                     <action selector="signUpPressed:" target="arN-cW-vAf" id="ZLP-zg-f5O"/>
                                 </connections>
                             </button>
-                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vzk-Qk-u3f" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="35" y="124" width="300" height="122"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Vzk-Qk-u3f" customClass="LoginHolder" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                <rect key="frame" x="35" y="150" width="300" height="135"/>
                                 <subviews>
-                                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KjD-1i-DWR">
-                                        <rect key="frame" x="10" y="87" width="280" height="24"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KjD-1i-DWR">
+                                        <rect key="frame" x="10" y="100" width="280" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="ttb-jI-cZd"/>
+                                            <constraint firstAttribute="width" constant="280" id="ucT-1g-cPC"/>
+                                        </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" alignment="left" placeholderString="Email" drawsBackground="YES" id="acd-R3-9nm">
-                                            <font key="font" size="20" name="HelveticaNeue"/>
+                                            <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ByQ-MG-8e5" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="79" width="300" height="1"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="ByQ-MG-8e5" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="89" width="300" height="2"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="FlQ-Gq-Yty"/>
+                                            <constraint firstAttribute="height" constant="2" id="eAk-hh-eD8"/>
+                                        </constraints>
                                     </customView>
-                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LXO-q2-cPB">
-                                        <rect key="frame" x="10" y="11" width="280" height="24"/>
-                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Repeat Password" drawsBackground="YES" usesSingleLineMode="YES" id="CZY-ys-rCH">
-                                            <font key="font" metaFont="system" size="20"/>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LXO-q2-cPB">
+                                        <rect key="frame" x="10" y="10" width="280" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="8Ux-gc-102"/>
+                                            <constraint firstAttribute="width" constant="280" id="nVw-H3-L9q"/>
+                                        </constraints>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Repeat Password" drawsBackground="YES" id="CZY-ys-rCH">
+                                            <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <allowedInputSourceLocales>
@@ -880,10 +1005,14 @@ DQ
                                             </allowedInputSourceLocales>
                                         </secureTextFieldCell>
                                     </secureTextField>
-                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3rx-3U-z2H">
-                                        <rect key="frame" x="10" y="49" width="280" height="24"/>
-                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password" drawsBackground="YES" usesSingleLineMode="YES" id="hvA-Sj-Exw">
-                                            <font key="font" metaFont="system" size="20"/>
+                                    <secureTextField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3rx-3U-z2H">
+                                        <rect key="frame" x="10" y="55" width="280" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="Rr2-hE-KSY"/>
+                                            <constraint firstAttribute="height" constant="25" id="fR9-f6-njV"/>
+                                        </constraints>
+                                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Password" drawsBackground="YES" id="hvA-Sj-Exw">
+                                            <font key="font" size="17" name="HelveticaNeue"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <allowedInputSourceLocales>
@@ -891,20 +1020,105 @@ DQ
                                             </allowedInputSourceLocales>
                                         </secureTextFieldCell>
                                     </secureTextField>
-                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YOZ-vH-XxO" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="41" width="300" height="1"/>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="YOZ-vH-XxO" customClass="CustomLine2" customModule="GameQ_OSX_2_0" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44" width="300" height="2"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="Uf3-mr-giL"/>
+                                            <constraint firstAttribute="height" constant="2" id="VAW-vT-SM9"/>
+                                        </constraints>
                                     </customView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="3rx-3U-z2H" firstAttribute="top" secondItem="ByQ-MG-8e5" secondAttribute="bottom" constant="9" id="0r4-il-gL5"/>
+                                    <constraint firstItem="KjD-1i-DWR" firstAttribute="top" secondItem="Vzk-Qk-u3f" secondAttribute="top" constant="10" id="2eA-KH-Tdl"/>
+                                    <constraint firstAttribute="centerX" secondItem="YOZ-vH-XxO" secondAttribute="centerX" id="2qa-lO-ZhA"/>
+                                    <constraint firstItem="LXO-q2-cPB" firstAttribute="top" secondItem="YOZ-vH-XxO" secondAttribute="bottom" constant="9" id="7P8-4S-0FF"/>
+                                    <constraint firstAttribute="centerX" secondItem="3rx-3U-z2H" secondAttribute="centerX" id="CyL-8m-vK5"/>
+                                    <constraint firstAttribute="height" constant="135" id="J4g-KF-dyO"/>
+                                    <constraint firstItem="ByQ-MG-8e5" firstAttribute="top" secondItem="KjD-1i-DWR" secondAttribute="bottom" constant="9" id="SlR-ei-LCv"/>
+                                    <constraint firstAttribute="width" constant="300" id="YN2-KA-g50"/>
+                                    <constraint firstItem="YOZ-vH-XxO" firstAttribute="top" secondItem="3rx-3U-z2H" secondAttribute="bottom" constant="9" id="aXg-yE-xY9"/>
+                                    <constraint firstAttribute="centerX" secondItem="ByQ-MG-8e5" secondAttribute="centerX" id="dPK-mV-SlP"/>
+                                    <constraint firstItem="3rx-3U-z2H" firstAttribute="top" secondItem="ByQ-MG-8e5" secondAttribute="bottom" constant="9" id="eHU-0U-2Hb"/>
+                                    <constraint firstAttribute="centerX" secondItem="KjD-1i-DWR" secondAttribute="centerX" id="mlH-eu-Y7K"/>
+                                    <constraint firstAttribute="centerX" secondItem="LXO-q2-cPB" secondAttribute="centerX" id="nnI-ar-He8"/>
+                                    <constraint firstItem="YOZ-vH-XxO" firstAttribute="top" secondItem="3rx-3U-z2H" secondAttribute="bottom" constant="9" id="nrm-qz-GY6"/>
+                                </constraints>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Siw-6l-DWp">
-                                <rect key="frame" x="33" y="105" width="297" height="17"/>
+                                <rect key="frame" x="-2" y="0.0" width="4" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="" id="rZk-5o-ChN">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mJr-Ny-6Fb">
+                                <rect key="frame" x="33" y="127" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="fBI-fh-OVg"/>
+                                    <constraint firstAttribute="height" constant="18" id="gex-hy-Vif"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString=" " id="cvx-he-cr2">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView translatesAutoresizingMaskIntoConstraints="NO" id="Noz-Eq-I3h">
+                                <rect key="frame" x="110" y="280" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="5zO-lg-2Rb"/>
+                                    <constraint firstAttribute="height" constant="150" id="Axz-Fr-bOC"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="GameQ-Logo2" id="07M-03-tTe"/>
+                            </imageView>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="odK-rL-Rwk">
+                                <rect key="frame" x="343" y="209" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="a6Q-Yl-BFE"/>
+                                    <constraint firstAttribute="height" constant="16" id="le2-U5-isV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="opL-SI-LQ8"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="wnU-W9-Qnl"/>
+                                </constraints>
+                            </progressIndicator>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Lf4-MG-fhd">
+                                <rect key="frame" x="343" y="254" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="4U7-QM-L57"/>
+                                    <constraint firstAttribute="height" constant="16" id="J5P-8f-qOd"/>
+                                    <constraint firstAttribute="width" constant="16" id="Llo-lT-XVo"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="rhl-6W-58a"/>
+                                </constraints>
+                            </progressIndicator>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="nG8-ra-hDY">
+                                <rect key="frame" x="343" y="164" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="16" id="Mm4-Ig-AQP"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="16" id="Y06-I9-8XU"/>
+                                    <constraint firstAttribute="height" constant="16" id="qIt-3J-crM"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="rur-1x-ZY1"/>
+                                </constraints>
+                            </progressIndicator>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="ZQA-gq-Ybc" firstAttribute="top" secondItem="HMz-tR-KhG" secondAttribute="bottom" constant="5" id="2RM-Ca-fMq"/>
+                            <constraint firstAttribute="centerX" secondItem="Vzk-Qk-u3f" secondAttribute="centerX" id="3YN-MF-dkk"/>
+                            <constraint firstItem="mJr-Ny-6Fb" firstAttribute="top" secondItem="Vzk-Qk-u3f" secondAttribute="bottom" constant="5" id="7c6-t7-CyB"/>
+                            <constraint firstItem="nG8-ra-hDY" firstAttribute="top" secondItem="odK-rL-Rwk" secondAttribute="bottom" constant="29" id="A8C-iK-Qm2"/>
+                            <constraint firstItem="odK-rL-Rwk" firstAttribute="top" secondItem="Lf4-MG-fhd" secondAttribute="bottom" constant="29" id="Bq8-v6-Byr"/>
+                            <constraint firstItem="Lf4-MG-fhd" firstAttribute="top" secondItem="WyX-Wb-ier" secondAttribute="top" constant="200" id="OYs-q8-gTL"/>
+                            <constraint firstItem="Noz-Eq-I3h" firstAttribute="top" secondItem="WyX-Wb-ier" secondAttribute="top" constant="40" id="RSB-GY-baP"/>
+                            <constraint firstAttribute="centerX" secondItem="HMz-tR-KhG" secondAttribute="centerX" id="UgS-8a-MHm"/>
+                            <constraint firstItem="Vzk-Qk-u3f" firstAttribute="top" secondItem="WyX-Wb-ier" secondAttribute="top" constant="185" id="Xix-6w-446"/>
+                            <constraint firstAttribute="centerX" secondItem="ZQA-gq-Ybc" secondAttribute="centerX" id="ZRn-lm-nRt"/>
+                            <constraint firstItem="odK-rL-Rwk" firstAttribute="leading" secondItem="Vzk-Qk-u3f" secondAttribute="trailing" constant="8" id="eK3-FX-Ml7"/>
+                            <constraint firstAttribute="centerX" secondItem="Noz-Eq-I3h" secondAttribute="centerX" id="kcg-hp-Cyj"/>
+                            <constraint firstAttribute="centerX" secondItem="mJr-Ny-6Fb" secondAttribute="centerX" id="nkA-q4-qPQ"/>
+                            <constraint firstItem="Lf4-MG-fhd" firstAttribute="leading" secondItem="Vzk-Qk-u3f" secondAttribute="trailing" constant="8" id="uI8-Vb-ahR"/>
+                            <constraint firstItem="HMz-tR-KhG" firstAttribute="top" secondItem="mJr-Ny-6Fb" secondAttribute="bottom" constant="5" id="wZT-BL-CAq"/>
+                            <constraint firstItem="nG8-ra-hDY" firstAttribute="leading" secondItem="Vzk-Qk-u3f" secondAttribute="trailing" constant="8" id="zCY-Ej-4IE"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="ZQA-gq-Ybc" id="XNO-ZG-r1k"/>
@@ -912,8 +1126,11 @@ DQ
                         <outlet property="emailField" destination="KjD-1i-DWR" id="UEq-Tp-xYb"/>
                         <outlet property="passwordField1" destination="3rx-3U-z2H" id="JDF-IU-eGf"/>
                         <outlet property="passwordField2" destination="LXO-q2-cPB" id="zZA-pO-mZU"/>
+                        <outlet property="progress1" destination="Lf4-MG-fhd" id="2c9-jA-vFd"/>
+                        <outlet property="progress2" destination="odK-rL-Rwk" id="IjF-Ri-9Pa"/>
+                        <outlet property="progress3" destination="nG8-ra-hDY" id="mjx-jh-GVI"/>
                         <outlet property="signUpButton" destination="HMz-tR-KhG" id="nrO-IL-VGM"/>
-                        <outlet property="statusLabel" destination="Siw-6l-DWp" id="LhT-0U-BQI"/>
+                        <outlet property="statusLabel" destination="mJr-Ny-6Fb" id="Rhb-br-ocy"/>
                         <segue destination="wFD-yq-twe" kind="custom" identifier="SignUpToMaster" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="rX2-V3-Egi"/>
                     </connections>
                 </viewController>
@@ -964,10 +1181,6 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OEE-3r-iZD">
-                                <rect key="frame" x="128" y="384" width="114" height="77"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Draft1" id="RLu-Tu-MSC"/>
-                            </imageView>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibd-Oe-cu8" customClass="CustomLine" customModule="GameQ_OSX_2_0" customModuleProvider="target">
                                 <rect key="frame" x="183" y="345" width="5" height="30"/>
                             </customView>
@@ -1237,10 +1450,10 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="Draft1" width="412" height="401"/>
+        <image name="GameQ-Logo2" width="550" height="550"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f9D-qx-hky"/>
-        <segue reference="oTI-Y7-tEr"/>
+        <segue reference="rX2-V3-Egi"/>
+        <segue reference="2vk-2S-oDg"/>
     </inferredMetricsTieBreakers>
 </document>
