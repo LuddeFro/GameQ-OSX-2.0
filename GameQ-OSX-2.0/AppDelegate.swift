@@ -20,11 +20,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem : NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
     var menuItem : NSMenuItem = NSMenuItem()
+    var windowController:NSWindowController?
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-    }
-    
+        
+        ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
+            if success {
+                dispatch_async(dispatch_get_main_queue()) {
+                    let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
+                    self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
+                }
+            }
+            else{
+                println(err)
+                dispatch_async(dispatch_get_main_queue()) {
+                    let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
+                    self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
+                    self.windowController?.showWindow(self)
+                }
+            }})}
     
     func applicationWillTerminate(aNotification: NSNotification) {
     }
@@ -39,10 +54,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem.title = "GameQ"
         
         //Add menuItem to menu
-        menuItem.title = "Clicked"
+        menuItem.title = "Open"
         menuItem.action = Selector("setWindowVisible:")
         menuItem.keyEquivalent = ""
         menu.addItem(menuItem)
+    }
+    
+    func setWindowVisible(sender: AnyObject){
+        dispatch_async(dispatch_get_main_queue()) {
+            self.windowController?.showWindow(sender)
+        }
     }
     
     // MARK: - Core Data stack

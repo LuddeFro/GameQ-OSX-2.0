@@ -11,6 +11,7 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+
     @IBOutlet weak var settingsButton: NSButton!
     @IBOutlet weak var feedbackButton: NSButton!
     @IBOutlet weak var logOutButton: NSButton!

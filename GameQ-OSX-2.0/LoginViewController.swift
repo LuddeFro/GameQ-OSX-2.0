@@ -70,15 +70,6 @@ class LoginViewController: NSViewController {
         
         
         //THIS SHOULD BE MOVED
-        disableAllButtons()
-        ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
-            self.enableAllButtons()
-            if success {
-                println("Jay")
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.performSegueWithIdentifier("LoginToMaster", sender: nil)
-                }}
-        })
     }
     
     private func disableAllButtons(){

@@ -1,4 +1,10 @@
-
+//
+//  File.swift
+//  ConnectionTester
+//
+//  Created by Ludvig Fröberg on 08/06/15.
+//  Copyright (c) 2015 GameQ AB. All rights reserved.
+//
 
 import Foundation
 import AppKit
@@ -8,10 +14,10 @@ class ConnectionHandler : NSObject {
     
     static let baseURL:String = "http://server.gameq.io:8080/computer/"
     static let deviceIdKey:String = "device_id_key"
-    static let tokenKey:String = "token_key" //only mobile
+    static let passwordKey:String = "password_key"
+    static let emailKey:String = "email_key"
     private static var sessionId:String = ""
-    static let emailKey = "email_key"
-    static let passwordKey = "password_key"
+    static var isLoggedIn = false
     
     
     private static func getStringFrom(json:Dictionary<String, AnyObject>, key:String) -> String {
@@ -42,7 +48,7 @@ class ConnectionHandler : NSObject {
                 return
             }
             
-            println("response = \(response)")
+            //println("response = \(response)")
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
             println("responseString = \(responseString!)")
             
@@ -59,12 +65,8 @@ class ConnectionHandler : NSObject {
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
         }
-        var tokenString = ""
-        if let token = loadToken() { //only mobile
-            tokenString = "token=\(token)"
-        }
-        let arguments = "email=\(email)&password=\(password)&\(tokenString)&\(diString)" // mobile version
-        //let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
+        
+        let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
         postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
@@ -76,6 +78,7 @@ class ConnectionHandler : NSObject {
                 } else {
                     self.savePassword(password)
                     self.saveEmail(email)
+                    self.isLoggedIn = true
                     let retDI = self.getIntFrom(json, key: "device_id")
                     println("returned DI: \(retDI)")
                     if retDI != 0 {
@@ -110,7 +113,7 @@ class ConnectionHandler : NSObject {
                     err = self.getStringFrom(json, key: "error")
                 } else {
                     //logout success
-                    
+                    self.isLoggedIn = false
                     self.sessionId = ""
                 }
             } else {
@@ -128,12 +131,8 @@ class ConnectionHandler : NSObject {
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
         }
-        var tokenString = ""
-        if let token = loadToken() { //only mobile
-            tokenString = "token=\(token)"
-        }
-        let arguments = "email=\(email)&password=\(password)&\(tokenString)&\(diString)" // mobile version
-        //let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
+        
+        let arguments = "email=\(email)&password=\(password)&\(diString)" // osx version
         postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
@@ -189,31 +188,7 @@ class ConnectionHandler : NSObject {
         })
     }
     
-    static func updateToken(token:String, finalCallBack:(success:Bool, err:String?)->()) {
-        let apiExtension = "updateToken"
-        var diString = ""
-        if let deviceId = loadDeviceId() {
-            diString = "device_id=\(deviceId)"
-        }
-        let arguments = "session_token=\(sessionId)&\(diString)&token=\(token)"
-        postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
-            var success:Bool = false
-            var err:String? = nil
-            
-            if let json = responseJSON as? Dictionary<String, AnyObject> {
-                success = self.getIntFrom(json, key: "success") != 0
-                if !success {
-                    err = self.getStringFrom(json, key: "error")
-                } else {
-                    //success
-                }
-            } else {
-                println("json parse fail")
-            }
-            
-            finalCallBack(success: success, err: err)
-        })
-    }
+    
     
     static func push(game:Int, acceptBefore:NSDate, finalCallBack:(success:Bool, err:String?)->()) {
         let apiExtension = "push"
@@ -273,7 +248,7 @@ class ConnectionHandler : NSObject {
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
         }
-        let arguments = "session_token=\(sessionId)&\(diString)&csv=\(csvString)&game=\(game)&type=\(type)"
+        let arguments = "session_token=\(sessionId)&\(diString)&game=\(game)&type=\(type)&csv=\(csvString)"
         postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
@@ -292,6 +267,33 @@ class ConnectionHandler : NSObject {
             finalCallBack(success: success, err: err)
         })
     }
+    
+    static func submitFeedback(feedbackString:String, finalCallBack:(success:Bool, err:String?)->()) {
+        let apiExtension = "submitFeedback"
+        var diString = ""
+        if let deviceId = loadDeviceId() {
+            diString = "device_id=\(deviceId)"
+        }
+        let arguments = "session_token=\(sessionId)&\(diString)&feedback=\(feedbackString)"
+        postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
+            var success:Bool = false
+            var err:String? = nil
+            
+            if let json = responseJSON as? Dictionary<String, AnyObject> {
+                success = self.getIntFrom(json, key: "success") != 0
+                if !success {
+                    err = self.getStringFrom(json, key: "error")
+                } else {
+                    //csv submission succeeded
+                }
+            } else {
+                println("json parse fail")
+            }
+            
+            finalCallBack(success: success, err: err)
+        })
+    }
+    
     
     static func updatePassword(email:String, password:String, newPassword:String, finalCallBack:(success:Bool, err:String?)->()) {
         let apiExtension = "updatePassword"
@@ -345,8 +347,6 @@ class ConnectionHandler : NSObject {
         })
     }
     
-    
-    
     static func loginWithRememberedDetails(finalCallBack:(success:Bool, err:String?)->()) {
         var s:Bool = false
         if let email = loadEmail() {
@@ -365,13 +365,14 @@ class ConnectionHandler : NSObject {
     }
     
     
-    static func saveToken(token:String) {
-        saveSingle(tokenKey, value: token)
-    }
     
-    static func loadToken() -> (String?){
-        return loadSingle(tokenKey) as? String
-    }
+    
+    
+    
+    
+    
+    
+    
     
     private static func saveDeviceId(deviceId:String) {
         saveSingle(deviceIdKey, value: deviceId)
@@ -485,33 +486,8 @@ class ConnectionHandler : NSObject {
         }
         
     }
-    
-    static func submitFeedback(feedbackString:String, finalCallBack:(success:Bool, err:String?)->()) {
-        let apiExtension = "submitFeedback"
-        var diString = ""
-        if let deviceId = loadDeviceId() {
-            diString = "device_id=\(deviceId)"
-        }
-        let arguments = "session_token=\(sessionId)&\(diString)&feedback=\(feedbackString)"
-        postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
-            var success:Bool = false
-            var err:String? = nil
-            
-            if let json = responseJSON as? Dictionary<String, AnyObject> {
-                success = self.getIntFrom(json, key: "success") != 0
-                if !success {
-                    err = self.getStringFrom(json, key: "error")
-                } else {
-                    //csv submission succeeded
-                }
-            } else {
-                println("json parse fail")
-            }
-            
-            finalCallBack(success: success, err: err)
-        })
-    }
 }
+
 
 
 

@@ -14,9 +14,18 @@ class ContainerViewController: NSViewController {
         super.viewDidLoad()
         
         let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
-        let sourceViewController = mainStoryboard.instantiateControllerWithIdentifier("loginViewController") as! NSViewController
+        
+        if(!ConnectionHandler.isLoggedIn){
+        let sourceViewController = mainStoryboard.instantiateControllerWithIdentifier("LoginViewController") as! NSViewController
         self.insertChildViewController(sourceViewController, atIndex: 0)
         self.view.addSubview(sourceViewController.view)
         self.view.frame = sourceViewController.view.frame
+        }
+        else{
+            let sourceViewController = mainStoryboard.instantiateControllerWithIdentifier("MasterViewController") as! NSViewController
+            self.insertChildViewController(sourceViewController, atIndex: 0)
+            self.view.addSubview(sourceViewController.view)
+            self.view.frame = sourceViewController.view.frame
+        }
     }
 }
