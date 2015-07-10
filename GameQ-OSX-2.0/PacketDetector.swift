@@ -26,9 +26,19 @@ class PacketDetector: GameDetector, PacketDetectorProtocol{
     static var packetParser:PacketParser = PacketParser.getSharedInstance()
     
     static func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
+        
+        if(iplen > 5){
+            var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
+            println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+            
+            if(detector.status != Status.InGame){
+                packetQueue.insert(newPacket, atIndex: 0)
+                if packetQueue.count >= queueMaxSize {
+                    packetQueue.removeLast()
+                }
+            }
+            update(newPacket);
+        }
     }
     
     static func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
@@ -45,5 +55,15 @@ class PacketDetector: GameDetector, PacketDetectorProtocol{
             log = "\(log)\(packetQueue[i].srcPort),\(packetQueue[i].dstPort),\(packetQueue[i].captureTime),\(packetQueue[i].packetLength)\n"
         }
         return log
+    }
+    
+    override class func saveDetection(){
+        super.saveDetection()
+        packetQueue = [Packet]()
+    }
+    
+    override class func saveMissedDetection(){
+        super.saveMissedDetection()
+        packetQueue = [Packet]()
     }
 }

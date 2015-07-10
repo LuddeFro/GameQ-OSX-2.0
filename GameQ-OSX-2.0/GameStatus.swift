@@ -95,7 +95,7 @@ class Encoding {
             case .Offline: return "Offline"
             case .Online: return  "Online"
             case .InLobby: return "In Game Lobby"
-            case .InQueue: return "Finding Match"
+            case .InQueue: return "Searching for Match"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
             }

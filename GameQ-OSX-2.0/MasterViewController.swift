@@ -11,6 +11,31 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBOutlet weak var toServerButton: NSButton!
+    
+    @IBOutlet weak var toDesktopButton: NSButton!
+    
+    @IBAction func serverPressed(sender: AnyObject) {
+        if(detector.saveToServer){
+            detector.saveToServer = false
+            toServerButton.title = "toserver = off"
+        }
+        else{
+            detector.saveToServer = true
+            toServerButton.title = "toserver = on"
+        }
+    }
+   
+    @IBAction func desktopPressed(sender: AnyObject) {
+        if(detector.saveToDesktop){
+            detector.saveToDesktop = false
+            toDesktopButton.title = "toDesktop = off"
+        }
+        else{
+            detector.saveToDesktop = true
+            toDesktopButton.title = "toDesktop = on"
+        }
+    }
     
     @IBOutlet weak var settingsButton: NSButton!
     @IBOutlet weak var feedbackButton: NSButton!
@@ -35,15 +60,6 @@ class MasterViewController: NSViewController {
     @IBOutlet weak var stopButton: NSButton!
     
     @IBOutlet weak var failmodebutton: NSButton!
-    
-    @IBAction func isTestingPressed(sender: AnyObject) {
-        if(detector.testMode){
-            println("testing off")
-            detector.testMode = false}
-        else{
-            println("testing on")
-            detector.testMode = true}
-    }
     
     @IBAction func saveMissedPressed(sender: AnyObject) {
         detector.saveMissedDetection()
@@ -76,6 +92,11 @@ class MasterViewController: NSViewController {
     
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
+        if(detector.isFailMode){
+        failmodebutton.title = "FailMode On"
+        }
+        
+        else{ failmodebutton.title = "FailMode Off" }
     }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
@@ -113,12 +134,15 @@ class MasterViewController: NSViewController {
         self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
         
         
-        if(ConnectionHandler.loadEmail() == "asd@asd.com"){
+        if((ConnectionHandler.loadEmail() == "f@w.com") || (ConnectionHandler.loadEmail() == "l@f.com") || (ConnectionHandler.loadEmail() == "g@h.com")){
             failmodebutton.enabled = true
             failmodebutton.hidden = false
             
-            isTestingButton.enabled = true
-            isTestingButton.hidden = false
+            toServerButton.enabled = true
+            toServerButton.hidden = false
+            
+            toDesktopButton.enabled = true
+            toDesktopButton.hidden = false
             
             startButton.enabled = true
             startButton.hidden = false

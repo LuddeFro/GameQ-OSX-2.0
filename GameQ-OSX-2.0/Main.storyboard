@@ -969,16 +969,6 @@ DQ
                                     <action selector="quitButtonPressed:" target="wFD-yq-twe" id="HH5-Ty-Q7i"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m6V-l1-zGG">
-                                <rect key="frame" x="-1" y="387" width="94" height="32"/>
-                                <buttonCell key="cell" type="push" title="isTesting" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Cp-wr-SjN">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="isTestingPressed:" target="wFD-yq-twe" id="XnT-wn-06z"/>
-                                </connections>
-                            </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="urm-Yo-WPv">
                                 <rect key="frame" x="320" y="420" width="40" height="40"/>
                                 <constraints>
@@ -1015,6 +1005,34 @@ DQ
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="GameQ-Logo2" id="QYH-oB-Yzz"/>
                             </imageView>
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9wX-bH-dev">
+                                <rect key="frame" x="3" y="416" width="122" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="H0A-mP-ZEb"/>
+                                    <constraint firstAttribute="height" constant="21" id="uDq-VW-3qy"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="toserver = on" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y89-bo-zS9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="serverPressed:" target="wFD-yq-twe" id="fal-LX-CxB"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M2V-DG-OD4">
+                                <rect key="frame" x="3" y="387" width="136" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="IYE-gF-LCK"/>
+                                    <constraint firstAttribute="width" constant="124" id="hMU-4V-hG0"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="toDesktop = off" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TTB-2j-fyh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="desktopPressed:" target="wFD-yq-twe" id="cGj-Hk-Bih"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="urm-Yo-WPv" secondAttribute="trailing" constant="10" id="7Ek-59-rkf"/>
@@ -1025,7 +1043,6 @@ DQ
                             <constraint firstItem="Azw-1E-jxV" firstAttribute="leading" secondItem="mYD-kO-0T9" secondAttribute="leading" id="A6S-vY-GTi"/>
                             <constraint firstItem="ibd-Oe-cu8" firstAttribute="top" secondItem="Wp4-y1-xbg" secondAttribute="bottom" constant="5" id="Agc-fV-AHr"/>
                             <constraint firstItem="CSV-MA-BZY" firstAttribute="leading" secondItem="uNO-Qg-MO1" secondAttribute="trailing" constant="10" id="B50-ar-7rU"/>
-                            <constraint firstItem="hm6-pb-ry3" firstAttribute="top" secondItem="m6V-l1-zGG" secondAttribute="bottom" constant="12" symbolic="YES" id="BX8-iU-st0"/>
                             <constraint firstItem="hm6-pb-ry3" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="C1V-ma-uov"/>
                             <constraint firstItem="S4Q-Se-CRP" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="CjC-pE-Zmz"/>
                             <constraint firstAttribute="centerX" secondItem="RTD-lj-erv" secondAttribute="centerX" id="Cwh-fN-UyK"/>
@@ -1038,40 +1055,42 @@ DQ
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="L77-ya-KTy"/>
                             <constraint firstItem="7aE-Du-svx" firstAttribute="top" secondItem="Bub-Pz-YnC" secondAttribute="bottom" constant="10" id="Mze-iR-elt"/>
                             <constraint firstAttribute="centerY" secondItem="GoJ-Pl-DN0" secondAttribute="centerY" id="NmR-Af-8iS"/>
-                            <constraint firstItem="m6V-l1-zGG" firstAttribute="top" secondItem="bfK-wO-M3S" secondAttribute="top" constant="55" id="OMd-te-k93"/>
                             <constraint firstItem="mYD-kO-0T9" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="RrR-S3-TKg"/>
                             <constraint firstItem="Azw-1E-jxV" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="TUU-hw-KCs"/>
                             <constraint firstItem="MoA-oI-xmy" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="ToA-WP-9Ki"/>
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="top" secondItem="mYD-kO-0T9" secondAttribute="bottom" constant="12" symbolic="YES" id="Ty1-4j-oi5"/>
                             <constraint firstItem="Dch-AV-KK7" firstAttribute="top" secondItem="Bub-Pz-YnC" secondAttribute="bottom" constant="10" id="U4a-33-DXk"/>
                             <constraint firstItem="urm-Yo-WPv" firstAttribute="top" secondItem="bfK-wO-M3S" secondAttribute="top" constant="10" id="UO9-RG-zEI"/>
+                            <constraint firstItem="hm6-pb-ry3" firstAttribute="top" secondItem="M2V-DG-OD4" secondAttribute="bottom" constant="12" id="VWk-XS-K7o"/>
                             <constraint firstAttribute="centerX" secondItem="ibd-Oe-cu8" secondAttribute="centerX" id="ZKP-AF-5f3"/>
                             <constraint firstAttribute="centerY" secondItem="CSV-MA-BZY" secondAttribute="centerY" id="ZkC-HF-3im"/>
                             <constraint firstAttribute="trailing" secondItem="Dch-AV-KK7" secondAttribute="trailing" constant="20" id="aAZ-DL-BjD"/>
                             <constraint firstItem="S4Q-Se-CRP" firstAttribute="top" secondItem="L9b-ND-Nn0" secondAttribute="bottom" constant="12" symbolic="YES" id="aDp-IP-TJ0"/>
                             <constraint firstItem="mYD-kO-0T9" firstAttribute="top" secondItem="Azw-1E-jxV" secondAttribute="bottom" constant="12" symbolic="YES" id="aqO-aM-Udq"/>
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="leading" secondItem="mYD-kO-0T9" secondAttribute="leading" id="cB2-fz-1gq"/>
-                            <constraint firstItem="m6V-l1-zGG" firstAttribute="leading" secondItem="hm6-pb-ry3" secondAttribute="leading" id="ePz-AR-OO1"/>
+                            <constraint firstItem="9wX-bH-dev" firstAttribute="top" secondItem="bfK-wO-M3S" secondAttribute="top" constant="26" id="e3x-50-AoL"/>
                             <constraint firstAttribute="centerX" secondItem="TCh-fi-bsJ" secondAttribute="centerX" id="gDh-pA-rj7"/>
                             <constraint firstItem="7aE-Du-svx" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="20" id="gdB-3T-BrB"/>
                             <constraint firstItem="MoA-oI-xmy" firstAttribute="top" secondItem="hm6-pb-ry3" secondAttribute="bottom" constant="12" symbolic="YES" id="gfR-1C-Oza"/>
                             <constraint firstAttribute="centerX" secondItem="CSV-MA-BZY" secondAttribute="centerX" id="ggh-TL-Qgr"/>
+                            <constraint firstItem="M2V-DG-OD4" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="9" id="ien-u2-1Xv"/>
                             <constraint firstItem="zpK-4P-0eX" firstAttribute="top" secondItem="CSV-MA-BZY" secondAttribute="bottom" constant="10" id="ivJ-PE-hYf"/>
                             <constraint firstAttribute="centerY" secondItem="TCh-fi-bsJ" secondAttribute="centerY" id="jyd-t1-RVD"/>
                             <constraint firstAttribute="centerX" secondItem="GoJ-Pl-DN0" secondAttribute="centerX" id="pup-RX-IaC"/>
+                            <constraint firstItem="M2V-DG-OD4" firstAttribute="top" secondItem="9wX-bH-dev" secondAttribute="bottom" constant="8" id="rgx-2i-Zzi"/>
                             <constraint firstItem="Bub-Pz-YnC" firstAttribute="top" secondItem="zpK-4P-0eX" secondAttribute="bottom" constant="5" id="sHi-tp-G0m"/>
                             <constraint firstAttribute="centerX" secondItem="ibd-Oe-cu8" secondAttribute="centerX" id="tlW-J3-uUH"/>
                             <constraint firstAttribute="centerX" secondItem="zpK-4P-0eX" secondAttribute="centerX" id="tnJ-io-LeX"/>
+                            <constraint firstItem="9wX-bH-dev" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="9" id="u0Y-6U-IJc"/>
                             <constraint firstItem="Azw-1E-jxV" firstAttribute="leading" secondItem="MoA-oI-xmy" secondAttribute="leading" id="vSx-JZ-5pv"/>
-                            <constraint firstItem="m6V-l1-zGG" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="w5M-ZI-mkI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="countDown" destination="TCh-fi-bsJ" id="RsR-Hj-OCa"/>
+                        <outlet property="desktopPressed" destination="M2V-DG-OD4" id="vN1-qK-Jsn"/>
                         <outlet property="failmodebutton" destination="L9b-ND-Nn0" id="82W-d8-V1B"/>
                         <outlet property="feedbackButton" destination="7aE-Du-svx" id="lRy-hv-iFq"/>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>
-                        <outlet property="isTestingButton" destination="m6V-l1-zGG" id="Vez-0u-Srg"/>
                         <outlet property="logOutButton" destination="Dch-AV-KK7" id="jw1-xA-WDQ"/>
                         <outlet property="missedQueueButton" destination="7aE-Du-svx" id="PWn-Ok-DWC"/>
                         <outlet property="queueTimer" destination="GoJ-Pl-DN0" id="bu6-5h-GnB"/>
@@ -1083,6 +1102,8 @@ DQ
                         <outlet property="statusLabel" destination="Bub-Pz-YnC" id="osa-9r-1UB"/>
                         <outlet property="stopButton" destination="mYD-kO-0T9" id="5F4-jA-q8s"/>
                         <outlet property="timer" destination="CSV-MA-BZY" id="LaK-Ba-gjI"/>
+                        <outlet property="toDesktopButton" destination="M2V-DG-OD4" id="8Qw-gK-EkE"/>
+                        <outlet property="toServerButton" destination="9wX-bH-dev" id="Lto-3U-Ktd"/>
                         <segue destination="ldi-Q6-qY3" kind="custom" identifier="MasterToLogin" customClass="MyCustomSwiftSegue" customModule="GameQ_OSX_2_0" customModuleProvider="target" id="f9D-qx-hky"/>
                         <segue destination="SSw-vW-DUh" kind="popover" identifier="MasterToReport" popoverAnchorView="7aE-Du-svx" popoverBehavior="t" preferredEdge="maxX" id="ipH-kv-zqw"/>
                     </connections>
@@ -1359,7 +1380,7 @@ DQ
         <image name="NSSmartBadgeTemplate" width="14" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2vk-2S-oDg"/>
         <segue reference="rX2-V3-Egi"/>
+        <segue reference="f9D-qx-hky"/>
     </inferredMetricsTieBreakers>
 </document>

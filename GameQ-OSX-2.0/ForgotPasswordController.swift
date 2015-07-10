@@ -11,6 +11,7 @@ import Cocoa
 class ForgotPasswordController: NSViewController {
     
     
+    
     @IBOutlet weak var emailField: NSTextField!
     @IBOutlet weak var statusLabel: NSTextField!
     let font1 = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)

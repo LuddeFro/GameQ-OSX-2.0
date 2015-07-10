@@ -62,19 +62,6 @@ class DotaDetector:PacketDetector{
         saveCounter = 0
     }
     
-    
-    override class func saveDetection(){
-        super.saveDetection()
-        dataHandler.logPackets(fileToString())
-        packetQueue = [Packet]()
-    }
-    
-    override class func saveMissedDetection(){
-        super.saveMissedDetection()
-        dataHandler.logPackets(fileToString())
-        packetQueue = [Packet]()
-    }
-    
     override class func stopDetection(){
         if(isCapturing){
             packetParser.stop_loop()
@@ -113,12 +100,6 @@ class DotaDetector:PacketDetector{
     }
     
     override class func update(newPacket: Packet){
-        
-        packetQueue.insert(newPacket, atIndex: 0)
-        if packetQueue.count >= queueMaxSize {
-            packetQueue.removeLast()
-        }
-        
         
         //IN LOBBY
         if(status == Status.InLobby){
