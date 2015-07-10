@@ -99,33 +99,6 @@ class HOTSDetector: GameDetector, PacketDetector {
     
     }
     
-    override class func getStatusString() -> String{
-        
-        var statusString = ""
-        
-        switch self.status {
-            
-        case Status.Offline:
-            statusString =  Status.Offline.rawValue
-            break
-        case Status.Online:
-            statusString =  Status.Online.rawValue
-            break
-        case Status.InLobby:
-            statusString =  "Detecting Game"
-            break
-        case Status.InQueue:
-            statusString =  "Detecting Game"
-            break
-        case Status.GameReady:
-            statusString =  Status.GameReady.rawValue
-            break
-        case Status.InGame:
-            statusString =  Status.InGame.rawValue
-            break
-        }
-        return statusString
-    }
     
     class func handle(srcPort:Int, dstPort:Int, iplen:Int){
         var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)

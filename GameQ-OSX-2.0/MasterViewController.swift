@@ -73,8 +73,7 @@ class MasterViewController: NSViewController {
     
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
-        detector.startTimer()
-    }
+        }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
         detector.stopDetection()
@@ -91,6 +90,7 @@ class MasterViewController: NSViewController {
     var counter: Float = 0
     var detector:GameDetector.Type = GameDetector.self
     var game:Game = Game.NoGame
+    var programTimer:NSTimer = NSTimer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,8 +105,8 @@ class MasterViewController: NSViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
         
-        self.gameStatus.stringValue = GameDetector.game.rawValue
-        self.statusLabel.stringValue = GameDetector.status.rawValue
+        self.gameStatus.stringValue =  Encoding.getStringFromGame(self.detector.game)
+        self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
         
         
         if(ConnectionHandler.loadEmail() == "asd@asd.com"){
@@ -135,7 +135,7 @@ class MasterViewController: NSViewController {
         
         //CHANGE THIS
         detector.updateStatus(Status.Online)
-        var timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+         programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear() {
@@ -150,9 +150,10 @@ class MasterViewController: NSViewController {
     
     func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
-            self.appDelegate.statusItem.title = Encoding.getStringFromStatus(self.detector.status)
-            self.gameStatus.stringValue = self.detector.game.rawValue
-            self.statusLabel.stringValue = self.detector.getStatusString()
+            self.appDelegate.gameItem.title = Encoding.getStringFromGame(self.detector.game)
+            self.appDelegate.statusItem.title = Encoding.getStringFromGameStatus(self.detector.game,status: self.detector.status)
+            self.gameStatus.stringValue = Encoding.getStringFromGame(self.detector.game)
+            self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
             
             switch GameDetector.status {
                 
@@ -254,6 +255,8 @@ class MasterViewController: NSViewController {
             game = newGame
         }
         
+        
+        //Lol Specific shit
         if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
             detector.updateStatus(Status.InLobby)
         }
@@ -264,6 +267,7 @@ class MasterViewController: NSViewController {
     }
     
     func startTimer(){
+        println("fan händer")
         dispatch_async(dispatch_get_main_queue()) {
             self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update2"), userInfo: nil, repeats: true)
         }
@@ -280,6 +284,7 @@ class MasterViewController: NSViewController {
             self.countDown.stringValue = ""
         }
         self.countDownTimer.invalidate()
+        self.countDownTimer = NSTimer()
         self.counter = 0
         }
     }

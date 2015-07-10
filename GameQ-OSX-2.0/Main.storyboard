@@ -603,9 +603,9 @@ DQ
                                 </constraints>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TCh-fi-bsJ">
-                                <rect key="frame" x="168" y="221" width="34" height="29"/>
+                                <rect key="frame" x="143" y="221" width="84" height="29"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="YiT-Bg-iFE"/>
+                                    <constraint firstAttribute="width" constant="80" id="YiT-Bg-iFE"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dG7-ln-pID">
                                     <font key="font" size="23" name="Axis"/>

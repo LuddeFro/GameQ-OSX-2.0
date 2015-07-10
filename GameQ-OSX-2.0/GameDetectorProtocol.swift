@@ -23,6 +23,4 @@ protocol GameDetectorProtocol : NSObjectProtocol {
     static func resetDetection()
     
     static func stopDetection()
-    
-    static func getStatusString() -> String
 }

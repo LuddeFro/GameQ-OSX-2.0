@@ -21,6 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var preferencesItem : NSMenuItem = NSMenuItem()
     var loginItem : NSMenuItem = NSMenuItem()
     var quitItem : NSMenuItem = NSMenuItem()
+    var gameItem: NSMenuItem = NSMenuItem()
     var statusItem:NSMenuItem = NSMenuItem()
     var emailItem : NSMenuItem = NSMenuItem()
     var windowController:NSWindowController?
@@ -41,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.didLogOut()
                     self.windowController?.showWindow(self)
-                    self.windowController?.window?.orderFront(self)
+                    self.windowController?.window?.orderFrontRegardless()
                 }
             }})}
     
@@ -73,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func setWindowVisible(sender: AnyObject){
         dispatch_async(dispatch_get_main_queue()) {
             self.windowController?.showWindow(sender)
-            self.windowController?.window?.orderFront(self)
+            self.windowController?.window?.orderFrontRegardless()
         }
     }
     
@@ -82,12 +83,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func didLogin(){
-    menu.removeAllItems()
+   
+    gameItem.title = Encoding.getStringFromGame(GameDetector.game)
+    gameItem.enabled = false
+    statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+    statusItem.enabled = false
     emailItem.title = ConnectionHandler.loadEmail()!
     emailItem.enabled = false
+        
+    menu.removeAllItems()
     menu.addItem(emailItem)
-    statusItem.title = Encoding.getStringFromStatus(GameDetector.status)
-    statusItem.enabled = false
+    menu.addItem(gameItem)
     menu.addItem(statusItem)
     menu.addItem(NSMenuItem.separatorItem())
     menu.addItem(preferencesItem)
@@ -96,7 +102,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func didLogOut(){
     menu.removeAllItems()
-        
     menu.addItem(loginItem)
     menu.addItem(quitItem)
     }

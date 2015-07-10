@@ -24,8 +24,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
     static var countDownTimer:NSTimer = NSTimer()
     
     class func startDetection(){
-        
-        dataHandler.folderName = self.game.rawValue
+        dataHandler.folderName = Encoding.getStringFromGame(self.game)
         counter = 0
     }
     
@@ -46,7 +45,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
         }
         
         status = newStatus
-        println(newStatus.rawValue)
+        println(Encoding.getStringFromGameStatus(self.game, status: self.status))
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
         if(isTesting == false && testMode == false){
@@ -57,7 +56,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func saveDetection() {
         println("Saving File")
-        dataHandler.folderName = game.rawValue
+        dataHandler.folderName = Encoding.getStringFromGame(self.game)
     }
     
     class func resetDetection() {
@@ -66,20 +65,20 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func saveMissedDetection(){
         println("Saving Missed File")
-        dataHandler.folderName = game.rawValue + "missed"
+        dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "missed"
     }
     
     final class func failMode(){
         
         if(isFailMode){
             println("FailMode Off")
-            dataHandler.folderName = game.rawValue
+            dataHandler.folderName = Encoding.getStringFromGame(self.game)
             isFailMode = false
         }
             
         else{
             println("FailMode On")
-            dataHandler.folderName = game.rawValue + "ForcedFails"
+            dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "ForcedFails"
             isFailMode = true
         }
     }
@@ -92,11 +91,6 @@ class GameDetector:NSObject, GameDetectorProtocol {
         isTesting = false
         counter = -1
         countDownLength = -1
-    }
-    
-    class func getStatusString() -> String {
-        
-        return self.status.rawValue
     }
     
     static func startTimer(){

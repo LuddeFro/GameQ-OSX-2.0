@@ -8,26 +8,26 @@
 
 import Foundation
 
-enum Status:String {
-    case Offline = "OFFLINE"
-    case Online = "ONLINE"
-    case InLobby = "IN LOBBY"
-    case InQueue = "IN QUEUE"
-    case GameReady = "GAME READY"
-    case InGame = "IN GAME"
+enum Status {
+    case Offline
+    case Online
+    case InLobby
+    case InQueue
+    case GameReady
+    case InGame
 }
 
-enum Game:String {
+enum Game {
     
-    case Dota = "DOTA2"
-    case HoN = "HEROES OF NEWERTH"
-    case CSGO = "CSGO"
-    case HOTS = "HOTS"
-    case LoL = "LoL"
-    case NoGame = "NO GAME ACTIVE"
+    case Dota
+    case HoN
+    case CSGO
+    case HOTS
+    case LoL
+    case NoGame
 }
 
- class Encoding {
+class Encoding {
     
     static func getStringFromGame(game:Game) -> String{
         switch game{
@@ -51,14 +51,64 @@ enum Game:String {
         }
     }
     
-    static func getStringFromStatus(status:Status) -> String{
-        switch status{
-        case .Offline: return "OFFLINE"
-        case .Online: return  "ONLINE"
-        case .InLobby: return "IN LOBBY"
-        case .InQueue: return "IN QUEUE"
-        case .GameReady: return "GAME READY"
-        case .InGame:return "IN GAME"
+    static func getStringFromGameStatus(game:Game, status:Status) -> String{
+        
+        switch game {
+        case .Dota:
+            switch status{
+            case .Offline: return "Offline"
+            case .Online: return  "Online"
+            case .InLobby: return "In Game Lobby"
+            case .InQueue: return "Finding Match"
+            case .GameReady: return "Your Match is Ready"
+            case .InGame:return "In Match"
+            }
+        case .HoN:
+            switch status{
+            case .Offline: return "Offline"
+            case .Online: return  "Online"
+            case .InLobby: return "In Game Lobby"
+            case .InQueue: return "Finding Match"
+            case .GameReady: return "Your Match is Ready"
+            case .InGame:return "In Match"
+            }
+        case .CSGO:
+            switch status{
+            case .Offline: return "Offline"
+            case .Online: return  "Online"
+            case .InLobby: return "In Game Lobby"
+            case .InQueue: return "Finding Match"
+            case .GameReady: return "Your Match is Ready"
+            case .InGame:return "In Match"
+            }
+        case .HOTS:
+            switch status{
+            case .Offline: return "Offline"
+            case .Online: return  "Online"
+            case .InLobby: return "In Game Lobby"
+            case .InQueue: return "Finding Match"
+            case .GameReady: return "Your Match is Ready"
+            case .InGame:return "In Match"
+            }
+        case .LoL:
+            switch status{
+            case .Offline: return "Offline"
+            case .Online: return  "Online"
+            case .InLobby: return "In Game Lobby"
+            case .InQueue: return "Finding Match"
+            case .GameReady: return "Your Match is Ready"
+            case .InGame:return "In Match"
+            }
+            
+        case .NoGame:
+            switch status{
+            case .Offline: return "Offline"
+            case .Online: return  "Online"
+            case .InLobby: return "Something went wrong"
+            case .InQueue: return "Something went wrong"
+            case .GameReady: return "Something went wrong"
+            case .InGame:return "Something went wrong"
+            }
         }
     }
     
