@@ -22,7 +22,7 @@ protocol GameDetectorProtocol : NSObjectProtocol {
 }
 
 class GameDetector:NSObject, GameDetectorProtocol {
-
+    
     static var status:Status = Status.Online
     static var game:Game = Game.NoGame
     static var isFailMode:Bool = false
@@ -46,9 +46,14 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = 0
         }
         
-        if(status != newStatus && newStatus == Status.GameReady && !isTesting){
+        if(status != newStatus && newStatus == Status.GameReady && !isTesting && testMode == false){
             detector.saveDetection()
             startTimer()
+            ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 0, finalCallBack: {(success:Bool, error:String?) in
+                if(success){
+                    println("Submitted csv")
+                }
+            })
         }
             
         else{
@@ -61,9 +66,10 @@ class GameDetector:NSObject, GameDetectorProtocol {
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
         if(isTesting == false && testMode == false){
-        ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
-        println("succesfully updated status")
-        })}
+            ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
+                println("succesfully updated status")
+            })}
+        
     }
     
     class func saveDetection() {

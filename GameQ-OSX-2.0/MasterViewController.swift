@@ -50,7 +50,6 @@ class MasterViewController: NSViewController {
     }
     
     @IBAction func logOutPressed(sender: AnyObject) {
-        
         disableAllButtons()
         self.detector.stopDetection()
         ConnectionHandler.logout({ (success:Bool, err:String?) in
@@ -98,6 +97,7 @@ class MasterViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
         let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()
@@ -135,11 +135,6 @@ class MasterViewController: NSViewController {
             quitButton.enabled = true
             quitButton.hidden = false
         }
-        
-        
-        //CHANGE THIS??
-        detector.updateStatus(Status.Online)
-        programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
     func getStatus(sender: NSNotification) {
