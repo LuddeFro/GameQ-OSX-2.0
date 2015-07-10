@@ -28,14 +28,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        
+        println("bajs")
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
             dispatch_async(dispatch_get_main_queue()) {
                 let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
                 self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
-                self.didLogin()
             }
             if success {
+            self.didLogin()
             }
             else{
                 println(err)
@@ -44,15 +44,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     self.windowController?.showWindow(self)
                     self.windowController?.window?.orderFrontRegardless()
                 }
-            }})}
+            }})
+    }
     
     func applicationWillTerminate(aNotification: NSNotification) {
     }
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
-        
         //Add statusBarItem
         statusBarItem = statusBar.statusItemWithLength(-1)
         statusBarItem.menu = menu
@@ -69,6 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         quitItem.title = "Quit"
         quitItem.action = Selector("quitApplication:")
         quitItem.keyEquivalent = ""
+        println("bajs2")
     }
     
     func setWindowVisible(sender: AnyObject){
@@ -79,31 +79,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func quitApplication(sender: AnyObject){
-    NSApplication.sharedApplication().terminate(self)
+        NSApplication.sharedApplication().terminate(self)
     }
     
     func didLogin(){
-   
-    gameItem.title = Encoding.getStringFromGame(GameDetector.game)
-    gameItem.enabled = false
-    statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
-    statusItem.enabled = false
-    emailItem.title = ConnectionHandler.loadEmail()!
-    emailItem.enabled = false
         
-    menu.removeAllItems()
-    menu.addItem(emailItem)
-    menu.addItem(gameItem)
-    menu.addItem(statusItem)
-    menu.addItem(NSMenuItem.separatorItem())
-    menu.addItem(preferencesItem)
-    menu.addItem(quitItem)
+        gameItem.title = Encoding.getStringFromGame(GameDetector.game)
+        gameItem.enabled = false
+        statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+        statusItem.enabled = false
+        emailItem.title = ConnectionHandler.loadEmail()!
+        emailItem.enabled = false
+        
+        menu.removeAllItems()
+        menu.addItem(emailItem)
+        menu.addItem(gameItem)
+        menu.addItem(statusItem)
+        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(preferencesItem)
+        menu.addItem(quitItem)
     }
     
     func didLogOut(){
-    menu.removeAllItems()
-    menu.addItem(loginItem)
-    menu.addItem(quitItem)
+        menu.removeAllItems()
+        menu.addItem(loginItem)
+        menu.addItem(quitItem)
     }
     
     // MARK: - Core Data stack
