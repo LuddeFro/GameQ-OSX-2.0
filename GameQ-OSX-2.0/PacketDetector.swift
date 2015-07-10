@@ -14,10 +14,7 @@ protocol PacketDetector:NSObjectProtocol, GameDetectorProtocol {
     static var queueMaxSize:Int {get set}
     static var isCapturing:Bool {get set}
     static var packetParser:PacketParser {get set}
-    
     static func handle(srcPort:Int, dstPort:Int, iplen:Int)
-    
     static func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double)
-    
     static func update(newPacket: Packet)
 }

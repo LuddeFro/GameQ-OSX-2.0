@@ -133,19 +133,9 @@ class MasterViewController: NSViewController {
         }
         
         
-        //CHANGE THIS
+        //CHANGE THIS??
         detector.updateStatus(Status.Online)
          programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
-    }
-    
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    override func viewWillAppear() {
-        super.viewWillAppear()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
     }
     
     func getStatus(sender: NSNotification) {
@@ -220,7 +210,7 @@ class MasterViewController: NSViewController {
         
         if(activeApps.contains("dota_osx") || activeApps.contains("dota2")){
             detector = DotaDetector.self
-            newGame = Game.Dota
+            newGame = Game.Dota2
         }
             
         else if(activeApps.contains("csgo_osx")){

@@ -46,7 +46,7 @@ class DotaDetector:GameDetector, PacketDetector{
     static var saveCounter = 0;
     
     override class func startDetection() {
-        self.game = Game.Dota
+        self.game = Game.Dota2
         self.detector = self
         self.countDownLength = 45
         updateStatus(Status.InLobby)

@@ -19,7 +19,7 @@ enum Status {
 
 enum Game {
     
-    case Dota
+    case Dota2
     case HoN
     case CSGO
     case HOTS
@@ -31,19 +31,19 @@ class Encoding {
     
     static func getStringFromGame(game:Game) -> String{
         switch game{
-        case .Dota: return "DOTA2"
-        case .HoN: return "HEROES OF NEWERTH"
-        case .CSGO: return "CSGO"
-        case .HOTS: return "HOTS"
-        case .LoL: return "LoL"
-        case .NoGame: return "NO GAME ACTIVE"
+        case .Dota2: return "Dota 2"
+        case .HoN: return "Heroes of Newerth"
+        case .CSGO: return "Counter Strike Global Offensive"
+        case .HOTS: return "Heroes of The Storm"
+        case .LoL: return "League of Legends"
+        case .NoGame: return "No Game Active"
         }
     }
     
     static func getIntFromGame(game:Game) -> Int{
         switch game{
         case .NoGame: return 0
-        case .Dota: return 1
+        case .Dota2: return 1
         case .HoN: return 2
         case .CSGO: return 3
         case .HOTS: return 4
@@ -54,7 +54,7 @@ class Encoding {
     static func getStringFromGameStatus(game:Game, status:Status) -> String{
         
         switch game {
-        case .Dota:
+        case .Dota2:
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"

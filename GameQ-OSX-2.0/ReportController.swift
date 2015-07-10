@@ -21,8 +21,8 @@ class ReportController: NSViewController {
                 else{println(error)}
             })}
         
-        else if(missedQueueLabel.state == NSOnState){
-            println("Not yet implemented")
+        else if(missedQueueLabel.state == NSOnState && GameDetector.game != Game.NoGame){
+//            ConnectionHandler.submitCSV(<#csvString: String#>, game: <#Int#>, type: <#Int#>, finalCallBack: <#(success: Bool, err: String?) -> ()##(success: Bool, err: String?) -> ()#>)
         }
             
         else if(unwantedLabel.state == NSOnState){

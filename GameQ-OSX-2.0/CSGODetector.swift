@@ -143,7 +143,7 @@ class CSGODetector:GameDetector, PacketDetector{
         else if(status == Status.GameReady){
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
             if(inGame){updateStatus(Status.InGame)
-            resetGameTimer()}
+                resetGameTimer()}
         }
             
             //IN GAME
