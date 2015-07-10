@@ -28,7 +28,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        println("bajs")
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
             dispatch_async(dispatch_get_main_queue()) {
                 let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
@@ -68,7 +67,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         quitItem.title = "Quit"
         quitItem.action = Selector("quitApplication:")
         quitItem.keyEquivalent = ""
-        println("bajs2")
     }
     
     func setWindowVisible(sender: AnyObject){
