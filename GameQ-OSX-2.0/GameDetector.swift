@@ -72,7 +72,6 @@ class GameDetector:NSObject, GameDetectorProtocol {
     }
     
     class func resetDetection() {
-        updateStatus(Status.InLobby)
     }
     
     class func saveMissedDetection(){
@@ -98,7 +97,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
     class func stopDetection(){
         println("Stopping Detection")
         self.game = Game.NoGame
-        updateStatus(Status.Online)
+        detector = GameDetector.self
+        updateStatus(Status.Offline)
         isFailMode = false
         isTesting = false
         counter = -1

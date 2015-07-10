@@ -52,9 +52,13 @@ class MasterViewController: NSViewController {
     @IBAction func logOutPressed(sender: AnyObject) {
         
         disableAllButtons()
+        self.detector.stopDetection()
         ConnectionHandler.logout({ (success:Bool, err:String?) in
             dispatch_async(dispatch_get_main_queue()) {
                 self.appDelegate.didLogOut()
+                self.programTimer.invalidate()
+                self.dismissController(self)
+                NSNotificationCenter.defaultCenter().removeObserver(self)
                 self.performSegueWithIdentifier("MasterToLogin", sender: nil)
             }})}
     
@@ -73,7 +77,7 @@ class MasterViewController: NSViewController {
     
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
-        }
+    }
     
     @IBAction func stopButtonPressed(sender: NSButton) {
         detector.stopDetection()
@@ -135,7 +139,7 @@ class MasterViewController: NSViewController {
         
         //CHANGE THIS??
         detector.updateStatus(Status.Online)
-         programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
     }
     
     func getStatus(sender: NSNotification) {
@@ -265,17 +269,17 @@ class MasterViewController: NSViewController {
     
     func resetTimer(isGame: Bool){
         dispatch_async(dispatch_get_main_queue()) {
-        if(isGame){
-            self.timer.progress = 1
-            self.countDown.stringValue = "Enjoy!"
-        }
-        else{
-            self.timer.progress = 0
-            self.countDown.stringValue = ""
-        }
-        self.countDownTimer.invalidate()
-        self.countDownTimer = NSTimer()
-        self.counter = 0
+            if(isGame){
+                self.timer.progress = 1
+                self.countDown.stringValue = "Enjoy!"
+            }
+            else{
+                self.timer.progress = 0
+                self.countDown.stringValue = ""
+            }
+            self.countDownTimer.invalidate()
+            self.countDownTimer = NSTimer()
+            self.counter = 0
         }
     }
     
