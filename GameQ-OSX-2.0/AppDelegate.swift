@@ -41,6 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.didLogOut()
                     self.windowController?.showWindow(self)
+                    self.windowController?.window?.orderFront(self)
                 }
             }})}
     
@@ -67,13 +68,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         quitItem.title = "Quit"
         quitItem.action = Selector("quitApplication:")
         quitItem.keyEquivalent = ""
-        
-        menu.addItem(preferencesItem)
     }
     
     func setWindowVisible(sender: AnyObject){
         dispatch_async(dispatch_get_main_queue()) {
             self.windowController?.showWindow(sender)
+            self.windowController?.window?.orderFront(self)
         }
     }
     
@@ -91,7 +91,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     menu.addItem(statusItem)
     menu.addItem(NSMenuItem.separatorItem())
     menu.addItem(preferencesItem)
-    menu.addItem(NSMenuItem.separatorItem())
     menu.addItem(quitItem)
     }
     

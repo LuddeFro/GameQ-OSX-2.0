@@ -216,8 +216,8 @@ class DotaDetector:GameDetector, PacketDetector{
             }
         }
         
-        //    println(srcQueueCounter)
-        //    println(dstQueueCounter)
+            println(srcQueueCounter)
+            println(dstQueueCounter)
         if(srcQueueCounter[78] > 0 && srcQueueCounter[158] > 0
             || (dstQueueCounter[174] > 0 && srcQueueCounter[78] > 0 && (srcQueueCounter[270] > 0 || srcQueueCounter[285] > 0 )))
         {
@@ -289,9 +289,9 @@ class DotaDetector:GameDetector, PacketDetector{
             stopQueueCounter[78]! = stopQueueCounter[78]! + 1
         }
         
-        //    println(srcQueueCounter)
-        //    println(dstQueueCounter)
-        //    println(stopQueueCounter)
+//            println(srcQueueCounter)
+//            println(dstQueueCounter)
+//            println(stopQueueCounter)
         
         if(isProbablyGame){return true}
         if(stopQueueCounter[78] > 1 && stopQueueCounter[250] > 0){return false}
@@ -348,14 +348,16 @@ class DotaDetector:GameDetector, PacketDetector{
         if(gameTimerEarly.count > 0 || gameTimerLate.count > 0 && p.packetLength > 1300){isProbablyGame = true}
         else{isProbablyGame = false}
         
-        //    println(dstPacketCounter)
-        //    println(packetCounterEarly)
-        //    println(packetCounterLate)
+        println(dstPacketCounter)
+        println(packetCounterEarly)
+        println(packetCounterLate)
+        println("")
         
         if(gameTimerEarly.count >= 3
             && packetCounterEarly[1300] < 3
             && gameTimerLate.count > 0
-            && dstPacketCounter[78] > 1)
+            && dstPacketCounter[78] > 1
+            && gameTimerEarly.first?.time < gameTimerLate.last?.time)
         {return true}
             
         else if((packetCounterLate[164] > 0 || packetCounterLate[174] > 0)

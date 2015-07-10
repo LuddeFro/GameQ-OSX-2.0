@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 class GameDetector:NSObject, GameDetectorProtocol {
-    
+
     static var status:Status = Status.Online
     static var game:Game = Game.NoGame
     static var isFailMode:Bool = false
@@ -49,7 +49,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
         println(newStatus.rawValue)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
-        if(!isTesting && !testMode){
+        if(isTesting == false && testMode == false){
         ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
         println("succesfully updated status")
         })}

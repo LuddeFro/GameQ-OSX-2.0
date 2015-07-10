@@ -11,7 +11,7 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
-
+    
     @IBOutlet weak var settingsButton: NSButton!
     @IBOutlet weak var feedbackButton: NSButton!
     @IBOutlet weak var logOutButton: NSButton!
@@ -143,9 +143,14 @@ class MasterViewController: NSViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
+    }
+    
     func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
-            
+            self.appDelegate.statusItem.title = Encoding.getStringFromStatus(self.detector.status)
             self.gameStatus.stringValue = self.detector.game.rawValue
             self.statusLabel.stringValue = self.detector.getStatusString()
             
@@ -212,7 +217,7 @@ class MasterViewController: NSViewController {
             if(appName != nil){activeApps.insert(appName!)}
         }
         
-        if(activeApps.contains("dota_osx")){
+        if(activeApps.contains("dota_osx") || activeApps.contains("dota2")){
             detector = DotaDetector.self
             newGame = Game.Dota
         }
@@ -265,34 +270,38 @@ class MasterViewController: NSViewController {
     }
     
     func resetTimer(isGame: Bool){
+        dispatch_async(dispatch_get_main_queue()) {
         if(isGame){
-            timer.progress = 1
-            countDown.stringValue = "Enjoy!"
+            self.timer.progress = 1
+            self.countDown.stringValue = "Enjoy!"
         }
         else{
-            timer.progress = 0
-            countDown.stringValue = ""
+            self.timer.progress = 0
+            self.countDown.stringValue = ""
         }
-        countDownTimer.invalidate()
-        counter = 0
+        self.countDownTimer.invalidate()
+        self.counter = 0
+        }
     }
     
     func update2() {
-        counter = counter + 0.1
-        self.timer.progress = CGFloat(counter / Float(GameDetector.countDownLength))
-        var time:Int = Int(Float(GameDetector.countDownLength) - counter)
-        self.countDown.stringValue = String(time)
-        
-        if(counter > Float(GameDetector.countDownLength)) {
-            countDownTimer.invalidate()
-            counter = 0
+        dispatch_async(dispatch_get_main_queue()) {
+            self.counter = self.counter + 0.1
+            self.timer.progress = CGFloat(self.counter / Float(GameDetector.countDownLength))
+            var time:Int = Int(Float(GameDetector.countDownLength) - self.counter)
+            self.countDown.stringValue = String(time)
+            
+            if(self.counter > Float(GameDetector.countDownLength)) {
+                self.countDownTimer.invalidate()
+                self.counter = 0
+            }
         }
     }
     
     private func disableAllButtons(){
-    logOutButton.enabled = false
-    settingsButton.enabled = false
-    feedbackButton.enabled = false
+        logOutButton.enabled = false
+        settingsButton.enabled = false
+        feedbackButton.enabled = false
     }
     
     private func enableAllButtons(){

@@ -356,6 +356,7 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailField" destination="hbz-6J-FCD" id="I9J-WS-PWz"/>
                         <outlet property="statusLabel" destination="VFM-FV-nTJ" id="Lnq-Yb-l4Y"/>
                         <outlet property="submitButton" destination="etw-Cn-jns" id="uua-em-4ja"/>
                     </connections>
