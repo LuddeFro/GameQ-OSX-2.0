@@ -8,12 +8,7 @@
 
 import Foundation
 
-class HoNDetector: GameDetector, PacketDetector {
-    
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+class HoNDetector: PacketDetector {
     
     static let HoNFilter:String = "udp src portrange 11235-11335 or udp dst portrange 11235-11335"
     
@@ -62,13 +57,13 @@ class HoNDetector: GameDetector, PacketDetector {
     
     override class func saveDetection(){
         super.saveDetection()
-        dataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(fileToString())
         packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
-        dataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(fileToString())
         packetQueue = [Packet]()
     }
     
@@ -99,19 +94,7 @@ class HoNDetector: GameDetector, PacketDetector {
         
     }
     
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func update(newPacket:Packet){
+    override class func update(newPacket:Packet){
         
         packetQueue.insert(newPacket, atIndex: 0)
         if packetQueue.count >= queueMaxSize {

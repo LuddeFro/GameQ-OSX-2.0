@@ -9,6 +9,18 @@
 import Foundation
 import Cocoa
 
+protocol GameDetectorProtocol : NSObjectProtocol {
+    
+    static func startDetection()
+    static func updateStatus(newStatus: Status)
+    static func saveDetection()
+    static func saveMissedDetection()
+    static func failMode()
+    static func resetDetection()
+    static func stopDetection()
+    static func fileToString() -> String
+}
+
 class GameDetector:NSObject, GameDetectorProtocol {
 
     static var status:Status = Status.Online
@@ -111,4 +123,6 @@ class GameDetector:NSObject, GameDetectorProtocol {
             countDownTimer.invalidate()
         }
     }
+    
+    class func fileToString() -> String {return ""}
 }

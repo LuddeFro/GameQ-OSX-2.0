@@ -8,12 +8,7 @@
 
 import Foundation
 
-class LoLDetector: GameDetector, PacketDetector {
-    
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+class LoLDetector: PacketDetector {
     
     static let LoLFilter:String = "tcp src port 2099 or tcp src port 5223 or tcp src port 5222 or tcp dst port 2099 or tcp dst port 5223 or tcp dst port 5222"
     
@@ -66,13 +61,13 @@ class LoLDetector: GameDetector, PacketDetector {
     
     override class func saveDetection(){
         super.saveDetection()
-        dataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(fileToString())
         packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
-        dataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(fileToString())
         packetQueue = [Packet]()
     }
     
@@ -111,21 +106,8 @@ class LoLDetector: GameDetector, PacketDetector {
         
     }
     
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        if(iplen > 5){
-            var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-            println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-            update(newPacket);
-        }
-    }
     
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func update(newPacket:Packet){
+    override class func update(newPacket:Packet){
         
         packetQueue.insert(newPacket, atIndex: 0)
         if packetQueue.count >= queueMaxSize {
@@ -136,7 +118,7 @@ class LoLDetector: GameDetector, PacketDetector {
         if(status == Status.InLobby){
             var queueing = isQueueing(newPacket)
             if(queueing){updateStatus(Status.InQueue)
-            resetQueueTimer()}
+                resetQueueTimer()}
         }
             
             //IN QUEUE
@@ -146,7 +128,7 @@ class LoLDetector: GameDetector, PacketDetector {
             
             if(gameReady){updateStatus(Status.GameReady)}
             else if(stoppedQueue){updateStatus(Status.InLobby)
-            resetQueueTimer()}
+                resetQueueTimer()}
         }
             
             //GAME READY

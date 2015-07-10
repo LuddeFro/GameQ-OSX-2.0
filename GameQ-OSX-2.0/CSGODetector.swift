@@ -9,12 +9,7 @@
 
 import Foundation
 
-class CSGODetector:GameDetector, PacketDetector{
-    
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+class CSGODetector: PacketDetector{
     
     static let csgoFilter:String = "udp src portrange 27000-28000 or udp dst portrange 27000-28000 or udp dst port 27005 or udp src port 27015 or udp src port 27005 or udp dst port 27015"
     
@@ -64,13 +59,13 @@ class CSGODetector:GameDetector, PacketDetector{
     
     override class func saveDetection(){
         super.saveDetection()
-        dataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(fileToString())
         packetQueue = [Packet]()
     }
     
     override class func saveMissedDetection(){
         super.saveMissedDetection()
-        dataHandler.logPackets(packetQueue)
+        dataHandler.logPackets(fileToString())
         packetQueue = [Packet]()
     }
     
@@ -103,19 +98,7 @@ class CSGODetector:GameDetector, PacketDetector{
         time = -1
     }
     
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func update(newPacket:Packet){
+    override class func update(newPacket:Packet){
         
         packetQueue.insert(newPacket, atIndex: 0)
         if packetQueue.count >= queueMaxSize {

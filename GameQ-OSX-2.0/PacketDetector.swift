@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PacketDetector:NSObjectProtocol, GameDetectorProtocol {
+protocol PacketDetectorProtocol:NSObjectProtocol, GameDetectorProtocol {
     
     static var packetQueue:[Packet] {get set}
     static var queueMaxSize:Int {get set}
@@ -17,4 +17,33 @@ protocol PacketDetector:NSObjectProtocol, GameDetectorProtocol {
     static func handle(srcPort:Int, dstPort:Int, iplen:Int)
     static func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double)
     static func update(newPacket: Packet)
+}
+
+class PacketDetector: GameDetector, PacketDetectorProtocol{
+    static var packetQueue:[Packet] = [Packet]()
+    static var queueMaxSize:Int = 200
+    static var isCapturing = false
+    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+    
+    static func handle(srcPort:Int, dstPort:Int, iplen:Int){
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        update(newPacket);
+    }
+    
+    static func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
+        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
+        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
+        update(newPacket);
+    }
+    
+    class func update(newPacket: Packet){}
+    
+    override class func fileToString() -> String{
+        var log:String = ""
+        for i in 0..<packetQueue.count {
+            log = "\(log)\(packetQueue[i].srcPort),\(packetQueue[i].dstPort),\(packetQueue[i].captureTime),\(packetQueue[i].packetLength)\n"
+        }
+        return log
+    }
 }
