@@ -25,8 +25,13 @@ class LoLDetector: PacketDetector {
     static var gameTimerEarly:[PacketTimer] = [PacketTimer]()
     static var packetCounterEarly:[Int:Int] = [1300:0]
     
-    static var stopQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var stopQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    static var stopSrcQueueTimer:[PacketTimer] = [PacketTimer]()
+    static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    
+    static var stopDstQueueTimer:[PacketTimer] = [PacketTimer]()
+    static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    
+    
     
     //    static var dstGameTimer:[PacketTimer] = [PacketTimer]()
     //    static var dstPacketCounter:[Int:Int] = [-1:0]
@@ -74,8 +79,11 @@ class LoLDetector: PacketDetector {
         dstQueueTimer = [PacketTimer]()
         dstQueueCounter = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
         
-        stopQueueTimer = [PacketTimer]()
-        stopQueueCounter = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+        stopSrcQueueTimer = [PacketTimer]()
+        stopSrcQueueCounter = [100:0,200:0,300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+
+        stopDstQueueTimer = [PacketTimer]()
+        stopDstQueueCounter = [100:0, 200:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
     }
     
     class func resetGameTimer(){
@@ -168,25 +176,40 @@ class LoLDetector: PacketDetector {
     
     class func stoppedQueueing(p:Packet) -> Bool{
         
-        while(!stopQueueTimer.isEmpty && p.captureTime - stopQueueTimer.last!.time > 2){
-            var key:Int = stopQueueTimer.removeLast().key
-            stopQueueCounter[key]! = stopQueueCounter[key]! - 1
+        while(!stopSrcQueueTimer.isEmpty && p.captureTime - stopSrcQueueTimer.last!.time > 2){
+            var key:Int = stopSrcQueueTimer.removeLast().key
+            stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! - 1
+        }
+       
+        while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2){
+            var key:Int = stopDstQueueTimer.removeLast().key
+            stopDstQueueCounter[key]! = stopDstQueueCounter[key]! - 1
         }
         
-        for key in stopQueueCounter.keys{
-            if(p.packetLength <= key + 99 && p.packetLength >= key && (ports.contains(p.dstPort) || ports.contains(p.srcPort))){
-                stopQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                stopQueueCounter[key]! = stopQueueCounter[key]! + 1
+        for key in stopSrcQueueCounter.keys{
+            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.srcPort)){
+                stopSrcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! + 1
             }
         }
         
-        println(stopQueueCounter)
+        for key in stopDstQueueCounter.keys{
+            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.srcPort)){
+                stopDstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                stopDstQueueCounter[key]! = stopDstQueueCounter[key]! + 1
+            }
+        }
         
         
+        println(stopSrcQueueCounter)
+        println(stopDstQueueCounter)
         
-        if((stopQueueCounter[300] > 0 || stopQueueCounter[700] > 0) && (stopQueueCounter[800] > 0 || stopQueueCounter[100] > 0) && (stopQueueTimer.count >= 3))
-        {return true}
-        else{return false}
+        
+//        
+//        if((stopQueueCounter[300] > 0 || stopQueueCounter[700] > 0) && (stopQueueCounter[800] > 0 || stopQueueCounter[100] > 0) && (stopQueueTimer.count >= 3))
+//        {return true}
+//        else{return false}
+        return false
     }
     
     

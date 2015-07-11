@@ -61,6 +61,7 @@ class MasterViewController: NSViewController {
         }
     @IBAction func startButtonPressed(sender: NSButton) {
         detector.startDetection()
+        
     }
     @IBAction func capButtonPressed(sender: NSButton) {
         detector.saveDetection()
