@@ -11,9 +11,24 @@ import Cocoa
 
 class MasterViewController: NSViewController {
     
+    @IBOutlet weak var changePWButton: NSButton!
     @IBOutlet weak var toServerButton: NSButton!
-    
     @IBOutlet weak var toDesktopButton: NSButton!
+    @IBOutlet weak var settingsButton: NSButton!
+    @IBOutlet weak var feedbackButton: NSButton!
+    @IBOutlet weak var logOutButton: NSButton!
+    @IBOutlet weak var missedQueueButton: NSButton!
+    @IBOutlet weak var timer: Timer!
+    @IBOutlet weak var countDown: NSTextField!
+    @IBOutlet weak var queueTimer: QueueTimer!
+    @IBOutlet weak var gameStatus: NSTextField!
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var saveMissButton: NSButton!
+    @IBOutlet weak var saveCapButton: NSButton!
+    @IBOutlet weak var startButton: NSButton!
+    @IBOutlet weak var quitButton: NSButton!
+    @IBOutlet weak var stopButton: NSButton!
+    @IBOutlet weak var failmodebutton: NSButton!
     
     @IBAction func serverPressed(sender: AnyObject) {
         if(detector.saveToServer){
@@ -25,7 +40,6 @@ class MasterViewController: NSViewController {
             toServerButton.title = "toserver = on"
         }
     }
-   
     @IBAction func desktopPressed(sender: AnyObject) {
         if(detector.saveToDesktop){
             detector.saveToDesktop = false
@@ -36,35 +50,9 @@ class MasterViewController: NSViewController {
             toDesktopButton.title = "toDesktop = on"
         }
     }
-    
-    @IBOutlet weak var settingsButton: NSButton!
-    @IBOutlet weak var feedbackButton: NSButton!
-    @IBOutlet weak var logOutButton: NSButton!
-    @IBOutlet weak var missedQueueButton: NSButton!
-    @IBOutlet weak var timer: Timer!
-    @IBOutlet weak var countDown: NSTextField!
-    @IBOutlet weak var queueTimer: QueueTimer!
-    @IBOutlet weak var gameStatus: NSTextField!
-    @IBOutlet weak var statusLabel: NSTextField!
-    
-    @IBOutlet weak var saveMissButton: NSButton!
-    
-    @IBOutlet weak var isTestingButton: NSButton!
-    
-    @IBOutlet weak var saveCapButton: NSButton!
-    
-    @IBOutlet weak var startButton: NSButton!
-    
-    @IBOutlet weak var quitButton: NSButton!
-    
-    @IBOutlet weak var stopButton: NSButton!
-    
-    @IBOutlet weak var failmodebutton: NSButton!
-    
     @IBAction func saveMissedPressed(sender: AnyObject) {
         detector.saveMissedDetection()
     }
-    
     @IBAction func logOutPressed(sender: AnyObject) {
         disableAllButtons()
         self.detector.stopDetection()
@@ -76,20 +64,16 @@ class MasterViewController: NSViewController {
                 NSNotificationCenter.defaultCenter().removeObserver(self)
                 self.performSegueWithIdentifier("MasterToLogin", sender: nil)
             }})}
-    
     @IBAction func startButtonPressed(sender: NSButton) {
         detector.startDetection()
     }
-    
     @IBAction func capButtonPressed(sender: NSButton) {
         detector.saveDetection()
     }
-    
     @IBAction func capFailButtonPressed(sender: NSButton) {
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier("MasterToReport", sender: nil)
         }}
-    
     @IBAction func failModePressed(sender: NSButton) {
         detector.failMode()
         if(detector.isFailMode){
@@ -98,11 +82,9 @@ class MasterViewController: NSViewController {
         
         else{ failmodebutton.title = "FailMode Off" }
     }
-    
     @IBAction func stopButtonPressed(sender: NSButton) {
         detector.stopDetection()
     }
-    
     @IBAction func quitButtonPressed(sender: NSButton) {
         detector.stopDetection()
         detector.updateStatus(Status.Offline)
@@ -217,7 +199,6 @@ class MasterViewController: NSViewController {
         }
     }
     
-    
     //THIS MUST BE MOVED
     func update() {
         
@@ -280,7 +261,6 @@ class MasterViewController: NSViewController {
     }
     
     func startTimer(){
-        println("fan händer")
         dispatch_async(dispatch_get_main_queue()) {
             self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update2"), userInfo: nil, repeats: true)
         }
@@ -320,9 +300,10 @@ class MasterViewController: NSViewController {
         logOutButton.enabled = false
         settingsButton.enabled = false
         feedbackButton.enabled = false
+        changePWButton.enabled = false
     }
-    
     private func enableAllButtons(){
+        changePWButton.enabled = true
         logOutButton.enabled = true
         settingsButton.enabled = true
         feedbackButton.enabled = true

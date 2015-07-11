@@ -81,14 +81,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func didLogin(){
-        
         gameItem.title = Encoding.getStringFromGame(GameDetector.game)
         gameItem.enabled = false
         statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
         statusItem.enabled = false
         emailItem.title = ConnectionHandler.loadEmail()!
         emailItem.enabled = false
-        
         menu.removeAllItems()
         menu.addItem(emailItem)
         menu.addItem(gameItem)
@@ -103,6 +101,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(loginItem)
         menu.addItem(quitItem)
     }
+    
     
     // MARK: - Core Data stack
     
@@ -240,5 +239,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .TerminateNow
     }
 }
-
-

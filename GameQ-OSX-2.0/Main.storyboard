@@ -1086,8 +1086,8 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="changePWButton" destination="urm-Yo-WPv" id="ked-He-2cq"/>
                         <outlet property="countDown" destination="TCh-fi-bsJ" id="RsR-Hj-OCa"/>
-                        <outlet property="desktopPressed" destination="M2V-DG-OD4" id="vN1-qK-Jsn"/>
                         <outlet property="failmodebutton" destination="L9b-ND-Nn0" id="82W-d8-V1B"/>
                         <outlet property="feedbackButton" destination="7aE-Du-svx" id="lRy-hv-iFq"/>
                         <outlet property="gameStatus" destination="Wp4-y1-xbg" id="EGV-PP-KCy"/>

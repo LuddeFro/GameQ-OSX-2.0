@@ -27,7 +27,6 @@ class LoginViewController: NSViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.loginProgress1.stopAnimation(self)
                     self.loginProgress2.stopAnimation(self)
-                    
                     self.appDelegate.didLogin()
                     self.performSegueWithIdentifier("LoginToMaster", sender: nil)
                 }
