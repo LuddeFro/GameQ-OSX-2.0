@@ -18,6 +18,9 @@ class ConnectionHandler : NSObject {
     static let emailKey:String = "email_key"
     private static var sessionId:String = ""
     static var isLoggedIn = false
+    static var statusTimer:NSTimer = NSTimer()
+    static var lastStatusUpdateStatus:Int = 0
+    static var lastStatusUpdateGame:Int? = 0
     
     
     private static func getStringFrom(json:Dictionary<String, AnyObject>, key:String) -> String {
@@ -59,7 +62,8 @@ class ConnectionHandler : NSObject {
         task.resume()
     }
     
-    static func login(email:String, password:String, finalCallBack:(success:Bool, err:String?)->()) {
+    static func login(email:String, password password1:String, finalCallBack:(success:Bool, err:String?)->()) {
+        let password = sha256(password1)
         let apiExtension = "login"
         var diString = ""
         if let deviceId = loadDeviceId() {
@@ -125,7 +129,8 @@ class ConnectionHandler : NSObject {
         })
     }
     
-    static func register(email:String, password:String, finalCallBack:(success:Bool, err:String?)->()) {
+    static func register(email:String, password password1:String, finalCallBack:(success:Bool, err:String?)->()) {
+        let password = sha256(password1)
         let apiExtension = "register"
         var diString = ""
         if let deviceId = loadDeviceId() {
@@ -158,13 +163,30 @@ class ConnectionHandler : NSObject {
         })
     }
     
+    private static func needsStatusUpdate() {
+        if isLoggedIn {
+            setStatus(lastStatusUpdateGame, status: lastStatusUpdateStatus, finalCallBack: {
+                (success:Bool, error:String?) in
+                println("autoupdate status success: \(success), error: \(error)")
+            })
+        }
+    }
+    
+    private static func resetStatusUpdateTimer(game:Int?, status:Int) {
+        lastStatusUpdateStatus = status
+        lastStatusUpdateGame = game
+        statusTimer.invalidate()
+        statusTimer = NSTimer.scheduledTimerWithTimeInterval(300, target: self, selector: Selector("needsStatusUpdate"), userInfo: nil, repeats: false)
+    }
+    
     static func setStatus(game:Int?, status:Int, finalCallBack:(success:Bool, err:String?)->()) {
+        resetStatusUpdateTimer(game, status: status)
         let apiExtension = "setStatus"
         var diString = ""
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
         }
-        var gameString:String = ""
+        var gameString:String = "game=0"
         if let gameId = game {
             gameString = "game=\(gameId)"
         }
@@ -295,7 +317,9 @@ class ConnectionHandler : NSObject {
     }
     
     
-    static func updatePassword(email:String, password:String, newPassword:String, finalCallBack:(success:Bool, err:String?)->()) {
+    static func updatePassword(email:String, password password1:String, newPassword newPassword1:String, finalCallBack:(success:Bool, err:String?)->()) {
+        let password = sha256(password1)
+        let newPassword = sha256(newPassword1)
         let apiExtension = "updatePassword"
         var diString = ""
         if let deviceId = loadDeviceId() {
@@ -486,6 +510,16 @@ class ConnectionHandler : NSObject {
         }
         
     }
+    
+    
+    static func sha256(aString : String) -> String {
+        var data:NSData = aString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        var hash = [UInt8](count: Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
+        CC_SHA256(data.bytes, CC_LONG(data.length), &hash)
+        let res = NSData(bytes: hash, length: Int(CC_SHA256_DIGEST_LENGTH))
+        return res.description.stringByReplacingOccurrencesOfString("<", withString: "").stringByReplacingOccurrencesOfString(">", withString: "").stringByReplacingOccurrencesOfString(" ", withString: "")
+    }
+    
 }
 
 

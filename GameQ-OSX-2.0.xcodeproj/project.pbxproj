@@ -247,6 +247,7 @@
 			children = (
 				AE98AC171B18A2AC00E5F382 /* DataHandler.swift */,
 				AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */,
+				832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */,
 			);
 			name = DataHandlers;
 			sourceTree = "<group>";
@@ -254,7 +255,6 @@
 		AE98AC2F1B18A34200E5F382 /* PacketParsers */ = {
 			isa = PBXGroup;
 			children = (
-				832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */,
 				AE98AC1C1B18A2AC00E5F382 /* PacketParser.h */,
 				AE98AC1D1B18A2AC00E5F382 /* PacketParser.m */,
 			);

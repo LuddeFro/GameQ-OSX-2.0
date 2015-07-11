@@ -19,3 +19,6 @@
 
 #import "PacketParser.h"
 
+#import <CommonCrypto/CommonCrypto.h>
+#import <CommonCrypto/CommonDigest.h>
+
