@@ -551,6 +551,9 @@ DQ
                                 <buttonCell key="cell" type="squareTextured" title="Get new Password" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="7Dm-gx-3aU">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="submitButtonPressed:" target="6mk-Ld-Lsx" id="8sB-xm-qCf"/>
@@ -1219,6 +1222,9 @@ DQ
                                 <buttonCell key="cell" type="squareTextured" title="Change Password" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="oHc-6b-15F">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="submitButtonPressed:" target="DPB-nK-ZV1" id="iTI-bE-92E"/>
@@ -1331,6 +1337,9 @@ DQ
                                 <buttonCell key="cell" type="squareTextured" title="Submit" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="eB9-nW-ePO">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="submitButtonPressed:" target="SSw-vW-DUh" id="4G8-tE-CYb"/>

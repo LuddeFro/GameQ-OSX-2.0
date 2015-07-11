@@ -102,7 +102,7 @@ class MasterViewController: NSViewController {
         
         missedQueueButton.attributedTitle = NSAttributedString(string: "Send Feedback", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
-        if((ConnectionHandler.loadEmail() == "f@w.com") || (ConnectionHandler.loadEmail() == "l@f.com") || (ConnectionHandler.loadEmail() == "g@h.com")){
+        if((ConnectionHandler.loadEmail() == "fabian.wikstrom@gmail.com")){
             failmodebutton.enabled = true
             failmodebutton.hidden = false
             
@@ -146,6 +146,7 @@ class MasterViewController: NSViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.appDelegate.gameItem.title = Encoding.getStringFromGame(GameDetector.detector.game)
             self.appDelegate.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.detector.game,status: GameDetector.detector.status)
+            
             self.gameStatus.stringValue = Encoding.getStringFromGame(GameDetector.detector.game)
             self.statusLabel.stringValue = Encoding.getStringFromGameStatus(GameDetector.detector.game, status: GameDetector.detector.status)
             
