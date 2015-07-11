@@ -8,12 +8,7 @@
 
 import Foundation
 
-class HOTSDetector: GameDetector, PacketDetector {
-    
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+class HOTSDetector: PacketDetector {
 
     static let HOTSFilter:String = "udp src port 1119 or udp src port 6113 or udp src port 1120 or udp src port 80 or udp src port 3724 or udp dst port 1119 or udp dst port 6113 or udp dst port 1120 or udp dst port 80 or udp dst port 3724"
     
@@ -59,19 +54,6 @@ class HOTSDetector: GameDetector, PacketDetector {
         resetGameTimer()
     }
     
-    
-    override class func saveDetection(){
-        super.saveDetection()
-        dataHandler.logPackets(packetQueue)
-        packetQueue = [Packet]()
-    }
-    
-    override class func saveMissedDetection(){
-        super.saveMissedDetection()
-        dataHandler.logPackets(packetQueue)
-        packetQueue = [Packet]()
-    }
-    
     override class func stopDetection(){
         if(isCapturing){
             packetParser.stop_loop()
@@ -99,52 +81,7 @@ class HOTSDetector: GameDetector, PacketDetector {
     
     }
     
-    override class func getStatusString() -> String{
-        
-        var statusString = ""
-        
-        switch self.status {
-            
-        case Status.Offline:
-            statusString =  Status.Offline.rawValue
-            break
-        case Status.Online:
-            statusString =  Status.Online.rawValue
-            break
-        case Status.InLobby:
-            statusString =  "Detecting Game"
-            break
-        case Status.InQueue:
-            statusString =  "Detecting Game"
-            break
-        case Status.GameReady:
-            statusString =  Status.GameReady.rawValue
-            break
-        case Status.InGame:
-            statusString =  Status.InGame.rawValue
-            break
-        }
-        return statusString
-    }
-    
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func update(newPacket:Packet){
-        
-        packetQueue.insert(newPacket, atIndex: 0)
-        if packetQueue.count >= queueMaxSize {
-            packetQueue.removeLast()
-        }
+    override class func update(newPacket:Packet){
         
         //IN LOBBY
         if(status == Status.InLobby){

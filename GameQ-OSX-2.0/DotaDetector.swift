@@ -8,12 +8,7 @@
 
 import Foundation
 
-class DotaDetector:GameDetector, PacketDetector{
-    
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+class DotaDetector:PacketDetector{
     
     static let dotaFilter:String = "udp src portrange 27000-28999 or udp dst portrange 27000-28999"
     static let portMin:Int = 27000
@@ -46,7 +41,7 @@ class DotaDetector:GameDetector, PacketDetector{
     static var saveCounter = 0;
     
     override class func startDetection() {
-        self.game = Game.Dota
+        self.game = Game.Dota2
         self.detector = self
         self.countDownLength = 45
         updateStatus(Status.InLobby)
@@ -65,19 +60,6 @@ class DotaDetector:GameDetector, PacketDetector{
         resetGameTimer()
         resetInGameTimer()
         saveCounter = 0
-    }
-    
-    
-    override class func saveDetection(){
-        super.saveDetection()
-        dataHandler.logPackets(packetQueue)
-        packetQueue = [Packet]()
-    }
-    
-    override class func saveMissedDetection(){
-        super.saveMissedDetection()
-        dataHandler.logPackets(packetQueue)
-        packetQueue = [Packet]()
     }
     
     override class func stopDetection(){
@@ -117,27 +99,7 @@ class DotaDetector:GameDetector, PacketDetector{
         inGamePacketCounter = [Int:Int]()
     }
     
-    
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    
-    class func update(newPacket: Packet){
-        
-        packetQueue.insert(newPacket, atIndex: 0)
-        if packetQueue.count >= queueMaxSize {
-            packetQueue.removeLast()
-        }
-        
+    override class func update(newPacket: Packet){
         
         //IN LOBBY
         if(status == Status.InLobby){
@@ -216,8 +178,8 @@ class DotaDetector:GameDetector, PacketDetector{
             }
         }
         
-        //    println(srcQueueCounter)
-        //    println(dstQueueCounter)
+            println(srcQueueCounter)
+            println(dstQueueCounter)
         if(srcQueueCounter[78] > 0 && srcQueueCounter[158] > 0
             || (dstQueueCounter[174] > 0 && srcQueueCounter[78] > 0 && (srcQueueCounter[270] > 0 || srcQueueCounter[285] > 0 )))
         {
@@ -289,9 +251,9 @@ class DotaDetector:GameDetector, PacketDetector{
             stopQueueCounter[78]! = stopQueueCounter[78]! + 1
         }
         
-        //    println(srcQueueCounter)
-        //    println(dstQueueCounter)
-        //    println(stopQueueCounter)
+//            println(srcQueueCounter)
+//            println(dstQueueCounter)
+//            println(stopQueueCounter)
         
         if(isProbablyGame){return true}
         if(stopQueueCounter[78] > 1 && stopQueueCounter[250] > 0){return false}
@@ -348,14 +310,16 @@ class DotaDetector:GameDetector, PacketDetector{
         if(gameTimerEarly.count > 0 || gameTimerLate.count > 0 && p.packetLength > 1300){isProbablyGame = true}
         else{isProbablyGame = false}
         
-        //    println(dstPacketCounter)
-        //    println(packetCounterEarly)
-        //    println(packetCounterLate)
+        println(dstPacketCounter)
+        println(packetCounterEarly)
+        println(packetCounterLate)
+        println("")
         
         if(gameTimerEarly.count >= 3
             && packetCounterEarly[1300] < 3
             && gameTimerLate.count > 0
-            && dstPacketCounter[78] > 1)
+            && dstPacketCounter[78] > 1
+            && gameTimerEarly.first?.time < gameTimerLate.last?.time)
         {return true}
             
         else if((packetCounterLate[164] > 0 || packetCounterLate[174] > 0)

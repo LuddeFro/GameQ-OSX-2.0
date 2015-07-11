@@ -62,6 +62,11 @@ class SignUpController: NSViewController {
         }
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        emailField.becomeFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

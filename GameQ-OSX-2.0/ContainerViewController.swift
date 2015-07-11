@@ -21,6 +21,7 @@ class ContainerViewController: NSViewController {
         self.view.addSubview(sourceViewController.view)
         self.view.frame = sourceViewController.view.frame
         }
+        
         else{
             let sourceViewController = mainStoryboard.instantiateControllerWithIdentifier("MasterViewController") as! NSViewController
             self.insertChildViewController(sourceViewController, atIndex: 0)

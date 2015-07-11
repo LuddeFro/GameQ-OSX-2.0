@@ -8,12 +8,7 @@
 
 import Foundation
 
-class LoLDetector: GameDetector, PacketDetector {
-    
-    static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
-    static var isCapturing = false
-    static var packetParser:PacketParser = PacketParser.getSharedInstance()
+class LoLDetector: PacketDetector {
     
     static let LoLFilter:String = "tcp src port 2099 or tcp src port 5223 or tcp src port 5222 or tcp dst port 2099 or tcp dst port 5223 or tcp dst port 5222"
     
@@ -30,8 +25,13 @@ class LoLDetector: GameDetector, PacketDetector {
     static var gameTimerEarly:[PacketTimer] = [PacketTimer]()
     static var packetCounterEarly:[Int:Int] = [1300:0]
     
-    static var stopQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var stopQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    static var stopSrcQueueTimer:[PacketTimer] = [PacketTimer]()
+    static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    
+    static var stopDstQueueTimer:[PacketTimer] = [PacketTimer]()
+    static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    
+    
     
     //    static var dstGameTimer:[PacketTimer] = [PacketTimer]()
     //    static var dstPacketCounter:[Int:Int] = [-1:0]
@@ -63,19 +63,6 @@ class LoLDetector: GameDetector, PacketDetector {
         resetGameTimer()
     }
     
-    
-    override class func saveDetection(){
-        super.saveDetection()
-        dataHandler.logPackets(packetQueue)
-        packetQueue = [Packet]()
-    }
-    
-    override class func saveMissedDetection(){
-        super.saveMissedDetection()
-        dataHandler.logPackets(packetQueue)
-        packetQueue = [Packet]()
-    }
-    
     override class func stopDetection(){
         if(isCapturing){
             packetParser.stop_loop()
@@ -92,8 +79,11 @@ class LoLDetector: GameDetector, PacketDetector {
         dstQueueTimer = [PacketTimer]()
         dstQueueCounter = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
         
-        stopQueueTimer = [PacketTimer]()
-        stopQueueCounter = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+        stopSrcQueueTimer = [PacketTimer]()
+        stopSrcQueueCounter = [100:0,200:0,300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+
+        stopDstQueueTimer = [PacketTimer]()
+        stopDstQueueCounter = [100:0, 200:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
     }
     
     class func resetGameTimer(){
@@ -111,60 +101,14 @@ class LoLDetector: GameDetector, PacketDetector {
         
     }
     
-    override class func getStatusString() -> String{
-        
-        var statusString = ""
-        
-        switch self.status {
-            
-        case Status.Offline:
-            statusString =  Status.Offline.rawValue
-            break
-        case Status.Online:
-            statusString =  Status.Online.rawValue
-            break
-        case Status.InLobby:
-            statusString =  "in Lobby"
-            break
-        case Status.InQueue:
-            statusString =  "in Queue"
-            break
-        case Status.GameReady:
-            statusString =  Status.GameReady.rawValue
-            break
-        case Status.InGame:
-            statusString =  Status.InGame.rawValue
-            break
-        }
-        return statusString
-    }
     
-    class func handle(srcPort:Int, dstPort:Int, iplen:Int){
-        if(iplen > 5){
-            var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen)
-            println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-            update(newPacket);
-        }
-    }
-    
-    class func handleTest(srcPort:Int, dstPort:Int, iplen:Int, time:Double) {
-        var newPacket:Packet = Packet(dstPort: dstPort, srcPort: srcPort, packetLength: iplen, time: time)
-        println("s: \(newPacket.srcPort) d: \(newPacket.dstPort) ip: \(newPacket.packetLength) time: \(newPacket.captureTime)")
-        update(newPacket);
-    }
-    
-    class func update(newPacket:Packet){
-        
-        packetQueue.insert(newPacket, atIndex: 0)
-        if packetQueue.count >= queueMaxSize {
-            packetQueue.removeLast()
-        }
+    override class func update(newPacket:Packet){
         
         //IN LOBBY
         if(status == Status.InLobby){
             var queueing = isQueueing(newPacket)
             if(queueing){updateStatus(Status.InQueue)
-            resetQueueTimer()}
+                resetQueueTimer()}
         }
             
             //IN QUEUE
@@ -174,7 +118,7 @@ class LoLDetector: GameDetector, PacketDetector {
             
             if(gameReady){updateStatus(Status.GameReady)}
             else if(stoppedQueue){updateStatus(Status.InLobby)
-            resetQueueTimer()}
+                resetQueueTimer()}
         }
             
             //GAME READY
@@ -232,25 +176,40 @@ class LoLDetector: GameDetector, PacketDetector {
     
     class func stoppedQueueing(p:Packet) -> Bool{
         
-        while(!stopQueueTimer.isEmpty && p.captureTime - stopQueueTimer.last!.time > 2){
-            var key:Int = stopQueueTimer.removeLast().key
-            stopQueueCounter[key]! = stopQueueCounter[key]! - 1
+        while(!stopSrcQueueTimer.isEmpty && p.captureTime - stopSrcQueueTimer.last!.time > 2){
+            var key:Int = stopSrcQueueTimer.removeLast().key
+            stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! - 1
+        }
+       
+        while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2){
+            var key:Int = stopDstQueueTimer.removeLast().key
+            stopDstQueueCounter[key]! = stopDstQueueCounter[key]! - 1
         }
         
-        for key in stopQueueCounter.keys{
-            if(p.packetLength <= key + 99 && p.packetLength >= key && (ports.contains(p.dstPort) || ports.contains(p.srcPort))){
-                stopQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                stopQueueCounter[key]! = stopQueueCounter[key]! + 1
+        for key in stopSrcQueueCounter.keys{
+            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.srcPort)){
+                stopSrcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! + 1
             }
         }
         
-        println(stopQueueCounter)
+        for key in stopDstQueueCounter.keys{
+            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.srcPort)){
+                stopDstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                stopDstQueueCounter[key]! = stopDstQueueCounter[key]! + 1
+            }
+        }
         
         
+        println(stopSrcQueueCounter)
+        println(stopDstQueueCounter)
         
-        if((stopQueueCounter[300] > 0 || stopQueueCounter[700] > 0) && (stopQueueCounter[800] > 0 || stopQueueCounter[100] > 0) && (stopQueueTimer.count >= 3))
-        {return true}
-        else{return false}
+        
+//        
+//        if((stopQueueCounter[300] > 0 || stopQueueCounter[700] > 0) && (stopQueueCounter[800] > 0 || stopQueueCounter[100] > 0) && (stopQueueTimer.count >= 3))
+//        {return true}
+//        else{return false}
+        return false
     }
     
     

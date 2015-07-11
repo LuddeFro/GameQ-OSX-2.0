@@ -18,6 +18,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     }
     
     override func tearDown() {
+        GameDetector.detector.isTesting = true
         GameDetector.detector.resetDetection()
         GameDetector.isTesting = false
         super.tearDown()
@@ -46,7 +47,7 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     func testOneFileDota2(){
         GameDetector.detector = DotaDetector.self
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/Jul 9, 2015, 23637 PM.csv")
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/DOTA2/asd5.csv")
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
     }
     
@@ -96,7 +97,8 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     func testOneFileLoL(){
         GameDetector.detector = LoLDetector.self
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/Jun 24, 2015, 10742 PM.csv")
+        GameDetector.game = Game.LoL
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/League of Legendsmissed/Jul 11, 2015, 24404 PM.csv")
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
     }
 }

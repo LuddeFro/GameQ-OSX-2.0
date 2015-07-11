@@ -13,12 +13,7 @@ class DataHandler:NSObject {
     static let sharedInstance = DataHandler()
     var folderName:String = ""
     
-    func logPackets(array:[Packet]) {
-        var log:String = ""
-        for i in 0..<array.count {
-            log = "\(log)\(array[i].srcPort),\(array[i].dstPort),\(array[i].captureTime),\(array[i].packetLength)\n"
-            array[i]
-        }
+    func logPackets(log:String) {
         
         // kontrollera att mapparna finns
         var error:NSError?
@@ -37,7 +32,7 @@ class DataHandler:NSObject {
         formatter.dateStyle = .MediumStyle
         var name = formatter.stringFromDate(date) + ".csv"
         name = name.filter({ $0 != Character(":") })
-
+        
         
         //spara filen i pathen
         var path = (NSSearchPathForDirectoriesInDomains(.DesktopDirectory, .UserDomainMask, true)![0] as! String).stringByAppendingPathComponent("GameQ-Caps").stringByAppendingPathComponent(folderName).stringByAppendingPathComponent(name)
