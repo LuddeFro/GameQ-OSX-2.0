@@ -163,7 +163,7 @@ class ConnectionHandler : NSObject {
         })
     }
     
-    private static func needsStatusUpdate() {
+    static func needsStatusUpdate() {
         if isLoggedIn {
             setStatus(lastStatusUpdateGame, status: lastStatusUpdateStatus, finalCallBack: {
                 (success:Bool, error:String?) in

@@ -1334,6 +1334,9 @@ DQ
                                 <buttonCell key="cell" type="squareTextured" title="Submit" bezelStyle="texturedSquare" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="eB9-nW-ePO">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="submitButtonPressed:" target="SSw-vW-DUh" id="4G8-tE-CYb"/>

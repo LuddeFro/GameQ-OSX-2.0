@@ -146,6 +146,7 @@ class MasterViewController: NSViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.appDelegate.gameItem.title = Encoding.getStringFromGame(GameDetector.detector.game)
             self.appDelegate.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.detector.game,status: GameDetector.detector.status)
+            
             self.gameStatus.stringValue = Encoding.getStringFromGame(GameDetector.detector.game)
             self.statusLabel.stringValue = Encoding.getStringFromGameStatus(GameDetector.detector.game, status: GameDetector.detector.status)
             

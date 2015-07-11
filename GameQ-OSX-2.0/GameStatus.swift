@@ -122,4 +122,30 @@ class Encoding {
         case .InGame: return 5
         }
     }
+    
+    static func getStatusFromInt(status:Int) -> Status {
+        
+        switch status{
+        case  0 : return .Offline
+        case  1 : return  .Online
+        case 2 : return .InLobby
+        case 3 : return .InQueue
+        case 4 : return .GameReady
+        case 5 : return .InGame
+        default: return .Offline
+        }
+    }
+    
+    static func getGameFromInt(game:Int) -> Game{
+        
+            switch game{
+            case 0 : return .NoGame
+            case 1 : return .Dota2
+            case 2 : return .HoN
+            case 3 : return .CSGO
+            case 4 : return .HOTS
+            case 5 : return .LoL
+            default: return .NoGame
+        }
+    }
 }
