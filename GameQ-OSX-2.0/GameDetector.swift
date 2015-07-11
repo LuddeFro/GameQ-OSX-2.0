@@ -119,7 +119,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
         println("Stopping Detection")
         self.game = Game.NoGame
         detector = GameDetector.self
-        updateStatus(Status.Offline)
+        updateStatus(Status.Online)
         isFailMode = false
         isTesting = false
         counter = -1

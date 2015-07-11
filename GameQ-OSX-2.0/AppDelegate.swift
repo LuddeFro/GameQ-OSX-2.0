@@ -25,10 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem:NSMenuItem = NSMenuItem()
     var emailItem : NSMenuItem = NSMenuItem()
     var windowController:NSWindowController?
-    var detector:GameDetector.Type = GameDetector.self
     var programTimer:NSTimer = NSTimer()
-    var game:Game = Game.NoGame
-    
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
@@ -100,14 +97,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         dispatch_async(dispatch_get_main_queue()) {
         self.programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         }
-        detector.updateStatus(Status.Online)
+        GameDetector.updateStatus(Status.Online)
     }
     
     func didLogOut(){
         menu.removeAllItems()
         menu.addItem(loginItem)
         menu.addItem(quitItem)
-        self.detector.stopDetection()
+        GameDetector.detector.stopDetection()
         dispatch_async(dispatch_get_main_queue()) {self.programTimer.invalidate()}
         ConnectionHandler.logout({ (success:Bool, err:String?) in})
     }
@@ -124,49 +121,49 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         if(activeApps.contains("dota_osx") || activeApps.contains("dota2")){
-            detector = DotaDetector.self
+            GameDetector.detector = DotaDetector.self
             newGame = Game.Dota2
         }
             
         else if(activeApps.contains("csgo_osx")){
-            detector = CSGODetector.self
+             GameDetector.detector = CSGODetector.self
             newGame = Game.CSGO
         }
             
         else if(activeApps.contains("Heroes")){
-            detector = HOTSDetector.self
+             GameDetector.detector = HOTSDetector.self
             newGame = Game.HOTS
         }
             
         else if(activeApps.contains("Heroes of Newerth")){
-            detector = HoNDetector.self
+             GameDetector.detector = HoNDetector.self
             newGame = Game.HoN
         }
             
         else if(activeApps.contains("LolClient")){
-            detector = LoLDetector.self
+             GameDetector.detector = LoLDetector.self
             newGame = Game.LoL
         }
             
         else {newGame = Game.NoGame}
         
-        if(game != newGame && newGame != Game.NoGame){
-            detector.startDetection()
-            game = newGame
+        if(GameDetector.game != newGame && newGame != Game.NoGame){
+             GameDetector.detector.startDetection()
+             GameDetector.game = newGame
         }
             
-        else if(game != newGame && newGame == Game.NoGame) {
-            detector.stopDetection()
-            game = newGame
+        else if(GameDetector.game != newGame && newGame == Game.NoGame) {
+             GameDetector.detector.stopDetection()
+             GameDetector.game = newGame
         }
         
         
         //Lol Specific shit
-        if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
-            detector.updateStatus(Status.InLobby)
+        if(( GameDetector.detector.game == Game.LoL) && (GameDetector.detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
+             GameDetector.detector.updateStatus(Status.InLobby)
         }
             
-        else if((detector.game == Game.LoL) && (detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
+        else if(( GameDetector.detector.game == Game.LoL) && ( GameDetector.detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
             LoLDetector.updateStatus(Status.InGame)
         }
     }

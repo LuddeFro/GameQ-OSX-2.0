@@ -31,27 +31,27 @@ class MasterViewController: NSViewController {
     @IBOutlet weak var failmodebutton: NSButton!
     
     @IBAction func serverPressed(sender: AnyObject) {
-        if(detector.saveToServer){
-            detector.saveToServer = false
+        if(GameDetector.detector.saveToServer){
+            GameDetector.detector.saveToServer = false
             toServerButton.title = "toserver = off"
         }
         else{
-            detector.saveToServer = true
+            GameDetector.detector.saveToServer = true
             toServerButton.title = "toserver = on"
         }
     }
     @IBAction func desktopPressed(sender: AnyObject) {
-        if(detector.saveToDesktop){
-            detector.saveToDesktop = false
+        if(GameDetector.detector.saveToDesktop){
+            GameDetector.detector.saveToDesktop = false
             toDesktopButton.title = "toDesktop = off"
         }
         else{
-            detector.saveToDesktop = true
+            GameDetector.detector.saveToDesktop = true
             toDesktopButton.title = "toDesktop = on"
         }
     }
     @IBAction func saveMissedPressed(sender: AnyObject) {
-        detector.saveMissedDetection()
+        GameDetector.detector.saveMissedDetection()
     }
     @IBAction func logOutPressed(sender: AnyObject) {
         disableAllButtons()
@@ -60,38 +60,36 @@ class MasterViewController: NSViewController {
         appDelegate.didLogOut()
         }
     @IBAction func startButtonPressed(sender: NSButton) {
-        detector.startDetection()
+        GameDetector.detector.startDetection()
         
     }
     @IBAction func capButtonPressed(sender: NSButton) {
-        detector.saveDetection()
+        GameDetector.detector.saveDetection()
     }
     @IBAction func capFailButtonPressed(sender: NSButton) {
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier("MasterToReport", sender: nil)
         }}
     @IBAction func failModePressed(sender: NSButton) {
-        detector.failMode()
-        if(detector.isFailMode){
+        GameDetector.detector.failMode()
+        if(GameDetector.detector.isFailMode){
         failmodebutton.title = "FailMode On"
         }
         
         else{ failmodebutton.title = "FailMode Off" }
     }
     @IBAction func stopButtonPressed(sender: NSButton) {
-        detector.stopDetection()
+        GameDetector.detector.stopDetection()
     }
     @IBAction func quitButtonPressed(sender: NSButton) {
-        detector.stopDetection()
-        detector.updateStatus(Status.Offline)
+        GameDetector.detector.stopDetection()
+        GameDetector.detector.updateStatus(Status.Offline)
         NSApplication.sharedApplication().terminate(self)
     }
     
     let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
     var countDownTimer = NSTimer()
     var counter: Float = 0
-    var detector:GameDetector.Type = GameDetector.self
-    var game:Game = Game.NoGame
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,8 +132,8 @@ class MasterViewController: NSViewController {
 
     override func viewWillAppear() {
         super.viewWillAppear()
-        self.gameStatus.stringValue =  Encoding.getStringFromGame(self.detector.game)
-        self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
+        self.gameStatus.stringValue =  Encoding.getStringFromGame(GameDetector.detector.game)
+        self.statusLabel.stringValue = Encoding.getStringFromGameStatus(GameDetector.detector.game, status: GameDetector.detector.status)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
     }
     
@@ -146,10 +144,10 @@ class MasterViewController: NSViewController {
     
     func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
-            self.appDelegate.gameItem.title = Encoding.getStringFromGame(self.detector.game)
-            self.appDelegate.statusItem.title = Encoding.getStringFromGameStatus(self.detector.game,status: self.detector.status)
-            self.gameStatus.stringValue = Encoding.getStringFromGame(self.detector.game)
-            self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
+            self.appDelegate.gameItem.title = Encoding.getStringFromGame(GameDetector.detector.game)
+            self.appDelegate.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.detector.game,status: GameDetector.detector.status)
+            self.gameStatus.stringValue = Encoding.getStringFromGame(GameDetector.detector.game)
+            self.statusLabel.stringValue = Encoding.getStringFromGameStatus(GameDetector.detector.game, status: GameDetector.detector.status)
             
             switch GameDetector.status {
                 
