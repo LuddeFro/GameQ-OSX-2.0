@@ -55,15 +55,10 @@ class MasterViewController: NSViewController {
     }
     @IBAction func logOutPressed(sender: AnyObject) {
         disableAllButtons()
-        self.detector.stopDetection()
-        ConnectionHandler.logout({ (success:Bool, err:String?) in
-            dispatch_async(dispatch_get_main_queue()) {
-                self.appDelegate.didLogOut()
-                self.programTimer.invalidate()
-                self.dismissController(self)
-                NSNotificationCenter.defaultCenter().removeObserver(self)
-                self.performSegueWithIdentifier("MasterToLogin", sender: nil)
-            }})}
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.performSegueWithIdentifier("MasterToLogin", sender: nil)
+        appDelegate.didLogOut()
+        }
     @IBAction func startButtonPressed(sender: NSButton) {
         detector.startDetection()
     }
@@ -96,11 +91,9 @@ class MasterViewController: NSViewController {
     var counter: Float = 0
     var detector:GameDetector.Type = GameDetector.self
     var game:Game = Game.NoGame
-    var programTimer:NSTimer = NSTimer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
         let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()
@@ -109,12 +102,6 @@ class MasterViewController: NSViewController {
         logOutButton.attributedTitle = NSAttributedString(string: "Log Out", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
         missedQueueButton.attributedTitle = NSAttributedString(string: "Send Feedback", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
-        
-        self.gameStatus.stringValue =  Encoding.getStringFromGame(self.detector.game)
-        self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
-        
         
         if((ConnectionHandler.loadEmail() == "f@w.com") || (ConnectionHandler.loadEmail() == "l@f.com") || (ConnectionHandler.loadEmail() == "g@h.com")){
             failmodebutton.enabled = true
@@ -141,6 +128,19 @@ class MasterViewController: NSViewController {
             quitButton.enabled = true
             quitButton.hidden = false
         }
+    }
+    
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        self.gameStatus.stringValue =  Encoding.getStringFromGame(self.detector.game)
+        self.statusLabel.stringValue = Encoding.getStringFromGameStatus(self.detector.game, status: self.detector.status)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
+    }
+    
+    override func viewWillDisappear() {
+        super.viewWillDisappear()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func getStatus(sender: NSNotification) {
@@ -196,67 +196,6 @@ class MasterViewController: NSViewController {
             default:
                 break
             }
-        }
-    }
-    
-    //THIS MUST BE MOVED
-    func update() {
-        
-        var ws = NSWorkspace.sharedWorkspace()
-        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
-        var activeApps:Set<String> = Set<String>()
-        var newGame:Game = Game.NoGame
-        
-        for app in apps {
-            var appName:String? = app.localizedName
-            if(appName != nil){activeApps.insert(appName!)}
-        }
-        
-        if(activeApps.contains("dota_osx") || activeApps.contains("dota2")){
-            detector = DotaDetector.self
-            newGame = Game.Dota2
-        }
-            
-        else if(activeApps.contains("csgo_osx")){
-            detector = CSGODetector.self
-            newGame = Game.CSGO
-        }
-            
-        else if(activeApps.contains("Heroes")){
-            detector = HOTSDetector.self
-            newGame = Game.HOTS
-        }
-            
-        else if(activeApps.contains("Heroes of Newerth")){
-            detector = HoNDetector.self
-            newGame = Game.HoN
-        }
-            
-        else if(activeApps.contains("LolClient")){
-            detector = LoLDetector.self
-            newGame = Game.LoL
-        }
-            
-        else {newGame = Game.NoGame}
-        
-        if(game != newGame && newGame != Game.NoGame){
-            detector.startDetection()
-            game = newGame
-        }
-            
-        else if(game != newGame && newGame == Game.NoGame) {
-            detector.stopDetection()
-            game = newGame
-        }
-        
-        
-        //Lol Specific shit
-        if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
-            detector.updateStatus(Status.InLobby)
-        }
-            
-        else if((detector.game == Game.LoL) && (detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
-            LoLDetector.updateStatus(Status.InGame)
         }
     }
     

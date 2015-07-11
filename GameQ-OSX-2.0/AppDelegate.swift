@@ -25,6 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var statusItem:NSMenuItem = NSMenuItem()
     var emailItem : NSMenuItem = NSMenuItem()
     var windowController:NSWindowController?
+    var detector:GameDetector.Type = GameDetector.self
+    var programTimer:NSTimer = NSTimer()
+    var game:Game = Game.NoGame
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -39,7 +42,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             else{
                 println(err)
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.didLogOut()
                     self.windowController?.showWindow(self)
                     self.windowController?.window?.orderFrontRegardless()
                 }
@@ -77,6 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func quitApplication(sender: AnyObject){
+        programTimer.invalidate()
         NSApplication.sharedApplication().terminate(self)
     }
     
@@ -94,14 +97,79 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem.separatorItem())
         menu.addItem(preferencesItem)
         menu.addItem(quitItem)
+        dispatch_async(dispatch_get_main_queue()) {
+        self.programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        }
+        detector.updateStatus(Status.Online)
     }
     
     func didLogOut(){
         menu.removeAllItems()
         menu.addItem(loginItem)
         menu.addItem(quitItem)
+        self.detector.stopDetection()
+        dispatch_async(dispatch_get_main_queue()) {self.programTimer.invalidate()}
+        ConnectionHandler.logout({ (success:Bool, err:String?) in})
     }
     
+    func update() {
+        var ws = NSWorkspace.sharedWorkspace()
+        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
+        var activeApps:Set<String> = Set<String>()
+        var newGame:Game = Game.NoGame
+        
+        for app in apps {
+            var appName:String? = app.localizedName
+            if(appName != nil){activeApps.insert(appName!)}
+        }
+        
+        if(activeApps.contains("dota_osx") || activeApps.contains("dota2")){
+            detector = DotaDetector.self
+            newGame = Game.Dota2
+        }
+            
+        else if(activeApps.contains("csgo_osx")){
+            detector = CSGODetector.self
+            newGame = Game.CSGO
+        }
+            
+        else if(activeApps.contains("Heroes")){
+            detector = HOTSDetector.self
+            newGame = Game.HOTS
+        }
+            
+        else if(activeApps.contains("Heroes of Newerth")){
+            detector = HoNDetector.self
+            newGame = Game.HoN
+        }
+            
+        else if(activeApps.contains("LolClient")){
+            detector = LoLDetector.self
+            newGame = Game.LoL
+        }
+            
+        else {newGame = Game.NoGame}
+        
+        if(game != newGame && newGame != Game.NoGame){
+            detector.startDetection()
+            game = newGame
+        }
+            
+        else if(game != newGame && newGame == Game.NoGame) {
+            detector.stopDetection()
+            game = newGame
+        }
+        
+        
+        //Lol Specific shit
+        if((detector.game == Game.LoL) && (detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
+            detector.updateStatus(Status.InLobby)
+        }
+            
+        else if((detector.game == Game.LoL) && (detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
+            LoLDetector.updateStatus(Status.InGame)
+        }
+    }
     
     // MARK: - Core Data stack
     
