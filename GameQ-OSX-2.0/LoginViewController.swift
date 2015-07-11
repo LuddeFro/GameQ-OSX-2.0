@@ -69,6 +69,11 @@ class LoginViewController: NSViewController {
         forgotPasswordButton.attributedTitle = NSAttributedString(string: "Forgot your password?", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style2, NSFontAttributeName: font2])
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        emailField.becomeFirstResponder()
+    }
+    
     private func disableAllButtons(){
         dispatch_async(dispatch_get_main_queue()) {
         self.forgotPasswordButton.enabled = false

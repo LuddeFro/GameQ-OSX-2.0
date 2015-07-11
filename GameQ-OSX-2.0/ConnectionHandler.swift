@@ -167,7 +167,7 @@ class ConnectionHandler : NSObject {
         })
     }
     
-    private static func needsStatusUpdate() {
+    static func needsStatusUpdate() {
         if isLoggedIn {
             setStatus(lastStatusUpdateGame, status: lastStatusUpdateStatus, finalCallBack: {
                 (success:Bool, error:String?) in
@@ -523,6 +523,8 @@ class ConnectionHandler : NSObject {
         var hash = [UInt8](count: Int(CC_SHA256_DIGEST_LENGTH), repeatedValue: 0)
         CC_SHA256(data.bytes, CC_LONG(data.length), &hash)
         let res = NSData(bytes: hash, length: Int(CC_SHA256_DIGEST_LENGTH))
+        println("sha256:")
+        println(res.description.stringByReplacingOccurrencesOfString("<", withString: "").stringByReplacingOccurrencesOfString(">", withString: "").stringByReplacingOccurrencesOfString(" ", withString: ""))
         return res.description.stringByReplacingOccurrencesOfString("<", withString: "").stringByReplacingOccurrencesOfString(">", withString: "").stringByReplacingOccurrencesOfString(" ", withString: "")
     }
     

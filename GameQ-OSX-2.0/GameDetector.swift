@@ -9,13 +9,27 @@
 import Foundation
 import Cocoa
 
+protocol GameDetectorProtocol : NSObjectProtocol {
+    
+    static func startDetection()
+    static func updateStatus(newStatus: Status)
+    static func saveDetection()
+    static func saveMissedDetection()
+    static func failMode()
+    static func resetDetection()
+    static func stopDetection()
+    static func fileToString() -> String
+}
+
 class GameDetector:NSObject, GameDetectorProtocol {
     
+    static var blockNotif:Bool = false
     static var status:Status = Status.Online
     static var game:Game = Game.NoGame
     static var isFailMode:Bool = false
     static var isTesting:Bool = false
-    static var testMode:Bool = false
+    static var saveToDesktop = false
+    static var saveToServer = true
     static let dataHandler = DataHandler.sharedInstance
     static var detector:GameDetector.Type = GameDetector.self
     
@@ -24,8 +38,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
     static var countDownTimer:NSTimer = NSTimer()
     
     class func startDetection(){
-        
-        dataHandler.folderName = self.game.rawValue
+        dataHandler.folderName = Encoding.getStringFromGame(self.game)
         counter = 0
     }
     
@@ -35,51 +48,69 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = 0
         }
         
-        if(status != newStatus && newStatus == Status.GameReady && !isTesting){
+        if(status != newStatus && newStatus == Status.GameReady && isTesting == false && blockNotif == false){
             detector.saveDetection()
             startTimer()
-        }
-            
-        else{
-            countDownTimer.invalidate()
-            counter = 0
+            blockNotif = true
         }
         
         status = newStatus
-        println(newStatus.rawValue)
+        println(Encoding.getStringFromGameStatus(self.game, status: self.status))
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
-        if(!isTesting && !testMode){
-        ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
-        println("succesfully updated status")
-        })}
+        if(isTesting == false && saveToServer != false){
+            ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
+                println("succesfully updated status")
+            })}
+        
     }
     
     class func saveDetection() {
         println("Saving File")
-        dataHandler.folderName = game.rawValue
+        var saveType = -1
+        if(isFailMode){saveType = 2}
+        else{saveType = 0}
+        
+        if(saveToServer){
+            ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: saveType, finalCallBack: {(success:Bool, error:String?) in
+                if(success){
+                    println("Submitted csv")
+                }
+            })
+        }
+        
+        if(saveToDesktop){
+            dataHandler.folderName = Encoding.getStringFromGame(self.game)
+            dataHandler.logPackets(detector.fileToString())
+        }
     }
     
     class func resetDetection() {
-        updateStatus(Status.InLobby)
     }
     
     class func saveMissedDetection(){
-        println("Saving Missed File")
-        dataHandler.folderName = game.rawValue + "missed"
+      
+        if(saveToServer){
+        ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 1, finalCallBack: {(success:Bool, error:String?) in})
+        }
+        
+        if(saveToDesktop){
+        dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "missed"
+        dataHandler.logPackets(detector.fileToString())
+        }
     }
     
     final class func failMode(){
         
         if(isFailMode){
             println("FailMode Off")
-            dataHandler.folderName = game.rawValue
+            dataHandler.folderName = Encoding.getStringFromGame(self.game)
             isFailMode = false
         }
             
         else{
             println("FailMode On")
-            dataHandler.folderName = game.rawValue + "ForcedFails"
+            dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "ForcedFails"
             isFailMode = true
         }
     }
@@ -87,16 +118,12 @@ class GameDetector:NSObject, GameDetectorProtocol {
     class func stopDetection(){
         println("Stopping Detection")
         self.game = Game.NoGame
+        detector = GameDetector.self
         updateStatus(Status.Online)
         isFailMode = false
         isTesting = false
         counter = -1
         countDownLength = -1
-    }
-    
-    class func getStatusString() -> String {
-        
-        return self.status.rawValue
     }
     
     static func startTimer(){
@@ -111,10 +138,17 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = counter + 1
         }
         
+        if(counter > 10 ){
+            blockNotif = false
+        }
+        
         if(counter >= countDownLength && status == Status.GameReady){
             counter = 0
+            blockNotif = false
             updateStatus(Status.InGame)
             countDownTimer.invalidate()
         }
     }
+    
+    class func fileToString() -> String {return ""}
 }

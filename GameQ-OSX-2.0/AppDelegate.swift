@@ -21,36 +21,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var preferencesItem : NSMenuItem = NSMenuItem()
     var loginItem : NSMenuItem = NSMenuItem()
     var quitItem : NSMenuItem = NSMenuItem()
+    var gameItem: NSMenuItem = NSMenuItem()
     var statusItem:NSMenuItem = NSMenuItem()
     var emailItem : NSMenuItem = NSMenuItem()
     var windowController:NSWindowController?
-    
+    var programTimer:NSTimer = NSTimer()
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        
         ConnectionHandler.loginWithRememberedDetails({ (success:Bool, err:String?) in
             dispatch_async(dispatch_get_main_queue()) {
                 let mainStoryboard: NSStoryboard = NSStoryboard(name: "Main", bundle: nil)!
                 self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
-                self.didLogin()
             }
             if success {
+            self.didLogin()
             }
             else{
                 println(err)
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.didLogOut()
+                    self.menu.removeAllItems()
+                    self.menu.addItem(self.loginItem)
+                    self.menu.addItem(self.quitItem)
                     self.windowController?.showWindow(self)
+                    self.windowController?.window?.orderFrontRegardless()
                 }
-            }})}
+            }})
+    }
     
     func applicationWillTerminate(aNotification: NSNotification) {
     }
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
-        
         //Add statusBarItem
         statusBarItem = statusBar.statusItemWithLength(-1)
         statusBarItem.menu = menu
@@ -67,39 +69,106 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         quitItem.title = "Quit"
         quitItem.action = Selector("quitApplication:")
         quitItem.keyEquivalent = ""
-        
-        menu.addItem(preferencesItem)
     }
     
     func setWindowVisible(sender: AnyObject){
         dispatch_async(dispatch_get_main_queue()) {
             self.windowController?.showWindow(sender)
+            self.windowController?.window?.orderFrontRegardless()
         }
     }
     
     func quitApplication(sender: AnyObject){
-    NSApplication.sharedApplication().terminate(self)
+        programTimer.invalidate()
+        NSApplication.sharedApplication().terminate(self)
     }
     
     func didLogin(){
-    menu.removeAllItems()
-    emailItem.title = ConnectionHandler.loadEmail()!
-    emailItem.enabled = false
-    menu.addItem(emailItem)
-    statusItem.title = Encoding.getStringFromStatus(GameDetector.status)
-    statusItem.enabled = false
-    menu.addItem(statusItem)
-    menu.addItem(NSMenuItem.separatorItem())
-    menu.addItem(preferencesItem)
-    menu.addItem(NSMenuItem.separatorItem())
-    menu.addItem(quitItem)
+        gameItem.title = Encoding.getStringFromGame(GameDetector.game)
+        gameItem.enabled = false
+        statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+        statusItem.enabled = false
+        emailItem.title = ConnectionHandler.loadEmail()!
+        emailItem.enabled = false
+        menu.removeAllItems()
+        menu.addItem(emailItem)
+        menu.addItem(gameItem)
+        menu.addItem(statusItem)
+        menu.addItem(NSMenuItem.separatorItem())
+        menu.addItem(preferencesItem)
+        menu.addItem(quitItem)
+        dispatch_async(dispatch_get_main_queue()) {
+        self.programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        }
+        GameDetector.updateStatus(Status.Online)
     }
     
     func didLogOut(){
-    menu.removeAllItems()
+        menu.removeAllItems()
+        menu.addItem(loginItem)
+        menu.addItem(quitItem)
+        GameDetector.detector.stopDetection()
+        dispatch_async(dispatch_get_main_queue()) {self.programTimer.invalidate()}
+        ConnectionHandler.logout({ (success:Bool, err:String?) in})
+    }
+    
+    func update() {
+        var ws = NSWorkspace.sharedWorkspace()
+        var apps:[NSRunningApplication] = ws.runningApplications as! [NSRunningApplication]
+        var activeApps:Set<String> = Set<String>()
+        var newGame:Game = Game.NoGame
         
-    menu.addItem(loginItem)
-    menu.addItem(quitItem)
+        for app in apps {
+            var appName:String? = app.localizedName
+            if(appName != nil){activeApps.insert(appName!)}
+        }
+        
+        if(activeApps.contains("dota_osx") || activeApps.contains("dota2")){
+            GameDetector.detector = DotaDetector.self
+            newGame = Game.Dota2
+        }
+            
+        else if(activeApps.contains("csgo_osx")){
+             GameDetector.detector = CSGODetector.self
+            newGame = Game.CSGO
+        }
+            
+        else if(activeApps.contains("Heroes")){
+             GameDetector.detector = HOTSDetector.self
+            newGame = Game.HOTS
+        }
+            
+        else if(activeApps.contains("Heroes of Newerth")){
+             GameDetector.detector = HoNDetector.self
+            newGame = Game.HoN
+        }
+            
+        else if(activeApps.contains("LolClient")){
+             GameDetector.detector = LoLDetector.self
+            newGame = Game.LoL
+        }
+            
+        else {newGame = Game.NoGame}
+        
+        if(GameDetector.game != newGame && newGame != Game.NoGame){
+             GameDetector.detector.startDetection()
+             GameDetector.game = newGame
+        }
+            
+        else if(GameDetector.game != newGame && newGame == Game.NoGame) {
+             GameDetector.detector.stopDetection()
+             GameDetector.game = newGame
+        }
+        
+        
+        //Lol Specific shit
+        if(( GameDetector.detector.game == Game.LoL) && (GameDetector.detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
+             GameDetector.detector.updateStatus(Status.InLobby)
+        }
+            
+        else if(( GameDetector.detector.game == Game.LoL) && ( GameDetector.detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
+            LoLDetector.updateStatus(Status.InGame)
+        }
     }
     
     // MARK: - Core Data stack
@@ -238,5 +307,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return .TerminateNow
     }
 }
-
-
