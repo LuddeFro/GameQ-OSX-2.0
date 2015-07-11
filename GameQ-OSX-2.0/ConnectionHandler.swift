@@ -21,7 +21,7 @@ class ConnectionHandler : NSObject {
     static var statusTimer:NSTimer = NSTimer()
     static var lastStatusUpdateStatus:Int = 0
     static var lastStatusUpdateGame:Int? = 0
-    
+    static var firstLogin:Bool = true
     
     private static func getStringFrom(json:Dictionary<String, AnyObject>, key:String) -> String {
         if let value = (json[key] as? String) {
@@ -63,7 +63,11 @@ class ConnectionHandler : NSObject {
     }
     
     static func login(email:String, password password1:String, finalCallBack:(success:Bool, err:String?)->()) {
-        let password = sha256(password1)
+        var password:String = password1
+        if !firstLogin {
+            password = sha256(password1)
+            firstLogin = false
+        }
         let apiExtension = "login"
         var diString = ""
         if let deviceId = loadDeviceId() {
@@ -379,12 +383,14 @@ class ConnectionHandler : NSObject {
                     s = true
                     self.login(email, password: password, finalCallBack: { (success:Bool, err:String?) in
                         finalCallBack(success: success, err: err)
+                        self.firstLogin = false
                     })
                 }
             }
         }
         if !s {
             finalCallBack(success: false, err: "Unable to load previous login details!")
+            firstLogin = false
         }
     }
     
