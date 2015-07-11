@@ -17,19 +17,19 @@ class LoLDetector: PacketDetector {
     static var queuePort:Int = -1
     
     static var srcQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var srcQueueCounter:[Int:Int] = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    static var srcQueueCounter:[Int:Int] = [100:0, 200: 0, 300:0, 400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
     
     static var dstQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var dstQueueCounter:[Int:Int] = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    static var dstQueueCounter:[Int:Int] = [100:0, 200: 0, 300:0, 400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
     
     static var gameTimerEarly:[PacketTimer] = [PacketTimer]()
     static var packetCounterEarly:[Int:Int] = [1300:0]
     
     static var stopSrcQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
     
     static var stopDstQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+    static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
     
     
     
@@ -74,16 +74,16 @@ class LoLDetector: PacketDetector {
     
     class func resetQueueTimer(){
         srcQueueTimer = [PacketTimer]()
-        srcQueueCounter = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+        srcQueueCounter = [100:0, 200: 0, 300:0, 400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
         queuePort = -1
         dstQueueTimer = [PacketTimer]()
-        dstQueueCounter = [400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+        dstQueueCounter =  [100:0, 200: 0, 300:0, 400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
         
         stopSrcQueueTimer = [PacketTimer]()
-        stopSrcQueueCounter = [100:0,200:0,300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+        stopSrcQueueCounter = [100:0,200:0,300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
 
         stopDstQueueTimer = [PacketTimer]()
-        stopDstQueueCounter = [100:0, 200:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0]
+        stopDstQueueCounter = [100:0, 200:0, 300:0,400:0, 500:0, 600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0]
     }
     
     class func resetGameTimer(){
@@ -171,6 +171,9 @@ class LoLDetector: PacketDetector {
         
         if((srcQueueCounter[400] > 0 || srcQueueCounter[800] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[700] > 0) && (srcQueueTimer.count + dstQueueTimer.count >= 3))
         {return true}
+        else if((srcQueueCounter[900] > 0 || srcQueueCounter[1100] > 0 || srcQueueCounter[300] > 0) &&
+             (dstQueueCounter[100] > 0) && (srcQueueTimer.count + dstQueueTimer.count >= 3))
+        {return true}
         else{return false}
     }
     
@@ -194,7 +197,7 @@ class LoLDetector: PacketDetector {
         }
         
         for key in stopDstQueueCounter.keys{
-            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.srcPort)){
+            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.dstPort)){
                 stopDstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
                 stopDstQueueCounter[key]! = stopDstQueueCounter[key]! + 1
             }
@@ -204,12 +207,9 @@ class LoLDetector: PacketDetector {
         println(stopSrcQueueCounter)
         println(stopDstQueueCounter)
         
-        
-//        
-//        if((stopQueueCounter[300] > 0 || stopQueueCounter[700] > 0) && (stopQueueCounter[800] > 0 || stopQueueCounter[100] > 0) && (stopQueueTimer.count >= 3))
-//        {return true}
-//        else{return false}
-        return false
+        if((stopSrcQueueCounter[800] > 0 || stopSrcQueueCounter[700] > 0 || stopSrcQueueCounter[100] > 0) && (stopDstQueueCounter[800] > 0 || stopDstQueueCounter[300] > 0) && (stopSrcQueueTimer.count + stopDstQueueTimer.count >= 5))
+        {return true}
+        else{return false}
     }
     
     

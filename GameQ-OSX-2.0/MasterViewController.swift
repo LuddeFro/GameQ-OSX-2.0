@@ -102,7 +102,7 @@ class MasterViewController: NSViewController {
         
         missedQueueButton.attributedTitle = NSAttributedString(string: "Send Feedback", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         
-        if((ConnectionHandler.loadEmail() == "f@w.com") || (ConnectionHandler.loadEmail() == "l@f.com") || (ConnectionHandler.loadEmail() == "g@h.com")){
+        if((ConnectionHandler.loadEmail() == "fabian.wikstrom@gmail.com")){
             failmodebutton.enabled = true
             failmodebutton.hidden = false
             

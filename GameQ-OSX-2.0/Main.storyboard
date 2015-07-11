@@ -1222,6 +1222,9 @@ DQ
                                 <buttonCell key="cell" type="squareTextured" title="Change Password" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="oHc-6b-15F">
                                     <behavior key="behavior" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="submitButtonPressed:" target="DPB-nK-ZV1" id="iTI-bE-92E"/>
