@@ -39,6 +39,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             else{
                 println(err)
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.menu.removeAllItems()
+                    self.menu.addItem(self.loginItem)
+                    self.menu.addItem(self.quitItem)
                     self.windowController?.showWindow(self)
                     self.windowController?.window?.orderFrontRegardless()
                 }
