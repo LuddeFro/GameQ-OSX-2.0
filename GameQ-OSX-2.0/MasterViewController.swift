@@ -132,9 +132,8 @@ class MasterViewController: NSViewController {
 
     override func viewWillAppear() {
         super.viewWillAppear()
-        self.gameStatus.stringValue =  Encoding.getStringFromGame(GameDetector.detector.game)
-        self.statusLabel.stringValue = Encoding.getStringFromGameStatus(GameDetector.detector.game, status: GameDetector.detector.status)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
     
     override func viewWillDisappear() {
@@ -201,6 +200,7 @@ class MasterViewController: NSViewController {
     
     func startTimer(){
         dispatch_async(dispatch_get_main_queue()) {
+            self.counter = max(0, Float(GameDetector.counter - 1))
             self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update2"), userInfo: nil, repeats: true)
         }
     }

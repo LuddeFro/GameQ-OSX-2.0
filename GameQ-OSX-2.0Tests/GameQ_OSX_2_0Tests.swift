@@ -101,7 +101,10 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     func testOneFileLoL(){
         GameDetector.detector = LoLDetector.self
         GameDetector.game = Game.LoL
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/League of Legends/Jul 10, 2015, 53029 PM.csv")
+        var file:String = "Jun 29, 2015, 65528 PM.csv"
+        println("starting " + file)
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/League of Legends/" + file)
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
+        if(GameDetector.status != Status.GameReady){println("failed: " + file)}
     }
 }

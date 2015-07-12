@@ -31,10 +31,7 @@ class LoLDetector: PacketDetector {
     static var stopDstQueueTimer:[PacketTimer] = [PacketTimer]()
     static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0, 900:0]
     
-    
-    
-    //    static var dstGameTimer:[PacketTimer] = [PacketTimer]()
-    //    static var dstPacketCounter:[Int:Int] = [-1:0]
+    static var queueStartTime:Double = -1
     
     static var gameTimer:[PacketTimer] = [PacketTimer]()
     
@@ -81,7 +78,7 @@ class LoLDetector: PacketDetector {
         
         stopSrcQueueTimer = [PacketTimer]()
         stopSrcQueueCounter = [100:0, 300:0, 800:0, 900:0, 1100:0]
-
+        
         stopDstQueueTimer = [PacketTimer]()
         stopDstQueueCounter = [100:0, 300:0, 800:0, 900:0]
     }
@@ -93,9 +90,7 @@ class LoLDetector: PacketDetector {
         
         gameTimerEarly = [PacketTimer]()
         packetCounterEarly = [1300:0]
-        
-        //        dstGameTimer = [PacketTimer]()
-        //        dstPacketCounter = [-1:0]
+        queueStartTime = -1
         
         gameTimer = [PacketTimer]()
         
@@ -123,8 +118,6 @@ class LoLDetector: PacketDetector {
             
             //GAME READY
         else if(status == Status.GameReady){
-            //            var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:50)
-            //            if(inGame){updateStatus(Status.InGame)}
         }
             
             //IN GAME
@@ -151,16 +144,20 @@ class LoLDetector: PacketDetector {
         
         
         for key in srcQueueCounter.keys{
-            if(p.packetLength <= key + 99 && p.packetLength >= key && (p.srcPort == queuePort || queuePort == -1) && ports.contains(p.srcPort)){
-                srcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                srcQueueCounter[key]! =  srcQueueCounter[key]! + 1
+            if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.srcPort)){
+                if((p.packetLength >= 600 && p.srcPort == 5223) || (p.packetLength < 600 && p.srcPort == 2099)){
+                    srcQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                    srcQueueCounter[key]! =  srcQueueCounter[key]! + 1
+                }
             }
         }
         
         for key in dstQueueCounter.keys{
             if(p.packetLength <= key + 99 && p.packetLength >= key && ports.contains(p.dstPort)){
-                dstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                dstQueueCounter[key]! = dstQueueCounter[key]! + 1
+                if((p.packetLength >= 600 && p.dstPort == 5223) || (p.packetLength < 600 && p.dstPort == 2099)){
+                    dstQueueTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                    dstQueueCounter[key]! = dstQueueCounter[key]! + 1
+                }
             }
         }
         
@@ -169,11 +166,13 @@ class LoLDetector: PacketDetector {
         println(srcQueueTimer.count)
         println(dstQueueTimer.count)
         
-      
-       if((srcQueueCounter[400] > 0 || srcQueueCounter[800] > 0 || srcQueueCounter[700] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[800] > 0 || dstQueueCounter[700] > 0) && (srcQueueTimer.count >= 1 && dstQueueTimer.count >= 1) && (srcQueueTimer.count + dstQueueTimer.count >= 3))
-        {return true}
-        else if((srcQueueCounter[300] > 0 || srcQueueCounter[400] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[100] > 0) && (srcQueueTimer.count >= 3 && dstQueueTimer.count >= 3))
-        {return true}
+        
+        if((srcQueueCounter[400] > 0 || srcQueueCounter[800] > 0 || srcQueueCounter[700] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[800] > 0 || dstQueueCounter[700] > 0) && (srcQueueTimer.count >= 1 && dstQueueTimer.count >= 2) && (srcQueueTimer.count + dstQueueTimer.count >= 3)){
+            queueStartTime = p.captureTime
+            return true}
+        else if((srcQueueCounter[300] > 0 || srcQueueCounter[400] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[100] > 0) && (srcQueueTimer.count >= 3 && dstQueueTimer.count >= 3)){
+            queueStartTime = p.captureTime
+            return true}
         else{return false}
     }
     
@@ -183,7 +182,7 @@ class LoLDetector: PacketDetector {
             var key:Int = stopSrcQueueTimer.removeLast().key
             stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! - 1
         }
-       
+        
         while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2){
             var key:Int = stopDstQueueTimer.removeLast().key
             stopDstQueueCounter[key]! = stopDstQueueCounter[key]! - 1
@@ -210,7 +209,7 @@ class LoLDetector: PacketDetector {
         if((stopSrcQueueCounter[100] > 0 || stopSrcQueueCounter[800] > 0) && (stopDstQueueCounter[300] > 0 || stopDstQueueCounter[800] > 0) && (stopSrcQueueTimer.count >= 2 && stopDstQueueTimer.count >= 2))
         {return true}
         else if((stopSrcQueueCounter[900] > 0 || stopSrcQueueCounter[1100] > 0 || stopSrcQueueCounter[300] > 0) &&
-        (stopDstQueueCounter[100] > 0 || stopDstQueueCounter[300] > 0) && (stopSrcQueueTimer.count >= 3 && stopDstQueueTimer.count >= 3))
+            (stopDstQueueCounter[100] > 0 || stopDstQueueCounter[300] > 0) && (stopSrcQueueTimer.count >= 3 && stopDstQueueTimer.count >= 3))
         {return true}
         else{return false}
     }
@@ -222,44 +221,18 @@ class LoLDetector: PacketDetector {
             var key:Int = gameTimerEarly.removeLast().key
             packetCounterEarly[key]! = packetCounterEarly[key]! - 1
         }
-        //
-        //        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 3){
-        //            var key:Int = dstGameTimer.removeLast().key
-        //            dstPacketCounter[key]! = dstPacketCounter[key]! - 1
-        //        }
-        
         
         for key in packetCounterEarly.keys{
-            if(p.packetLength <= key + 99 && p.packetLength >= key && (p.srcPort == queuePort || queuePort == -1) && ports.contains(p.srcPort)){
+            if(p.packetLength <= key + 99 && p.packetLength >= key && (p.srcPort == queuePort || queuePort == -1) && ports.contains(p.srcPort) && (p.captureTime - queueStartTime > 0.3)){
                 gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
                 packetCounterEarly[key]! =  packetCounterEarly[key]! + 1
             }
         }
         
-        //        for key in dstPacketCounter.keys{
-        //            if(p.packetLength <= key + 30 && p.packetLength >= key && ports.contains(p.dstPort)){
-        //                dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-        //                dstPacketCounter[key]! = dstPacketCounter[key]! + 1
-        //            }
-        //        }
-        
         println(packetCounterEarly)
-        //        println(dstPacketCounter)
         
-        if(packetCounterEarly[1300] > 1){return true}
+        if(packetCounterEarly[1300] >= 2)
+        {return true}
         else{return false}
     }
-    
-    class func isGame(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
-        
-        while(!gameTimer.isEmpty && p.captureTime - gameTimer.last!.time > timeSpan || gameTimer.count >= inGameMaxSize){
-            gameTimer.removeLast()
-        }
-        
-        gameTimer.insert(PacketTimer(key: p.srcPort, time: p.captureTime),atIndex: 0)
-        
-        if(gameTimer.count >= packetNumber){return true}
-        else {return false}
-    }
-    
 }
