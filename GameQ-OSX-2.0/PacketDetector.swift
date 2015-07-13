@@ -21,7 +21,7 @@ protocol PacketDetectorProtocol:NSObjectProtocol, GameDetectorProtocol {
 
 class PacketDetector: GameDetector, PacketDetectorProtocol{
     static var packetQueue:[Packet] = [Packet]()
-    static var queueMaxSize:Int = 200
+    static var queueMaxSize:Int = 300
     static var isCapturing = false
     static var packetParser:PacketParser = PacketParser.getSharedInstance()
     

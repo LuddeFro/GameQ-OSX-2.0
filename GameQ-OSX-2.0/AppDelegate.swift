@@ -59,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Add statusBarItem
         statusBarItem = statusBar.statusItemWithLength(-1)
         statusBarItem.menu = menu
-        statusBarItem.title = "GameQ"
+        statusBarItem.image = NSImage(named: "statusIcon")
         
         loginItem.title = "Login"
         loginItem.action = Selector("setWindowVisible:")
@@ -75,8 +75,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
      func getStatus(sender: NSNotification) {
+        dispatch_async(dispatch_get_main_queue()) {
         self.gameItem.title = Encoding.getStringFromGame(GameDetector.game)
         self.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+        }
     }
     
     func setWindowVisible(sender: AnyObject){
