@@ -48,17 +48,18 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = 0
         }
         
-        if(status != newStatus && newStatus == Status.GameReady && isTesting == false && blockNotif == false){
+        //&& blockNotif == false
+        if(status != newStatus && newStatus == Status.GameReady && isTesting == false){
             detector.saveDetection()
             startTimer()
-            blockNotif = true
+           // blockNotif = true
         }
         
         status = newStatus
         println(Encoding.getStringFromGameStatus(self.game, status: self.status))
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
-        if(isTesting == false && saveToServer != false){
+        if(isTesting == false){
             ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
                 println("succesfully updated status")
             })}
@@ -138,7 +139,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = counter + 1
         }
         
-        if(counter > 10 ){
+        if(counter > 10){
             blockNotif = false
         }
         

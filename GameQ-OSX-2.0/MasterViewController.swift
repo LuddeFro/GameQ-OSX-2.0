@@ -201,6 +201,7 @@ class MasterViewController: NSViewController {
     func startTimer(){
         dispatch_async(dispatch_get_main_queue()) {
             self.counter = max(0, Float(GameDetector.counter - 1))
+            println(self.counter)
             self.countDownTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("update2"), userInfo: nil, repeats: true)
         }
     }

@@ -59,8 +59,9 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     
     func testAllFilesCS(){
         GameDetector.detector = CSGODetector.self
+        GameDetector.game = Game.CSGO
         let filemanager:NSFileManager = NSFileManager()
-        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/")
+        let files = filemanager.enumeratorAtPath("/Users/fabianwikstrom/Desktop/GameQ-Caps/Counter Strike Global Offensive/")
         while let file = files?.nextObject() as? String {
             if file.hasSuffix("csv") { // checks the extension
                 testIteratorCS(file)
@@ -69,17 +70,25 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     }
     
     func testIteratorCS(file:String){
-        println(file)
+        GameDetector.detector = CSGODetector.self
+        GameDetector.game = Game.CSGO
+        println("starting:" + file)
         setUp()
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/" + file)
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Counter Strike Global Offensive/" + file)
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
+        if(GameDetector.status != Status.GameReady){println("failed: " + file)}
         tearDown()
     }
     
     func testOneFileCS(){
-       GameDetector.detector = CSGODetector.self
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/CSGO/Jun 24, 2015, 10742 PM.csv")
+        GameDetector.detector = CSGODetector.self
+        GameDetector.game = Game.CSGO
+        var file:String = "Jun 24, 2015, 12652 PM.csv"
+        println("starting:" + file)
+        setUp()
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Counter Strike Global Offensive/" + file)
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
+        tearDown()
     }
     
     func testAllFilesLoL(){

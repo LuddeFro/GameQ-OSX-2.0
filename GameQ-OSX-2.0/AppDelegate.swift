@@ -51,7 +51,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {
-          NSNotificationCenter.defaultCenter().removeObserver(self)
+        ConnectionHandler.setStatus(Encoding.getIntFromGame(Game.NoGame), status: Encoding.getIntFromStatus(Status.Offline), finalCallBack:{ (success:Bool, err:String?) in
+            })
+
+        programTimer.invalidate()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func awakeFromNib() {
@@ -74,10 +78,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         quitItem.keyEquivalent = ""
     }
     
-     func getStatus(sender: NSNotification) {
+    func getStatus(sender: NSNotification) {
         dispatch_async(dispatch_get_main_queue()) {
-        self.gameItem.title = Encoding.getStringFromGame(GameDetector.game)
-        self.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+            self.gameItem.title = Encoding.getStringFromGame(GameDetector.game)
+            self.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
         }
     }
     
