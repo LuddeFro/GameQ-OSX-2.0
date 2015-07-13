@@ -37,7 +37,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.didLogin()
             }
             else{
-                println(err)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.menu.removeAllItems()
                     self.menu.addItem(self.loginItem)
@@ -49,6 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
     }
+    
     
     func applicationWillTerminate(aNotification: NSNotification) {
         ConnectionHandler.setStatus(Encoding.getIntFromGame(Game.NoGame), status: Encoding.getIntFromStatus(Status.Offline), finalCallBack:{ (success:Bool, err:String?) in

@@ -33,8 +33,13 @@ class ForgotPasswordController: NSViewController {
                 }
             }
             else{
-            self.statusLabel.stringValue = error!
+                dispatch_async(dispatch_get_main_queue()) {
+                if(error! != "404"){
+                    self.statusLabel.stringValue = error!}
+                else {
+                    self.statusLabel.stringValue = "No Internet Connection"}
             self.submitButton.enabled = true
+                }
             }
             })
     }
