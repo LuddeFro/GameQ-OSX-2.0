@@ -76,7 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		832BCE6A1B09E4AC00FE15E2 /* GameQ-OSX-2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GameQ-OSX-2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		832BCE6A1B09E4AC00FE15E2 /* GameQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		832BCE6E1B09E4AC00FE15E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		832BCE721B09E4AC00FE15E2 /* GameQ_OSX_2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameQ_OSX_2_0.xcdatamodel; sourceTree = "<group>"; };
 		832BCE741B09E4AC00FE15E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 		832BCE6B1B09E4AC00FE15E2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				832BCE6A1B09E4AC00FE15E2 /* GameQ-OSX-2.0.app */,
+				832BCE6A1B09E4AC00FE15E2 /* GameQ.app */,
 				832BCE7D1B09E4AC00FE15E2 /* GameQ-OSX-2.0Tests.xctest */,
 			);
 			name = Products;
@@ -333,7 +333,7 @@
 			);
 			name = "GameQ-OSX-2.0";
 			productName = "GameQ-OSX-2.0";
-			productReference = 832BCE6A1B09E4AC00FE15E2 /* GameQ-OSX-2.0.app */;
+			productReference = 832BCE6A1B09E4AC00FE15E2 /* GameQ.app */;
 			productType = "com.apple.product-type.application";
 		};
 		832BCE7C1B09E4AC00FE15E2 /* GameQ-OSX-2.0Tests */ = {
@@ -574,15 +574,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: GameQ AB (NZ5DEAP476)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "GameQ-OSX-2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GameQ;
+				PROVISIONING_PROFILE = "5f0cea7f-2bf8-41ba-89a7-91c829523f6b";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "GameQ_OSX_2_0-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -592,15 +594,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: GameQ AB (NZ5DEAP476)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "GameQ-OSX-2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GameQ;
+				PROVISIONING_PROFILE = "5f0cea7f-2bf8-41ba-89a7-91c829523f6b";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "GameQ_OSX_2_0-Swift.h";
 			};
 			name = Release;
 		};
