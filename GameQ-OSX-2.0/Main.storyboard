@@ -1275,7 +1275,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lHK-Qn-p6j">
-                                <rect key="frame" x="10" y="54" width="281" height="100"/>
+                                <rect key="frame" x="10" y="59" width="281" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="281" id="D8p-Sd-EDk"/>
                                     <constraint firstAttribute="height" constant="100" id="hnr-Go-Bpc"/>
@@ -1329,7 +1329,7 @@ DQ
                                 </cells>
                             </matrix>
                             <button springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NmM-p0-RIT" customClass="OrangeButton" customModule="GameQ_OSX_2_0" customModuleProvider="target">
-                                <rect key="frame" x="10" y="14" width="280" height="30"/>
+                                <rect key="frame" x="10" y="6" width="280" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="dn8-xc-5ed"/>
                                     <constraint firstAttribute="height" constant="30" id="q5H-Sf-3Za"/>
@@ -1357,24 +1357,39 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iQY-ID-7SA">
+                                <rect key="frame" x="8" y="39" width="284" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="1rM-iF-n4z"/>
+                                    <constraint firstAttribute="height" constant="17" id="bAE-1M-4jG"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="j4Z-7p-6lx">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="vGK-6z-Wbs" firstAttribute="top" secondItem="vGE-cV-LaR" secondAttribute="top" constant="10" id="8U3-og-NTb"/>
-                            <constraint firstItem="lHK-Qn-p6j" firstAttribute="top" secondItem="lGu-TD-Hnz" secondAttribute="bottom" constant="10" id="Bgg-a0-8Nb"/>
+                            <constraint firstItem="lHK-Qn-p6j" firstAttribute="top" secondItem="lGu-TD-Hnz" secondAttribute="bottom" constant="5" id="Bgg-a0-8Nb"/>
+                            <constraint firstItem="NmM-p0-RIT" firstAttribute="top" secondItem="iQY-ID-7SA" secondAttribute="bottom" constant="3" id="QiY-85-8ky"/>
                             <constraint firstItem="lGu-TD-Hnz" firstAttribute="top" secondItem="WJH-Kd-pUU" secondAttribute="bottom" constant="3" id="Tpu-nr-Uxa"/>
-                            <constraint firstItem="NmM-p0-RIT" firstAttribute="top" secondItem="lHK-Qn-p6j" secondAttribute="bottom" constant="10" id="bDj-p1-TD6"/>
                             <constraint firstAttribute="centerX" secondItem="vGK-6z-Wbs" secondAttribute="centerX" id="bnR-uq-53P"/>
                             <constraint firstAttribute="centerX" secondItem="NmM-p0-RIT" secondAttribute="centerX" id="fwN-yh-RDP"/>
                             <constraint firstAttribute="centerX" secondItem="lHK-Qn-p6j" secondAttribute="centerX" id="iv4-Wj-imR"/>
+                            <constraint firstItem="iQY-ID-7SA" firstAttribute="top" secondItem="lHK-Qn-p6j" secondAttribute="bottom" constant="3" id="lug-BZ-JF4"/>
                             <constraint firstAttribute="centerX" secondItem="WJH-Kd-pUU" secondAttribute="centerX" id="nxd-PS-EIP"/>
+                            <constraint firstAttribute="centerX" secondItem="iQY-ID-7SA" secondAttribute="centerX" id="wU3-48-z18"/>
                             <constraint firstItem="WJH-Kd-pUU" firstAttribute="top" secondItem="vGK-6z-Wbs" secondAttribute="bottom" constant="10" id="yWB-Yo-BGh"/>
                             <constraint firstAttribute="centerX" secondItem="lGu-TD-Hnz" secondAttribute="centerX" id="zP3-5t-LYS"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="commentField" destination="lHK-Qn-p6j" id="l0o-WD-mZQ"/>
+                        <outlet property="commentField" destination="lHK-Qn-p6j" id="GLT-rx-BWe"/>
                         <outlet property="feedbackLabel" destination="BvO-gl-Jww" id="Gc0-be-kjc"/>
                         <outlet property="missedQueueLabel" destination="hf4-lA-ROV" id="aw0-fu-Z8l"/>
+                        <outlet property="statusField" destination="iQY-ID-7SA" id="Q4u-Bg-tnO"/>
                         <outlet property="submitButton" destination="NmM-p0-RIT" id="qzd-CU-71f"/>
                         <outlet property="unwantedLabel" destination="iyP-eF-XBg" id="i3j-Vb-DkI"/>
                     </connections>

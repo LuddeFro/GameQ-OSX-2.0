@@ -50,9 +50,11 @@ class SignUpController: NSViewController {
                         self.appDelegate.didLogin()
                     }
                 } else {
-                    println("nay")
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.statusLabel.stringValue = err!
+                        if(err! != "404"){
+                            self.statusLabel.stringValue = err!}
+                        else {
+                            self.statusLabel.stringValue = "No Internet Connection"}
                         self.progress1.stopAnimation(self)
                         self.progress2.stopAnimation(self)
                         self.progress3.stopAnimation(self)

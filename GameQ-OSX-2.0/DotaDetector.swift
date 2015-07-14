@@ -180,10 +180,12 @@ class DotaDetector:PacketDetector{
         
             println(srcQueueCounter)
             println(dstQueueCounter)
+        
         if(srcQueueCounter[78] > 0 && srcQueueCounter[158] > 0
             || (dstQueueCounter[174] > 0 && srcQueueCounter[78] > 0 && (srcQueueCounter[270] > 0 || srcQueueCounter[285] > 0 )))
         {
-            queuePort = p.srcPort
+            if(p.srcPort <= portMax && p.srcPort >= portMin){queuePort = p.srcPort}
+            else {queuePort = p.dstPort}
             
             srcQueueTimer.insert(PacketTimer(key: 158, time: p.captureTime),atIndex: 0)
             var oldCount1:Int = srcQueueCounter[158]!
@@ -299,6 +301,7 @@ class DotaDetector:PacketDetector{
             }
         }
         
+        println(queuePort)
         for key in packetCounterLate.keys{
             if(p.packetLength <= key + 5 && p.packetLength >= key && (p.srcPort == queuePort || queuePort  ==
                 -1) && p.srcPort <= portMax && p.srcPort >= portMin){

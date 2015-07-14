@@ -34,10 +34,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.windowController = mainStoryboard.instantiateControllerWithIdentifier("WindowController") as? NSWindowController
             }
             if success {
-            self.didLogin()
+                self.didLogin()
             }
             else{
-                println(err)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.menu.removeAllItems()
                     self.menu.addItem(self.loginItem)
@@ -46,9 +45,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     self.windowController?.window?.orderFrontRegardless()
                 }
             }})
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
     }
     
+    
     func applicationWillTerminate(aNotification: NSNotification) {
+        ConnectionHandler.setStatus(Encoding.getIntFromGame(Game.NoGame), status: Encoding.getIntFromStatus(Status.Offline), finalCallBack:{ (success:Bool, err:String?) in
+            })
+
+        programTimer.invalidate()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func awakeFromNib() {
@@ -56,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //Add statusBarItem
         statusBarItem = statusBar.statusItemWithLength(-1)
         statusBarItem.menu = menu
-        statusBarItem.title = "GameQ"
+        statusBarItem.image = NSImage(named: "statusIcon")
         
         loginItem.title = "Login"
         loginItem.action = Selector("setWindowVisible:")
@@ -69,6 +76,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         quitItem.title = "Quit"
         quitItem.action = Selector("quitApplication:")
         quitItem.keyEquivalent = ""
+    }
+    
+    func getStatus(sender: NSNotification) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.gameItem.title = Encoding.getStringFromGame(GameDetector.game)
+            self.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+        }
     }
     
     func setWindowVisible(sender: AnyObject){
@@ -84,23 +98,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func didLogin(){
-        gameItem.title = Encoding.getStringFromGame(GameDetector.game)
-        gameItem.enabled = false
-        statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
-        statusItem.enabled = false
-        emailItem.title = ConnectionHandler.loadEmail()!
-        emailItem.enabled = false
-        menu.removeAllItems()
-        menu.addItem(emailItem)
-        menu.addItem(gameItem)
-        menu.addItem(statusItem)
-        menu.addItem(NSMenuItem.separatorItem())
-        menu.addItem(preferencesItem)
-        menu.addItem(quitItem)
-        dispatch_async(dispatch_get_main_queue()) {
-        self.programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
-        }
         GameDetector.updateStatus(Status.Online)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+            self.gameItem.title = Encoding.getStringFromGame(GameDetector.game)
+            self.gameItem.enabled = false
+            self.statusItem.title = Encoding.getStringFromGameStatus(GameDetector.game, status: GameDetector.status)
+            self.statusItem.enabled = false
+            self.emailItem.title = ConnectionHandler.loadEmail()!
+            self.emailItem.enabled = false
+            self.menu.removeAllItems()
+            self.menu.addItem(self.emailItem)
+            self.menu.addItem(self.gameItem)
+            self.menu.addItem(self.statusItem)
+            self.menu.addItem(NSMenuItem.separatorItem())
+            self.menu.addItem(self.preferencesItem)
+            self.menu.addItem(self.quitItem)
+        }
     }
     
     func didLogOut(){
@@ -129,41 +143,41 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
             
         else if(activeApps.contains("csgo_osx")){
-             GameDetector.detector = CSGODetector.self
+            GameDetector.detector = CSGODetector.self
             newGame = Game.CSGO
         }
             
         else if(activeApps.contains("Heroes")){
-             GameDetector.detector = HOTSDetector.self
+            GameDetector.detector = HOTSDetector.self
             newGame = Game.HOTS
         }
             
         else if(activeApps.contains("Heroes of Newerth")){
-             GameDetector.detector = HoNDetector.self
+            GameDetector.detector = HoNDetector.self
             newGame = Game.HoN
         }
             
         else if(activeApps.contains("LolClient")){
-             GameDetector.detector = LoLDetector.self
+            GameDetector.detector = LoLDetector.self
             newGame = Game.LoL
         }
             
         else {newGame = Game.NoGame}
         
         if(GameDetector.game != newGame && newGame != Game.NoGame){
-             GameDetector.detector.startDetection()
-             GameDetector.game = newGame
+            GameDetector.detector.startDetection()
+            GameDetector.game = newGame
         }
             
         else if(GameDetector.game != newGame && newGame == Game.NoGame) {
-             GameDetector.detector.stopDetection()
-             GameDetector.game = newGame
+            GameDetector.detector.stopDetection()
+            GameDetector.game = newGame
         }
         
         
         //Lol Specific shit
         if(( GameDetector.detector.game == Game.LoL) && (GameDetector.detector.status == Status.InGame) && (activeApps.contains("League Of Legends") == false)){
-             GameDetector.detector.updateStatus(Status.InLobby)
+            GameDetector.detector.updateStatus(Status.InLobby)
         }
             
         else if(( GameDetector.detector.game == Game.LoL) && ( GameDetector.detector.status != Status.InGame) && activeApps.contains("League Of Legends")){
