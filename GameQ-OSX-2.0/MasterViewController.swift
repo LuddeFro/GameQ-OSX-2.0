@@ -108,9 +108,11 @@ class MasterViewController: NSViewController {
             
             toServerButton.enabled = true
             toServerButton.hidden = false
-            
+            serverPressed(self)
+        
             toDesktopButton.enabled = true
             toDesktopButton.hidden = false
+            desktopPressed(self)
             
             startButton.enabled = true
             startButton.hidden = false

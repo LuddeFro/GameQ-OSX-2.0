@@ -63,7 +63,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
         
         if(isTesting == false){
             ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
-                println("succesfully updated status")
+                if(success){println("succesfully updated status")}
             })}
         
     }

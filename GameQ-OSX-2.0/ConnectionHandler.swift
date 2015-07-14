@@ -194,6 +194,7 @@ class ConnectionHandler : NSObject {
         var diString = ""
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
+            //println("bajs " + diString)
         }
         var gameString:String = "game=0"
         if let gameId = game {
