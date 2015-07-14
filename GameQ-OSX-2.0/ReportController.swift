@@ -10,6 +10,8 @@ import Cocoa
 
 class ReportController: NSViewController {
     
+    @IBOutlet weak var statusField: NSTextField!
+
     @IBOutlet weak var commentField: NSTextField!
     @IBOutlet weak var submitButton: NSButtonCell!
     
@@ -24,6 +26,17 @@ class ReportController: NSViewController {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.submitButton.attributedTitle = NSAttributedString(string: "Thank You!", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])
                     }}
+                else{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if(error! != "404"){
+                            self.statusField.stringValue = error!
+                            println(error)}
+                        else {
+                        self.statusField.stringValue = "No Internet Connection"}
+                        self.submitButton.enabled = true
+                        self.submitButton.attributedTitle = NSAttributedString(string: "Submit", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])
+                    }
+                }
             })}
             
         else if(missedQueueLabel.state == NSOnState && GameDetector.game != Game.NoGame){
@@ -32,6 +45,16 @@ class ReportController: NSViewController {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.submitButton.attributedTitle = NSAttributedString(string: "Thank You!", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])
                     }}
+                else{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if(error! != "404"){
+                            self.statusField.stringValue = error!
+                            println(error)}
+                        else {
+                            self.statusField.stringValue = "No Internet Connection"}
+                        self.submitButton.enabled = true
+                    self.submitButton.attributedTitle = NSAttributedString(string: "Submit", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])}
+                }
             })
         }
             
@@ -41,16 +64,18 @@ class ReportController: NSViewController {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.submitButton.attributedTitle = NSAttributedString(string: "Thank You!", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])
                     }}
+                else{
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if(error! != "404"){
+                            self.statusField.stringValue = error!
+                            println(error)}
+                        else {
+                            self.statusField.stringValue = "No Internet Connection"}
+                        self.submitButton.enabled = true
+                        self.submitButton.attributedTitle = NSAttributedString(string: "Submit", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])
+                    }
+                }
             })
-        }
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            let font1 = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
-            let style1 = NSMutableParagraphStyle()
-            style1.alignment = .CenterTextAlignment
-            
-            self.submitButton.attributedTitle = NSAttributedString(string: "Thank you!", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style1, NSFontAttributeName: font1])
-            self.submitButton.enabled = false
         }
     }
     

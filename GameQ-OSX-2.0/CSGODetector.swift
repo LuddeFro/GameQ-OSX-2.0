@@ -23,7 +23,7 @@ class CSGODetector: PacketDetector{
     static var packetCounterEarly:[Int:Int] = [170:0]
     
     static var dstGameTimer:[PacketTimer] = [PacketTimer]()
-    static var dstPacketCounter:[Int:Int] = [75:0]
+    static var dstPacketCounter:[Int:Int] = [75:0, 190:0]
     
     static var gameTimerLate:[PacketTimer] = [PacketTimer]()
     static var packetCounterLate:[Int:Int] = [60:0, 590:0]
@@ -80,10 +80,12 @@ class CSGODetector: PacketDetector{
         dstGameTimer = [PacketTimer]()
         dstPacketCounter = [75:0]
         
-        gameTimer = [PacketTimer]()
-        
         timer.invalidate()
         time = -1
+    }
+    
+    class func resetInGameTimer(){
+         gameTimer = [PacketTimer]()
     }
     
     override class func update(newPacket:Packet){
@@ -113,10 +115,10 @@ class CSGODetector: PacketDetector{
         }
             
             //IN GAME
-        else  if(status == Status.InGame){
+        else if(status == Status.InGame){
+            resetGameTimer()
             var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
             if(!inGame){updateStatus(Status.InQueue)}
-            
         }
             
         else {
@@ -132,7 +134,7 @@ class CSGODetector: PacketDetector{
         }
         
         var t:Double = -1
-        if(isTesting){t = 0.5}
+        if(isTesting){t = 0.2}
         else{t = 2}
         
         while(!gameTimerLate.isEmpty && p.captureTime - gameTimerLate.last!.time > t){
@@ -203,7 +205,9 @@ class CSGODetector: PacketDetector{
             gameTimer.removeLast()
         }
         
-        gameTimer.insert(PacketTimer(key: p.srcPort, time: p.captureTime),atIndex: 0)
+        if(p.packetLength >= 200){
+        gameTimer.insert(PacketTimer(key: p.dstPort, time: p.captureTime),atIndex: 0)
+        }
         
         if(gameTimer.count >= packetNumber){return true}
         else {return false}

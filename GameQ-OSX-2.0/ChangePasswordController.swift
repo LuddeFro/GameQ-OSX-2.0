@@ -42,10 +42,14 @@ class ChangePasswordController: NSViewController {
                 }
                 else{
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.statusLabel.stringValue = error!
+                        if(error! != "404"){
+                            self.statusLabel.stringValue = error!}
+                        else {
+                            self.statusLabel.stringValue = "No Internet Connection"}
                         self.submitButton.enabled = true
                     }
-                }})}}
+                }
+                })}}
     
     
     @IBOutlet weak var submitButton: OrangeButton!

@@ -32,6 +32,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
     static var saveToServer = true
     static let dataHandler = DataHandler.sharedInstance
     static var detector:GameDetector.Type = GameDetector.self
+    static var saveMemory: String = ""
+    static var lastGame: Game = Game.NoGame
     
     static var countDownLength:Int = -1
     static var counter:Int = -1
@@ -48,17 +50,18 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = 0
         }
         
-        if(status != newStatus && newStatus == Status.GameReady && isTesting == false && blockNotif == false){
+        //&& blockNotif == false
+        if(status != newStatus && newStatus == Status.GameReady && isTesting == false){
             detector.saveDetection()
             startTimer()
-            blockNotif = true
+            // blockNotif = true
         }
         
         status = newStatus
         println(Encoding.getStringFromGameStatus(self.game, status: self.status))
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
-        if(isTesting == false && saveToServer != false){
+        if(isTesting == false){
             ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
                 println("succesfully updated status")
             })}
@@ -71,17 +74,35 @@ class GameDetector:NSObject, GameDetectorProtocol {
         if(isFailMode){saveType = 2}
         else{saveType = 0}
         
-        if(saveToServer){
-            ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: saveType, finalCallBack: {(success:Bool, error:String?) in
-                if(success){
-                    println("Submitted csv")
-                }
-            })
+        if(self.game != Game.NoGame){
+            if(saveToServer){
+                ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: saveType, finalCallBack: {(success:Bool, error:String?) in
+                    if(success){
+                        println("Submitted csv")
+                    }
+                })
+            }
+            
+            if(saveToDesktop){
+                dataHandler.folderName = Encoding.getStringFromGame(self.game)
+                dataHandler.logPackets(detector.fileToString())
+            }
         }
-        
-        if(saveToDesktop){
-            dataHandler.folderName = Encoding.getStringFromGame(self.game)
-            dataHandler.logPackets(detector.fileToString())
+            
+        else if(self.lastGame != Game.NoGame && saveMemory != ""){
+            if(saveToServer ){
+                ConnectionHandler.submitCSV(saveMemory, game: Encoding.getIntFromGame(self.lastGame), type: saveType, finalCallBack: {(success:Bool, error:String?) in
+                    if(success){
+                        println("Submitted csv")
+                    }
+                })
+            }
+            
+            if(saveToDesktop){
+                dataHandler.folderName = Encoding.getStringFromGame(self.lastGame)
+                dataHandler.logPackets(saveMemory)
+            }
+            
         }
     }
     
@@ -89,14 +110,34 @@ class GameDetector:NSObject, GameDetectorProtocol {
     }
     
     class func saveMissedDetection(){
-      
+        
+        
+        if(self.game != Game.NoGame){
         if(saveToServer){
-        ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 1, finalCallBack: {(success:Bool, error:String?) in})
+            ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 1, finalCallBack: {(success:Bool, error:String?) in})
         }
         
         if(saveToDesktop){
-        dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "missed"
-        dataHandler.logPackets(detector.fileToString())
+            dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "missed"
+            dataHandler.logPackets(detector.fileToString())
+        }
+        }
+        
+        else if(self.lastGame != Game.NoGame && saveMemory != ""){
+           
+            if(saveToServer ){
+                ConnectionHandler.submitCSV(saveMemory, game: Encoding.getIntFromGame(self.lastGame), type: 1, finalCallBack: {(success:Bool, error:String?) in
+                    if(success){
+                        println("Submitted csv")
+                    }
+                })
+            }
+            
+            if(saveToDesktop){
+                dataHandler.folderName = Encoding.getStringFromGame(self.lastGame)
+                dataHandler.logPackets(saveMemory)
+            }
+            
         }
     }
     
@@ -117,6 +158,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func stopDetection(){
         println("Stopping Detection")
+        saveMemory = fileToString()
+        self.lastGame = self.game
         self.game = Game.NoGame
         detector = GameDetector.self
         updateStatus(Status.Online)
@@ -138,7 +181,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
             counter = counter + 1
         }
         
-        if(counter > 10 ){
+        if(counter > 10){
             blockNotif = false
         }
         

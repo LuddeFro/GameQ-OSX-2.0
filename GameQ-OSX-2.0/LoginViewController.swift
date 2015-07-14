@@ -23,7 +23,6 @@ class LoginViewController: NSViewController {
         ConnectionHandler.login(emailField.stringValue, password: passwordField.stringValue, finalCallBack:{ (success:Bool, err:String?) in
             self.enableAllButtons()
             if success {
-                println("Jay")
                 dispatch_async(dispatch_get_main_queue()) {
                     self.loginProgress1.stopAnimation(self)
                     self.loginProgress2.stopAnimation(self)
@@ -31,11 +30,13 @@ class LoginViewController: NSViewController {
                     self.performSegueWithIdentifier("LoginToMaster", sender: nil)
                 }
             } else {
-                println("nay")
                 dispatch_async(dispatch_get_main_queue()) {
                     self.loginProgress1.stopAnimation(self)
                     self.loginProgress2.stopAnimation(self)
-                    self.statusLabel.stringValue = err!
+                    if(err! != "404"){
+                        self.statusLabel.stringValue = err!}
+                    else {
+                        self.statusLabel.stringValue = "No Internet Connection"}
                 }
             }})}
     
