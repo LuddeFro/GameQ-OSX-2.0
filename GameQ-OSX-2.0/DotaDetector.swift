@@ -277,6 +277,9 @@ class DotaDetector:PacketDetector{
             }
         }
         
+        println(packetCounterEarly)
+        println(packetCounterLate)
+        
         if(gameTimerEarly.count > 0 || gameTimerLate.count > 0 && p.packetLength > 1300){isProbablyGame = true}
         else{isProbablyGame = false}
         

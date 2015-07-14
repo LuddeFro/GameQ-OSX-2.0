@@ -50,9 +50,9 @@ class GameQ_OSX_2_0Tests: XCTestCase {
     func testOneFileDota2(){
         GameDetector.detector = DotaDetector.self
         GameDetector.game = Game.Dota2
-        var file:String = "Jul 12, 2015, 65052 PM.csv"
+        var file:String = "Jul 14, 2015, 31925 PM.csv"
         println("starting " + file)
-        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota 2Missed/" + file)
+        CSV.readOneCSV("/Users/fabianwikstrom/Desktop/GameQ-Caps/Dota 2ForcedFails/" + file)
         XCTAssert(GameDetector.status == Status.GameReady || GameDetector.status == Status.InGame, "Test Passed")
         if(GameDetector.status != Status.GameReady){println("failed: " + file)}
     }

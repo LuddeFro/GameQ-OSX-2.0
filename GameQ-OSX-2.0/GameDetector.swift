@@ -61,8 +61,12 @@ class GameDetector:NSObject, GameDetectorProtocol {
         println(Encoding.getStringFromGameStatus(self.game, status: self.status))
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
         
+        var newStatus = Status.InQueue
+        if(self.status == Status.InLobby){newStatus == Status.InQueue}
+        else{newStatus = self.status}
+        
         if(isTesting == false){
-            ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(self.status), finalCallBack:{ (success:Bool, err:String?) in
+            ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(newStatus), finalCallBack:{ (success:Bool, err:String?) in
                 if(success){println("succesfully updated status")}
             })}
         
