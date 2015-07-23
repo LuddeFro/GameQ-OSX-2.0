@@ -71,7 +71,7 @@ class SignUpController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+          statusLabel.textColor = NSColor.whiteColor()
         let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()
         style.alignment = .CenterTextAlignment

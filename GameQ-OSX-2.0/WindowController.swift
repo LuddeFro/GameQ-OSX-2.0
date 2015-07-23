@@ -18,7 +18,7 @@ class WindowController: NSWindowController {
         self.window!.titleVisibility = NSWindowTitleVisibility.Hidden
         self.window!.titlebarAppearsTransparent = true
         self.window!.styleMask |= NSFullSizeContentViewWindowMask
-        self.window!.backgroundColor = NSColor(netHex: 0x465568)
+        self.window!.backgroundColor = Colors().backgroundColor
         self.window!.movableByWindowBackground = true
     }
     

@@ -41,12 +41,9 @@ class LoginViewController: NSViewController {
             }})}
     
     @IBOutlet weak var statusLabel: NSTextField!
-    
     @IBOutlet weak var loginButton: NSButton!
-    
     @IBOutlet weak var signUpButton: NSButton!
     @IBOutlet weak var emailField: NSTextField!
-    
     @IBOutlet weak var passwordField: NSSecureTextField!
     
     let appDelegate = NSApplication.sharedApplication().delegate as! AppDelegate
@@ -57,6 +54,7 @@ class LoginViewController: NSViewController {
         let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
         let style = NSMutableParagraphStyle()
         style.alignment = .CenterTextAlignment
+        statusLabel.textColor = NSColor.whiteColor()
         
         loginButton.attributedTitle = NSAttributedString(string: "Login", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
         

@@ -111,6 +111,7 @@ class ConnectionHandler : NSObject {
     
     static func logout(finalCallBack:(success:Bool, err:String?)->()) {
         let apiExtension = "logout"
+        self.isLoggedIn = false
         var diString = ""
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"

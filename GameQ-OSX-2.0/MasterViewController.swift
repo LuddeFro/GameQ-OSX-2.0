@@ -16,7 +16,6 @@ class MasterViewController: NSViewController {
     @IBOutlet weak var toDesktopButton: NSButton!
     @IBOutlet weak var settingsButton: NSButton!
     @IBOutlet weak var feedbackButton: NSButton!
-    @IBOutlet weak var logOutButton: NSButton!
     @IBOutlet weak var missedQueueButton: NSButton!
     @IBOutlet weak var timer: Timer!
     @IBOutlet weak var countDown: NSTextField!
@@ -53,12 +52,13 @@ class MasterViewController: NSViewController {
     @IBAction func saveMissedPressed(sender: AnyObject) {
         GameDetector.detector.saveMissedDetection()
     }
-    @IBAction func logOutPressed(sender: AnyObject) {
+    
+   func logOut(sender: NSNotification) {
         disableAllButtons()
         NSNotificationCenter.defaultCenter().removeObserver(self)
         self.performSegueWithIdentifier("MasterToLogin", sender: nil)
-        appDelegate.didLogOut()
         }
+    
     @IBAction func startButtonPressed(sender: NSButton) {
         GameDetector.detector.startDetection()
         
@@ -94,14 +94,6 @@ class MasterViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let font = NSFont(name: "Helvetica", size: 16) ?? NSFont.labelFontOfSize(16)
-        let style = NSMutableParagraphStyle()
-        style.alignment = .CenterTextAlignment
-        
-        logOutButton.attributedTitle = NSAttributedString(string: "Log Out", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
-        
-        missedQueueButton.attributedTitle = NSAttributedString(string: "Send Feedback", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : style, NSFontAttributeName: font])
-        
         if((ConnectionHandler.loadEmail() == "fabian.wikstrom@gmail.com")){
             failmodebutton.enabled = true
             failmodebutton.hidden = false
@@ -135,12 +127,13 @@ class MasterViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("getStatus:"), name:"updateStatus", object: nil)
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("logOut:"), name:"logOut", object: nil)
         NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
     }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        //NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func getStatus(sender: NSNotification) {
@@ -238,14 +231,12 @@ class MasterViewController: NSViewController {
     }
     
     private func disableAllButtons(){
-        logOutButton.enabled = false
         settingsButton.enabled = false
         feedbackButton.enabled = false
         changePWButton.enabled = false
     }
     private func enableAllButtons(){
         changePWButton.enabled = true
-        logOutButton.enabled = true
         settingsButton.enabled = true
         feedbackButton.enabled = true
     }

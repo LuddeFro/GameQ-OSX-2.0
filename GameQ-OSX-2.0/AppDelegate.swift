@@ -24,6 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var gameItem: NSMenuItem = NSMenuItem()
     var statusItem:NSMenuItem = NSMenuItem()
     var emailItem : NSMenuItem = NSMenuItem()
+    var logOutItem : NSMenuItem = NSMenuItem()
     var windowController:NSWindowController?
     var programTimer:NSTimer = NSTimer()
     
@@ -69,9 +70,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         loginItem.action = Selector("setWindowVisible:")
         loginItem.keyEquivalent = ""
         
-        preferencesItem.title = "Preferences"
+        preferencesItem.title = "Show App"
         preferencesItem.action = Selector("setWindowVisible:")
         preferencesItem.keyEquivalent = ""
+        
+        logOutItem.title = "Log Out"
+        logOutItem.action = Selector("logOutPressed:")
+        logOutItem.keyEquivalent = ""
         
         quitItem.title = "Quit"
         quitItem.action = Selector("quitApplication:")
@@ -87,9 +92,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func setWindowVisible(sender: AnyObject){
         dispatch_async(dispatch_get_main_queue()) {
+            
             self.windowController?.showWindow(sender)
             self.windowController?.window?.orderFrontRegardless()
         }
+    }
+    
+    func logOutPressed(sender: AnyObject){
+        NSNotificationCenter.defaultCenter().postNotificationName("logOut", object: nil)
+        self.didLogOut()
     }
     
     func quitApplication(sender: AnyObject){
@@ -113,16 +124,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.menu.addItem(self.statusItem)
             self.menu.addItem(NSMenuItem.separatorItem())
             self.menu.addItem(self.preferencesItem)
+            self.menu.addItem(self.logOutItem)
             self.menu.addItem(self.quitItem)
         }
     }
     
     func didLogOut(){
-        menu.removeAllItems()
-        menu.addItem(loginItem)
-        menu.addItem(quitItem)
+         dispatch_async(dispatch_get_main_queue()) {
+        self.menu.removeAllItems()
+        self.menu.addItem(self.loginItem)
+        self.menu.addItem(self.quitItem)
         GameDetector.detector.stopDetection()
-        dispatch_async(dispatch_get_main_queue()) {self.programTimer.invalidate()}
+        self.programTimer.invalidate()}
         ConnectionHandler.logout({ (success:Bool, err:String?) in})
     }
     

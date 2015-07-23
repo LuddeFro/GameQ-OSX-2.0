@@ -22,7 +22,7 @@ class MyCustomSwiftAnimator: NSObject, NSViewControllerPresentationAnimator {
         var frame : CGRect = NSRectToCGRect(bottomVC.view.frame)
         frame = CGRectInset(frame, 0, 0)
         topVC.view.frame = NSRectFromCGRect(frame)
-        let color: CGColorRef = NSColor(netHex: 0x465568).CGColor
+        let color: CGColorRef = Colors().backgroundColor.CGColor
         topVC.view.layer?.backgroundColor = color
         NSAnimationContext.runAnimationGroup({ (context) -> Void in
             context.duration = 0.5

@@ -103,11 +103,11 @@ class Encoding {
         case .NoGame:
             switch status{
             case .Offline: return "Offline"
-            case .Online: return  "Enjoy your day"
-            case .InLobby: return "Something went wrong"
-            case .InQueue: return "Something went wrong"
-            case .GameReady: return "Something went wrong"
-            case .InGame:return "Something went wrong"
+            case .Online: return  "Online"
+            case .InLobby: return ""
+            case .InQueue: return ""
+            case .GameReady: return ""
+            case .InGame:return ""
             }
         }
     }

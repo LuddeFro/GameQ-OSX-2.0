@@ -3,59 +3,61 @@
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo16.png",
+      "filename" : "gq-nb-16.png",
       "scale" : "1x"
     },
     {
       "size" : "16x16",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo32.png",
+      "filename" : "gq-nb-32.png",
       "scale" : "2x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo32-1.png",
+      "filename" : "gq-nb-32-1.png",
       "scale" : "1x"
     },
     {
       "size" : "32x32",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo64.png",
+      "filename" : "gq-nb-64.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "gq-nb-128.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "gq-nb-256.png",
       "scale" : "2x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo256.png",
+      "filename" : "gq-nb-256-1.png",
       "scale" : "1x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo512-1.png",
+      "filename" : "gq-nb-512.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo512.png",
+      "filename" : "gq-nb-512-1.png",
       "scale" : "1x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "GameQ-Logo1024.png",
+      "filename" : "gq-nb-1024.png",
       "scale" : "2x"
     }
   ],
