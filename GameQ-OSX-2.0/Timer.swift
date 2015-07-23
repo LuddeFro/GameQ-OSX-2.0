@@ -37,8 +37,8 @@ class Timer: NSView {
         var path:NSBezierPath = NSBezierPath()
         path.appendBezierPathWithArcWithCenter(NSPoint(x: x + circleRadius, y: y + circleRadius), radius: circleRadius, startAngle: 90, endAngle: -270, clockwise: true)
         
-        path.lineWidth = 5
-        NSColor(netHex: 0x323f4f).setStroke()
+        path.lineWidth = 4
+        Colors().timerSecondColor.setStroke()
         path.stroke()
     }
     
@@ -57,9 +57,9 @@ class Timer: NSView {
     func configure() {
         progress = 0
         circlePathLayer.frame = bounds
-        circlePathLayer.lineWidth = 5
+        circlePathLayer.lineWidth = 4
         circlePathLayer.fillColor = NSColor.clearColor().CGColor
-        circlePathLayer.strokeColor = NSColor(netHex: 0xFF6861).CGColor
+        circlePathLayer.strokeColor = Colors().LightBlue.CGColor
         layer!.addSublayer(circlePathLayer)
     }
     

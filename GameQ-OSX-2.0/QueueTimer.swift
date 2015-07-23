@@ -23,8 +23,8 @@ class QueueTimer: NSView {
         var path = NSBezierPath()
         path.appendBezierPathWithArcWithCenter(center, radius: 67, startAngle: 0, endAngle: 360)
         path.lineWidth = 3
-        if(isGame){NSColor(netHex: 0x8fd8f7).setStroke()}
-        else{NSColor(netHex: 0x323f4f).setStroke()}
+        if(isGame){Colors().Orange.setStroke()}
+        else{Colors().timerSecondColor.setStroke()}
 
         path.stroke()
         
@@ -32,7 +32,7 @@ class QueueTimer: NSView {
         var path2 = NSBezierPath()
         path2.appendBezierPathWithArcWithCenter(center, radius: 67, startAngle: 0, endAngle: 60)
         path2.lineWidth = 3
-        NSColor(netHex: 0x8fd8f7).setStroke()
+        Colors().Orange.setStroke()
         path2.stroke()
         }
       }
