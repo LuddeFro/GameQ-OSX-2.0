@@ -21,5 +21,5 @@ struct Colors {
     let MenuTextGray = NSColor(netHex: 0xb6bfc6)
     let ButtonOffGray = NSColor(netHex: 0x546575)
     let backgroundColor = NSColor(netHex: 0x17212b)
-    let timerSecondColor = NSColor(netHex: 0x8c9fb2)
+    let timerSecondColor = NSColor(netHex: 0x34404d)
 }

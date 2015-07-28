@@ -899,12 +899,13 @@ DQ
                                 </constraints>
                             </customView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TCh-fi-bsJ">
-                                <rect key="frame" x="143" y="221" width="84" height="29"/>
+                                <rect key="frame" x="133" y="215" width="104" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="YiT-Bg-iFE"/>
+                                    <constraint firstAttribute="height" constant="40" id="O3n-y4-kPP"/>
+                                    <constraint firstAttribute="width" constant="100" id="YiT-Bg-iFE"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="dG7-ln-pID">
-                                    <font key="font" size="23" name="Axis"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="" id="dG7-ln-pID">
+                                    <font key="font" size="23" name="Roboto-Regular"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1062,7 +1063,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <imageView translatesAutoresizingMaskIntoConstraints="NO" id="gOw-QP-F5z">
-                                <rect key="frame" x="145" y="380" width="70" height="70"/>
+                                <rect key="frame" x="148" y="386" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="558-Vp-fys"/>
                                     <constraint firstAttribute="height" constant="70" id="gpb-cd-SiC"/>
@@ -1096,12 +1097,12 @@ DQ
                             <constraint firstItem="Bub-Pz-YnC" firstAttribute="top" secondItem="zpK-4P-0eX" secondAttribute="bottom" constant="5" id="H5r-Ld-9s0"/>
                             <constraint firstAttribute="centerY" secondItem="uNO-Qg-MO1" secondAttribute="centerY" id="HON-oh-ps2"/>
                             <constraint firstItem="CSV-MA-BZY" firstAttribute="top" secondItem="ibd-Oe-cu8" secondAttribute="bottom" constant="10" id="Hxh-6f-tI9"/>
-                            <constraint firstItem="gOw-QP-F5z" firstAttribute="top" secondItem="bfK-wO-M3S" secondAttribute="top" constant="20" id="IQB-5Q-qca"/>
+                            <constraint firstItem="gOw-QP-F5z" firstAttribute="top" secondItem="bfK-wO-M3S" secondAttribute="top" constant="14" id="IQB-5Q-qca"/>
                             <constraint firstAttribute="centerY" secondItem="KJD-VZ-InT" secondAttribute="centerY" id="IYq-dn-Dy6"/>
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="leading" secondItem="S4Q-Se-CRP" secondAttribute="leading" id="KcU-zY-I9M"/>
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="L77-ya-KTy"/>
                             <constraint firstAttribute="centerY" secondItem="GoJ-Pl-DN0" secondAttribute="centerY" id="NmR-Af-8iS"/>
-                            <constraint firstItem="urm-Yo-WPv" firstAttribute="leading" secondItem="gOw-QP-F5z" secondAttribute="trailing" constant="100" id="OoK-WD-Ca3"/>
+                            <constraint firstItem="urm-Yo-WPv" firstAttribute="leading" secondItem="gOw-QP-F5z" secondAttribute="trailing" constant="97" id="OoK-WD-Ca3"/>
                             <constraint firstItem="mYD-kO-0T9" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="RrR-S3-TKg"/>
                             <constraint firstItem="Azw-1E-jxV" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="TUU-hw-KCs"/>
                             <constraint firstItem="MoA-oI-xmy" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="ToA-WP-9Ki"/>
@@ -1488,7 +1489,7 @@ DQ
         <image name="settings" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="f9D-qx-hky"/>
         <segue reference="rX2-V3-Egi"/>
-        <segue reference="2vk-2S-oDg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -44,6 +44,7 @@
 		AE5B6C271B4D4C1500C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
 		AE5B6C281B4D51DB00C263C4 /* ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */; };
 		AE5B6C2A1B4D5ACE00C263C4 /* ReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B6C291B4D5ACE00C263C4 /* ReportController.swift */; };
+		AE61A5B11B67E75E007A597A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE61A5B01B67E742007A597A /* Roboto-Regular.ttf */; };
 		AE7A01661B67CD1000412F2F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE7A01651B67CD1000412F2F /* Sparkle.framework */; };
 		AE8C42101B374D000050D686 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C420F1B374D000050D686 /* ContainerViewController.swift */; };
 		AE98AC211B18A2AC00E5F382 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
@@ -125,6 +126,7 @@
 		AE349E741B417BC200823189 /* LoLDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoLDetector.swift; sourceTree = "<group>"; };
 		AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionHandler.swift; sourceTree = "<group>"; };
 		AE5B6C291B4D5ACE00C263C4 /* ReportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportController.swift; sourceTree = "<group>"; };
+		AE61A5B01B67E742007A597A /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		AE7A01651B67CD1000412F2F /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		AE8C420F1B374D000050D686 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AE98AC171B18A2AC00E5F382 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		832BCE6D1B09E4AC00FE15E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE61A5B01B67E742007A597A /* Roboto-Regular.ttf */,
 				AE7A01651B67CD1000412F2F /* Sparkle.framework */,
 				AEFE3CCD1B4E98C7008DE5C2 /* Other */,
 				AEFE3CCC1B4E98B7008DE5C2 /* Segue */,
@@ -428,6 +431,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE61A5B11B67E75E007A597A /* Roboto-Regular.ttf in Resources */,
 				832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */,
 				AEF4B5B11B343C2E0001AF42 /* Main.storyboard in Resources */,
 			);
