@@ -59,7 +59,7 @@ class Timer: NSView {
         circlePathLayer.frame = bounds
         circlePathLayer.lineWidth = 4
         circlePathLayer.fillColor = NSColor.clearColor().CGColor
-        circlePathLayer.strokeColor = Colors().LightBlue.CGColor
+        circlePathLayer.strokeColor = Colors().green.CGColor
         layer!.addSublayer(circlePathLayer)
     }
     

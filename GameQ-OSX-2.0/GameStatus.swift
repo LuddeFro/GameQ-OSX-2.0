@@ -58,7 +58,7 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "In Game Lobby"
+            case .InLobby: return "Finding Match"
             case .InQueue: return "Finding Match"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
@@ -67,7 +67,7 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "In Game Lobby"
+            case .InLobby: return "Finding Match"
             case .InQueue: return "Finding Match"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
@@ -76,7 +76,7 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "In Game Lobby"
+            case .InLobby: return "Detecting Match"
             case .InQueue: return "Detecting Match"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
@@ -85,7 +85,7 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "In Game Lobby"
+            case .InLobby: return "Finding Match"
             case .InQueue: return "Finding Match"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
@@ -94,7 +94,7 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "In Game Lobby"
+            case .InLobby: return "Searching for Match"
             case .InQueue: return "Searching for Match"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
@@ -126,8 +126,8 @@ class Encoding {
     static func getStatusFromInt(status:Int) -> Status {
         
         switch status{
-        case  0 : return .Offline
-        case  1 : return  .Online
+        case 0 : return .Offline
+        case 1 : return  .Online
         case 2 : return .InLobby
         case 3 : return .InQueue
         case 4 : return .GameReady

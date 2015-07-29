@@ -22,4 +22,5 @@ struct Colors {
     let ButtonOffGray = NSColor(netHex: 0x546575)
     let backgroundColor = NSColor(netHex: 0x17212b)
     let timerSecondColor = NSColor(netHex: 0x34404d)
+    let green = NSColor(netHex: 0x2ecc71)
 }

@@ -28,7 +28,7 @@ class CustomLine: NSView {
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
-        Colors().timerSecondColor.setFill()
+        Colors().LightBlue.setFill()
         NSRectFill(dirtyRect);
     }
 }
@@ -37,7 +37,7 @@ class CustomLine2: NSView {
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
-        Colors().timerSecondColor.setFill()
+        Colors().LightBlue.setFill()
         NSRectFill(dirtyRect);
     }
 }

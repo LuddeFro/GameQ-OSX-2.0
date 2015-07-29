@@ -164,6 +164,7 @@ class MasterViewController: NSViewController {
                 self.queueTimer.isGame = false
                 self.queueTimer.reset()
                 self.resetTimer(false)
+                self.queueTimer.start()
                 self.timer.progress = 0
                 break
                 
