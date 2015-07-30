@@ -174,10 +174,12 @@ class ConnectionHandler : NSObject {
     }
     
     static func needsStatusUpdate() {
+//        println("bajs2")
+        println(isLoggedIn)
         if isLoggedIn {
             setStatus(lastStatusUpdateGame, status: lastStatusUpdateStatus, finalCallBack: {
                 (success:Bool, error:String?) in
-                //println("autoupdate status success: \(success), error: \(error)")
+                println("autoupdate status success: \(success), error: \(error)")
             })
         }
     }
@@ -185,11 +187,14 @@ class ConnectionHandler : NSObject {
     private static func resetStatusUpdateTimer(game:Int?, status:Int) {
         lastStatusUpdateStatus = status
         lastStatusUpdateGame = game
-        statusTimer.invalidate()
-        statusTimer = NSTimer.scheduledTimerWithTimeInterval(300, target: self, selector: Selector("needsStatusUpdate"), userInfo: nil, repeats: false)
+//        println("vafan")
+        dispatch_async(dispatch_get_main_queue(), {
+        self.statusTimer.invalidate()
+        self.statusTimer = NSTimer.scheduledTimerWithTimeInterval(120, target: self, selector: Selector("needsStatusUpdate"), userInfo: nil, repeats: false)})
     }
     
     static func setStatus(game:Int?, status:Int, finalCallBack:(success:Bool, err:String?)->()) {
+//        println("bajsbajs")
         resetStatusUpdateTimer(game, status: status)
         let apiExtension = "setStatus"
         var diString = ""

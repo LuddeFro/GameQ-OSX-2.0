@@ -109,8 +109,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func didLogin(){
-        GameDetector.updateStatus(Status.Online)
         dispatch_async(dispatch_get_main_queue()) {
+            GameDetector.updateStatus(Status.Online)
             self.programTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
             self.gameItem.title = Encoding.getStringFromGame(GameDetector.game)
             self.gameItem.enabled = false
