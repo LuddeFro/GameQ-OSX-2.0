@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Cocoa
 enum Status {
     case Offline
     case Online
@@ -28,6 +28,8 @@ enum Game {
 }
 
 class Encoding {
+    
+    
     
     static func getStringFromGame(game:Game) -> String{
         switch game{

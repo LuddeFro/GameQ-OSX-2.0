@@ -11,6 +11,7 @@
 		832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE741B09E4AC00FE15E2 /* Images.xcassets */; };
 		832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */; };
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
+		838137C01B778F1700BA56E3 /* AcceptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838137BF1B778F1700BA56E3 /* AcceptHandler.swift */; };
 		AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
 		AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
 		AE0759B01B4D20BB000EFD94 /* OrangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */; };
@@ -111,6 +112,7 @@
 		832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameQ_OSX_2_0Tests.swift; sourceTree = "<group>"; };
 		832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 		832BCE971B09FA0800FE15E2 /* GameQ-OSX-2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "GameQ-OSX-2.0-Bridging-Header.h"; path = "GameQ-OSX-2.0/GameQ-OSX-2.0-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		838137BF1B778F1700BA56E3 /* AcceptHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptHandler.swift; sourceTree = "<group>"; };
 		AE008B951B3C3101000EEA45 /* HOTSDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HOTSDetector.swift; sourceTree = "<group>"; };
 		AE0759AF1B4D20BB000EFD94 /* OrangeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrangeButton.swift; sourceTree = "<group>"; };
 		AE0759B11B4D3106000EFD94 /* BlueButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlueButton.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				AE98AC171B18A2AC00E5F382 /* DataHandler.swift */,
+				838137BF1B778F1700BA56E3 /* AcceptHandler.swift */,
 				AE5B6C261B4D4C1500C263C4 /* ConnectionHandler.swift */,
 			);
 			name = DataHandlers;
@@ -479,6 +482,7 @@
 				AE199A331B32E76100EC5870 /* Helpers.swift in Sources */,
 				AE990B3E1B4D8F1C009735BD /* ForgotPasswordController.swift in Sources */,
 				AEF4B5B21B343C2E0001AF42 /* LoginViewController.swift in Sources */,
+				838137C01B778F1700BA56E3 /* AcceptHandler.swift in Sources */,
 				AE226CB71B2316D0009B7D9B /* CSGODetector.swift in Sources */,
 				AE0759B21B4D3106000EFD94 /* BlueButton.swift in Sources */,
 				AE5B6C2A1B4D5ACE00C263C4 /* ReportController.swift in Sources */,

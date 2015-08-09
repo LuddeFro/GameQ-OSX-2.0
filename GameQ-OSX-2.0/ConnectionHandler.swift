@@ -187,20 +187,17 @@ class ConnectionHandler : NSObject {
     private static func resetStatusUpdateTimer(game:Int?, status:Int) {
         lastStatusUpdateStatus = status
         lastStatusUpdateGame = game
-//        println("vafan")
         dispatch_async(dispatch_get_main_queue(), {
         self.statusTimer.invalidate()
         self.statusTimer = NSTimer.scheduledTimerWithTimeInterval(120, target: self, selector: Selector("needsStatusUpdate"), userInfo: nil, repeats: false)})
     }
     
     static func setStatus(game:Int?, status:Int, finalCallBack:(success:Bool, err:String?)->()) {
-//        println("bajsbajs")
         resetStatusUpdateTimer(game, status: status)
         let apiExtension = "setStatus"
         var diString = ""
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
-            //println("bajs " + diString)
         }
         var gameString:String = "game=0"
         if let gameId = game {
@@ -217,6 +214,9 @@ class ConnectionHandler : NSObject {
                     err = self.getStringFrom(json, key: "error")
                 } else {
                     //set status success
+                    if self.getStringFrom(json, key: "error") == "accept" {
+                        AcceptHandler.acceptForGame(Encoding.getGameFromInt(game!))
+                    }
                 }
             } else {
                 //println("json parse fail")
