@@ -214,9 +214,16 @@ class ConnectionHandler : NSObject {
                     err = self.getStringFrom(json, key: "error")
                 } else {
                     //set status success
-                    if self.getStringFrom(json, key: "error") == "accept" {
-                        AcceptHandler.acceptForGame(Encoding.getGameFromInt(game!))
+                    let e = self.getStringFrom(json, key: "error")
+                    if e == "auto" {
+                        usleep(3000000)
+                        AcceptHandler.acceptForGame(true, game: Encoding.getGameFromInt(game!))
+                    } else if e == "accept" {
+                        AcceptHandler.acceptForGame(true, game: Encoding.getGameFromInt(game!))
+                    } else if e == "decline" {
+                        AcceptHandler.acceptForGame(false, game: Encoding.getGameFromInt(game!))
                     }
+                    
                 }
             } else {
                 //println("json parse fail")
