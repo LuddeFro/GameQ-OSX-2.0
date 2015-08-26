@@ -16,7 +16,9 @@ private let i:CGFloat = 22
 
 
 class AcceptHandler:NSObject {
-    static func acceptForGame(game:Game) {
+    
+    
+    static func acceptForGame(accept:Bool, game:Game) {
          
         //generate coordinates x & y
         let option = CGWindowListOption(kCGWindowListOptionAll)
@@ -52,35 +54,69 @@ class AcceptHandler:NSObject {
                         let h = boundsDic["Height"]!
                         let w = boundsDic["Width"]!
                         
-                        let xfractions:[Int:CGFloat] = [ /// distance x unbordered & bordered
-                            1:CGFloat(xwindowcoord) + CGFloat(532)/(CGFloat(1286)/CGFloat(w)), //dota
-                            //2:CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //hon
-                            //3:CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //hots
-                            4:CGFloat(xwindowcoord) + CGFloat(263)/(CGFloat(1280)/CGFloat(w)), //csgo
-                            5:CGFloat(xwindowcoord) + CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //lol
-                            6:CGFloat(xwindowcoord) + CGFloat(550)/(CGFloat(1280)/CGFloat(w)), //dotareborn
-                        ]
-                        let yfractions:[Int:CGFloat] = [ /// distance y unbordered
-                            1:CGFloat(ywindowcoord) + CGFloat(324)/(CGFloat(796)/CGFloat(h)), //dota
-                            //2:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hon
-                            //3:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hots
-                            4:CGFloat(ywindowcoord) + CGFloat(192)/(CGFloat(800)/CGFloat(h)), //csgo
-                            5:CGFloat(ywindowcoord) + CGFloat(445)/(CGFloat(800)/CGFloat(h)), //lol
-                            6:CGFloat(ywindowcoord) + CGFloat(403)/(CGFloat(768)/CGFloat(h)), //dotareborn
-                        ]
-                        let diff:CGFloat = CGFloat(h) - i /// distance y bordered
-                        let yfractionsBordered:[Int:CGFloat] = [
-                            1:CGFloat(ywindowcoord) + CGFloat(324)/(CGFloat(796)/diff) + i, //dota
-                            //2:CGFloat(589)/(CGFloat(1280)/diff), //hon
-                            //3:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hots
-                            4:CGFloat(ywindowcoord) + CGFloat(192)/(CGFloat(800)/diff) + i, //csgo
-                            5:CGFloat(ywindowcoord) + CGFloat(445)/(CGFloat(800)/diff) + i, //lol
-                            6:CGFloat(ywindowcoord) + CGFloat(403)/(CGFloat(768)/diff) + i, //dotareborn
-                        ]
+                        if accept {
+                            //accept
+                            let xfractions:[Int:CGFloat] = [ /// distance x unbordered & bordered
+                                1:CGFloat(xwindowcoord) + CGFloat(532)/(CGFloat(1286)/CGFloat(w)), //dota
+                                //2:CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //hon
+                                //3:CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //hots
+                                4:CGFloat(xwindowcoord) + CGFloat(263)/(CGFloat(1280)/CGFloat(w)), //csgo
+                                5:CGFloat(xwindowcoord) + CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //lol
+                                6:CGFloat(xwindowcoord) + CGFloat(550)/(CGFloat(1280)/CGFloat(w)), //dotareborn
+                            ]
+                            let yfractions:[Int:CGFloat] = [ /// distance y unbordered
+                                1:CGFloat(ywindowcoord) + CGFloat(324)/(CGFloat(796)/CGFloat(h)), //dota
+                                //2:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hon
+                                //3:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hots
+                                4:CGFloat(ywindowcoord) + CGFloat(192)/(CGFloat(800)/CGFloat(h)), //csgo
+                                5:CGFloat(ywindowcoord) + CGFloat(445)/(CGFloat(800)/CGFloat(h)), //lol
+                                6:CGFloat(ywindowcoord) + CGFloat(403)/(CGFloat(768)/CGFloat(h)), //dotareborn
+                            ]
+                            let diff:CGFloat = CGFloat(h) - i /// distance y bordered
+                            let yfractionsBordered:[Int:CGFloat] = [
+                                1:CGFloat(ywindowcoord) + CGFloat(324)/(CGFloat(796)/diff) + i, //dota
+                                //2:CGFloat(589)/(CGFloat(1280)/diff), //hon
+                                //3:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hots
+                                4:CGFloat(ywindowcoord) + CGFloat(192)/(CGFloat(800)/diff) + i, //csgo
+                                5:CGFloat(ywindowcoord) + CGFloat(445)/(CGFloat(800)/diff) + i, //lol
+                                6:CGFloat(ywindowcoord) + CGFloat(403)/(CGFloat(768)/diff) + i, //dotareborn
+                            ]
+                            x = xfractions[localGame]!
+                            y = yfractions[localGame]!
+                            y2 = yfractionsBordered[localGame]!
+                        } else {
+                            //decline
+                            let xfractions:[Int:CGFloat] = [ /// distance x unbordered & bordered
+                                1:CGFloat(xwindowcoord) + CGFloat(1146)/(CGFloat(1920)/CGFloat(w)), //dota
+                                //2:CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //hon
+                                //3:CGFloat(589)/(CGFloat(1280)/CGFloat(w)), //hots
+                                4:CGFloat(xwindowcoord) + CGFloat(620)/(CGFloat(1920)/CGFloat(w)), //csgo
+                                5:CGFloat(xwindowcoord) + CGFloat(736)/(CGFloat(1280)/CGFloat(w)), //lol
+                                6:CGFloat(xwindowcoord) + CGFloat(1157)/(CGFloat(1920)/CGFloat(w)), //dotareborn
+                            ]
+                            let yfractions:[Int:CGFloat] = [ /// distance y unbordered
+                                1:CGFloat(ywindowcoord) + CGFloat(469)/(CGFloat(1200)/CGFloat(h)), //dota
+                                //2:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hon
+                                //3:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hots
+                                4:CGFloat(ywindowcoord) + CGFloat(190)/(CGFloat(1200)/CGFloat(h)), //csgo
+                                5:CGFloat(ywindowcoord) + CGFloat(445)/(CGFloat(800)/CGFloat(h)), //lol
+                                6:CGFloat(ywindowcoord) + CGFloat(646)/(CGFloat(1200)/CGFloat(h)), //dotareborn
+                            ]
+                            let diff:CGFloat = CGFloat(h) - i /// distance y bordered
+                            let yfractionsBordered:[Int:CGFloat] = [
+                                1:CGFloat(ywindowcoord) + CGFloat(469)/(CGFloat(1200)/diff) + i, //dota
+                                //2:CGFloat(589)/(CGFloat(1280)/diff), //hon
+                                //3:CGFloat(589)/(CGFloat(1280)/CGFloat(h)), //hots
+                                4:CGFloat(ywindowcoord) + CGFloat(190)/(CGFloat(1200)/diff) + i, //csgo
+                                5:CGFloat(ywindowcoord) + CGFloat(445)/(CGFloat(800)/diff) + i, //lol
+                                6:CGFloat(ywindowcoord) + CGFloat(646)/(CGFloat(1200)/diff) + i, //dotareborn
+                            ]
+                            
+                            x = xfractions[localGame]!
+                            y = yfractions[localGame]!
+                            y2 = yfractionsBordered[localGame]!
+                        }
                         
-                        x = xfractions[localGame]!
-                        y = yfractions[localGame]!
-                        y2 = yfractionsBordered[localGame]!
                         
                         //generate mouse click events
                         let state:CGEventSourceStateID = CGEventSourceStateID(kCGEventSourceStateCombinedSessionState)
@@ -96,15 +132,15 @@ class AcceptHandler:NSObject {
                         //execute mouse click events
                         CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseMove)
                         usleep(10000)
-                        //                        CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseDown)
+                                                CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseDown)
                         usleep(10000)
-                        //                        CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseUp)
+                                                CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseUp)
                         usleep(10000)
-                        //                        CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseMove2)
+                                                CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseMove2)
                         usleep(10000)
-                        //                        CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseDown)
+                                                CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseDown)
                         usleep(10000)
-                        //                        CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseUp)
+                                                CGEventPost(CGEventTapLocation(kCGHIDEventTap), eventMouseUp)
                         
                         //done
                         

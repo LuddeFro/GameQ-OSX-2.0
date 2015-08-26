@@ -11,6 +11,7 @@
 		832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE741B09E4AC00FE15E2 /* Images.xcassets */; };
 		832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */; };
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
+		834CB9811B7F58A300196081 /* AcceptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838137BF1B778F1700BA56E3 /* AcceptHandler.swift */; };
 		838137C01B778F1700BA56E3 /* AcceptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838137BF1B778F1700BA56E3 /* AcceptHandler.swift */; };
 		AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
 		AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
