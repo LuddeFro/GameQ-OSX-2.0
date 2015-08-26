@@ -1051,9 +1051,8 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-y1-xbg">
-                                <rect key="frame" x="33" y="10" width="304" height="55"/>
+                                <rect key="frame" x="8" y="10" width="354" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="J1w-f3-0us"/>
                                     <constraint firstAttribute="height" constant="55" id="Nlf-Pz-YCx"/>
                                 </constraints>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Game" id="2n0-Yd-m7h">
@@ -1071,10 +1070,10 @@ DQ
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="GameQLogo" id="2hf-E0-zsz"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bub-Pz-YnC">
-                                <rect key="frame" x="33" y="70" width="304" height="40"/>
+                                <rect key="frame" x="8" y="70" width="354" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0Nw-Zt-eAP"/>
-                                    <constraint firstAttribute="width" constant="300" id="CLp-cL-slq"/>
+                                    <constraint firstAttribute="width" constant="350" id="sUt-h2-1dL"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="STATUS" id="zd5-qh-jq7">
                                     <font key="font" size="24" name="Roboto-Regular"/>
@@ -1101,8 +1100,11 @@ DQ
                             <constraint firstAttribute="centerY" secondItem="KJD-VZ-InT" secondAttribute="centerY" id="IYq-dn-Dy6"/>
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="leading" secondItem="S4Q-Se-CRP" secondAttribute="leading" id="KcU-zY-I9M"/>
                             <constraint firstItem="L9b-ND-Nn0" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="L77-ya-KTy"/>
+                            <constraint firstItem="Bub-Pz-YnC" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="10" id="MTE-XN-bNJ"/>
                             <constraint firstAttribute="centerY" secondItem="GoJ-Pl-DN0" secondAttribute="centerY" id="NmR-Af-8iS"/>
                             <constraint firstItem="urm-Yo-WPv" firstAttribute="leading" secondItem="gOw-QP-F5z" secondAttribute="trailing" constant="97" id="OoK-WD-Ca3"/>
+                            <constraint firstAttribute="trailing" secondItem="Bub-Pz-YnC" secondAttribute="trailing" constant="10" id="QHe-Sd-ke9"/>
+                            <constraint firstItem="Wp4-y1-xbg" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="10" id="Qrf-tq-h60"/>
                             <constraint firstItem="mYD-kO-0T9" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="RrR-S3-TKg"/>
                             <constraint firstItem="Azw-1E-jxV" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="TUU-hw-KCs"/>
                             <constraint firstItem="MoA-oI-xmy" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="5" id="ToA-WP-9Ki"/>
@@ -1130,6 +1132,7 @@ DQ
                             <constraint firstAttribute="centerX" secondItem="zpK-4P-0eX" secondAttribute="centerX" id="tnJ-io-LeX"/>
                             <constraint firstItem="9wX-bH-dev" firstAttribute="leading" secondItem="bfK-wO-M3S" secondAttribute="leading" constant="9" id="u0Y-6U-IJc"/>
                             <constraint firstItem="Azw-1E-jxV" firstAttribute="leading" secondItem="MoA-oI-xmy" secondAttribute="leading" id="vSx-JZ-5pv"/>
+                            <constraint firstAttribute="trailing" secondItem="Wp4-y1-xbg" secondAttribute="trailing" constant="10" id="wNA-sg-UBd"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1489,7 +1492,7 @@ DQ
         <image name="settings" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f9D-qx-hky"/>
+        <segue reference="2vk-2S-oDg"/>
         <segue reference="rX2-V3-Egi"/>
     </inferredMetricsTieBreakers>
 </document>

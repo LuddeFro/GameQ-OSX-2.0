@@ -46,6 +46,7 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func updateStatus(newStatus: Status){
         
+        if(newStatus != Status.InLobby){
         if(newStatus == Status.InLobby || newStatus == Status.InQueue){
             counter = 0
         }
@@ -69,7 +70,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
             ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(newStatus), finalCallBack:{ (success:Bool, err:String?) in
                 if(success){println("succesfully updated status")}
             })}
-        
+}
+
     }
     
     class func saveDetection() {
