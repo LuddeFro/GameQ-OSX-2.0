@@ -26,7 +26,7 @@ class LoLDetector: PacketDetector {
     static var packetCounterEarly:[Int:Int] = [1300:0]
     
     static var stopSrcQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0, 900:0, 1100:0]
+    static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0, 800:0, 900:0, 1100:0]
     
     static var stopDstQueueTimer:[PacketTimer] = [PacketTimer]()
     static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0, 900:0]
@@ -77,7 +77,7 @@ class LoLDetector: PacketDetector {
         dstQueueCounter =  [100:0, 400:0, 500:0, 700:0, 800:0, 900:0]
         
         stopSrcQueueTimer = [PacketTimer]()
-        stopSrcQueueCounter = [100:0, 300:0, 900:0, 1100:0]
+        stopSrcQueueCounter = [100:0, 300:0,800:0, 900:0, 1100:0]
         
         stopDstQueueTimer = [PacketTimer]()
         stopDstQueueCounter = [100:0, 300:0, 800:0, 900:0]
@@ -206,7 +206,7 @@ class LoLDetector: PacketDetector {
         println(stopSrcQueueCounter)
         println(stopDstQueueCounter)
         
-        if((stopSrcQueueCounter[100] > 0 || stopSrcQueueCounter[900] > 0) && (stopDstQueueCounter[300] > 0 || stopDstQueueCounter[800] > 0) && (stopSrcQueueTimer.count >= 2 && stopDstQueueTimer.count >= 2))
+        if((stopSrcQueueCounter[100] > 0 || (stopSrcQueueCounter[900] > 0 || stopSrcQueueCounter[800] > 0)) && (stopDstQueueCounter[300] > 0 || stopDstQueueCounter[800] > 0) && (stopSrcQueueTimer.count >= 2 && stopDstQueueTimer.count >= 2))
         {return true}
         else if((stopSrcQueueCounter[900] > 0 || stopSrcQueueCounter[1100] > 0 || stopSrcQueueCounter[300] > 0) &&
             (stopDstQueueCounter[100] > 0 || stopDstQueueCounter[300] > 0) && (stopSrcQueueTimer.count >= 3 && stopDstQueueTimer.count >= 3))

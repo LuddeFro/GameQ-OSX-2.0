@@ -8,13 +8,13 @@
 
 import Foundation
 import Cocoa
-enum Status {
-    case Offline
-    case Online
-    case InLobby
-    case InQueue
-    case GameReady
-    case InGame
+enum Status: String{
+    case Offline =  "Offline"
+    case Online = "Online"
+    case InLobby =  "InLobby"
+    case InQueue =  "In Queue"
+    case GameReady =  "Game Ready "
+    case InGame =  "In Game"
 }
 
 enum Game {

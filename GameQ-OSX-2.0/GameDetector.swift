@@ -46,6 +46,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func updateStatus(newStatus: Status){
         
+          println("Changing status to: " + newStatus.rawValue)
+        
             if(newStatus == Status.InLobby || newStatus == Status.InQueue){
                 counter = 0
             }
@@ -58,7 +60,6 @@ class GameDetector:NSObject, GameDetectorProtocol {
             }
             
             status = newStatus
-            println(Encoding.getStringFromGameStatus(self.game, status: self.status))
             NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
             
             var newStatus = Status.InQueue
@@ -69,7 +70,8 @@ class GameDetector:NSObject, GameDetectorProtocol {
             
             if(isTesting == false){
                 ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(newStatus), finalCallBack:{ (success:Bool, err:String?) in
-                    if(success){println(Encoding.getStringFromGame(self.game) + Encoding.getStringFromGameStatus(self.game, status: newStatus))}
+                    if(success){
+                    }
                     else {
                         println("update Failed")
                     }
