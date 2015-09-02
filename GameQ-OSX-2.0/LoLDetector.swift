@@ -29,7 +29,7 @@ class LoLDetector: PacketDetector {
     static var stopSrcQueueCounter:[Int:Int] = [100:0, 300:0, 800:0, 900:0, 1100:0]
     
     static var stopDstQueueTimer:[PacketTimer] = [PacketTimer]()
-    static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0, 900:0]
+    static var stopDstQueueCounter:[Int:Int] = [100:0, 300:0, 800:0]
     
     static var queueStartTime:Double = -1
     
@@ -80,7 +80,7 @@ class LoLDetector: PacketDetector {
         stopSrcQueueCounter = [100:0, 300:0,800:0, 900:0, 1100:0]
         
         stopDstQueueTimer = [PacketTimer]()
-        stopDstQueueCounter = [100:0, 300:0, 800:0, 900:0]
+        stopDstQueueCounter = [100:0, 300:0, 800:0]
     }
     
     class func resetGameTimer(){
@@ -173,6 +173,8 @@ class LoLDetector: PacketDetector {
         else if((srcQueueCounter[300] > 0 || srcQueueCounter[400] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[100] > 0) && (srcQueueTimer.count >= 3 && dstQueueTimer.count >= 3)){
             queueStartTime = p.captureTime
             return true}
+            
+        else if(srcQueueCounter[700] > 0 && dstQueueCounter[700] > 0 && srcQueueCounter[400] > 0 && dstQueueCounter[400] > 0) {return true}
         else{return false}
     }
     
