@@ -35,6 +35,8 @@ class LoLDetector: PacketDetector {
     
     static var gameTimer:[PacketTimer] = [PacketTimer]()
     
+    static var spamDetector:[PacketTimer] = [PacketTimer]()
+    
     static var foundServer:Bool = false
     static var soonGame:Bool = false
     
@@ -70,6 +72,9 @@ class LoLDetector: PacketDetector {
     }
     
     class func resetQueueTimer(){
+        
+        spamDetector = [PacketTimer]()
+        
         srcQueueTimer = [PacketTimer]()
         srcQueueCounter = [300:0, 400:0, 500:0, 600:0, 800:0, 900:0, 1100:0]
         queuePort = -1
@@ -132,12 +137,19 @@ class LoLDetector: PacketDetector {
     
     class func isQueueing(p:Packet) -> Bool{
         
-        while(!srcQueueTimer.isEmpty && p.captureTime - srcQueueTimer.last!.time > 2){
+        
+        while(!spamDetector.isEmpty && p.captureTime - spamDetector.last!.time > 2.0){
+            spamDetector.removeLast()
+        }
+        
+        spamDetector.insert(PacketTimer(key: p.packetLength, time: p.captureTime), atIndex: 0)
+        
+        while(!srcQueueTimer.isEmpty && p.captureTime - srcQueueTimer.last!.time > 2.0){
             var key:Int = srcQueueTimer.removeLast().key
             srcQueueCounter[key]! = srcQueueCounter[key]! - 1
         }
         
-        while(!dstQueueTimer.isEmpty && p.captureTime - dstQueueTimer.last!.time > 2){
+        while(!dstQueueTimer.isEmpty && p.captureTime - dstQueueTimer.last!.time > 2.0){
             var key:Int = dstQueueTimer.removeLast().key
             dstQueueCounter[key]! = dstQueueCounter[key]! - 1
         }
@@ -166,8 +178,8 @@ class LoLDetector: PacketDetector {
         println(srcQueueTimer.count)
         println(dstQueueTimer.count)
         
-        
-        if((srcQueueCounter[400] > 0 || srcQueueCounter[800] > 0 || srcQueueCounter[700] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[800] > 0 || dstQueueCounter[700] > 0 || dstQueueCounter[400] > 0) && (srcQueueTimer.count >= 2 && dstQueueTimer.count >= 2) && (srcQueueTimer.count + dstQueueTimer.count >= 3)){
+        if(spamDetector.count > 10){return false}
+        else if((srcQueueCounter[400] > 0 || srcQueueCounter[800] > 0 || srcQueueCounter[700] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[800] > 0 || dstQueueCounter[700] > 0 || dstQueueCounter[400] > 0) && (srcQueueTimer.count >= 2 && dstQueueTimer.count >= 2) && (srcQueueTimer.count + dstQueueTimer.count >= 3)){
             queueStartTime = p.captureTime
             return true}
         else if((srcQueueCounter[300] > 0 || srcQueueCounter[400] > 0) && (dstQueueCounter[500] > 0 || dstQueueCounter[100] > 0) && (srcQueueTimer.count >= 3 && dstQueueTimer.count >= 3)){
@@ -180,12 +192,12 @@ class LoLDetector: PacketDetector {
     
     class func stoppedQueueing(p:Packet) -> Bool{
         
-        while(!stopSrcQueueTimer.isEmpty && p.captureTime - stopSrcQueueTimer.last!.time > 2){
+        while(!stopSrcQueueTimer.isEmpty && p.captureTime - stopSrcQueueTimer.last!.time > 2.0){
             var key:Int = stopSrcQueueTimer.removeLast().key
             stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! - 1
         }
         
-        while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2){
+        while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2.0){
             var key:Int = stopDstQueueTimer.removeLast().key
             stopDstQueueCounter[key]! = stopDstQueueCounter[key]! - 1
         }
@@ -219,7 +231,7 @@ class LoLDetector: PacketDetector {
     
     class func isGameReady(p:Packet) -> Bool{
         
-        while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 3){
+        while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 3.0){
             var key:Int = gameTimerEarly.removeLast().key
             packetCounterEarly[key]! = packetCounterEarly[key]! - 1
         }
