@@ -11,7 +11,6 @@
 		832BCE751B09E4AC00FE15E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 832BCE741B09E4AC00FE15E2 /* Images.xcassets */; };
 		832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832BCE831B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift */; };
 		832BCE8E1B09EA6300FE15E2 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832BCE8D1B09EA6300FE15E2 /* libpcap.dylib */; };
-		834CB9811B7F58A300196081 /* AcceptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838137BF1B778F1700BA56E3 /* AcceptHandler.swift */; };
 		838137C01B778F1700BA56E3 /* AcceptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838137BF1B778F1700BA56E3 /* AcceptHandler.swift */; };
 		AE008B961B3C3101000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
 		AE008B971B3C333C000EEA45 /* HOTSDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE008B951B3C3101000EEA45 /* HOTSDetector.swift */; };
@@ -35,6 +34,7 @@
 		AE349E731B416D0D00823189 /* HoNDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE349E711B41643900823189 /* HoNDetector.swift */; };
 		AE349E751B417BC200823189 /* LoLDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE349E741B417BC200823189 /* LoLDetector.swift */; };
 		AE349E761B417C7D00823189 /* LoLDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE349E741B417BC200823189 /* LoLDetector.swift */; };
+		AE504A251B78E1110083B9AF /* AcceptHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838137BF1B778F1700BA56E3 /* AcceptHandler.swift */; };
 		AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC2B1B18A30500E5F382 /* AppDelegate.swift */; };
 		AE546D2C1B19DEBF008D8A86 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC171B18A2AC00E5F382 /* DataHandler.swift */; };
 		AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE98AC1B1B18A2AC00E5F382 /* Packet.swift */; };
@@ -498,7 +498,7 @@
 				AECB07491B207812001C7C18 /* GameDetector.swift in Sources */,
 				AE546D2B1B19DEBF008D8A86 /* AppDelegate.swift in Sources */,
 				AE2C085D1B4C1CE9009A1836 /* SignUpController.swift in Sources */,
-				834CB9811B7F58A300196081 /* AcceptHandler.swift in Sources */,
+				AE504A251B78E1110083B9AF /* AcceptHandler.swift in Sources */,
 				AE546D2D1B19DEBF008D8A86 /* Packet.swift in Sources */,
 				832BCE841B09E4AC00FE15E2 /* GameQ_OSX_2_0Tests.swift in Sources */,
 				AE546D2E1B19DEBF008D8A86 /* PacketParser.m in Sources */,
@@ -625,6 +625,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "GameQ-OSX-2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				"OTHER_LDFLAGS[arch=*]" = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = GameQ;
 				PROVISIONING_PROFILE = "";
@@ -651,6 +652,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "GameQ-OSX-2.0/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				"OTHER_LDFLAGS[arch=*]" = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = GameQ;
 				PROVISIONING_PROFILE = "";

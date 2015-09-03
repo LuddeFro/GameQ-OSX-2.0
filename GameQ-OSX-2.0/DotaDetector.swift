@@ -110,9 +110,9 @@ class DotaDetector:PacketDetector{
         //IN LOBBY
         if(status == Status.InLobby){
             
-            var inGame:Bool = isInGame(newPacket, timeSpan: 5, packetNumber: 30)
+            var inGame:Bool = isInGame(newPacket, timeSpan: 5.0, packetNumber: 30)
             var gameReady:Bool = isGameReady(newPacket)
-            var startedQueueing:Bool = queueStarted(newPacket, timeSpan: 2, maxPacket:5, packetNumber: 2)
+            var startedQueueing:Bool = queueStarted(newPacket, timeSpan: 2.0, maxPacket:5, packetNumber: 2)
             
             if(inGame){updateStatus(Status.InGame)}
             else if(gameReady){updateStatus(Status.GameReady)}
@@ -121,9 +121,9 @@ class DotaDetector:PacketDetector{
             
             //IN QUEUE
         else  if(status == Status.InQueue){
-            var inGame:Bool = isInGame(newPacket, timeSpan: 5, packetNumber: 30)
+            var inGame:Bool = isInGame(newPacket, timeSpan: 5.0, packetNumber: 30)
             var gameReady:Bool = isGameReady(newPacket)
-            var stillQueueing:Bool = isStillQueueing(newPacket, timeSpan: 30, maxPacket: 5, packetNumber: 2)
+            var stillQueueing:Bool = isStillQueueing(newPacket, timeSpan: 30.0, maxPacket: 5, packetNumber: 2)
             
             if(inGame){updateStatus(Status.InGame)}
             else if(gameReady){updateStatus(Status.GameReady)}
@@ -134,7 +134,7 @@ class DotaDetector:PacketDetector{
             
             //GAME READY
         else if(status == Status.GameReady){
-            var inGame:Bool = isInGame(newPacket, timeSpan: 6, packetNumber: 30)
+            var inGame:Bool = isInGame(newPacket, timeSpan: 6.0, packetNumber: 30)
             resetGameTimer()
             
             if(inGame){updateStatus(Status.InGame)
@@ -143,7 +143,7 @@ class DotaDetector:PacketDetector{
             
             //IN GAME
         else  if(status == Status.InGame){
-            var inGame:Bool = isInGame(newPacket, timeSpan: 3, packetNumber: 50)
+            var inGame:Bool = isInGame(newPacket, timeSpan: 3.0, packetNumber: 50)
             
             if(!inGame){updateStatus(Status.InLobby)
                 resetQueueTimer()
@@ -196,12 +196,12 @@ class DotaDetector:PacketDetector{
     
     class func isStillQueueing(p:Packet, timeSpan:Double, maxPacket:Int, packetNumber:Int) -> Bool{
         
-        while(!stopSrcQueueTimer.isEmpty && p.captureTime - stopSrcQueueTimer.last!.time > 2){
+        while(!stopSrcQueueTimer.isEmpty && p.captureTime - stopSrcQueueTimer.last!.time > 2.0){
             var key:Int = stopSrcQueueTimer.removeLast().key
             stopSrcQueueCounter[key]! = stopSrcQueueCounter[key]! - 1
         }
         
-        while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2){
+        while(!stopDstQueueTimer.isEmpty && p.captureTime - stopDstQueueTimer.last!.time > 2.0){
             var key:Int = stopDstQueueTimer.removeLast().key
             stopDstQueueCounter[key]! = stopDstQueueCounter[key]! - 1
         }
@@ -236,17 +236,17 @@ class DotaDetector:PacketDetector{
     
     class func isGameReady(p:Packet) -> Bool{
         
-        while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 10){
+        while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 10.0){
             var key:Int = gameTimerEarly.removeLast().key
             packetCounterEarly[key]! = packetCounterEarly[key]! - 1
         }
         
-        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 10){
+        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 10.0){
             var key:Int = dstGameTimer.removeLast().key
             dstPacketCounter[key]! = dstPacketCounter[key]! - 1
         }
         
-        while(!gameTimerLate.isEmpty && p.captureTime - gameTimerLate.last!.time > 10){
+        while(!gameTimerLate.isEmpty && p.captureTime - gameTimerLate.last!.time > 10.0){
             var key:Int = gameTimerLate.removeLast().key
             packetCounterLate[key]! = packetCounterLate[key]! - 1
         }

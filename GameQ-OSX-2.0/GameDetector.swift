@@ -46,30 +46,36 @@ class GameDetector:NSObject, GameDetectorProtocol {
     
     class func updateStatus(newStatus: Status){
         
-        if(newStatus == Status.InLobby || newStatus == Status.InQueue){
-            counter = 0
-        }
+          println("Changing status to: " + newStatus.rawValue)
         
-        //&& blockNotif == false
-        if(status != newStatus && newStatus == Status.GameReady && isTesting == false){
-            detector.saveDetection()
-            startTimer()
-            // blockNotif = true
-        }
-        
-        status = newStatus
-        println(Encoding.getStringFromGameStatus(self.game, status: self.status))
-        NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
-        
-        var newStatus = Status.InQueue
-        if(self.status == Status.InLobby){newStatus == Status.InQueue}
-        else{newStatus = self.status}
-        
-        if(isTesting == false){
-            ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(newStatus), finalCallBack:{ (success:Bool, err:String?) in
-                if(success){println("succesfully updated status")}
-            })}
-        
+            if(newStatus == Status.InLobby || newStatus == Status.InQueue){
+                counter = 0
+            }
+            
+            //&& blockNotif == false
+            if(status != newStatus && newStatus == Status.GameReady && isTesting == false){
+                detector.saveDetection()
+                startTimer()
+                // blockNotif = true
+            }
+            
+            status = newStatus
+            NSNotificationCenter.defaultCenter().postNotificationName("updateStatus", object: nil)
+            
+            var newStatus = Status.InQueue
+            if(self.status == Status.InLobby){
+                newStatus = Status.InQueue
+            }
+            else{newStatus = self.status}
+            
+            if(isTesting == false){
+                ConnectionHandler.setStatus(Encoding.getIntFromGame(self.game), status: Encoding.getIntFromStatus(newStatus), finalCallBack:{ (success:Bool, err:String?) in
+                    if(success){
+                    }
+                    else {
+                        println("update Failed")
+                    }
+                })}
     }
     
     class func saveDetection() {
@@ -117,18 +123,18 @@ class GameDetector:NSObject, GameDetectorProtocol {
         
         
         if(self.game != Game.NoGame){
-        if(saveToServer){
-            ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 1, finalCallBack: {(success:Bool, error:String?) in})
+            if(saveToServer){
+                ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 1, finalCallBack: {(success:Bool, error:String?) in})
+            }
+            
+            if(saveToDesktop){
+                dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "missed"
+                dataHandler.logPackets(detector.fileToString())
+            }
         }
-        
-        if(saveToDesktop){
-            dataHandler.folderName =  Encoding.getStringFromGame(self.game) + "missed"
-            dataHandler.logPackets(detector.fileToString())
-        }
-        }
-        
+            
         else if(self.lastGame != Game.NoGame && saveMemory != ""){
-           
+            
             if(saveToServer ){
                 ConnectionHandler.submitCSV(saveMemory, game: Encoding.getIntFromGame(self.lastGame), type: 1, finalCallBack: {(success:Bool, error:String?) in
                     if(success){

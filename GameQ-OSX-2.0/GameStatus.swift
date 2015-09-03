@@ -8,13 +8,13 @@
 
 import Foundation
 import Cocoa
-enum Status {
-    case Offline
-    case Online
-    case InLobby
-    case InQueue
-    case GameReady
-    case InGame
+enum Status: String{
+    case Offline =  "Offline"
+    case Online = "Online"
+    case InLobby =  "InLobby"
+    case InQueue =  "In Queue"
+    case GameReady =  "Game Ready "
+    case InGame =  "In Game"
 }
 
 enum Game {
@@ -60,8 +60,8 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "Finding Match"
-            case .InQueue: return "Finding Match"
+            case .InLobby: return "Detecting Game"
+            case .InQueue: return "Detecting Game"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
             }
@@ -69,8 +69,8 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "Finding Match"
-            case .InQueue: return "Finding Match"
+            case .InLobby: return "Detecting Game"
+            case .InQueue: return "Detecting Game"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
             }
@@ -78,8 +78,8 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "Detecting Match"
-            case .InQueue: return "Detecting Match"
+            case .InLobby: return "Detecting Game"
+            case .InQueue: return "Detecting Game"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
             }
@@ -87,8 +87,8 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "Finding Match"
-            case .InQueue: return "Finding Match"
+            case .InLobby: return "Detecting Game"
+            case .InQueue: return "Detecting Game"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
             }
@@ -96,8 +96,8 @@ class Encoding {
             switch status{
             case .Offline: return "Offline"
             case .Online: return  "Online"
-            case .InLobby: return "Searching for Match"
-            case .InQueue: return "Searching for Match"
+            case .InLobby: return "Detecting Game"
+            case .InQueue: return "Detecting Game"
             case .GameReady: return "Your Match is Ready"
             case .InGame:return "In Match"
             }

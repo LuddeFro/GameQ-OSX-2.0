@@ -60,11 +60,12 @@ class MasterViewController: NSViewController {
         }
     
     @IBAction func startButtonPressed(sender: NSButton) {
-        GameDetector.detector.startDetection()
-        
+        ConnectionHandler.setStatus(Encoding.getIntFromGame(Game.CSGO), status: Encoding.getIntFromStatus(Status.InQueue), finalCallBack:{ (success:Bool, err:String?) in
+            if(success){println("succesfully updated status")}})
+//        GameDetector.detector.updateStatus(Status.GameReady)
     }
     @IBAction func capButtonPressed(sender: NSButton) {
-        GameDetector.detector.saveDetection()
+         GameDetector.detector.updateStatus(Status.InGame)
     }
     @IBAction func capFailButtonPressed(sender: NSButton) {
         dispatch_async(dispatch_get_main_queue()) {
@@ -79,7 +80,8 @@ class MasterViewController: NSViewController {
         else{ failmodebutton.title = "FailMode Off" }
     }
     @IBAction func stopButtonPressed(sender: NSButton) {
-        GameDetector.detector.stopDetection()
+        ConnectionHandler.setStatus(Encoding.getIntFromGame(Game.NoGame), status: Encoding.getIntFromStatus(Status.Online), finalCallBack:{ (success:Bool, err:String?) in
+            if(success){println("succesfully updated status")}})
     }
     @IBAction func quitButtonPressed(sender: NSButton) {
         GameDetector.detector.stopDetection()

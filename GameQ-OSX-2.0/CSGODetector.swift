@@ -99,7 +99,7 @@ class CSGODetector: PacketDetector{
             //IN QUEUE
         else  if(status == Status.InQueue){
             
-            var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
+            var inGame = isGame(newPacket, timeSpan:10.0, maxPacket:0, packetNumber:90)
             var gameReady:Bool = isGameReady(newPacket)
             
             if(inGame){updateStatus(Status.InGame)}
@@ -109,7 +109,7 @@ class CSGODetector: PacketDetector{
             
             //GAME READY
         else if(status == Status.GameReady){
-            var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
+            var inGame = isGame(newPacket, timeSpan:10.0, maxPacket:0, packetNumber:90)
             if(inGame){updateStatus(Status.InGame)
                 resetGameTimer()}
         }
@@ -117,7 +117,7 @@ class CSGODetector: PacketDetector{
             //IN GAME
         else if(status == Status.InGame){
             resetGameTimer()
-            var inGame = isGame(newPacket, timeSpan:10, maxPacket:0, packetNumber:90)
+            var inGame = isGame(newPacket, timeSpan:10.0, maxPacket:0, packetNumber:90)
             if(!inGame){updateStatus(Status.InQueue)}
         }
             
@@ -128,21 +128,21 @@ class CSGODetector: PacketDetector{
     
     class func isGameReady(p:Packet) -> Bool{
         
-        while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 60){
+        while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 60.0){
             var key:Int = gameTimerEarly.removeLast().key
             packetCounterEarly[key]! = packetCounterEarly[key]! - 1
         }
         
         var t:Double = -1
         if(isTesting){t = 0.2}
-        else{t = 2}
+        else{t = 2.0}
         
         while(!gameTimerLate.isEmpty && p.captureTime - gameTimerLate.last!.time > t){
             var key:Int = gameTimerLate.removeLast().key
             packetCounterLate[key]! = packetCounterLate[key]! - 1
         }
         
-        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 10){
+        while(!dstGameTimer.isEmpty && p.captureTime - dstGameTimer.last!.time > 10.0){
             var key:Int = dstGameTimer.removeLast().key
             dstPacketCounter[key]! = dstPacketCounter[key]! - 1
         }
