@@ -103,7 +103,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
@@ -132,7 +132,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             self.saveEmail("")
             self.savePassword("")
             finalCallBack(success: success, err: err)
@@ -167,7 +167,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
@@ -227,7 +227,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
@@ -255,6 +255,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
+                err = "Connection failure"
             }
             
             finalCallBack(success: success, err: err)
@@ -281,7 +282,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err, newestVersion:newestVersion, link:downloadLink)
         })
@@ -307,7 +308,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
@@ -333,7 +334,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
@@ -366,7 +367,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
@@ -388,7 +389,7 @@ class ConnectionHandler : NSObject {
                 }
             } else {
                 //println("json parse fail")
-            }
+                err = "Connection failure"            }
             
             finalCallBack(success: success, err: err)
         })
