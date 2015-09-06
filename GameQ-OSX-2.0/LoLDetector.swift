@@ -138,7 +138,7 @@ class LoLDetector: PacketDetector {
     class func isQueueing(p:Packet) -> Bool{
         
         
-        while(!spamDetector.isEmpty && p.captureTime - spamDetector.last!.time > 2.0){
+        while(!spamDetector.isEmpty && p.captureTime - spamDetector.last!.time > 1.0){
             spamDetector.removeLast()
         }
         

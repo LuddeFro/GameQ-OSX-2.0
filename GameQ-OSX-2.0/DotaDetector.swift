@@ -41,6 +41,8 @@ class DotaDetector:PacketDetector{
     static let inGameMaxSize:Int = 100
     static var inGamePacketCounter:[Int:Int] = [Int:Int]()
     
+    static var spamDetector:[PacketTimer] = [PacketTimer]()
+    
     static var saveCounter = 0;
     
     override class func startDetection() {
@@ -88,6 +90,8 @@ class DotaDetector:PacketDetector{
     }
     
     class func resetGameTimer(){
+        
+        spamDetector = [PacketTimer]()
         gameTimerEarly = [PacketTimer]()
         packetCounterEarly = [600:0, 700:0, 800:0, 900:0, 1000:0, 1100:0, 1200:0, 1300:0]
         
@@ -236,6 +240,12 @@ class DotaDetector:PacketDetector{
     
     class func isGameReady(p:Packet) -> Bool{
         
+        while(!spamDetector.isEmpty && p.captureTime - spamDetector.last!.time > 1.0){
+            spamDetector.removeLast()
+        }
+        
+        spamDetector.insert(PacketTimer(key: p.packetLength, time: p.captureTime), atIndex: 0)
+        
         while(!gameTimerEarly.isEmpty && p.captureTime - gameTimerEarly.last!.time > 10.0){
             var key:Int = gameTimerEarly.removeLast().key
             packetCounterEarly[key]! = packetCounterEarly[key]! - 1
@@ -283,7 +293,11 @@ class DotaDetector:PacketDetector{
         if(gameTimerEarly.count > 0 || gameTimerLate.count > 0 && p.packetLength > 1300){isProbablyGame = true}
         else{isProbablyGame = false}
         
-        if(gameTimerEarly.count >= 3
+        
+        println(spamDetector.count)
+        
+        if(spamDetector.count > 10){return false}
+        else if(gameTimerEarly.count >= 3
             && packetCounterEarly[1300] < 3
             && gameTimerLate.count > 0
             && dstPacketCounter[78] > 1

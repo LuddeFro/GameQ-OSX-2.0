@@ -25,20 +25,20 @@ class AcceptHandler:NSObject {
         let relativeToWindow = CGWindowID(0)
         let info = CGWindowListCopyWindowInfo(option, relativeToWindow).takeRetainedValue()
         let pid = getPIDFromGame(game)
-        println(pid)
+//        println(pid)
         if let app:NSRunningApplication = NSRunningApplication(processIdentifier: pid) {
             app.activateWithOptions(NSApplicationActivationOptions.ActivateIgnoringOtherApps)
             
-            usleep(1000000)
+            usleep(2000000)
             
             var x:CGFloat = 0
             var y:CGFloat = 0
             var y2:CGFloat = 0
             
             for dict in info as! [ [ String : AnyObject] ] {
-                println()
-                println(dict.description)
-                println()
+//                println()
+//                println(dict.description)
+//                println()
                 
                 if let pidComp = dict["kCGWindowOwnerPID"] as? Int {
                     let acmp = "\(pid)"
