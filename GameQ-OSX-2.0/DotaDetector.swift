@@ -262,28 +262,30 @@ class DotaDetector:PacketDetector{
         }
         
         
-        for key in packetCounterEarly.keys{
-            if(p.packetLength <= key + 100 && p.packetLength >= key && (p.srcPort == queuePort || queuePort ==
-                -1) && p.srcPort <= portMax && p.srcPort >= portMin){
-                    gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                    packetCounterEarly[key]! =  packetCounterEarly[key]! + 1
+        if(spamDetector.count < 20){
+            for key in packetCounterEarly.keys{
+                if(p.packetLength <= key + 100 && p.packetLength >= key && (p.srcPort == queuePort || queuePort ==
+                    -1) && p.srcPort <= portMax && p.srcPort >= portMin){
+                        gameTimerEarly.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                        packetCounterEarly[key]! =  packetCounterEarly[key]! + 1
+                }
             }
-        }
-        
-        for key in dstPacketCounter.keys{
-            if(p.packetLength <= key + 5 && p.packetLength >= key && (p.dstPort == queuePort || queuePort ==
-                -1) && p.dstPort <= portMax && p.dstPort >= portMin){
-                    dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                    dstPacketCounter[key]! = dstPacketCounter[key]! + 1
+            
+            for key in dstPacketCounter.keys{
+                if(p.packetLength <= key + 5 && p.packetLength >= key && (p.dstPort == queuePort || queuePort ==
+                    -1) && p.dstPort <= portMax && p.dstPort >= portMin){
+                        dstGameTimer.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                        dstPacketCounter[key]! = dstPacketCounter[key]! + 1
+                }
             }
-        }
-        
-        println(queuePort)
-        for key in packetCounterLate.keys{
-            if(p.packetLength <= key + 5 && p.packetLength >= key && (p.srcPort == queuePort || queuePort  ==
-                -1) && p.srcPort <= portMax && p.srcPort >= portMin){
-                    gameTimerLate.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
-                    packetCounterLate[key]! = packetCounterLate[key]! + 1
+            
+            println(queuePort)
+            for key in packetCounterLate.keys{
+                if(p.packetLength <= key + 5 && p.packetLength >= key && (p.srcPort == queuePort || queuePort  ==
+                    -1) && p.srcPort <= portMax && p.srcPort >= portMin){
+                        gameTimerLate.insert(PacketTimer(key: key, time: p.captureTime),atIndex: 0)
+                        packetCounterLate[key]! = packetCounterLate[key]! + 1
+                }
             }
         }
         
@@ -296,8 +298,8 @@ class DotaDetector:PacketDetector{
         
         println(spamDetector.count)
         
-        if(spamDetector.count > 10){return false}
-        else if(gameTimerEarly.count >= 3
+        
+        if(gameTimerEarly.count >= 3
             && packetCounterEarly[1300] < 3
             && gameTimerLate.count > 0
             && dstPacketCounter[78] > 1
