@@ -13,6 +13,7 @@ import CoreData
 class ConnectionHandler : NSObject {
     
     static let baseURL:String = "http://server.gameq.io:8080/computer/"
+    static let devURL:String = "http://dev.gameq.io:8080/computer/"
     static let deviceIdKey:String = "device_id_key"
     static let passwordKey:String = "password_key"
     static let emailKey:String = "email_key"
@@ -38,6 +39,37 @@ class ConnectionHandler : NSObject {
     
     private static func postRequest(arguments:String, apiExtension:String, responseHandler:(responseJSON:AnyObject!) -> ()) {
         let urlString = "\(baseURL)\(apiExtension)?"
+        //println(urlString)
+        let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        request.HTTPMethod = "POST"
+        
+        request.HTTPBody = "key=68440fe0484ad2bb1656b56d234ca5f463f723c3d3d58c3398190877d1d963bb&\(arguments)".dataUsingEncoding(NSUTF8StringEncoding)
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                //println("error=\(error)")
+                let Json:Dictionary<String, AnyObject> = [
+                    "success": 0,
+                    "error": "404"
+                ]
+                responseHandler(responseJSON: Json)
+                return
+            }
+            
+            ////println("response = \(response)")
+            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            //println("responseString = \(responseString!)")
+            
+            var jsonErrorOptional:NSError?
+            let responseJSON:AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &jsonErrorOptional)
+            responseHandler(responseJSON: responseJSON)
+        }
+        task.resume()
+    }
+    
+    private static func postDevRequest(arguments:String, apiExtension:String, responseHandler:(responseJSON:AnyObject!) -> ()) {
+        let urlString = "\(devURL)\(apiExtension)?"
         //println(urlString)
         let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
         request.HTTPMethod = "POST"
@@ -289,13 +321,13 @@ class ConnectionHandler : NSObject {
     }
     
     static func submitCSV(csvString:String, game:Int, type:Int, finalCallBack:(success:Bool, err:String?)->()) {
-        let apiExtension = "submitCSV"
+        let apiExtension = "storeCSV"
         var diString = ""
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
         }
         let arguments = "session_token=\(sessionId)&\(diString)&game=\(game)&type=\(type)&csv=\(csvString)"
-        postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
+        postDevRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
             
@@ -315,13 +347,13 @@ class ConnectionHandler : NSObject {
     }
     
     static func submitFeedback(feedbackString:String, finalCallBack:(success:Bool, err:String?)->()) {
-        let apiExtension = "submitFeedback"
+        let apiExtension = "storeFeedback"
         var diString = ""
         if let deviceId = loadDeviceId() {
             diString = "device_id=\(deviceId)"
         }
         let arguments = "session_token=\(sessionId)&\(diString)&feedback=\(feedbackString)"
-        postRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
+        postDevRequest(arguments, apiExtension: apiExtension, responseHandler: {(responseJSON:AnyObject!) in
             var success:Bool = false
             var err:String? = nil
             
