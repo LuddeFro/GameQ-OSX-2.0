@@ -39,7 +39,8 @@ class ReportController: NSViewController {
                 }
             })}
             
-        else if(missedQueueLabel.state == NSOnState && GameDetector.game != Game.NoGame){
+        else if(missedQueueLabel.state == NSOnState && GameDetector.detector.fileToString() != ""){
+            println("asd" + GameDetector.detector.fileToString())
             ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 1, finalCallBack: {(success:Bool, error:String?) in
                 if(success){
                     dispatch_async(dispatch_get_main_queue()) {
@@ -58,7 +59,8 @@ class ReportController: NSViewController {
             })
         }
             
-        else if(unwantedLabel.state == NSOnState && GameDetector.game != Game.NoGame){
+        else if(unwantedLabel.state == NSOnState && GameDetector.detector.fileToString() != ""){
+            println(GameDetector.detector.fileToString())
             ConnectionHandler.submitCSV(GameDetector.detector.fileToString(), game: Encoding.getIntFromGame(GameDetector.detector.game), type: 2, finalCallBack: {(success:Bool, error:String?) in
                 if(success){
                     dispatch_async(dispatch_get_main_queue()) {
@@ -76,6 +78,10 @@ class ReportController: NSViewController {
                     }
                 }
             })
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.submitButton.attributedTitle = NSAttributedString(string: "Thank You!", attributes: [ NSForegroundColorAttributeName : NSColor.whiteColor(), NSParagraphStyleAttributeName : self.style1, NSFontAttributeName: self.font1])}
         }
     }
     

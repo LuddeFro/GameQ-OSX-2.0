@@ -203,5 +203,5 @@ class GameDetector:NSObject, GameDetectorProtocol {
         }
     }
     
-    class func fileToString() -> String {return ""}
+    class func fileToString() -> String {return saveMemory}
 }
